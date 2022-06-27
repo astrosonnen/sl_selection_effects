@@ -90,7 +90,7 @@ cs_vs_fdm = np.zeros((nfdm, ndms))
 
 xmin = max(deV.rgrid_min*reff, Rfrac_min*rs_fixed)
 
-def get_beta_max(gammadm, fdm, dms):
+def get_cs(gammadm, fdm, dms):
 
     mstar_here = np.pi * rein**2 / mstar_einfrac * (1. - fdm)
     mdm_ein_here = np.pi * rein**2 * fdm
@@ -104,26 +104,28 @@ def get_beta_max(gammadm, fdm, dms):
 
     cimg = mu_r_search > 0. # only looks outside of the radial critical curve
     mu_search = abs(mu_r_search * mu_t_search)
-
     minmu_here = 10.**(dms/2.5)
 
-    mu_ltmin = cimg & (abs(mu_r_search * mu_t_search) < minmu_here)
+    beta_arr = xcimg_max_search[cimg] - alpha(xcimg_max_search[cimg], gnfw_norm, rs_fixed, gammadm, mstar_here, reff)
+    beta_arr[0] = 0.
 
-    if mu_ltmin.sum() > 0: # at some point, the magnification of the counter-image drops below minmu
-        # takes the point right before mu drops below minmu
-        xcimg_max = xcimg_max_search[mu_ltmin][0] - dx_search 
-    else: # otherwise takes the radial critical curve as the limit
-        xcimg_max = xcimg_max_search[cimg][-1]
-    beta_max = xcimg_max - alpha(xcimg_max, gnfw_norm, rs_fixed, gammadm, mstar_here, reff)
-    return beta_max
+    cs_integrand = 2.*np.pi*beta_arr
+    cs_integrand[mu_search[cimg] < minmu_here] = 0.
+
+    cs_spline = splrep(beta_arr, cs_integrand, k=1)
+    cs_int = splint(0., beta_arr[-1], cs_spline)
+
+    return cs_int
 
 for i in range(ngammadm):
+    print(i)
     for j in range(ndms):
-        cs_vs_gammadm[i, j] = np.pi*get_beta_max(gammadm_grid[i], fdm_fixed, dms_grid[j])**2
+        cs_vs_gammadm[i, j] = get_cs(gammadm_grid[i], fdm_fixed, dms_grid[j])
 
 for i in range(nfdm):
+    print(i)
     for j in range(ndms):
-        cs_vs_fdm[i, j] = np.pi*get_beta_max(gammadm_fixed, fdm_grid[i], dms_grid[j])**2
+        cs_vs_fdm[i, j] = get_cs(gammadm_fixed, fdm_grid[i], dms_grid[j])
 
 grids_file.create_dataset('cs_vs_gammadm', data=cs_vs_gammadm)
 grids_file.create_dataset('cs_vs_fdm', data=cs_vs_fdm)
