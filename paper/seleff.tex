@@ -140,7 +140,7 @@ How important?
 } 
    % methods heading (mandatory)
    {
-I simulate lenses.
+We simulate lenses.
 }
 % results heading (mandatory)
    {
@@ -148,7 +148,7 @@ Results.
 }
   % conclusions heading (optional), leave it empty if necessary 
    {
-I conclude.
+We conclude.
 }
    \keywords{
              Gravitational lensing: strong 
@@ -179,13 +179,8 @@ In the equation above, $\psilens$ is the set of parameters describing the proper
 This last factor takes into account both physical effects, that is whether a lens with parameters $\psilens$ produces a strongly lensed image of a source with parameters $\psisource$, and survey selection effects, that is whether such an image can be recognised as a strong lens.
 
 The left-hand side of \Eref{eq:one} is directly accessible from strong lensing observations. If the main goal of a lensing survey is to characterise the properties of the strong lens population, then it can be accomplished by directly analysing this term. For many applications of strong lensing, however, the aim is to constrain the properties of the general galaxy or source population, $\prlens$ and $\prsource$, which are coupled in a nontrivial way via the lens detection probability $\pdet$.
-%These factors are coupled in a nontrivial way via the lens detection probability $\pdet$. 
-%The factor $\pdet$ takes into account both 
-%The factor $\pdet$ varies as a function of lens mass: it is larger 
-%Therefore, in order to obtain an unbiased estimate of $\prlens$ or $\prsource$ it is necessary to account for selection effects.
 In order to obtain an unbiased estimate of either $\prlens$ or $\prsource$, then, it is necessary to invert \Eref{eq:one}.
 In principle, this can be done with a Bayesian hierarchical formalism, provided that the lens detection probability $\pdet$ is known \citep{Son22}.
-%That, however, requires knowing the lens detection probability $\pdet$ as a function of lens and source properties, which is a difficult quantity to determine.
 For most of the existing strong lensing surveys, however, characterising $\pdet$ is very challenging: the process determining whether a system is included in a strong lens sample is typically a combination of several cuts, usually involving a nontrivial visual selection step. 
 
 The problem of inverting \Eref{eq:one} is a difficult one to tackle exactly.
@@ -195,37 +190,22 @@ Few studies have attempted to explicitly account for strong lensing selection ef
 Whether it is necessary to invert \Eref{eq:one}, however, depends on the severity of the strong lensing bias that needs to be corrected and on the accuracy requirements on the key quantities of interest.
 
 In this paper we aim to quantify the strength of the strong lensing bias on a series of foreground galaxy and background source parameters. %, under realistic assumptions for the lens detection probability $\pdet$.
-In particular, we aim to determine how strong lenses differ from the general population of foreground galaxies and background sources in terms of 1) the radial mass structure of the lenses (i.e. their stellar and dark matter mass density profiles); 2) the ellipticity of the lenses; 3) the size-magnitude distribution of the lensed sources.
-We use semi-analytic models to simulate large populations of strong lenses.
-We simulate images of the lenses and the lensed sources, and then simulate lensing surveys with realistic assumptions for the lens detection probability $\pdet$.
-%then use these images to determine whether they are classified as lenses by a fiducial survey, under realistic assumptions for the lens detection probability $\pdet$.
-We consider two scenarios: one in which a population of foreground massive galaxies lenses a population of extended background sources, and a second one in which the source population consists of point-like quasars.
+In particular, we aim to determine how strong lenses differ from the general population of foreground galaxies and background sources in terms of a) the radial mass structure of the lenses (i.e. their stellar and dark matter mass density profiles); b) the ellipticity of the lenses; c) the size-magnitude distribution of the lensed sources.
+The answer to this question depends on 1) how the lens detection probability $\pdet$ varies as a function of galaxy and source properties, and on 2) the shape of the galaxy and source parameters distribution $\prlens$ and $\prsource$. To understand this second point we can imagine the limiting case in which both $\prlens$ and $\prsource$ are Dirac delta functions: in this limit, $\prsl$ simply reduces to the product $\prlens\prsource$ up to a scaling constant, corresponding to a case in which the lensing bias is none.
 
-The amplitude of the lensing bias depends on two aspects: 1) how the lens detection probability $\pdet$ varies as a function of galaxy and source properties, and 2) the width of the galaxy and source parameters distribution $\plens$ and $\psource$. To understand this second point we can imagine the limiting case in which both $\plens$ and $\psource$ are Dirac delta functions: in this limit, $\prsl$ simply reduces to the product $\plens\psource$ up to a scaling constant, corresponding to a case in which the lensing bias is none.
-\citet{MVK09} carried out a thorough study of point 1): they quantified how the properties of a lens galaxy determine its probability of creating a lensing event.
-In this work we revisit 
+\citet{MVK09} carried out a thorough study of point 1): they quantified how the properties of a lens galaxy determine its probability of creating a lensing event with a point source.
+In this work we revisit the \citet{MVK09} study, we expand it to the extended source case and, most importantly, we address point 2) as well: we simulate large populations of strong lenses using semi-analytic models, simulate lensing surveys with realistic assumptions for the lens probability $\pdet$ and quantify the lensing bias under various scenarios.
+We explore how the results change as a function of the scatter in mass parameters at fixed light, and as a function of source type: we simulate both galaxy and quasar sources.
 
-\citet{MVK09} carried out a thorough study of how the properties of a lens galaxy determine its strong lensing cross-section with respect to point sources, which is closely related to the probability of creating a lensing event.
-The lensing cross-section depends purely on the lens detection probability $\pdet$ \citep[see section 2.1.2 of][]{Son22}, but does not determine on its own 
-
- %can be derived by marginalising $\pdet$ over the source position \citep[see Equation (4) of][]{Son22}.
-%A thorough study of how the properties of a lens galaxy affect the probability of a lensing event was carried out by \citet{MVK09}.
-%In the formalism of \Eref{eq:one}, they explored how 
-In this work we take an additional step, by 
-
-%There are several differences between our work and that of \citet{MVK09}.
-In this work we revisit some of the findings of \citet{MVK09}, then take the additional step of quantifying the impact that a varying 
-
-The most important one is that we take the additional step of simulating realistic populations of galaxies and quantifying the difference between 
-
-%Their main result is that galaxies with a cuspier or more concentrated dark matter 
-
+%In light of the results of our experiments, we discuss to what extent can studies of galaxy structure based on strong lenses be generalised to describe non-lens galaxies.
+Finally, we address the question of how different are galaxy-galaxy lens samples from sets of galaxy-quasar lenses. This last point is relevant for time-delay cosmography studies, in which measurements of the time-delay between the multiple images of a strongly lensed quasar are used to constrain the expansion rate of the Universe. Galaxy-galaxy lenses can in principle be used to help break some of the model degeneracies affecting these measurements \citep{B+T21}, but any difference between the two lens classes can in principle introduce biases, if not corrected for.
+With this study we aim to quantify this bias.
 
 The structure of this work is the following.
 In \Sref{sect:indlenses} we study individual lens systems, to look for trends in the lensing cross-section with various lens and source properties.
-In \Sref{sect:lenspop} we study 
-
-I discuss the results in \Sref{sect:discuss} and draw conclusions in \Sref{sect:concl}.
+In \Sref{sect:lenspop} we describe our simulations of lens populations.
+In \Sref{sect:results} we show the results of our analysis on the simulated lens populations.
+We discuss the results in \Sref{sect:discuss} and draw conclusions in \Sref{sect:concl}.
 
 The Python code used for the simulation and analysis of the lens sample can be found in a dedicated section of a GitHub repository\footnote{\url{https://github.com/astrosonnen/strong_lensing_tools}}.
 
@@ -253,14 +233,26 @@ The dashed line marks the cross-section in the case in which at least two images
 
 %__________________________________________________________________
 
-\section{Lens populations}\label{sect:lenspop}
+\section{Lens populations simulations}\label{sect:lenspop}
 
 
 %__________________________________________________________________
 
-\section{Discussion and summary}\label{sect:discuss}
+\section{Results}\label{sect:results}
 
-Discuss.
+There are results.
+
+%__________________________________________________________________
+
+\section{Discussion}\label{sect:discuss}
+
+We discuss.
+
+%__________________________________________________________________
+
+\section{Conclusions}\label{sect:concl}
+
+We conclude.
 
 %\begin{acknowledgements}
 
