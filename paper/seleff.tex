@@ -161,7 +161,6 @@ I conclude.
 \section{Introduction}\label{sect:intro}
 
 Strong gravitational lensing is a powerful tool for studying galaxies and cosmology.
-%Strongly lensed images enable us to make very precise measurements of the mass 
 Strong lenses have been used to probe the mass structure of massive galaxies \citep{Aug++10, ORF14, Son++15, Sha++21}, to detect substructure \citep{Veg++12, Hez++16, Nie++20}, to carry out detailed studies of magnified star-forming galaxies \citep{Jon++13}, and to measure the expansion rate of the universe with time delays \citep[see][for a review]{T+M16}.
 
 Strong lenses, however, are a biased subset of the general population of galaxies and background sources.
@@ -169,18 +168,15 @@ A necessary condition for a galaxy to act as a strong lens with respect to a giv
 This condition excludes objects with a very diffuse mass distribution from the population of lenses.
 In general, galaxies with a higher concentration of mass are more likely to be strong lenses, and are therefore over-represented in lens samples.
 
-%The distribution of background source properties is also affected by strong lensing. 
-%Both the luminosity and size distribution of lensed galaxies 
 The luminosity and size distribution of strongly lensed sources is also biased with respect to the general population of background galaxies.
 For instance, lensing magnification allows the detection of fainter objects with respect to the field, and galaxies that are very extended with respect to the Einstein radius are less likely to be classified as strongly lensed, since their magnification averaged over their size tends to be low \citep[see also the discussion in section 5.3 of][]{O+A17}.
-%Moreover, if a large overall magnification is required in order to classify a source as strongly lensed, galaxies that are very extended with respect to the Einstein radius are less likely to be part of a strong lens sample.
 
-%The details of the bias on the lens and source population properties depend also on the criteria used to define a lens.
 In general, the probability distribution $\prsl$ of a sample of strong lenses from a given survey with selection criterion $S$ is given by \citep{Son22}:
 \begin{equation}\label{eq:one}
 \prsl(\psilens,\psisource|S) \propto \prlens(\psilens)\prsource(\psisource)\pdet(\psilens,\psisource|S).
 \end{equation}
 In the equation above, $\psilens$ is the set of parameters describing the properties of foreground galaxies that are relevant for lensing, such as their redshift and mass distribution; $\psisource$ is the set of parameters describing background sources; $\prlens$ and $\prsource$ describe the general distribution of foreground galaxies and background sources in the absence of lensing; and $\pdet$ describes the probability of detecting a lens-source system with parameters $\psilens$ and $\psisource$ given the criterion $S$ used to define a lens.
+This last factor takes into account both physical effects, that is whether a lens with parameters $\psilens$ produces a strongly lensed image of a source with parameters $\psisource$, and survey selection effects, that is whether such an image can be recognised as a strong lens.
 
 The left-hand side of \Eref{eq:one} is directly accessible from strong lensing observations. If the main goal of a lensing survey is to characterise the properties of the strong lens population, then it can be accomplished by directly analysing this term. For many applications of strong lensing, however, the aim is to constrain the properties of the general galaxy or source population, $\prlens$ and $\prsource$, which are coupled in a nontrivial way via the lens detection probability $\pdet$.
 %These factors are coupled in a nontrivial way via the lens detection probability $\pdet$. 
@@ -192,15 +188,38 @@ In principle, this can be done with a Bayesian hierarchical formalism, provided 
 %That, however, requires knowing the lens detection probability $\pdet$ as a function of lens and source properties, which is a difficult quantity to determine.
 For most of the existing strong lensing surveys, however, characterising $\pdet$ is very challenging: the process determining whether a system is included in a strong lens sample is typically a combination of several cuts, usually involving a nontrivial visual selection step. 
 
-%In summary, the problem of the invertibility of \Eref{eq:one} is a difficult one to solve.
-%The problem of the invertibility of \Eref{eq:one} can be simplified by working with lens samples that constructing lens samples that are complete above a well-defined observational cut.
-%The problem of the invertibility of \Eref{eq:one} can be simplified by working with samples of lenses that are constructed in a well-defined way, for instance 
-The problem of the invertibility of \Eref{eq:one} can be simplified by adopting lens selection criteria that can be easily forward-modelled: for instance by building samples that are complete above a well-defined observational cut \citep{Son22}.
-Whether that is necessary, however, depends on the severity of the strong lensing bias that needs to be corrected and on the accuracy requirements on the key quantities of interest.
+The problem of inverting \Eref{eq:one} is a difficult one to tackle exactly.
+Few studies have attempted to explicitly account for strong lensing selection effects, usually by making ad-hoc simplifying assumptions \citep{Son++15,O+A17,Son++19}.
+%The problem of the invertibility of \Eref{eq:one} can be simplified by adopting lens selection criteria that can be easily forward-modelled: for instance by building samples that are complete above a well-defined observational cut \citep{Son22}.
+%The problem can be simplified by adopting lens selection criteria that can be easily forward-modelled: for instance by building samples that are complete above a well-defined observational cut \citep{Son22}.
+Whether it is necessary to invert \Eref{eq:one}, however, depends on the severity of the strong lensing bias that needs to be corrected and on the accuracy requirements on the key quantities of interest.
 
-In this paper we aim to quantify the strength of the strong lensing bias on a series of foreground galaxy and background source parameters, under realistic assumptions for the lens detection probability $\pdet$.
+In this paper we aim to quantify the strength of the strong lensing bias on a series of foreground galaxy and background source parameters. %, under realistic assumptions for the lens detection probability $\pdet$.
 In particular, we aim to determine how strong lenses differ from the general population of foreground galaxies and background sources in terms of 1) the radial mass structure of the lenses (i.e. their stellar and dark matter mass density profiles); 2) the ellipticity of the lenses; 3) the size-magnitude distribution of the lensed sources.
+We use semi-analytic models to simulate large populations of strong lenses.
+We simulate images of the lenses and the lensed sources, and then simulate lensing surveys with realistic assumptions for the lens detection probability $\pdet$.
+%then use these images to determine whether they are classified as lenses by a fiducial survey, under realistic assumptions for the lens detection probability $\pdet$.
 We consider two scenarios: one in which a population of foreground massive galaxies lenses a population of extended background sources, and a second one in which the source population consists of point-like quasars.
+
+The amplitude of the lensing bias depends on two aspects: 1) how the lens detection probability $\pdet$ varies as a function of galaxy and source properties, and 2) the width of the galaxy and source parameters distribution $\plens$ and $\psource$. To understand this second point we can imagine the limiting case in which both $\plens$ and $\psource$ are Dirac delta functions: in this limit, $\prsl$ simply reduces to the product $\plens\psource$ up to a scaling constant, corresponding to a case in which the lensing bias is none.
+\citet{MVK09} carried out a thorough study of point 1): they quantified how the properties of a lens galaxy determine its probability of creating a lensing event.
+In this work we revisit 
+
+\citet{MVK09} carried out a thorough study of how the properties of a lens galaxy determine its strong lensing cross-section with respect to point sources, which is closely related to the probability of creating a lensing event.
+The lensing cross-section depends purely on the lens detection probability $\pdet$ \citep[see section 2.1.2 of][]{Son22}, but does not determine on its own 
+
+ %can be derived by marginalising $\pdet$ over the source position \citep[see Equation (4) of][]{Son22}.
+%A thorough study of how the properties of a lens galaxy affect the probability of a lensing event was carried out by \citet{MVK09}.
+%In the formalism of \Eref{eq:one}, they explored how 
+In this work we take an additional step, by 
+
+%There are several differences between our work and that of \citet{MVK09}.
+In this work we revisit some of the findings of \citet{MVK09}, then take the additional step of quantifying the impact that a varying 
+
+The most important one is that we take the additional step of simulating realistic populations of galaxies and quantifying the difference between 
+
+%Their main result is that galaxies with a cuspier or more concentrated dark matter 
+
 
 The structure of this work is the following.
 In \Sref{sect:indlenses} we study individual lens systems, to look for trends in the lensing cross-section with various lens and source properties.
