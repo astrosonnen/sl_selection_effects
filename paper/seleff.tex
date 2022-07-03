@@ -32,6 +32,9 @@
 
 \def\detJ{\mathrm{det}J}
 
+\def\reff{R_{\mathrm{e}}}
+\def\mstar{M_*}
+
 \def\tein{\theta_{\mathrm{Ein}}}
 \def\trad{\theta_{\mathrm{rad}}}
 \def\tsis{\theta_{\mathrm{Ein}}^{\mathrm{(SIS)}}}
@@ -213,9 +216,47 @@ The Python code used for the simulation and analysis of the lens sample can be f
 
 \section{Individual lenses}\label{sect:indlenses}
 
-In this section we study how the probability of a strong lensing event varies as a function of 
+In this section we study how the probability of a strong lensing event varies as a function of lens and source properties.
+In order to do so, it is useful to introduce the concept of strong lensing cross-section.
+Given a foreground galaxy with parameters $\psilens$, a background source with parameters $\psisource$, and a criterion $S$ to define a strong lensing event, the strong lensing cross-section is defined as \citep{Son22}:
+\begin{equation}\label{eq:crosssect}
+\crosssect = \int_{\mathbb{R}^2} d\boldsymbol\beta \pdet(\psilens,\psisourcenobeta,\boldsymbol\beta|S),
+\end{equation}
+where $\boldsymbol\beta$ is the position of the background source and the integral is carried out over the whole sky.
+The definition above is valid for both a point source and an extended source: although there is no unique way of defining the position of an extended source, the integral over the sky ensures that the result is independent of how the source position is defined.
+In the limit of low density of background sources, which is satisfied in all practical cases, the probability of a lensing event is proportional to $\crosssect$.
 
-\subsection{Axisymmetric lenses, point sources}
+In this section we compute $\crosssect$ in a series of different scenarios of increasing complexity.
+The model family adopted to describe the radial density profile of the lenses is the same in all of our experiments. We describe this in \ref{ssec:profile}.
+%In section \ref{ssec:axsymmpoint} we consider axisymmetric lenses and point sources.
+In section \ref{ssec:axsymmpoint} we show calculations of the strong lensing cross-section in the case of axisymmetric lenses and point sources.
+In section \ref{ssec:ellpoint} we generalise the lens geometry to elliptical, while in section \ref{ssec:ellext} we replace point sources with extended sources.
+
+\subsection{Lens density profile}\label{ssec:profile}
+
+Throughout this work we describe the mass distribution of the lens galaxies with a two-component model consisting of a S\'{e}rsic profile, describing the baryonic component of a galaxy, and a generalised Navarro, Frenk \& White (gNFW) profile, describing the dark matter halo.
+We assume that the two components are concentric.
+We also assume that the baryonic component consists entirely of stars.
+This is a good approximation for the majority of the known strong lenses, which are massive elliptical galaxies with little gas.
+Finally, we assume that the light distribution of the stellar component follows its mass distribution exactly, that is we do not allow for the presence of gradients in the stellar mass-to-light ratio. This assumption is probably broken in real galaxies but, as we discuss in \Sref{sect:discuss}, does not impact our investigation.
+
+For the purpose of computing lensing-related quantities, the projected massdistribution $\Sigma(R)$ is needed.
+For a S\'{e}rsic profile, this is given by
+\begin{equation}
+\Sigma(R) = \Sigma_0 \exp{\left\{-b\left(\frac{R}{\reff}\right)^{1/4}\right\}},
+\end{equation}
+with
+\begin{equation}
+\Sigma_0 = \frac{\mstar b^{2n}}{2\pi n \reff^2 \Gamma(2n)},
+\end{equation}
+where $\mstar$ is the total mass, $\reff$ is the radius enclosing half of the total mass, $n$ is the S\'{e}rsic index, $\Gamma$ is the incomplete Gamma function, and $b$ is \citep{C+B99}
+\begin{equation}
+b(n) \approx 2n -\frac13 + \frac{4}{405n} + \frac{46}{25515n^2} + O(n^{-3}).
+\end{equation}
+
+In the axisymmetric case, the projected 
+
+\subsection{Axisymmetric lenses, point sources}\label{sect:axsymmpoint}
 
 \begin{figure}
 \includegraphics[width=\columnwidth]{axisymm_pl_crosssect.eps}
@@ -227,9 +268,9 @@ The dashed line marks the cross-section in the case in which at least two images
 }
 \end{figure}
 
-\subsection{Elliptical lenses, point sources}
+\subsection{Elliptical lenses, point sources}\label{ssec:ellpoint}
 
-\subsection{Elliptical lenses, extended sources}
+\subsection{Elliptical lenses, extended sources}\label{ssec:ellext}
 
 %__________________________________________________________________
 
