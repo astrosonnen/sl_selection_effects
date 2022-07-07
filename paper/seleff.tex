@@ -34,6 +34,9 @@
 
 \def\reff{R_{\mathrm{e}}}
 \def\mstar{M_*}
+\def\gammadm{\gamma_{\mathrm{DM}}}
+\def\fdm{f_{\mathrm{DM}}}
+\def\mdmfive{M_{\mathrm{DM}, 5}}
 
 \def\tein{\theta_{\mathrm{Ein}}}
 \def\trad{\theta_{\mathrm{rad}}}
@@ -238,9 +241,10 @@ Throughout this work we describe the mass distribution of the lens galaxies with
 We assume that the two components are concentric.
 We also assume that the baryonic component consists entirely of stars.
 This is a good approximation for the majority of the known strong lenses, which are massive elliptical galaxies with little gas.
-Finally, we assume that the light distribution of the stellar component follows its mass distribution exactly, that is we do not allow for the presence of gradients in the stellar mass-to-light ratio. This assumption is probably broken in real galaxies but, as we discuss in \Sref{sect:discuss}, does not impact our investigation.
+Finally, we assume that the light distribution of the stellar component follows its mass distribution exactly. That is, we do not allow for the presence of gradients in the stellar mass-to-light ratio. This assumption is probably broken in real galaxies but, as we discuss in \Sref{sect:discuss}, does not impact our investigation.
 
-For the purpose of computing lensing-related quantities, the projected massdistribution $\Sigma(R)$ is needed.
+Lensing-related quantities depend on the projected mass distribution $\Sigma(R)$.
+%For the purpose of computing lensing-related quantities, the projected massdistribution $\Sigma(R)$ is needed.
 For a S\'{e}rsic profile, this is given by
 \begin{equation}
 \Sigma(R) = \Sigma_0 \exp{\left\{-b\left(\frac{R}{\reff}\right)^{1/4}\right\}},
@@ -249,12 +253,21 @@ with
 \begin{equation}
 \Sigma_0 = \frac{\mstar b^{2n}}{2\pi n \reff^2 \Gamma(2n)},
 \end{equation}
-where $\mstar$ is the total mass, $\reff$ is the radius enclosing half of the total mass, $n$ is the S\'{e}rsic index, $\Gamma$ is the incomplete Gamma function, and $b$ is \citep{C+B99}
+where $\mstar$ is the total mass, $\reff$ is the radius enclosing half of the total mass, $n$ is the S\'{e}rsic index, $\Gamma$ is the incomplete Gamma function, and $b$ is given by \citep{C+B99}
 \begin{equation}
 b(n) \approx 2n -\frac13 + \frac{4}{405n} + \frac{46}{25515n^2} + O(n^{-3}).
 \end{equation}
 
-In the axisymmetric case, the projected 
+The dark matter component is first defined by means of its three-dimensional distribution, which for a spherically symmetric gNFW profile is
+\begin{equation}
+\rho(r) = \dfrac{\rho_0}{(r/r_s)^{\gammadm}\left(1 + r/r_s\right)^{3-\gammadm}}.
+\end{equation}
+The parameter $\gammadm$ is the inner density slope, $\rho_0$ is a normalisation parameter, while $r_s$ is the scale radius. The logarithmic slope of the density profile transitions from $-\gammadm$ to $-3$ at a radius $r\approx r_s$.
+
+The projected surface mass density of a gNFW profile can be expressed in terms of the following integral
+\begin{equation}
+\Sigma(R) = 2r_s\rho_0 \left(\frac{R}{r_s}\right)^{1-\gammadm}\int_0^{\pi/2} dx \sin{x}(\sin{x} + R/r_s)^{\gammadm-3}.
+\end{equation}
 
 \subsection{Axisymmetric lenses, point sources}\label{sect:axsymmpoint}
 
