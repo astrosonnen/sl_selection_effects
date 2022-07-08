@@ -230,10 +230,61 @@ The definition above is valid for both a point source and an extended source: al
 In the limit of low density of background sources, which is satisfied in all practical cases, the probability of a lensing event is proportional to $\crosssect$.
 
 In this section we compute $\crosssect$ in a series of different scenarios of increasing complexity.
-The model family adopted to describe the radial density profile of the lenses is the same in all of our experiments. We describe this in \ref{ssec:profile}.
+We first introduce the basic equations of gravitational lensing in section \ref{ssec:lensbasics}.
+Then, in section \ref{ssec:profile}, we present the model family adopted to describe the radial density profile of the lenses in our experiments.
+%The model family adopted to describe the radial density profile of the lenses is the same in all of our experiments. We describe this in \ref{ssec:profile}, among with the basic equations of gravitational lensing.
 %In section \ref{ssec:axsymmpoint} we consider axisymmetric lenses and point sources.
 In section \ref{ssec:axsymmpoint} we show calculations of the strong lensing cross-section in the case of axisymmetric lenses and point sources.
 In section \ref{ssec:ellpoint} we generalise the lens geometry to elliptical, while in section \ref{ssec:ellext} we replace point sources with extended sources.
+
+
+\subsection{Strong lensing basics}\label{ssec:lensbasics}
+
+The lensing properties of an object with respect to a source depend solely on its dimensionless surface mass density distribution $\kappa(\boldsymbol\theta)$ (also referred to as the convergence), 
+% ratio between its surface mass density distribution and the critical surface mass density for lensing:
+\begin{equation}
+\kappa(\boldsymbol\theta) = \dfrac{\Sigma(\boldsymbol\theta)}{\Sigma_{\mathrm{cs}}},
+\end{equation}
+which is the ratio between the projected surface mass density of the lens and the critical surface mass density for lensing.
+The latter quantity is defined as
+%The quantity $\Sigma_{\matrhrm{cs}}$ is the critical surface mass density for lensing, defined as
+\begin{equation}
+\Sigma_{cr} = \dfrac{c^2D_s}{4\pi G D_d D_{ds}},
+\end{equation}
+where $c$ is the speed of light, $G$ the gravitational constant, and $D_d$, $D_s$, and $D_{ds}$ are the angular diameter distances between the observer and the lens, the observer and the source, and the lens and the source, respectively.
+
+Given a source at angular position $\boldsymbol\beta$, images of it form at the positions $\boldsymbol\theta$ that are solutions of the lens equation
+\begin{equation}\label{eq:lenseq}
+\boldsymbol\beta = \boldsymbol\theta - \boldsymbol\alpha(\boldsymbol\theta),
+\end{equation}
+where $\boldsymbol\alpha$ is the deflection angle of the lens.
+This can be expressed in terms of the dimensionless surface mass density by means of the following integral over the whole sky:
+\begin{equation}
+\boldsymbol\alpha(\boldsymbol\theta) = \frac{1}{\pi}\int_{\mathbb{R}^2} d^2\boldsymbol\theta' \kappa(\boldsymbol\theta')\dfrac{\boldsymbol\theta - \boldsymbol\theta'}{|\boldsymbol\theta - \boldsymbol\theta'|^2}.
+\end{equation}
+
+In the special case of an axisymmetric lens, the deflection angle, calculated along an arbitrary axis passing through the lens centre, reduces to
+\begin{equation}
+\alpha(\theta) = \frac{2}{\theta}\int_0^{\theta} d\theta' \kappa(\theta') \theta'.
+\end{equation}
+This can also be expressed in terms of the total projected mass enclosed within a circle with angular radius equal to $\theta$:
+\begin{equation}
+\alpha(\theta) = \frac{1}{\pi\theta}\dfrac{M(<\theta)}{\Sigma_{\mathrm{cr}}D_{\mathrm{d}}^2}.
+\end{equation}
+
+A very important quantity for describing the strength of a strong lens is the Einstein radius, $\tein$. For an axisymmetric lens, this is the radius corresponding to the solution of \Eref{eq:lenseq} for a source placed at the same angular position as the lens centre ($\beta=0$).
+It can be shown that $\tein$ satisfies the following condition,
+\begin{equation}\label{eq:criteq}
+\bar{\kappa}(<\tein) = 1,
+\end{equation}
+where $\bar{\kappa}(<\theta)$ is the average surface mass density within a radius equal to $\theta$:
+\begin{equation}
+\bar{\kappa}(<\theta) \equiv \frac{2}{\theta^2}\int_0^{\theta}d\theta' \kappa(\theta')\theta'.
+\end{equation}
+Based on \Eref{eq:criteq},
+%The average surface mass density within $\tein$ is equal to one.
+%For this reason, 
+we generalise the definition of $\tein$ to the non-axisymmetric case as the circularised radius of the isodensity contour that encloses an average surface mass density equal to $\Sigma_{\mathrm{cr}}$.
 
 \subsection{Lens density profile}\label{ssec:profile}
 
@@ -243,9 +294,10 @@ We also assume that the baryonic component consists entirely of stars.
 This is a good approximation for the majority of the known strong lenses, which are massive elliptical galaxies with little gas.
 Finally, we assume that the light distribution of the stellar component follows its mass distribution exactly. That is, we do not allow for the presence of gradients in the stellar mass-to-light ratio. This assumption is probably broken in real galaxies but, as we discuss in \Sref{sect:discuss}, does not impact our investigation.
 
-Lensing-related quantities depend on the projected mass distribution $\Sigma(R)$.
+%Lensing-related quantities depend on the projected mass distribution $\Sigma(R)$.
 %For the purpose of computing lensing-related quantities, the projected massdistribution $\Sigma(R)$ is needed.
-For a S\'{e}rsic profile, this is given by
+%For a S\'{e}rsic profile, this is given by
+The projected surface mass density of a S\'{e}rsic profile is given by
 \begin{equation}
 \Sigma(R) = \Sigma_0 \exp{\left\{-b\left(\frac{R}{\reff}\right)^{1/4}\right\}},
 \end{equation}
@@ -263,11 +315,11 @@ The dark matter component is first defined by means of its three-dimensional dis
 \rho(r) = \dfrac{\rho_0}{(r/r_s)^{\gammadm}\left(1 + r/r_s\right)^{3-\gammadm}}.
 \end{equation}
 The parameter $\gammadm$ is the inner density slope, $\rho_0$ is a normalisation parameter, while $r_s$ is the scale radius. The logarithmic slope of the density profile transitions from $-\gammadm$ to $-3$ at a radius $r\approx r_s$.
-
-The projected surface mass density of a gNFW profile can be expressed in terms of the following integral
+The projected surface mass density of a gNFW profile can be expressed in terms of the following integral \citep{WTS01}:
 \begin{equation}
 \Sigma(R) = 2r_s\rho_0 \left(\frac{R}{r_s}\right)^{1-\gammadm}\int_0^{\pi/2} dx \sin{x}(\sin{x} + R/r_s)^{\gammadm-3}.
 \end{equation}
+
 
 \subsection{Axisymmetric lenses, point sources}\label{sect:axsymmpoint}
 
