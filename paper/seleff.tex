@@ -263,7 +263,13 @@ This can be expressed in terms of the dimensionless surface mass density by mean
 \boldsymbol\alpha(\boldsymbol\theta) = \frac{1}{\pi}\int_{\mathbb{R}^2} d^2\boldsymbol\theta' \kappa(\boldsymbol\theta')\dfrac{\boldsymbol\theta - \boldsymbol\theta'}{|\boldsymbol\theta - \boldsymbol\theta'|^2}.
 \end{equation}
 
-In the special case of an axisymmetric lens, the deflection angle, calculated along an arbitrary axis passing through the lens centre, reduces to
+In the special case of an axisymmetric lens we can simplify the notation by considering a single coordinate axis with origin at the centre of the lens. We label the components of the image position, source position and deflection angle along this axis as $\theta$, $\beta$ and $\alpha$, respectively.
+The lens equation for an axisymmetric lens then becomes
+\begin{equation}\label{eq:1dlenseq}
+\beta = \theta - \alpha(\theta),
+\end{equation}
+and the expression for the deflection angle reduces to
+%In the special case of an axisymmetric lens, the deflection angle, calculated along an arbitrary axis passing through the lens centre, reduces to
 \begin{equation}
 \alpha(\theta) = \frac{2}{\theta}\int_0^{\theta} d\theta' \kappa(\theta') \theta'.
 \end{equation}
@@ -273,6 +279,8 @@ This can also be expressed in terms of the total projected mass enclosed within 
 \end{equation}
 
 A very important quantity for describing the strength of a strong lens is the Einstein radius, $\tein$. For an axisymmetric lens, this is the radius corresponding to the solution of \Eref{eq:lenseq} for a source placed at the same angular position as the lens centre ($\beta=0$).
+The circle with radius equal to $\tein$ is known as the tangential critical curve. Images that form here have infinite magnification in the tangential direction.
+
 It can be shown that $\tein$ satisfies the following condition,
 \begin{equation}\label{eq:criteq}
 \bar{\kappa}(<\tein) = 1,
@@ -285,6 +293,7 @@ Based on \Eref{eq:criteq},
 %The average surface mass density within $\tein$ is equal to one.
 %For this reason, 
 we generalise the definition of $\tein$ to the non-axisymmetric case as the circularised radius of the isodensity contour that encloses an average surface mass density equal to $\Sigma_{\mathrm{cr}}$.
+
 
 \subsection{Lens density profile}\label{ssec:profile}
 
@@ -320,8 +329,60 @@ The projected surface mass density of a gNFW profile can be expressed in terms o
 \Sigma(R) = 2r_s\rho_0 \left(\frac{R}{r_s}\right)^{1-\gammadm}\int_0^{\pi/2} dx \sin{x}(\sin{x} + R/r_s)^{\gammadm-3}.
 \end{equation}
 
+\Fref{fig:kappa} shows the dimensionless surface mass density profile S\'{e}rsic + gNFW models with various values of the inner dark matter density slope $\gammadm$ and of the fraction of projected dark matter mass within the half-light radius, $\fdm$.
+All of the profiles have a S\'{e}rsic index $n=4$, a dark matter scale radius equal to ten times $\reff$, and are normalised in such a way that the Einstein radius is equal to the half-mass radius of the stellar component. 
+Two main features emerge from \Fref{fig:kappa}. First, the baryons generally dominate the total density in the inner regions $(\theta < \tein)$, while the dark matter is the main component at large radii.
+Second, models with different dark matter fractions and inner dark matter slopes can conspire to produce very similar total density profiles. 
+%it is possible to build models with different dark matter fractions and inner dark matter slopes, but with very similar total density profiles. 
+This is the case, for example, of the ($\fdm=0.5,\gammadm=1.5$) and the ($\fdm=0.2,\gammadm=2.0$) models (green and blue lines in \Fref{fig:kappa}).
+
+%
+\begin{figure}
+\includegraphics[width=\columnwidth]{composite_fixedap_kappa.eps}
+\caption{
+Dimensionless surface mass density profile of S\'{e}rsic + gNFW composite models.
+The S\'{e}rsic index of the baryonic component is fixed to $n=4$ and the scale radius of the dark matter component is fixed to ten times the half-light radius.
+All of the profiles are normalised in such a way that the Einstein radius is equal to the half-light radius.
+Solid lines: total density profile. Dotted lines: dark matter density profile. Dashed lines: baryonic density profile.
+The blue, orange and green dashed lines are identical, as they correspond to profiles with the same fraction of baryonic mass within the half-light radius.
+\label{fig:kappa}
+}
+\end{figure}
+%
+
 
 \subsection{Axisymmetric lenses, point sources}\label{sect:axsymmpoint}
+
+Axisymmetric lenses with a density profile of the kind considered in section \ref{ssec:profile} typically produce either one or three images of a point source.
+\Fref{fig:scheme} helps to visualise this property.
+%\Fref{fig:scheme}, which shows the quantity $\theta - \alpha(\theta)$ as a function of the position in the image plane $\theta$, helps to visualise this property. 
+Plotted in \Fref{fig:scheme} is the quantity $\theta - \alpha(\theta)$ as a function of the position in the image plane $\theta$, for the same lens models considered in \Fref{fig:kappa}.
+According to \Eref{eq:1dlenseq}, images form at the locations where this quantity equals the position of the source. 
+Therefore, given a source position $\beta$, the number of images and their location can be determined by drawing a horizontal line at the value $\beta$ on the vertical axis, and finding the points where this line intersects the $\theta - \alpha(\theta)$ curves.
+
+For small values of $\beta$ (for sources close to the lens centre), the number of images that are produced is three: the source is strongly lensed. For large values of $\beta$, instead, only one image is formed.
+The value of $\beta$ where the transition occurs is known as the radial caustic, which is marked by the horizontal dotted line in \Fref{fig:scheme}. 
+As can be seen from \Fref{fig:scheme}, a source at this location is mapped to the stationary point of the $\theta - \alpha(\theta)$ curve. 
+%this value corresponds to the stationary point of the $\theta - \alpha(\theta)$ curve. 
+That location on the image plane is known as the radial critical curve. 
+Images that form there have a formally infinite magnification in the radial direction\footnote{The slope of the $\theta - \alpha(\theta)$ curve is the inverse of the radial magnification. This can be understood by taking the derivative of \Eref{eq:1dlenseq} with respect to $\theta$.}.
+
+\begin{figure}
+\includegraphics[width=\columnwidth]{composite_fixedap_scheme.eps}
+\caption{
+The lens equation of axisymmetric lenses. Solid lines: right-hand side of \Eref{eq:1dlenseq} for the five lenses with density profile plotted in \Fref{fig:kappa}. 
+Given a source at position $\beta$, its lensed images form at the values of $\theta$ where the solid line intersects a horizontal line located at $\beta$ on the vertical axis. 
+Dotted lines: positions of the radial caustics. Sources located within the radial caustic of a given lens produce three images.
+\label{fig:scheme}
+}
+\end{figure}
+%The slope of the $\theta - \alpha(\theta)$ curve is the inverse of the magnification of an image in the radial direction. 
+%This can be understood by noting that, according to \Eref{eq:1dlenseq}, the derivative of $\theta - \alpha(\theta)$ is equal to $d\beta/d\theta$, which quantifies the ratio between an infinitesimal displacement in the radial direction in the source plane and the corresponding displacement in the image plane.
+%Stationary points of the $\theta - \alpha(\theta)$ curve, therefore, are points of infinite magnification in the radial direction. For a given axisymmetric lens, these points describe a circle known as the radial critical curve. 
+%The corresponding curve in the source plane, the radius of which is given by the value of $\theta - \alpha(\theta)$ at the stationary point, is known as the radial caustic.
+%As can be seen in \Fref{fig:scheme}, sources that lie within the radial caustic are strongly lensed into three images, while sources that lie outside of it produce only one image.
+
+%Strong lenses also have a tangential critical curve, where the magnification along the tangential direction is formally infinite. For an axisymmetric lens, the tangential critical curve is a circle with radius equal to the Einstein radius, and the corresponding tangential caustic collapses to the $\beta=0$ point in the source plane.
 
 \begin{figure}
 \includegraphics[width=\columnwidth]{axisymm_pl_crosssect.eps}

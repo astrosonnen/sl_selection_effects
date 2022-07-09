@@ -9,6 +9,8 @@ rc('text', usetex=True)
 
 fsize = 18
 
+colseq = pylab.rcParams['axes.prop_cycle'].by_key()['color']
+
 reff = 1.
 rein = reff
 theta_E = rein
@@ -17,9 +19,11 @@ rs_fixed = 10. * reff
 s_cr = 1. # I shouldn't need to change this
 
 gammadm_plot = [1., 1.5, 2.]
+ngamma = len(gammadm_plot)
 fdm_fixed = 0.5
 gammadm_fixed = 1.5
 fdm_plot = [0.2, 0.8]
+nfdm = len(fdm_plot)
 
 Rfrac_min = gnfw.R_grid[0]
 Rfrac_max = gnfw.R_grid[-1]
@@ -69,23 +73,45 @@ mstar_einfrac = deV.M2d(rein, reff)
 
 xmin = max(deV.rgrid_min*reff, Rfrac_min*rs_fixed)
 
-for gammadm in gammadm_plot:
+for i in range(ngamma):
+
+    gammadm = gammadm_plot[i]
 
     mstar_here = np.pi * rein**2 / mstar_einfrac * (1. - fdm_fixed)
     mdm_ein_here = np.pi * rein**2 * fdm_fixed
 
     gnfw_norm = mdm_ein_here / gnfw.fast_M2d(rein, rs_fixed, gammadm)
 
-    ax.plot(t_finearr, t_finearr - alpha(t_finearr, gnfw_norm, rs_fixed, gammadm, mstar_here, reff), label='$f_{\mathrm{DM}} = %2.1f$, $\gamma_{\mathrm{DM}}=%2.1f$'%(fdm_fixed, gammadm))
+    ax.plot(t_finearr, t_finearr - alpha(t_finearr, gnfw_norm, rs_fixed, gammadm, mstar_here, reff), label='$f_{\mathrm{DM}} = %2.1f$, $\gamma_{\mathrm{DM}}=%2.1f$'%(fdm_fixed, gammadm), color=colseq[i])
 
-for fdm in fdm_plot:
+    # looks for radial critical curve
+    def zerofunc(x):
+        return 1./mu_r(x, gnfw_norm, rs_fixed, gammadm, mstar_here, reff)
+
+    x_rad = brentq(zerofunc, -rein, -0.01)
+    beta_rad = x_rad - alpha(x_rad, gnfw_norm, rs_fixed, gammadm, mstar_here, reff)
+    ax.axhline(beta_rad, linestyle=':', color=colseq[i])
+    ax.axhline(-beta_rad, linestyle=':', color=colseq[i])
+
+for i in range(nfdm):
+
+    fdm = fdm_plot[i]
 
     mstar_here = np.pi * rein**2 / mstar_einfrac * (1. - fdm)
     mdm_ein_here = np.pi * rein**2 * fdm
 
     gnfw_norm = mdm_ein_here / gnfw.fast_M2d(rein, rs_fixed, gammadm_fixed)
 
-    ax.plot(t_finearr, t_finearr - alpha(t_finearr, gnfw_norm, rs_fixed, gammadm_fixed, mstar_here, reff), label='$f_{\mathrm{DM}}=%2.1f$, $\gamma_{\mathrm{DM}}=%2.1f$'%(fdm, gammadm_fixed))
+    ax.plot(t_finearr, t_finearr - alpha(t_finearr, gnfw_norm, rs_fixed, gammadm_fixed, mstar_here, reff), label='$f_{\mathrm{DM}}=%2.1f$, $\gamma_{\mathrm{DM}}=%2.1f$'%(fdm, gammadm_fixed), color=colseq[i+ngamma])
+
+    # looks for radial critical curve
+    def zerofunc(x):
+        return 1./mu_r(x, gnfw_norm, rs_fixed, gammadm_fixed, mstar_here, reff)
+
+    x_rad = brentq(zerofunc, -rein, -0.01)
+    beta_rad = x_rad - alpha(x_rad, gnfw_norm, rs_fixed, gammadm_fixed, mstar_here, reff)
+    ax.axhline(beta_rad, linestyle=':', color=colseq[i+ngamma])
+    ax.axhline(-beta_rad, linestyle=':', color=colseq[i+ngamma])
 
 #ax.set_aspect(1.)
 pylab.arrow(t_arr[0], 0, t_arr[-1]-t_arr[0], 0, length_includes_head=False, head_width=0.15, color='k')
