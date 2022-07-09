@@ -208,6 +208,7 @@ Finally, we address the question of how different are galaxy-galaxy lens samples
 With this study we aim to quantify this bias.
 
 The structure of this work is the following.
+\Sref{sect:basics} introduces the basics of gravitational lensing.
 In \Sref{sect:indlenses} we study individual lens systems, to look for trends in the lensing cross-section with various lens and source properties.
 In \Sref{sect:lenspop} we describe our simulations of lens populations.
 In \Sref{sect:results} we show the results of our analysis on the simulated lens populations.
@@ -217,28 +218,7 @@ The Python code used for the simulation and analysis of the lens sample can be f
 
 %__________________________________________________________________
 
-\section{Individual lenses}\label{sect:indlenses}
-
-In this section we study how the probability of a strong lensing event varies as a function of lens and source properties.
-In order to do so, it is useful to introduce the concept of strong lensing cross-section.
-Given a foreground galaxy with parameters $\psilens$, a background source with parameters $\psisource$, and a criterion $S$ to define a strong lensing event, the strong lensing cross-section is defined as \citep{Son22}:
-\begin{equation}\label{eq:crosssect}
-\crosssect = \int_{\mathbb{R}^2} d\boldsymbol\beta \pdet(\psilens,\psisourcenobeta,\boldsymbol\beta|S),
-\end{equation}
-where $\boldsymbol\beta$ is the position of the background source and the integral is carried out over the whole sky.
-The definition above is valid for both a point source and an extended source: although there is no unique way of defining the position of an extended source, the integral over the sky ensures that the result is independent of how the source position is defined.
-In the limit of low density of background sources, which is satisfied in all practical cases, the probability of a lensing event is proportional to $\crosssect$.
-
-In this section we compute $\crosssect$ in a series of different scenarios of increasing complexity.
-We first introduce the basic equations of gravitational lensing in section \ref{ssec:lensbasics}.
-Then, in section \ref{ssec:profile}, we present the model family adopted to describe the radial density profile of the lenses in our experiments.
-%The model family adopted to describe the radial density profile of the lenses is the same in all of our experiments. We describe this in \ref{ssec:profile}, among with the basic equations of gravitational lensing.
-%In section \ref{ssec:axsymmpoint} we consider axisymmetric lenses and point sources.
-In section \ref{ssec:axsymmpoint} we show calculations of the strong lensing cross-section in the case of axisymmetric lenses and point sources.
-In section \ref{ssec:ellpoint} we generalise the lens geometry to elliptical, while in section \ref{ssec:ellext} we replace point sources with extended sources.
-
-
-\subsection{Strong lensing basics}\label{ssec:lensbasics}
+\section{Strong lensing basics}\label{sect:basics}
 
 The lensing properties of an object with respect to a source depend solely on its dimensionless surface mass density distribution $\kappa(\boldsymbol\theta)$ (also referred to as the convergence), 
 % ratio between its surface mass density distribution and the critical surface mass density for lensing:
@@ -262,6 +242,9 @@ This can be expressed in terms of the dimensionless surface mass density by mean
 \begin{equation}
 \boldsymbol\alpha(\boldsymbol\theta) = \frac{1}{\pi}\int_{\mathbb{R}^2} d^2\boldsymbol\theta' \kappa(\boldsymbol\theta')\dfrac{\boldsymbol\theta - \boldsymbol\theta'}{|\boldsymbol\theta - \boldsymbol\theta'|^2}.
 \end{equation}
+
+
+\subsection{The axisymmetric lens}
 
 In the special case of an axisymmetric lens we can simplify the notation by considering a single coordinate axis with origin at the centre of the lens. We label the components of the image position, source position and deflection angle along this axis as $\theta$, $\beta$ and $\alpha$, respectively.
 The lens equation for an axisymmetric lens then becomes
@@ -293,6 +276,67 @@ Based on \Eref{eq:criteq},
 %The average surface mass density within $\tein$ is equal to one.
 %For this reason, 
 we generalise the definition of $\tein$ to the non-axisymmetric case as the circularised radius of the isodensity contour that encloses an average surface mass density equal to $\Sigma_{\mathrm{cr}}$.
+
+Axisymmetric lenses with a density profile of the kind considered in section \ref{ssec:profile} typically produce either one or three images of a point source.
+\Fref{fig:scheme} helps to visualise this property.
+%\Fref{fig:scheme}, which shows the quantity $\theta - \alpha(\theta)$ as a function of the position in the image plane $\theta$, helps to visualise this property. 
+Plotted in \Fref{fig:scheme} is the quantity $\theta - \alpha(\theta)$ as a function of the position in the image plane $\theta$, for the same lens models considered in \Fref{fig:kappa}.
+According to \Eref{eq:1dlenseq}, images form at the locations where this quantity equals the position of the source. 
+Therefore, given a source position $\beta$, the number of images and their location can be determined by drawing a horizontal line at the value $\beta$ on the vertical axis, and finding the points where this line intersects the $\theta - \alpha(\theta)$ curves.
+
+For small values of $\beta$ (for sources close to the lens centre), the number of images that are produced is three: the source is strongly lensed. For large values of $\beta$, instead, only one image is formed.
+The value of $\beta$ where the transition occurs is known as the radial caustic, which is marked by the horizontal dotted line in \Fref{fig:scheme}. 
+As can be seen from \Fref{fig:scheme}, a source at this location is mapped to the stationary point of the $\theta - \alpha(\theta)$ curve. 
+%this value corresponds to the stationary point of the $\theta - \alpha(\theta)$ curve. 
+That location on the image plane is known as the radial critical curve. 
+Images that form there have a formally infinite magnification in the radial direction\footnote{The slope of the $\theta - \alpha(\theta)$ curve is the inverse of the radial magnification. This can be understood by taking the derivative of \Eref{eq:1dlenseq} with respect to $\theta$.}.
+
+\begin{figure}
+\includegraphics[width=\columnwidth]{composite_fixedap_scheme.eps}
+\caption{
+The lens equation of axisymmetric lenses. Solid lines: right-hand side of \Eref{eq:1dlenseq} for the five lenses with density profile plotted in \Fref{fig:kappa}. 
+Given a source at position $\beta$, its lensed images form at the values of $\theta$ where the solid line intersects a horizontal line located at $\beta$ on the vertical axis. 
+Dotted lines: positions of the radial caustics. Sources located within the radial caustic of a given lens produce three images.
+\label{fig:scheme}
+}
+\end{figure}
+%The slope of the $\theta - \alpha(\theta)$ curve is the inverse of the magnification of an image in the radial direction. 
+%This can be understood by noting that, according to \Eref{eq:1dlenseq}, the derivative of $\theta - \alpha(\theta)$ is equal to $d\beta/d\theta$, which quantifies the ratio between an infinitesimal displacement in the radial direction in the source plane and the corresponding displacement in the image plane.
+%Stationary points of the $\theta - \alpha(\theta)$ curve, therefore, are points of infinite magnification in the radial direction. For a given axisymmetric lens, these points describe a circle known as the radial critical curve. 
+%The corresponding curve in the source plane, the radius of which is given by the value of $\theta - \alpha(\theta)$ at the stationary point, is known as the radial caustic.
+%As can be seen in \Fref{fig:scheme}, sources that lie within the radial caustic are strongly lensed into three images, while sources that lie outside of it produce only one image.
+
+%Strong lenses also have a tangential critical curve, where the magnification along the tangential direction is formally infinite. For an axisymmetric lens, the tangential critical curve is a circle with radius equal to the Einstein radius, and the corresponding tangential caustic collapses to the $\beta=0$ point in the source plane.
+
+\subsection{The elliptical lens}
+
+
+
+
+%__________________________________________________________________
+
+\section{Individual lenses}\label{sect:indlenses}
+
+In this section we study how the probability of a strong lensing event varies as a function of lens and source properties.
+In order to do so, it is useful to introduce the concept of strong lensing cross-section.
+Given a foreground galaxy with parameters $\psilens$, a background source with parameters $\psisource$, and a criterion $S$ to define a strong lensing event, the strong lensing cross-section is defined as \citep{Son22}:
+\begin{equation}\label{eq:crosssect}
+\crosssect = \int_{\mathbb{R}^2} d\boldsymbol\beta \pdet(\psilens,\psisourcenobeta,\boldsymbol\beta|S),
+\end{equation}
+where $\boldsymbol\beta$ is the position of the background source and the integral is carried out over the whole sky.
+The definition above is valid for both a point source and an extended source: although there is no unique way of defining the position of an extended source, the integral over the sky ensures that the result is independent of how the source position is defined.
+In the limit of low density of background sources, which is satisfied in all practical cases, the probability of a lensing event is proportional to $\crosssect$.
+
+In this section we compute $\crosssect$ in a series of different scenarios of increasing complexity.
+%We first introduce the basic equations of gravitational lensing in section \ref{ssec:lensbasics}.
+%Then, in section \ref{ssec:profile}, we present the model family adopted to describe the radial density profile of the lenses in our experiments.
+The model family adopted to describe the radial density profile of the lenses is the same in all of our experiments. We describe this in \ref{ssec:profile}. %, among with the basic equations of gravitational lensing.
+%In section \ref{ssec:axsymmpoint} we consider axisymmetric lenses and point sources.
+In section \ref{ssec:axsymmpoint} we show calculations of the strong lensing cross-section in the case of axisymmetric lenses and point sources.
+In section \ref{ssec:ellpoint} we generalise the lens geometry to elliptical, while in section \ref{ssec:ellext} we replace point sources with extended sources.
+
+
+%\subsection{Strong lensing basics}\label{ssec:lensbasics}
 
 
 \subsection{Lens density profile}\label{ssec:profile}
@@ -353,36 +397,6 @@ The blue, orange and green dashed lines are identical, as they correspond to pro
 
 \subsection{Axisymmetric lenses, point sources}\label{sect:axsymmpoint}
 
-Axisymmetric lenses with a density profile of the kind considered in section \ref{ssec:profile} typically produce either one or three images of a point source.
-\Fref{fig:scheme} helps to visualise this property.
-%\Fref{fig:scheme}, which shows the quantity $\theta - \alpha(\theta)$ as a function of the position in the image plane $\theta$, helps to visualise this property. 
-Plotted in \Fref{fig:scheme} is the quantity $\theta - \alpha(\theta)$ as a function of the position in the image plane $\theta$, for the same lens models considered in \Fref{fig:kappa}.
-According to \Eref{eq:1dlenseq}, images form at the locations where this quantity equals the position of the source. 
-Therefore, given a source position $\beta$, the number of images and their location can be determined by drawing a horizontal line at the value $\beta$ on the vertical axis, and finding the points where this line intersects the $\theta - \alpha(\theta)$ curves.
-
-For small values of $\beta$ (for sources close to the lens centre), the number of images that are produced is three: the source is strongly lensed. For large values of $\beta$, instead, only one image is formed.
-The value of $\beta$ where the transition occurs is known as the radial caustic, which is marked by the horizontal dotted line in \Fref{fig:scheme}. 
-As can be seen from \Fref{fig:scheme}, a source at this location is mapped to the stationary point of the $\theta - \alpha(\theta)$ curve. 
-%this value corresponds to the stationary point of the $\theta - \alpha(\theta)$ curve. 
-That location on the image plane is known as the radial critical curve. 
-Images that form there have a formally infinite magnification in the radial direction\footnote{The slope of the $\theta - \alpha(\theta)$ curve is the inverse of the radial magnification. This can be understood by taking the derivative of \Eref{eq:1dlenseq} with respect to $\theta$.}.
-
-\begin{figure}
-\includegraphics[width=\columnwidth]{composite_fixedap_scheme.eps}
-\caption{
-The lens equation of axisymmetric lenses. Solid lines: right-hand side of \Eref{eq:1dlenseq} for the five lenses with density profile plotted in \Fref{fig:kappa}. 
-Given a source at position $\beta$, its lensed images form at the values of $\theta$ where the solid line intersects a horizontal line located at $\beta$ on the vertical axis. 
-Dotted lines: positions of the radial caustics. Sources located within the radial caustic of a given lens produce three images.
-\label{fig:scheme}
-}
-\end{figure}
-%The slope of the $\theta - \alpha(\theta)$ curve is the inverse of the magnification of an image in the radial direction. 
-%This can be understood by noting that, according to \Eref{eq:1dlenseq}, the derivative of $\theta - \alpha(\theta)$ is equal to $d\beta/d\theta$, which quantifies the ratio between an infinitesimal displacement in the radial direction in the source plane and the corresponding displacement in the image plane.
-%Stationary points of the $\theta - \alpha(\theta)$ curve, therefore, are points of infinite magnification in the radial direction. For a given axisymmetric lens, these points describe a circle known as the radial critical curve. 
-%The corresponding curve in the source plane, the radius of which is given by the value of $\theta - \alpha(\theta)$ at the stationary point, is known as the radial caustic.
-%As can be seen in \Fref{fig:scheme}, sources that lie within the radial caustic are strongly lensed into three images, while sources that lie outside of it produce only one image.
-
-%Strong lenses also have a tangential critical curve, where the magnification along the tangential direction is formally infinite. For an axisymmetric lens, the tangential critical curve is a circle with radius equal to the Einstein radius, and the corresponding tangential caustic collapses to the $\beta=0$ point in the source plane.
 
 \begin{figure}
 \includegraphics[width=\columnwidth]{axisymm_pl_crosssect.eps}
