@@ -208,7 +208,7 @@ Finally, we address the question of how different are galaxy-galaxy lens samples
 With this study we aim to quantify this bias.
 
 The structure of this work is the following.
-\Sref{sect:basics} introduces the basics of gravitational lensing.
+In \Sref{sect:basics} we introduce the basics of gravitational lensing.
 In \Sref{sect:indlenses} we study individual lens systems, to look for trends in the lensing cross-section with various lens and source properties.
 In \Sref{sect:lenspop} we describe our simulations of lens populations.
 In \Sref{sect:results} we show the results of our analysis on the simulated lens populations.
@@ -220,12 +220,12 @@ The Python code used for the simulation and analysis of the lens sample can be f
 
 \section{Strong lensing basics}\label{sect:basics}
 
-The lensing properties of an object with respect to a source depend solely on its dimensionless surface mass density distribution $\kappa(\boldsymbol\theta)$ (also referred to as the convergence), 
-% ratio between its surface mass density distribution and the critical surface mass density for lensing:
+The lensing properties of an object with respect to a source depend solely on its dimensionless surface mass density distribution $\kappa(\boldsymbol\theta)$ (also referred to as the convergence). 
+This is the ratio between the surface mass density and the critical surface mass density for lensing:
 \begin{equation}
-\kappa(\boldsymbol\theta) = \dfrac{\Sigma(\boldsymbol\theta)}{\Sigma_{\mathrm{cs}}},
+\kappa(\boldsymbol\theta) = \dfrac{\Sigma(\boldsymbol\theta)}{\Sigma_{\mathrm{cs}}}.
 \end{equation}
-which is the ratio between the projected surface mass density of the lens and the critical surface mass density for lensing.
+%which is the ratio between the projected surface mass density of the lens and the critical surface mass density for lensing.
 The latter quantity is defined as
 %The quantity $\Sigma_{\matrhrm{cs}}$ is the critical surface mass density for lensing, defined as
 \begin{equation}
@@ -263,7 +263,7 @@ This can also be expressed in terms of the total projected mass enclosed within 
 
 A very important quantity for describing the strength of a strong lens is the Einstein radius, $\tein$. For an axisymmetric lens, this is the radius corresponding to the solution of \Eref{eq:lenseq} for a source placed at the same angular position as the lens centre ($\beta=0$).
 The circle with radius equal to $\tein$ is known as the tangential critical curve. Images that form here have infinite magnification in the tangential direction.
-
+%
 It can be shown that $\tein$ satisfies the following condition,
 \begin{equation}\label{eq:criteq}
 \bar{\kappa}(<\tein) = 1,
@@ -272,17 +272,18 @@ where $\bar{\kappa}(<\theta)$ is the average surface mass density within a radiu
 \begin{equation}
 \bar{\kappa}(<\theta) \equiv \frac{2}{\theta^2}\int_0^{\theta}d\theta' \kappa(\theta')\theta'.
 \end{equation}
-Based on \Eref{eq:criteq},
-%The average surface mass density within $\tein$ is equal to one.
-%For this reason, 
-we generalise the definition of $\tein$ to the non-axisymmetric case as the circularised radius of the isodensity contour that encloses an average surface mass density equal to $\Sigma_{\mathrm{cr}}$.
+%Based on \Eref{eq:criteq},
+%we generalise the definition of $\tein$ to the non-axisymmetric case as the circularised radius of the isodensity contour that encloses an average surface mass density equal to $\Sigma_{\mathrm{cr}}$.
 
-Axisymmetric lenses with a density profile of the kind considered in section \ref{ssec:profile} typically produce either one or three images of a point source.
+Axisymmetric lenses of the kind considered in this work 
+%Axisymmetric lenses with a density profile of the kind considered in section \ref{ssec:profile} 
+typically produce either one or three images of a point source.
 \Fref{fig:scheme} helps to visualise this property.
 %\Fref{fig:scheme}, which shows the quantity $\theta - \alpha(\theta)$ as a function of the position in the image plane $\theta$, helps to visualise this property. 
-Plotted in \Fref{fig:scheme} is the quantity $\theta - \alpha(\theta)$ as a function of the position in the image plane $\theta$, for the same lens models considered in \Fref{fig:kappa}.
+Plotted in \Fref{fig:scheme} is the quantity $\theta - \alpha(\theta)$ as a function of the position in the image plane $\theta$, for a few lens models.
+%for the same lens models considered in \Fref{fig:kappa}.
 According to \Eref{eq:1dlenseq}, images form at the locations where this quantity equals the position of the source. 
-Therefore, given a source position $\beta$, the number of images and their location can be determined by drawing a horizontal line at the value $\beta$ on the vertical axis, and finding the points where this line intersects the $\theta - \alpha(\theta)$ curves.
+Therefore, given a source position $\beta$, the number of images and their location can be determined by drawing a horizontal line at the value $\beta$ on the vertical axis, and finding the points where this line intersects the $\theta - \alpha(\theta)$ curve.
 
 For small values of $\beta$ (for sources close to the lens centre), the number of images that are produced is three: the source is strongly lensed. For large values of $\beta$, instead, only one image is formed.
 The value of $\beta$ where the transition occurs is known as the radial caustic, which is marked by the horizontal dotted line in \Fref{fig:scheme}. 
@@ -294,9 +295,10 @@ Images that form there have a formally infinite magnification in the radial dire
 \begin{figure}
 \includegraphics[width=\columnwidth]{composite_fixedap_scheme.eps}
 \caption{
-The lens equation of axisymmetric lenses. Solid lines: right-hand side of \Eref{eq:1dlenseq} for the five lenses with density profile plotted in \Fref{fig:kappa}. 
+The lens equation of axisymmetric lenses. Solid lines: right-hand side of \Eref{eq:1dlenseq} for five lenses with different density profiles. 
 Given a source at position $\beta$, its lensed images form at the values of $\theta$ where the solid line intersects a horizontal line located at $\beta$ on the vertical axis. 
 Dotted lines: positions of the radial caustics. Sources located within the radial caustic of a given lens produce three images.
+The lens models used in this simulations consist of a stellar component and a dark matter halo, as described in section \ref{ssec:profile}. Their density profile is plotted in \Fref{fig:kappa}.
 \label{fig:scheme}
 }
 \end{figure}

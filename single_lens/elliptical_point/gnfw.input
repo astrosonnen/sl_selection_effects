@@ -1,0 +1,22 @@
+omega 0.3
+lambda 0.7
+weos -1.
+hubble 0.7
+prefix gnfw
+xmin -3.
+xmax 3.
+ymin -3.
+ymax 3.
+pix_poi 0.1
+maxlev 5
+nfw_users 1
+
+startup 1 0 1
+lens gnfw 0.300000 1e13 0. 0. 0. 0.000000 10. 1.
+point 1.500000 0.5 0.
+end_startup
+
+start_command
+calcein 1.5
+findimg
+quit

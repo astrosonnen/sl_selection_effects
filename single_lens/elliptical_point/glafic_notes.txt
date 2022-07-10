@@ -1,0 +1,10 @@
+2022-7-10
+
+- The function 'calcein' does not seem to work on Python. Need to run glafic directly.
+
+- The total mass of the Sersic profile in Glafic is in units of M_Sun/h.
+
+- I verified that the Einstein radius of a Sersic profile calculated by Glafic is the same that I get with my 1D scripts. I verified that the Einstein radius returned by 'calcein' is independent of the ellipticity (as stated in the manual).
+
+- The mass scale of the gNFW profile seems to be the virial radius
+

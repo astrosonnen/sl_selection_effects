@@ -1,0 +1,20 @@
+omega 0.3
+lambda 0.7
+weos -1.
+hubble 0.7
+prefix sersic
+xmin -3.
+xmax 3.
+ymin -3.
+ymax 3.
+pix_poi 0.1
+maxlev 5
+
+startup 1 0 1
+lens sers 0.300000 1e11 0. 0. 0.2 0.000000 1. 4.
+point 1.500000 0.5 0.
+end_startup
+
+start_command
+calcein 1.5
+quit
