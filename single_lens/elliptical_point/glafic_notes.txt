@@ -6,5 +6,7 @@
 
 - I verified that the Einstein radius of a Sersic profile calculated by Glafic is the same that I get with my 1D scripts. I verified that the Einstein radius returned by 'calcein' is independent of the ellipticity (as stated in the manual).
 
-- The mass scale of the gNFW profile seems to be the virial radius
+- The mass scale of the gNFW profile is the virial radius, but the exact definition of virial radius needs to be defined via the parameter 'flag_hodensity' and 'hodensity'.
+
+- I verified that the Einstein radius of a gNFW profile computed by Glafic is the same that I obtain with my 1D scripts.
 

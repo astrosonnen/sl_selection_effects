@@ -10,13 +10,14 @@ ymax 3.
 pix_poi 0.1
 maxlev 5
 nfw_users 1
+flag_hodensity 2
+hodensity 200.
 
 startup 1 0 1
-lens gnfw 0.300000 1e13 0. 0. 0. 0.000000 10. 1.
+lens gnfw 0.300000 1e13 0. 0. 0. 0.000000 5. 1.5
 point 1.500000 0.5 0.
 end_startup
 
 start_command
 calcein 1.5
-findimg
 quit
