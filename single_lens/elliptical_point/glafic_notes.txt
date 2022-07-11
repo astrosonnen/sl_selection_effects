@@ -10,3 +10,4 @@
 
 - I verified that the Einstein radius of a gNFW profile computed by Glafic is the same that I obtain with my 1D scripts.
 
+- I verified that the circularised radius of the isodensity contour corresponding to the Einstein radius is fixed as a function of axis ratio
