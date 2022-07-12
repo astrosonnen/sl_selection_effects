@@ -22,7 +22,7 @@ else:
 
 cs_file = h5py.File('composite_physical_grid.hdf5', 'r')
 
-dms_grid = cs_file['dms_grid'][()]
+dms_grid = cs_file['dms_grid'][1:]
 ndms = len(dms_grid)
 
 #lmstar_grid = cs_file['lmstar_grid'][()]
@@ -36,10 +36,10 @@ ngamma = len(gammadm_grid)
 lmdm5_grid = cs_file['lmdm5_grid'][()]
 nmdm5 = len(lmdm5_grid)
 
-cs_gammadm = cs_file['cs_vs_gammadm'][()]
-cs_lmdm5 = cs_file['cs_vs_lmdm5'][()]
-cs_lmstar = cs_file['cs_vs_lmstar'][()]
-cs_lreff = cs_file['cs_vs_lreff'][()]
+cs_gammadm = cs_file['cs_vs_gammadm'][:, 1:]
+cs_lmdm5 = cs_file['cs_vs_lmdm5'][:, 1:]
+cs_lmstar = cs_file['cs_vs_lmstar'][:, 1:]
+cs_lreff = cs_file['cs_vs_lreff'][:, 1:]
 
 rein_gammadm = cs_file['rein_vs_gammadm'][()]
 rein_lmdm5 = cs_file['rein_vs_lmdm5'][()]

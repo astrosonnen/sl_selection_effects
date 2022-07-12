@@ -244,7 +244,7 @@ This can be expressed in terms of the dimensionless surface mass density by mean
 \end{equation}
 
 
-\subsection{The axisymmetric lens}
+\subsection{The axisymmetric lens}\label{ssec:axisymm}
 
 In the special case of an axisymmetric lens we can simplify the notation by considering a single coordinate axis with origin at the centre of the lens. We label the components of the image position, source position and deflection angle along this axis as $\theta$, $\beta$ and $\alpha$, respectively.
 The lens equation for an axisymmetric lens then becomes
@@ -312,14 +312,46 @@ The lens models used in this simulations consist of a stellar component and a da
 
 \subsection{The elliptical lens}
 
+In this paper we focus mostly on lens galaxies with elliptical isodensity contours.
+Given a surface mass density profile $\Sigma(R)$, a lens with an elliptical mass distribution can be obtained by replacing the radial coordinate with the circularised radius:
+\begin{equation}
+R \rightarrow \sqrt{qx^2 + \frac{y^2}{q}},
+\end{equation}
+where $x$ and $y$ are cartesian axes centred on the lens centre, with $x$ pointing towards the major axis, and where $q$ is the minor-to-major axis ratio.
+
+\Fref{fig:ellcaust} shows the source-plane caustics of elliptical lenses with different values of the axis ratio.
+The outermost curves are radial caustics, while the inner ones are tangential ones.
+%While in the axisymmetric case these are a circle and a point respectively (blue curves), in the elliptical case they are transformed into a 
+The most striking difference with respect to the axisymmetric case (blue curves in \Fref{fig:ellcaust}) is the fact that the tangential caustic is transformed from a point into a diamond-like curve.
+Sources located within the diamond produce five images (one of which is usually highly de-magnified). Sources that lie in the region enclosed between the two caustics are imaged three times. Sources outside the radial caustic are imaged only once, as in the axisymmetric case.
+The fact that the number of images changes by two at a caustic crossing is a general feature of gravitational lenses with no singularities \citep{SEF92}.
+
 \begin{figure}
 \includegraphics[width=\columnwidth]{composite_caustics.eps}
 \caption{
 Caustics of lenses with fixed radial structure and different ellipticity.
+Source-plane angular coordinates are in units of the Einstein radius.
 The outer curve is the radial caustic, while the inner diamond is the tangential caustic. Sources located outside the caustic are not strongly lensed. Sources that lie in the region enclosed between the two caustics produce three images, while sources inside the tangential caustic produce five images.
-The lens model adopted for this experiment consists of a stellar component and a dark matter halo. The two components have the same ellipticity.
+The lens model adopted for this experiment consists of a stellar component and a dark matter halo, as described in \ref{ssec:profile}. The two components have the same ellipticity.
+\label{fig:ellcaust}
 }
 \end{figure}
+
+\subsection{Lensing event definition: point sources}\label{ssec:lensdefpoint}
+
+In order to compute the probability of a lensing event we must provide an exact definition for it.
+A necessary condition for a lens-source system to qualify as a strong lens is the presence of multiple images of the source.
+As we showed above, this requires the source to lie within the region enclosed by the radial caustic.
+In order to recognise a strong lens in a real strong lensing survey, however, it is not sufficient for multiple images to exist: they must be detected.
+For this reason, given the detection limit of a survey for a point source, $m_{\mathrm{lim}}$, we define as strong lensing event any lens-source system with at least two images brighter than $m_{\mathrm{lim}}$.
+This is the same definition upon which the \citet{MVK09} work is based \citep{VMK09}.
+Labelling with $m_2$ the magnitude of the second-brightest image, then, in the absence of photometric noise the lens detection probability $\pdet$ becomes
+\begin{equation}
+\pdet(\psilens,\psisource) = \left\{\begin{array}{ll} 1 & \rm{if}\,m_2(\psilens,\psisource) < m_{\mathrm{lim}} \\
+0 & \rm{otherwise}\end{array}\right. .
+\end{equation}
+
+\subsection{Lensing event definition: extended sources}\label{ssec:lensdefext}
 
 
 %__________________________________________________________________
@@ -343,7 +375,6 @@ The model family adopted to describe the radial density profile of the lenses is
 %In section \ref{ssec:axsymmpoint} we consider axisymmetric lenses and point sources.
 In section \ref{ssec:axsymmpoint} we show calculations of the strong lensing cross-section in the case of axisymmetric lenses and point sources.
 In section \ref{ssec:ellpoint} we generalise the lens geometry to elliptical, while in section \ref{ssec:ellext} we replace point sources with extended sources.
-
 
 %\subsection{Strong lensing basics}\label{ssec:lensbasics}
 
@@ -404,18 +435,86 @@ The blue, orange and green dashed lines are identical, as they correspond to pro
 %
 
 
-\subsection{Axisymmetric lenses, point sources}\label{sect:axsymmpoint}
 
 
+\subsection{Axisymmetric lenses, point sources}\label{ssec:axsymmpoint}
+
+Axisymmetric lenses with a density profile of the kind introduced in section \ref{ssec:profile} can produce either one or three images of a point source.
+This can be seen in \Fref{fig:scheme}, which shows the lens equation for various values of the dark matter fraction and the inner dark matter slope.
+All of the lenses shown in this figure have the same Einstein radius, which is equal in size to the half-mass radius of the stellar component.
+The radius of the radial caustic, marked by the dotted lines in \Fref{fig:scheme}, is a strong function of the lens properties: it is largest in lenses with a smaller dark matter fraction or steeper dark matter slopes.
+As a result, the source plane area that is subject to strong lensing is an even stronger function of these properties, since it scales with the square of the radial caustic radius.
+In order to compute the lensing cross-section, however, we must take into account the magnification of the multiple images: according to our definition of a strong lensing event, given in section \ref{ssec:lensdefpoint}, at least two images must be detected in order for a system to qualify as a strong lens.
+
+\Fref{fig:1dmag} shows the magnification of the secondary image as a function of source position. The secondary image is the one located in the region between the radial and tangential critical curves, opposite to the source with respect to the lens centre. In most practical cases this is the second brightest image.
+As \Fref{fig:1dmag} shows, the magnification is very large for sources close to the lens (small values of $\beta$), decreases with increasing source position and then increases in close proximity to the radial caustic.
+%In particular, for $\beta > 0.5\tein$, the magnification is smaller than unity, with the exception of a thin slice near the caustic.
+While for the model with $f_{\mathrm{DM}}=0.8$ (purple curve) the magnification is above unity everywhere, other lens models can produce highly de-magnified secondary images for large values of $\beta$.
+Depending on the intrinsic brightness of the lensed source, these images may or may not be detected.
+%This has two implications for the lensing cross-section. First, a larger caustic size does not necessarily translate into a larger value of $\crosssect$. Second, the cross-section depends on the intrinsic brightness of the lensed source: an extremely bright point source can be detected regardless of its position in the source plane, but a source with a finite brightness can go undetected depending on its value of $\beta$.
+
+%
 \begin{figure}
-\includegraphics[width=\columnwidth]{axisymm_pl_crosssect.eps}
+\includegraphics[width=\columnwidth]{composite_fixedap_mu2.eps}
 \caption{
-Strong lensing cross-section of an axisymmetric power-law lens and a point source, as a function of the power-law slope $\gamma$.
-The system is defined as a strong lens if at least two images are detected.
-Different lines correspond to the difference $\Delta m$ between the source magnitude and the survey detection limit for a point source.
-The dashed line marks the cross-section in the case in which at least two images are formed, regardless of their magnification.
+Magnification of the secondary image as a function of the source position.
+The lenses are axisymmetric composite model. Their density profile is plotted in \Fref{fig:kappa}.
+Vertical dotted lines mark the position of the radial caustic.
+\label{fig:1dmag}
 }
 \end{figure}
+
+Using the definition of \Eref{eq:crosssect}, we computed the lensing cross-section of a set of axisymmetric lenses, with respect to point sources with different brightnesses.
+In particular, we considered model lenses with fixed Einstein radius, with angular half-mass radius fixed to $\tein$, and varying values of the dark matter fraction and dark matter inner slope.
+The results are shown in \Fref{fig:fixedap_cs}.
+Each line corresponds to a source with a given intrinsic (i.e. unlensed) magnitude, $m_s$. The difference between this magnitude and the limiting magnitude of the survey is indicated as follows:
+\begin{equation}
+\Delta m \equiv m_s - m_{\mathrm{lim}}.
+\end{equation}
+
+We can see a clear trend between $\Delta m$ and the lensing cross-section, in both panels of \Fref{fig:fixedap_cs}: $\crosssect$ is larger for brighter sources.
+The trend saturates below a certain $\Delta m$, for sufficiently small values of $\gammadm$ or for sufficiently large values of $\fdm$.
+%These are cases in which the source is so bright that, as long as it is located within the radial caustic, it always produces at least two detectable images. 
+In these cases the lensing cross-section coincides with the full area enclosed within the caustic, and further increasing the source brightness does not result in an increased value of $\crosssect$.
+
+\begin{figure}
+\includegraphics[width=\columnwidth]{axisymm_composite_crosssect.eps}
+\caption{
+Strong lensing cross-section of an axisymmetric lens and a point source.
+The lens galaxy is a composite model, introduced in section \ref{ssec:profile}, with angular half-light radius equal to the Einstein radius.
+Left panel: cross-section, in units of $\pi\tein^2$, as a function of the inner dark matter slope. The dark matter fraction is fixed at $\fdm=0.5$.
+Right panel: cross-section as a function of the fraction of dark matter within the half-light radius. The inner dark matter slope is fixed at $\gammadm=1.5$.
+The system is defined as a strong lens if at least two images are detected.
+Different lines correspond to the difference $\Delta m$ between the source magnitude and the survey detection limit for a point source.
+\label{fig:fixedap_cs}
+}
+\end{figure}
+
+At fixed source brightness, trends with the dark matter inner slope or dark matter fraction are generally weak.
+\Fref{fig:fixedap_cs}, however, shows how the lensing cross-section varies with $\gammadm$ or $\fdm$ while keeping the Einstein radius fixed.
+This is achieved by adjusting other properties of the lens, such as the total mass of the baryonic or the dark matter component (see \Fref{fig:kappa}). 
+%This means that other properties of the lens, such as the total mass of the baryonic component or the dark matter component, are adjusted to maintain a constant $\tein$ (see \Fref{fig:kappa}). 
+In practice, when varying one ingredient of the lens density profile, the Einstein radius varies in response.
+To get a complete view of how the lensing cross-section depends on different lens properties, we also computed how $\crosssect$ responds in absolute terms by varying one lens parameter at a time.
+\Fref{fig:phys_cs} shows $\crosssect$ as a function of stellar mass, half-light radius, inner dark matter slope, and projected dark matter mass enclosed within an aperture of $5$~kpc, $\mdmfive$.
+%The reference lens is a galaxy at $z=0.3$ with $\log{\mstar}=11.5$, $\reff=7\,{\rm kpc}$, $\gammadm=1.5$, $\log{\mfive}=11.0$, and a source at $z=1.5$.
+
+\begin{figure*}
+\includegraphics[width=\textwidth]{axisymm_composite_physical_crosssect.eps}
+\caption{
+Absolute value of the strong lensing cross-section as a function of various lens properties.
+The reference lens is a galaxy at $z=0.3$ with $\log{\mstar}=11.5$, $\reff=7\,{\rm kpc}$, $\gammadm=1.5$, $\log{\mdmfive}=11.0$, and a source at $z=1.5$
+In each panel, only one property of the lens is varied, as indicated on the label of the horizontal axis.
+Each curve corresponds to a different value of $\Delta m$, in accordance with \Fref{fig:fixedap_cs}.
+The dashed line in each panel shows the quantity $\pi\tein^2$.
+\label{fig:phys_cs}
+}
+\end{figure*}
+
+The lensing cross-section increases with increasing stellar mass and dark matter mass, decreases with increasing $\reff$ for bright sources, while is only a weak function of $\gammadm$. 
+The lack of a clear trend between $\crosssect$ and $\gammadm$ appears to be in contradiction with the result of \citet{MVK09}, who found a strong positive correlation between $\crosssect$ and $\gammadm$.
+The origin of this discrepancy lies in the different ways in which $\gammadm$ is varied in the two experiments. While we varied $\gammadm$ at fixed $\mdmfive$, \citet{MVK09} kept fixed the virial mass of the dark matter halo. At fixed virial mass, increasing the inner dark matter slope results in a correspondingly larger dark matter mass in the inner regions, which naturally results in a larger lensing cross-section.
+
 
 \subsection{Elliptical lenses, point sources}\label{ssec:ellpoint}
 
