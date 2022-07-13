@@ -27,7 +27,7 @@ for i in range(len(ygrid)):
     ax.axhline(ygrid[i], color='grey', linewidth=0.5)
 """
 
-f = open('composite_crit.dat', 'r')
+f = open('e0.4_crit.dat', 'r')
 table = np.loadtxt(f)
 f.close()
 
