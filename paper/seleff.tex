@@ -353,6 +353,27 @@ Labelling with $m_2$ the magnitude of the second-brightest image, then, in the a
 
 \subsection{Lensing event definition: extended sources}\label{ssec:lensdefext}
 
+Defining a strong lensing event in the case of an extended source is less straightforward.
+In principle, we should require parts of the source to be multiply imaged.
+In practice, it is not always easy to determine whether a lensed image contains multiple images or not.
+For instance, a source located on one of the cusps of a tangential caustic produces a merging set of three magnified images. If the source is extended and no counter-image is detected, however, the appearence of the merging triplet is very similar to that of a single arc with no multiple images, and it can be difficult to differentiate between the two cases.
+In real strong lensing surveys, the decision of including systems with a single arc or not is often arbitrary.
+
+For the purpose of carrying out our experiment we adopt the following definition. First, we determine the footprint of the lensed source. We define this as the ensemble of pixels where the source is detected with $S/N>3$. The footprint is in general composed of multiple disconnected regions, corresponding to the different images. In order to only include images that can be clearly identified, we add the condition that the integrated $S/N$ of each separate region must be $S/N > 10$. This condition has the effect of removing from the source footprint any isolated region consisting only of a very small number of pixels. In a real-world application, it would be very hard to classify such marginal detections as images.
+%Given the source footprint thus defined, we classify the system as a strong lens if the footprint subtends an angle $\theta_{\mathrm{s}}$ with respect to the lens centre that satisfies the following condition:
+Given the source footprint thus defined, we classify the system as a strong lens if we can find two points on the footprint that subtend an angle $\theta_{\mathrm{s}}$ with respect to the lens centre that satisfies the following condition:
+\begin{equation}
+\theta_{\mathrm{min}} < \theta_{\mathrm{s}} \leq \pi,
+\end{equation}
+with $\theta_{\mathrm{min}}=\pi/2$.
+\Fref{fig:lensdef} shows a few examples of how this criterion can be used to classify lenses.
+
+
+If no counter-image is detected, however, it can be difficult to distinguish such 
+
+For instance, it can be difficult to distinguish a single arc with no detected counter-image from a merging set of three images
+
+This is because it is not always 
 
 %__________________________________________________________________
 
@@ -368,10 +389,10 @@ where $\boldsymbol\beta$ is the position of the background source and the integr
 The definition above is valid for both a point source and an extended source: although there is no unique way of defining the position of an extended source, the integral over the sky ensures that the result is independent of how the source position is defined.
 In the limit of low density of background sources, which is satisfied in all practical cases, the probability of a lensing event is proportional to $\crosssect$.
 
-In this section we compute $\crosssect$ in a series of different scenarios of increasing complexity.
+We compute $\crosssect$ in a series of different scenarios of increasing complexity.
 %We first introduce the basic equations of gravitational lensing in section \ref{ssec:lensbasics}.
 %Then, in section \ref{ssec:profile}, we present the model family adopted to describe the radial density profile of the lenses in our experiments.
-The model family adopted to describe the radial density profile of the lenses is the same in all of our experiments. We describe this in \ref{ssec:profile}. %, among with the basic equations of gravitational lensing.
+The model family adopted to describe the radial density profile of the lenses is the same in all of our experiments. We describe this in section \ref{ssec:profile}. %, among with the basic equations of gravitational lensing.
 %In section \ref{ssec:axsymmpoint} we consider axisymmetric lenses and point sources.
 In section \ref{ssec:axsymmpoint} we show calculations of the strong lensing cross-section in the case of axisymmetric lenses and point sources.
 In section \ref{ssec:ellpoint} we generalise the lens geometry to elliptical, while in section \ref{ssec:ellext} we replace point sources with extended sources.
