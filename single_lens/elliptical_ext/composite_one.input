@@ -2,7 +2,7 @@ omega 0.3
 lambda 0.7
 weos -1.
 hubble 0.7
-prefix e0.2_re0.1_x0.0_y0.0
+prefix e0.0_re0.1_x0.0_y0.0
 xmin -3.
 xmax 3.
 ymin -3.
@@ -15,8 +15,8 @@ flag_hodensity 2
 hodensity 200.
 
 startup 2 1 0
-lens gnfw 0.300000 4.173e12 0. 0. 0.2 90.000000 22.45 1.5
-lens sers 0.300000 1.087e11 0. 0. 0.2 90.000000 1. 4.
+lens gnfw 0.300000 4.173e12 0. 0. 0.0 90.000000 22.45 1.5
+lens sers 0.300000 1.087e11 0. 0. 0.0 90.000000 1. 4.
 extend sersic 1.5 10. 0. 0. 0. 0. 0.1 1.
 end_startup
 

@@ -346,7 +346,7 @@ In order to recognise a strong lens in a real strong lensing survey, however, it
 For this reason, given the detection limit of a survey for a point source, $m_{\mathrm{lim}}$, we define as strong lensing event any lens-source system with at least two images brighter than $m_{\mathrm{lim}}$.
 This is the same definition upon which the \citet{MVK09} work is based \citep{VMK09}.
 Labelling with $m_2$ the magnitude of the second-brightest image, then, in the absence of photometric noise the lens detection probability $\pdet$ becomes
-\begin{equation}
+\begin{equation}\label{eq:pointdet}
 \pdet(\psilens,\psisource) = \left\{\begin{array}{ll} 1 & \rm{if}\,m_2(\psilens,\psisource) < m_{\mathrm{lim}} \\
 0 & \rm{otherwise}\end{array}\right. .
 \end{equation}
@@ -356,22 +356,29 @@ Labelling with $m_2$ the magnitude of the second-brightest image, then, in the a
 Defining a strong lensing event in the case of an extended source is less straightforward.
 In principle, we should require parts of the source to be multiply imaged.
 In practice, it is not always easy to determine whether a lensed image contains multiple images or not.
-For instance, a source located on one of the cusps of a tangential caustic produces a merging set of three magnified images. If the source is extended and no counter-image is detected, however, the appearence of the merging triplet is very similar to that of a single arc with no multiple images, and it can be difficult to differentiate between the two cases.
-In real strong lensing surveys, the decision of including systems with a single arc or not is often arbitrary.
+This is because, when the source is extended, some of the images can be blended together.
+In real strong lensing surveys, it is common to find lens candidates in which the lensed source consists only a single arc. In those cases it is difficult to establish whether the arc is a set of blending images or not, and the decision of including such systems in a strong lens sample is often arbitrary.
+%For instance, a source located on one of the cusps of a tangential caustic produces a merging set of three magnified images. If the source is extended and no counter-image is detected, however, the appearence of the merging triplet is very similar to that of a single arc with no multiple images, and it can be difficult to differentiate between the two cases.
+%In real strong lensing surveys, the decision of including systems with a single arc or not is often arbitrary.
 
 For the purpose of carrying out our experiment we adopt the following definition. First, we determine the footprint of the lensed source. We define this as the ensemble of pixels where the source is detected with $S/N>3$. The footprint is in general composed of multiple disconnected regions, corresponding to the different images. In order to only include images that can be clearly identified, we add the condition that the integrated $S/N$ of each separate region must be $S/N > 10$. This condition has the effect of removing from the source footprint any isolated region consisting only of a very small number of pixels. In a real-world application, it would be very hard to classify such marginal detections as images.
 %Given the source footprint thus defined, we classify the system as a strong lens if the footprint subtends an angle $\theta_{\mathrm{s}}$ with respect to the lens centre that satisfies the following condition:
 Given the source footprint thus defined, we classify the system as a strong lens if we can find two points on the footprint that subtend an angle $\theta_{\mathrm{s}}$ with respect to the lens centre that satisfies the following condition:
-\begin{equation}
-\theta_{\mathrm{min}} < \theta_{\mathrm{s}} \leq \pi,
+\begin{equation}\label{eq:subtend}
+\theta_{\mathrm{min}} < \theta_{\mathrm{s}} \leq 180^\circ,
 \end{equation}
-with $\theta_{\mathrm{min}}=\pi/2$.
+with $\theta_{\mathrm{min}}=90^\circ$.
+A similar criterion was used in the automatic lens search campaign of \citet{Son++18a}.
+
 \Fref{fig:lensdef} shows a few examples of how this criterion can be used to classify lenses.
+As the first three examples in \Fref{fig:lensdef} show, the presence of a counter-image to the main arc always guarantees that the system is classified as a lens. Only if a single arc is visible, and if this arc subtends an angle smaller than $90^\circ$, a system is not considered a strong lens (fourth example).
+The choice of points used to define the angle $\theta_{\mathrm{s}}$ is not unique: any pair of points for which \Eref{eq:subtend} is satisfied is acceptable.
 
 \begin{figure*}
 \includegraphics[width=\textwidth]{footprints.eps}
 \caption{
-Criterion used to classify lensed images of extended sources.
+Criterion used to classify lensed images of extended sources. Four examples. In each panel, the blue regions are the footprint of the lensed source. 
+The two segments connecting the source footprint to the lens centre show the largest angle subtended by the source. If this angle is larger than $90^\circ$, the system is classified as a strong lens.
 }
 \end{figure*}
 %__________________________________________________________________
@@ -523,7 +530,7 @@ To get a complete view of how the lensing cross-section depends on different len
 \includegraphics[width=\textwidth]{axisymm_composite_physical_crosssect.eps}
 \caption{
 Absolute value of the strong lensing cross-section as a function of various lens properties.
-The reference lens is a galaxy at $z=0.3$ with $\log{\mstar}=11.5$, $\reff=7\,{\rm kpc}$, $\gammadm=1.5$, $\log{\mdmfive}=11.0$, and a source at $z=1.5$
+The reference lens is a galaxy at $z=0.3$ with $\log{\mstar}=11.5$, $\reff=7\,{\rm kpc}$, $\gammadm=1.5$, $\log{\mdmfive}=11.0$, $r_s=100$~kpc, and a source at $z=1.5$
 In each panel, only one property of the lens is varied, as indicated on the label of the horizontal axis.
 Each curve corresponds to a different value of $\Delta m$, in accordance with \Fref{fig:fixedap_cs}.
 The dashed line in each panel shows the quantity $\pi\tein^2$.
@@ -535,8 +542,53 @@ The lensing cross-section increases with increasing stellar mass and dark matter
 The lack of a clear trend between $\crosssect$ and $\gammadm$ appears to be in contradiction with the result of \citet{MVK09}, who found a strong positive correlation between $\crosssect$ and $\gammadm$.
 The origin of this discrepancy lies in the different ways in which $\gammadm$ is varied in the two experiments. While we varied $\gammadm$ at fixed $\mdmfive$, \citet{MVK09} kept fixed the virial mass of the dark matter halo. At fixed virial mass, increasing the inner dark matter slope results in a correspondingly larger dark matter mass in the inner regions, which naturally results in a larger lensing cross-section.
 
+\Fref{fig:fixedap_cs} and \Fref{fig:phys_cs} show that the trends between lens properties and the strong lensing cross-section can be different for sources with different brightnesses.
+The net effect in a strong lensing survey is an average over the source population, weighted by the source luminosity function. 
+This implies that surveys that target different families of sources, with different luminosity functions (for instance, galaxies or quasars), can have different strong lensing biases. We explore this possibility in \Sref{sect:lenspop}.
 
 \subsection{Elliptical lenses, point sources}\label{ssec:ellpoint}
+
+We measured $\crosssect$ for lenses with a fixed radial density profile and different ellipticities, with respect to point sources of diferent brightnesses.
+%In particular, we took a lens at redshift $z_{\mathrm{l}}=0.3$, with $\log{\mstar}=11.5$, $\reff=7$~kpc, $\log{\mdmfive}=11.0$, $r_s=100$~kpc, $\gammadm=1.5$, and a source at redshift $z_{\mathrm{s}}=1.5$. 
+In particular, we took a lens at redshift $z_{\mathrm{l}}=0.3$, with $\log{\mstar}=11.19$, $\reff=4.45$~kpc, $\fdm=0.5$, $r_s=100$~kpc, $\gammadm=1.5$, and a source at redshift $z_{\mathrm{s}}=1.5$. This corresponds to a lens with Einstein radius equal to the half-light radius, both equal to $1''$.
+We set the ellipticities of both the baryonic and dark matter components to be the same, with the same orientation of the major axis.
+This is the lens model used to produce the caustics plot of \Fref{Fig:caustics}.
+That figure suggests that the size of the source plane area subject to strong lensing, the area enclosed within the outermost caustic, does not vary strongly with the ellipticity of the lens.
+Therefore we expect the strong lensing cross-section to be a weak function of ellipticity.
+
+We carried out the computation of $\crosssect$ by means of simulation: we generated a large number of point sources over a given area that includes the caustic, then used the software {\sc Glafic} \citep{Ogu21} to solve the lens equation, find the number of images and their magnification. We then multiplied the area over which sources are located by the fraction of those that are strongly lensed according to the criterion of \Eref{eq:pointdet}.
+%\Fref{fig:ellcaust} suggests that the size of the source plane area subject to strong lensing, the area enclosed within the outermost caustic, does not vary strongly with the ellipticity of the lens.
+%Therefore we expect the strong lensing cross-section to be a weak function of ellipticity.
+The resulting $\crosssect$ is shown in \Fref{fig:ellpoint_cs} as a function of the minor-to-major axis ratio $q$.
+
+\begin{figure}
+\includegraphics[width=\columnwidth]{ell_pnt_cs.eps}
+\caption{
+Point source strong lensing cross-section as a function of lens axis ratio.Solid lines: cross-section based on the lens event definition of \Eref{eq:pointdet}.
+Dashed lines: cross-section based on the detection of four images (quad cross-section).
+Lines of different colour correspond to sources of different intrinsic magnitude.
+The lens consists of a galaxy at redshift $z_{\mathrm{l}}=0.3$, with $\log{\mstar}=11.19$, $\reff=4.45$~kpc, $\fdm=0.5$, $r_s=100$~kpc, $\gammadm=1.5$, and a source at redshift $z_{\mathrm{s}}=1.5$.
+The baryonic and dark matter components have the same ellipticity and direction of the major axis.
+}
+\end{figure}
+
+For bright sources the strong lensing cross-section is approximately constant with axis ratio. This is because, as pointed out earlier, in the bright source regime the cross-section is determined by the area enclosed within the radial caustic, which does not vary much with lens ellipticity.
+For faint sources we observe a larger variation with $q$, with a factor of two difference between the largest and smallest value of $\crosssect$ at fixed source brightness.
+
+Most of the sources that result in detectable lenses produce two detectable images. These are sources that are located in the region enclosed bewteen the radial and the tangential caustic. 
+%In most cases, only two of these three images are detected: the third one, close to the centre, is usually highly de-magnified.
+If the source is located within the tangential caustic, however, four detectable images are usually created.
+Lenses with four visible images, usually referred to as quad lenses, are sometimes given a high priority in certain lensing studies, because they offer more constraints compared to double lenses. For instance, quads make up the majority of the lenses used so far in time-delay studies \citep{Mil++20}.
+For this reason we also computed an alternative lensing cross-section, in which the definition of a lensing event requires the detection of four images, instead of two.
+This is plotted in \Fref{fig:ellpoint_cs} with dashed lines.
+The cross-section for quads is a strong function of lens ellipticity, for bright sources.
+This is a consequence of the fact that the area enclosed within the tangential caustic, which is where a source needs to be in order to produce four images, increases with increased lens ellipticity, as \Fref{fig:ellcaust} shows.
+For sources that are intrinsically fainter than the detection limit, however, the quad cross-section is extremely small.
+
+%\Fref{fig:caustics} shows that the area enclosed within the tangential caustic is a strong function of the lens ellipticity.
+%Therefore we expect that the 
+
+
 
 \subsection{Elliptical lenses, extended sources}\label{ssec:ellext}
 

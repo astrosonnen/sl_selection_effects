@@ -6,7 +6,7 @@ from matplotlib import rc
 rc('text', usetex=True)
 
 
-names = ['e0.2_re0.1_x0.0_y0.0', 'e0.4_re0.1_x0.122_y0.105', 'e0.4_re0.1_x0.4_y0.0', 'e0.4_re0.1_x0.7_y0.0']
+names = ['e0.0_re0.1_x0.0_y0.0', 'e0.4_re0.1_x0.122_y0.105', 'e0.4_re0.1_x0.4_y0.0', 'e0.4_re0.1_x0.7_y0.0']
 
 sky_rms = 0.6
 thresh = 3.*sky_rms
@@ -61,16 +61,18 @@ for i in range(4):
     ax[i].text(textpos[i][0], textpos[i][1], '$\\theta_{\mathrm{s}} = %s^\circ$'%text[i], fontsize=fsize)
 
     if success[i]:
-        phi = np.pi*np.linspace(-1., 1., 1001)
-        x = 3. * np.cos(phi) + 10.
-        y = 3. * np.sin(phi) + 70.
-        ax[i].plot(x, y, color=(0., 1., 0.), linewidth=3)
+        #phi = np.pi*np.linspace(-1., 1., 1001)
+        #x = 3. * np.cos(phi) + 10.
+        #y = 3. * np.sin(phi) + 70.
+        #ax[i].plot(x, y, color=(0., 1., 0.), linewidth=3)
+        ax[i].text(10., 70., 'Lens', fontsize=fsize)
     else:
-        x = np.linspace(-3., 3.) + 10.
-        y1 = np.linspace(-3., 3.) + 70.
-        y2 = np.flipud(y1)
-        ax[i].plot(x, y1, color='r', linewidth=3)
-        ax[i].plot(x, y2, color='r', linewidth=3)
+        #x = np.linspace(-3., 3.) + 10.
+        #y1 = np.linspace(-3., 3.) + 70.
+        #y2 = np.flipud(y1)
+        #ax[i].plot(x, y1, color='r', linewidth=3)
+        #ax[i].plot(x, y2, color='r', linewidth=3)
+        ax[i].text(10., 70., 'Not a lens', fontsize=fsize)
 
     ax[i].tick_params(axis='both', which='both', top=False, bottom=False, left=False, right=False, labelleft=False, labelbottom=False)
 

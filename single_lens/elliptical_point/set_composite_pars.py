@@ -82,6 +82,7 @@ mstar_glafic = mstar_phys * hubble
 print('GNFW component parameters. Mvir=%4.3e, rs=%4.3f arcsec'%(m200_glafic, rs_arcsec))
 print('Sersic component parameters. Mtot=%4.3e, reff=%4.3f arcsec'%(mstar_glafic, reff_arcsec))
 
+print('Parameters in physical units. logMstar=%4.3f, reff=%4.3f kpc'%(np.log10(mstar_phys), reff_phys))
 def kappa(x, gnfw_norm, rs, gammadm, mstar, reff, s_cr): 
     # dimensionless surface mass density
     return (mstar * deV.Sigma(abs(x), reff) + gnfw_norm * gnfw.fast_Sigma(abs(x), rs, gammadm))/s_cr
