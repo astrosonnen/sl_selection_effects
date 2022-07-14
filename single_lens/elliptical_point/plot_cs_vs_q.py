@@ -92,7 +92,7 @@ for i in range(ndms):
 
 lines = labelLines(ax.get_lines()[2:], xvals = [0.65, 0.9, 0.58], fontsize=fsize, backgroundcolor='white')
 ax.text(0.73, 0.40, '$\Delta m_s=-1.0$', fontsize=fsize, color=colseq[1])
-ax.text(0.51, 0.67, '$\Delta m_s=-1.0$', fontsize=fsize, color=colseq[0])
+ax.text(0.51, 0.67, '$\Delta m_s=-2.0$', fontsize=fsize, color=colseq[0])
 
 for i in range(ndms):
     ax.plot(q_arr, cs_quad[:, i]/np.pi, label='$\Delta m_s=%2.1f$'%dms_arr[i], linewidth=2, color=colseq[i], linestyle='--')
