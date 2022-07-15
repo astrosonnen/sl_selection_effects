@@ -1,0 +1,11 @@
+2022-7-15
+
+We need to generate simulations of sources with fixed total flux and different values of the half-light radius.
+Glafic takes as input Sigma_0, the central surface brightness of a Sersic profile, in units of counts/pixel^2, and the half-light radius in angular units (arcsec).
+The total flux, in units of counts, is
+
+ftot = 2*pi*I0*(Re/pix)^2*n/b(n)^(2*n)*Gamma(2*n)
+
+where 'pix' is the pixel size in arcsec.
+
+Given ftot and Re, the corresponding I0 can be found by inverting the equation above.
