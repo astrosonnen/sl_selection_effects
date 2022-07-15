@@ -362,17 +362,23 @@ In real strong lensing surveys, it is common to find lens candidates in which th
 %In real strong lensing surveys, the decision of including systems with a single arc or not is often arbitrary.
 
 For the purpose of carrying out our experiment we adopt the following definition. First, we determine the footprint of the lensed source. We define this as the ensemble of pixels where the source is detected with $S/N>3$. The footprint is in general composed of multiple disconnected regions, corresponding to the different images. In order to only include images that can be clearly identified, we add the condition that the integrated $S/N$ of each separate region must be $S/N > 10$. This condition has the effect of removing from the source footprint any isolated region consisting only of a very small number of pixels. In a real-world application, it would be very hard to classify such marginal detections as images.
+If, after applying this cut, the source footprint is spread over multiple separated regions, then the system is classified as a lens.
+Additionally, if the source footprint consists of only a single region, we still classify it as strongly lensed if it subtends an angle larger than $90^\circ$ measured from the lens centre. This last criterion allows us to include highly magnified arcs and full rings.
+
+%Additionally, we classify as strongly lensed the following set of sources any full rings, and any single arcs that subtend an angle larger than $90^\circ$ measured from the lens centre. This last criterion is a 
+%Additionally, we classify as a strongly lensed source any full rings, and any single arcs that subtend an angle larger than $90^\circ$ measured from the lens centre. This last criterion is a 
+
 %Given the source footprint thus defined, we classify the system as a strong lens if the footprint subtends an angle $\theta_{\mathrm{s}}$ with respect to the lens centre that satisfies the following condition:
-Given the source footprint thus defined, we classify the system as a strong lens if we can find two points on the footprint that subtend an angle $\theta_{\mathrm{s}}$ with respect to the lens centre that satisfies the following condition:
-\begin{equation}\label{eq:subtend}
-\theta_{\mathrm{min}} < \theta_{\mathrm{s}} \leq 180^\circ,
-\end{equation}
-with $\theta_{\mathrm{min}}=90^\circ$.
-A similar criterion was used in the automatic lens search campaign of \citet{Son++18a}.
+%Given the source footprint thus defined, we classify the system as a strong lens if we can find two points on the footprint that subtend an angle $\theta_{\mathrm{s}}$ with respect to the lens centre that satisfies the following condition:
+%\begin{equation}\label{eq:subtend}
+%\theta_{\mathrm{min}} < \theta_{\mathrm{s}} \leq 180^\circ,
+%\end{equation}
+%with $\theta_{\mathrm{min}}=90^\circ$.
+%A similar criterion was used in the automatic lens search campaign of \citet{Son++18a}.
 
 \Fref{fig:lensdef} shows a few examples of how this criterion can be used to classify lenses.
 As the first three examples in \Fref{fig:lensdef} show, the presence of a counter-image to the main arc always guarantees that the system is classified as a lens. Only if a single arc is visible, and if this arc subtends an angle smaller than $90^\circ$, a system is not considered a strong lens (fourth example).
-The choice of points used to define the angle $\theta_{\mathrm{s}}$ is not unique: any pair of points for which \Eref{eq:subtend} is satisfied is acceptable.
+%The choice of points used to define the angle $\theta_{\mathrm{s}}$ is not unique: any pair of points for which \Eref{eq:subtend} is satisfied is acceptable.
 
 \begin{figure*}
 \includegraphics[width=\textwidth]{footprints.eps}
@@ -588,6 +594,7 @@ For sources that are intrinsically fainter than the detection limit, however, th
 
 
 \subsection{Elliptical lenses, extended sources}\label{ssec:ellext}
+
 
 %__________________________________________________________________
 

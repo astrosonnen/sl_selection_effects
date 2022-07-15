@@ -49,16 +49,18 @@ for i in range(4):
     ax[i].set_aspect(1.)
     ax[i].scatter(x0, y0, color='k')
 
-    ax[i].plot([points[i][0][0], x0], [points[i][0][1], y0], color='k')
-    ax[i].plot([points[i][1][0], x0], [points[i][1][1], y0], color='k')
-
-    # draws semicircle
-    phi = np.linspace(phis[i][0], phis[i][1], 101)
-    circ_x = r * np.cos(phi) + x0
-    circ_y = r * np.sin(phi) + y0
-
-    ax[i].plot(circ_x, circ_y, color='k', linewidth=0.5)
-    ax[i].text(textpos[i][0], textpos[i][1], '$\\theta_{\mathrm{s}} = %s^\circ$'%text[i], fontsize=fsize)
+    if i==3:
+        ax[i].plot([points[i][0][0], x0], [points[i][0][1], y0], color='k')
+        ax[i].plot([points[i][1][0], x0], [points[i][1][1], y0], color='k')
+    
+        # draws semicircle
+        phi = np.linspace(phis[i][0], phis[i][1], 101)
+        circ_x = r * np.cos(phi) + x0
+        circ_y = r * np.sin(phi) + y0
+    
+        ax[i].plot(circ_x, circ_y, color='k', linewidth=0.5)
+        #ax[i].text(textpos[i][0], textpos[i][1], '$\\theta_{\mathrm{s}} = %s^\circ$'%text[i], fontsize=fsize)
+        ax[i].text(textpos[i][0], textpos[i][1], '$%s^\circ$'%text[i], fontsize=fsize)
 
     if success[i]:
         #phi = np.pi*np.linspace(-1., 1., 1001)
