@@ -377,7 +377,7 @@ Additionally, if the source footprint consists of only a single region, we still
 %A similar criterion was used in the automatic lens search campaign of \citet{Son++18a}.
 
 \Fref{fig:lensdef} shows a few examples of how this criterion can be used to classify lenses.
-As the first three examples in \Fref{fig:lensdef} show, the presence of a counter-image to the main arc always guarantees that the system is classified as a lens. Only if a single arc is visible, and if this arc subtends an angle smaller than $90^\circ$, a system is not considered a strong lens (fourth example).
+As the first three examples in \Fref{fig:lensdef} show, the presence of multiple images or a full ring implies that the system is classified as a lens. Only if the source footprint subtends an angle smaller than $90^\circ$, a system is not considered a strong lens (fourth example).
 %The choice of points used to define the angle $\theta_{\mathrm{s}}$ is not unique: any pair of points for which \Eref{eq:subtend} is satisfied is acceptable.
 
 \begin{figure*}
@@ -595,6 +595,12 @@ For sources that are intrinsically fainter than the detection limit, however, th
 
 \subsection{Elliptical lenses, extended sources}\label{ssec:ellext}
 
+In the case of an extended source, the complexity of the problem is increased due to the addition of a series of features: the surface brightness distribution, including its radial profile, shape and orientation, and the point spread function (PSF). 
+For the sake of reducing the dimensionality of the problem, we neglect the PSF and focus on circularly symmetric sources. We also fix the surface brightness profile to an exponential disk (i.e. a S\'{e}rsic model with $n=1$).
+We then took a lens model with the same parameters used in section \ref{ssec:ellpoint} and a minor-to-major axis ratio of $q=0.7$.
+We created a grid of pixels with $0.05''$ size, then computed the lensing cross-section by simulating a large number of images of extended sources with {\sc Glafic} and measuring the fraction of them that results in a strong lens, according to the definition of section \ref{ssec:lensdefext}.
+We carried out experiments with sources with different values of the total magnitude and varying half-light radius.
+The results are shown in \Fref{fig:extcs}.
 
 %__________________________________________________________________
 
