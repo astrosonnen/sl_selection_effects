@@ -22,6 +22,7 @@ end_startup
 
 start_command
 
-mockext1 1000 1 -1. 1. -1. 1. 0.29 0.31 1. 2.
+writeimage
+writeimage_ori
 
 quit
