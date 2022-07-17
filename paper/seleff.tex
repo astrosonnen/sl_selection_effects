@@ -595,12 +595,37 @@ For sources that are intrinsically fainter than the detection limit, however, th
 
 \subsection{Elliptical lenses, extended sources}\label{ssec:ellext}
 
-In the case of an extended source, the complexity of the problem is increased due to the addition of a series of features: the surface brightness distribution, including its radial profile, shape and orientation, and the point spread function (PSF). 
+In the case of an extended source, the complexity of the problem is increased due to the addition of a series of features: the surface brightness distribution including its radial profile, shape and orientation, and the point spread function (PSF). 
 For the sake of reducing the dimensionality of the problem, we neglect the PSF and focus on circularly symmetric sources. We also fix the surface brightness profile to an exponential disk (i.e. a S\'{e}rsic model with $n=1$).
 We then took a lens model with the same parameters used in section \ref{ssec:ellpoint} and a minor-to-major axis ratio of $q=0.7$.
 We created a grid of pixels with $0.05''$ size, then computed the lensing cross-section by simulating a large number of images of extended sources with {\sc Glafic} and measuring the fraction of them that results in a strong lens, according to the definition of section \ref{ssec:lensdefext}.
-We carried out experiments with sources with different values of the total magnitude and varying half-light radius.
+We carried out experiments with sources with different values of the total flux and varying half-light radius, $\theta_s$.
 The results are shown in \Fref{fig:extcs}.
+The total flux of the source, indicated in the legend, is expressed in terms of the sky background fluctuation within an area equal to the square of the Einstein radius. We assumed that the background noise is an uncorrelated Gaussian field, for this purpose.
+
+\begin{figure}
+\includegraphics[width=\columnwidth]{ell_ext_cs.eps}
+\caption{
+Strong lensing cross-section as a function of source half-light radius.
+The lens model is the same as in \Fref{fig:ellpoint_cs}, with axis ratio $q=0.7$. The source is a circular exponential profile.
+Each solid line corresponds to a different value of the total flux of the source. The flux $f$ is expressed in terms of the background noise fluctuation measured over an area equal to $\tein^2$.
+The vertical dashed lines correspond to the maximum size for which a galaxy with a given flux can be detected in the absence of lensing.
+Solid grey curves are lines of constant effective surface brightness, $f/(2\pi\theta_s^2)$.
+\label{fig:extcs}
+}
+\end{figure}
+
+As in the point source case, the lensing cross-section increasing with increasing total flux, at fixed source size.
+At fixed flux, $\crosssect$ stays approximately constant with increasing source size until a given value, then drops rapidly for larger sizes.
+From a qualitative point of view, this behaviour can be observed also in the absence of lensing: increasing the size of a galaxy while keeping its flux fixed lowers its average surface brightness. If the surface brightness drops below the sky fluctuation level, then it becomes very difficult to detect it.
+In order to determine whether there are lensing-specific features in the $\crosssect-\theta_s$ relation of \Fref{fig:extcs}, we computed, for each source flux, the maximum half-light radius for which it can be detected in the absence of lensing.
+We used the same criterion as that of section \ref{ssec:lensdefext} to define a detection: we defined the source footprint as the ensemble of pixels that are $2\sigma$ above the background and required the total signal-to-noise ratio within the footprint to be larger than ten.
+The resulting limiting sizes are shown as vertical lines in \Fref{fig:extcs}. For each given total flux, the non-lensing size limit is larger than the value of $\theta_s$ at which the lensing cross-section drops.
+This implies that strong lensing selects preferentially more compact sources, compared to the field.
+
+
+
+
 
 %__________________________________________________________________
 

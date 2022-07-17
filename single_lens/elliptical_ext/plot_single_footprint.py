@@ -8,7 +8,7 @@ rc('text', usetex=True)
 
 
 filename = sys.argv[1]
-sky_rms = 1.
+sky_rms = float(sys.argv[2])
 thresh = 2.*sky_rms
 
 x0 = 39.5
