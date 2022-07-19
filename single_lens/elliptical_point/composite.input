@@ -15,7 +15,7 @@ flag_hodensity 2
 hodensity 200.
 
 startup 2 0 0
-lens gnfw 0.300000 4.173e12 0. 0. 0. 90.000000 22.45 1.5
+lens gnfw 0.300000 2.021e12 0. 0. 0. 90.000000 10. 1.5
 lens sers 0.300000 1.087e11 0. 0. 0. 90.000000 1. 4.
 end_startup
 
@@ -23,31 +23,37 @@ start_command
 reset_par prefix composite_e0.0
 reset_lens 1 5 0.
 reset_lens 2 5 0.
-mock1 100000 1.5 -1. 1. -1. 1.
+writecrit 1.5
+#mock1 100000 1.5 -1. 1. -1. 1.
 
 reset_par prefix composite_e0.1
 reset_lens 1 5 0.1
 reset_lens 2 5 0.1
-mock1 100000 1.5 -1. 1. -1. 1.
+writecrit 1.5
+#mock1 100000 1.5 -1. 1. -1. 1.
 
 reset_par prefix composite_e0.2
 reset_lens 1 5 0.2
 reset_lens 2 5 0.2
-mock1 100000 1.5 -1. 1. -1. 1.
+writecrit 1.5
+#mock1 100000 1.5 -1. 1. -1. 1.
 
 reset_par prefix composite_e0.3
 reset_lens 1 5 0.3
 reset_lens 2 5 0.3
-mock1 100000 1.5 -1. 1. -1. 1.
+writecrit 1.5
+#mock1 100000 1.5 -1. 1. -1. 1.
 
 reset_par prefix composite_e0.4
 reset_lens 1 5 0.4
 reset_lens 2 5 0.4
-mock1 100000 1.5 -1. 1. -1. 1.
+writecrit 1.5
+#mock1 100000 1.5 -1. 1. -1. 1.
 
 reset_par prefix composite_e0.5
 reset_lens 1 5 0.5
 reset_lens 2 5 0.5
-mock1 100000 1.5 -1. 1. -1. 1.
+writecrit 1.5
+#mock1 100000 1.5 -1. 1. -1. 1.
 
 quit

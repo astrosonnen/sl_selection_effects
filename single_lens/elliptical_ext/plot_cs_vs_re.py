@@ -13,7 +13,7 @@ rc('text', usetex=True)
 fsize = 18
 
 #xlim = (0.1, 1.)
-ylim = (0.085, 1.3)
+ylim = (0.085, 1.5)
 
 logscale = True
 
@@ -31,6 +31,9 @@ logre_grid = cs_file['logre_grid'][()]
 nre = len(logre_grid)
 
 cs_grid = cs_file['cs_grid'][()]
+cs_ps = cs_grid[:, 0] # approximation of point-source cross-section
+re_max = (cs_ps/np.pi)**0.5
+print(re_max)
 
 fig, ax = pylab.subplots(1, 1)#, figsize=(8, 4))
 pylab.subplots_adjust(left=leftm, right=0.98, bottom=0.14, top=0.97, wspace=0.)
@@ -38,9 +41,12 @@ pylab.subplots_adjust(left=leftm, right=0.98, bottom=0.14, top=0.97, wspace=0.)
 colseq = pylab.rcParams['axes.prop_cycle'].by_key()['color']
 
 for i in range(nfrat):
-    ax.loglog(10.**logre_grid, cs_grid[i, :]/np.pi, linewidth=2, color=colseq[i], label="$\log{\\frac{f}{\sigma_{\mathrm{sky,\\theta_{\mathrm{Ein}}^{2}}}}} = %2.1f$"%lfrat_grid[i])
+    #ax.loglog(10.**logre_grid, cs_grid[i, :]/np.pi, linewidth=2, color=colseq[i], label="$\log{\\frac{f}{\sigma_{\mathrm{sky,\\theta_{\mathrm{Ein}}^{2}}}}} = %2.1f$"%lfrat_grid[i])
+    ax.loglog(10.**logre_grid, cs_grid[i, :]/np.pi, linewidth=2, color=colseq[i], label="$\log{f} = %2.1f$"%lfrat_grid[i])
     cs_spline = splrep(10.**logre_grid, cs_grid[i, :]/np.pi, k=1)
 
+# lines of constant surface brightness (who cares?)
+"""
 nfr2 = nfrat
 cs_fixedfr2 = np.zeros((nfr2, nfrat))
 re_fixedfr2 = np.zeros((nfr2, nfrat))
@@ -59,6 +65,7 @@ for i in range(nfr2):
         istart = 0
         iend = 4
     ax.loglog(re_fixedfr2[i, istart:iend], cs_fixedfr2[i, istart:iend]/np.pi, color='grey', linewidth=0.5)
+"""
 
 #lines = labelLines(ax.get_lines()[2:], xvals = [0.65, 0.9, 0.58], fontsize=fsize, backgroundcolor='white')
 
@@ -104,6 +111,8 @@ for l in range(nfrat):
 
 #ax.set_xlim(xlim[0], xlim[1])
 ax.set_ylim(ylim[0], ylim[1])
+
+#ax.loglog(re_max, cs_ps/np.pi, linestyle=':', color='k')
 
 ax.legend(loc = 'lower right', fontsize=fsize, framealpha=1.)
 

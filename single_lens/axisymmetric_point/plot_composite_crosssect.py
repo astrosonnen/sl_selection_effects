@@ -66,6 +66,9 @@ ax[1].tick_params(axis='both', which='both', top=True, right=True, labelsize=fsi
 
 ax[1].set_xlabel('$f_{\mathrm{DM}}$', fontsize=fsize)
 
+ax[0].text(0.5, 1., '$f_{\mathrm{DM}}=0.5$', fontsize=fsize)
+ax[1].text(0.55, 1., '$\gamma_{\mathrm{DM}}=1.5$', fontsize=fsize)
+
 ax[0].set_yscale('log')
 ax[1].set_yscale('log')
 

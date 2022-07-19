@@ -39,6 +39,7 @@
 \def\mdmfive{M_{\mathrm{DM}, 5}}
 
 \def\tein{\theta_{\mathrm{Ein}}}
+\def\teff{\theta_{\mathrm{e}}}
 \def\trad{\theta_{\mathrm{rad}}}
 \def\tsis{\theta_{\mathrm{Ein}}^{\mathrm{(SIS)}}}
 \def\meantsis{<\tsis>}
@@ -92,6 +93,7 @@
 \def\pdetone{{\rm P}_{\mathrm{det},1}}
 \def\pdettwo{{\rm P}_{\mathrm{det},2}}
 \def\crosssect{\sigma_\mathrm{{SL}}}
+\def\crosssectps{\sigma_\mathrm{{SL,PS}}}
 
 \def\data{\mathbf{d}}
 \def\datai{\mathbf{d}_i}
@@ -242,7 +244,7 @@ This can be expressed in terms of the dimensionless surface mass density by mean
 \begin{equation}
 \boldsymbol\alpha(\boldsymbol\theta) = \frac{1}{\pi}\int_{\mathbb{R}^2} d^2\boldsymbol\theta' \kappa(\boldsymbol\theta')\dfrac{\boldsymbol\theta - \boldsymbol\theta'}{|\boldsymbol\theta - \boldsymbol\theta'|^2}.
 \end{equation}
-
+The images of the background source are in general magnified in total flux and in size, while preserving the original surface brightness.
 
 \subsection{The axisymmetric lens}\label{ssec:axisymm}
 
@@ -385,6 +387,7 @@ As the first three examples in \Fref{fig:lensdef} show, the presence of multiple
 \caption{
 Criterion used to classify lensed images of extended sources. Four examples. In each panel, the blue regions are the footprint of the lensed source. 
 The two segments connecting the source footprint to the lens centre show the largest angle subtended by the source. If this angle is larger than $90^\circ$, the system is classified as a strong lens.
+\label{fig:lensdef}
 }
 \end{figure*}
 %__________________________________________________________________
@@ -397,7 +400,7 @@ Given a foreground galaxy with parameters $\psilens$, a background source with p
 \begin{equation}\label{eq:crosssect}
 \crosssect = \int_{\mathbb{R}^2} d\boldsymbol\beta \pdet(\psilens,\psisourcenobeta,\boldsymbol\beta|S),
 \end{equation}
-where $\boldsymbol\beta$ is the position of the background source and the integral is carried out over the whole sky.
+where $\boldsymbol\beta$ is the position of the background source, $\psisourcenobeta$ is the ensemble of source parameter except for the position, and the integral is carried out over the whole sky.
 The definition above is valid for both a point source and an extended source: although there is no unique way of defining the position of an extended source, the integral over the sky ensures that the result is independent of how the source position is defined.
 In the limit of low density of background sources, which is satisfied in all practical cases, the probability of a lensing event is proportional to $\crosssect$.
 
@@ -435,6 +438,7 @@ where $\mstar$ is the total mass, $\reff$ is the radius enclosing half of the to
 \begin{equation}
 b(n) \approx 2n -\frac13 + \frac{4}{405n} + \frac{46}{25515n^2} + O(n^{-3}).
 \end{equation}
+Throughout this paper we indicate with $\teff$ the angular size of the half-light radius.
 
 The dark matter component is first defined by means of its three-dimensional distribution, which for a spherically symmetric gNFW profile is
 \begin{equation}
@@ -446,7 +450,7 @@ The projected surface mass density of a gNFW profile can be expressed in terms o
 \Sigma(R) = 2r_s\rho_0 \left(\frac{R}{r_s}\right)^{1-\gammadm}\int_0^{\pi/2} dx \sin{x}(\sin{x} + R/r_s)^{\gammadm-3}.
 \end{equation}
 
-\Fref{fig:kappa} shows the dimensionless surface mass density profile S\'{e}rsic + gNFW models with various values of the inner dark matter density slope $\gammadm$ and of the fraction of projected dark matter mass within the half-light radius, $\fdm$.
+\Fref{fig:kappa} shows the dimensionless surface mass density profile of S\'{e}rsic + gNFW models with various values of the inner dark matter density slope $\gammadm$ and of the fraction of projected dark matter mass within the half-light radius, $\fdm$.
 All of the profiles have a S\'{e}rsic index $n=4$, a dark matter scale radius equal to ten times $\reff$, and are normalised in such a way that the Einstein radius is equal to the half-mass radius of the stellar component. 
 Two main features emerge from \Fref{fig:kappa}. First, the baryons generally dominate the total density in the inner regions $(\theta < \tein)$, while the dark matter is the main component at large radii.
 Second, models with different dark matter fractions and inner dark matter slopes can conspire to produce very similar total density profiles. 
@@ -466,9 +470,6 @@ The blue, orange and green dashed lines are identical, as they correspond to pro
 }
 \end{figure}
 %
-
-
-
 
 \subsection{Axisymmetric lenses, point sources}\label{ssec:axsymmpoint}
 
@@ -498,7 +499,7 @@ Vertical dotted lines mark the position of the radial caustic.
 \end{figure}
 
 Using the definition of \Eref{eq:crosssect}, we computed the lensing cross-section of a set of axisymmetric lenses, with respect to point sources with different brightnesses.
-In particular, we considered model lenses with fixed Einstein radius, with angular half-mass radius fixed to $\tein$, and varying values of the dark matter fraction and dark matter inner slope.
+In particular, we considered model lenses with fixed Einstein radius, with angular half-mass radius $\teff$ fixed to $\tein$, and varying values of the dark matter fraction and dark matter inner slope.
 The results are shown in \Fref{fig:fixedap_cs}.
 Each line corresponds to a source with a given intrinsic (i.e. unlensed) magnitude, $m_s$. The difference between this magnitude and the limiting magnitude of the survey is indicated as follows:
 \begin{equation}
@@ -524,7 +525,7 @@ Different lines correspond to the difference $\Delta m$ between the source magni
 \end{figure}
 
 At fixed source brightness, trends with the dark matter inner slope or dark matter fraction are generally weak.
-\Fref{fig:fixedap_cs}, however, shows how the lensing cross-section varies with $\gammadm$ or $\fdm$ while keeping the Einstein radius fixed.
+The lines of \Fref{fig:fixedap_cs}, however, have been computed by keeping the Einstein radius fixed while varying $\gammadm$ or $\fdm$.
 This is achieved by adjusting other properties of the lens, such as the total mass of the baryonic or the dark matter component (see \Fref{fig:kappa}). 
 %This means that other properties of the lens, such as the total mass of the baryonic component or the dark matter component, are adjusted to maintain a constant $\tein$ (see \Fref{fig:kappa}). 
 In practice, when varying one ingredient of the lens density profile, the Einstein radius varies in response.
@@ -556,8 +557,8 @@ This implies that surveys that target different families of sources, with differ
 
 We measured $\crosssect$ for lenses with a fixed radial density profile and different ellipticities, with respect to point sources of diferent brightnesses.
 %In particular, we took a lens at redshift $z_{\mathrm{l}}=0.3$, with $\log{\mstar}=11.5$, $\reff=7$~kpc, $\log{\mdmfive}=11.0$, $r_s=100$~kpc, $\gammadm=1.5$, and a source at redshift $z_{\mathrm{s}}=1.5$. 
-In particular, we took a lens at redshift $z_{\mathrm{l}}=0.3$, with $\log{\mstar}=11.19$, $\reff=4.45$~kpc, $\fdm=0.5$, $r_s=100$~kpc, $\gammadm=1.5$, and a source at redshift $z_{\mathrm{s}}=1.5$. This corresponds to a lens with Einstein radius equal to the half-light radius, both equal to $1''$.
-We set the ellipticities of both the baryonic and dark matter components to be the same, with the same orientation of the major axis.
+%In particular, we took a lens at redshift $z_{\mathrm{l}}=0.3$, with $\log{\mstar}=11.19$, $\reff=4.45$~kpc, $\fdm=0.5$, $r_s=100$~kpc, $\gammadm=1.5$, and a source at redshift $z_{\mathrm{s}}=1.5$. This corresponds to a lens with Einstein radius equal to the half-light radius, both equal to $1''$.
+In particular, we set $\fdm=0.5$, $\gammadm=1.5$, $r_s=10\reff$, $\tein=\teff$, and set the ellipticities of both the baryonic and dark matter components to be the same, with the same orientation of the major axis.
 This is the lens model used to produce the caustics plot of \Fref{fig:ellcaust}.
 That figure suggests that the size of the source plane area subject to strong lensing, the area enclosed within the outermost caustic, does not vary strongly with the ellipticity of the lens.
 Therefore we expect the strong lensing cross-section to be a weak function of ellipticity.
@@ -570,10 +571,12 @@ The resulting $\crosssect$ is shown in \Fref{fig:ellpoint_cs} as a function of t
 \begin{figure}
 \includegraphics[width=\columnwidth]{ell_pnt_cs.eps}
 \caption{
-Point source strong lensing cross-section as a function of lens axis ratio.Solid lines: cross-section based on the lens event definition of \Eref{eq:pointdet}.
+Point source strong lensing cross-section as a function of lens axis ratio.
+Solid lines: cross-section based on the lens event definition of \Eref{eq:pointdet}.
 Dashed lines: cross-section based on the detection of four images (quad cross-section).
 Lines of different colour correspond to sources of different intrinsic magnitude.
-The lens consists of a galaxy at redshift $z_{\mathrm{l}}=0.3$, with $\log{\mstar}=11.19$, $\reff=4.45$~kpc, $\fdm=0.5$, $r_s=100$~kpc, $\gammadm=1.5$, and a source at redshift $z_{\mathrm{s}}=1.5$.
+%The lens consists of a galaxy at redshift $z_{\mathrm{l}}=0.3$, with $\log{\mstar}=11.19$, $\reff=4.45$~kpc, $\fdm=0.5$, $r_s=100$~kpc, $\gammadm=1.5$, and a source at redshift $z_{\mathrm{s}}=1.5$.
+The parameters of the lens density profile are $\fdm=0.5$, $\gammadm=1.5$, $r_s=10\reff$, $\teff=\tein$.
 The baryonic and dark matter components have the same ellipticity and direction of the major axis.
 \label{fig:ellpoint_cs}
 }
@@ -595,13 +598,13 @@ For sources that are intrinsically fainter than the detection limit, however, th
 
 \subsection{Elliptical lenses, extended sources}\label{ssec:ellext}
 
-In the case of an extended source, the complexity of the problem is increased due to the addition of a series of features: the surface brightness distribution including its radial profile, shape and orientation, and the point spread function (PSF). 
-For the sake of reducing the dimensionality of the problem, we neglect the PSF and focus on circularly symmetric sources. We also fix the surface brightness profile to an exponential disk (i.e. a S\'{e}rsic model with $n=1$).
+In the case of an extended source, the complexity of the problem is increased due to the addition of a series of features: the surface brightness distribution with its radial profile, shape and orientation, and the point spread function (PSF). 
+For the sake of reducing the dimensionality of the problem, we neglected the PSF and focus on circularly symmetric sources. We also fixed the surface brightness profile to an exponential disk (i.e. a S\'{e}rsic model with $n=1$).
 We then took a lens model with the same parameters used in section \ref{ssec:ellpoint} and a minor-to-major axis ratio of $q=0.7$.
 We created a grid of pixels with $0.05''$ size, then computed the lensing cross-section by simulating a large number of images of extended sources with {\sc Glafic} and measuring the fraction of them that results in a strong lens, according to the definition of section \ref{ssec:lensdefext}.
-We carried out experiments with sources with different values of the total flux and varying half-light radius, $\theta_s$.
+We carried out experiments with sources with different values of the total flux and varying half-light radius, $\theta_{\mathrm{e,s}}$.
 The results are shown in \Fref{fig:extcs}.
-The total flux of the source, indicated in the legend, is expressed in terms of the sky background fluctuation within an area equal to the square of the Einstein radius. We assumed that the background noise is an uncorrelated Gaussian field, for this purpose.
+The total flux of the source, indicated in the legend, is measured in units of the sky background fluctuation within an area equal to the square of the Einstein radius. We assumed that the background noise is an uncorrelated Gaussian field, for this purpose.
 
 \begin{figure}
 \includegraphics[width=\columnwidth]{ell_ext_cs.eps}
@@ -610,19 +613,46 @@ Strong lensing cross-section as a function of source half-light radius.
 The lens model is the same as in \Fref{fig:ellpoint_cs}, with axis ratio $q=0.7$. The source is a circular exponential profile.
 Each solid line corresponds to a different value of the total flux of the source. The flux $f$ is expressed in terms of the background noise fluctuation measured over an area equal to $\tein^2$.
 The vertical dashed lines correspond to the maximum size for which a galaxy with a given flux can be detected in the absence of lensing.
-Solid grey curves are lines of constant effective surface brightness, $f/(2\pi\theta_s^2)$.
+%Solid grey curves are lines of constant effective surface brightness, $f/(2\pi\theta_s^2)$.
 \label{fig:extcs}
 }
 \end{figure}
 
-As in the point source case, the lensing cross-section increasing with increasing total flux, at fixed source size.
+As in the point source case, the lensing cross-section increases with increasing total flux, at fixed source size.
 At fixed flux, $\crosssect$ stays approximately constant with increasing source size until a given value, then drops rapidly for larger sizes.
 From a qualitative point of view, this behaviour can be observed also in the absence of lensing: increasing the size of a galaxy while keeping its flux fixed lowers its average surface brightness. If the surface brightness drops below the sky fluctuation level, then it becomes very difficult to detect it.
-In order to determine whether there are lensing-specific features in the $\crosssect-\theta_s$ relation of \Fref{fig:extcs}, we computed, for each source flux, the maximum half-light radius for which it can be detected in the absence of lensing.
+In order to determine whether there are lensing-specific features in the $\crosssect-\theta_{\mathrm{e,s}}$ relation of \Fref{fig:extcs}, we computed, for each source flux, the maximum half-light radius for which it can be detected in the absence of lensing.
 We used the same criterion as that of section \ref{ssec:lensdefext} to define a detection: we defined the source footprint as the ensemble of pixels that are $2\sigma$ above the background and required the total signal-to-noise ratio within the footprint to be larger than ten.
-The resulting limiting sizes are shown as vertical lines in \Fref{fig:extcs}. For each given total flux, the non-lensing size limit is larger than the value of $\theta_s$ at which the lensing cross-section drops.
-This implies that strong lensing selects preferentially more compact sources, compared to the field.
+The resulting limiting sizes are shown as vertical lines in \Fref{fig:extcs}. For each given total flux, the non-lensing size limit is similar to the value of $\theta_{\mathrm{e,s}}$ at which the lensing cross-section drops.
 
+This result suggests that, to first approximation, lensing does not introduce a strong selection in source size.
+This is expected, since gravitational lensing preserves surface brightness: a source that can be detected in the absence of lensing will produce images with the same surface brightness when lensed, which can be detected as well.
+%When the source is extended, however, 
+In order to classify a source as strongly lensed, however, we require that multiple images are observed. 
+Only sources that lie within a well-defined region give rise to a strong lensing configuration.
+If part of the source extends outside of this region, then only a fraction of its flux contributes to creating a set of strongly lensed images.
+This lowers the signal-to-noise ratio of the multiple images compared to the point source case.
+%The result is the decrease in $\crosssect$ at values of the source size smaller than the 
+The result is that $\crosssect$ starts to decrease with increasing source size at values of $\theta_{\mathrm{e,s}}$ that are smaller than the no-lensing detection limit, as observed in \Fref{fig:extcs}.
+
+%At the brightest flux explored in the experiment (red line in \Fref{fig:extcs}), $\crosssect$ increases with increasing source size, before dropping to zero.
+At the brightest flux explored in the experiment (red line in \Fref{fig:extcs}), the lensing cross-section at small source sizes is larger than the area enclosed within the radial caustic (red ellipse in \Fref{fig:cs}).
+This is because, when the source is very bright, it can give rise to multiple images even while its centroid lies outside of the radial caustic, as long as its surface brightness distribution extends into it.
+This also explains why $\crosssect$ increases with increasing source size, before dropping to zero: the more extended the source, the farther away from the lens centre it can be while still producing multiple images.
+
+%The limit posed by lensing to the maximum detectable source size can be understood as follows.
+%In the point source case, at a given flux, only sources that produce at least two images with a sufficiently high magnification are classified as strongly lensed.
+%In most practical cases, the limiting factor is the magnification of the secondary image, $\mu_2$, which is a strong function of the source position (see \Fref{fig:1dmag}).
+%Only sources that lie within a region of large $\mu_2$, the area of which is equal to the strong lensing cross-section, give rise to a strong lens configuration.
+%When the source is extended, different parts of it are magnified by different amounts. If the source size is comparable to or larger than the region of high magnification, then its net magnification averaged over its extent will be lower than in the point-source case, and the secondary image will drop below the detection limit.
+%This effect adds to the limit on the source surface brightness in the absence of lensing to produce the trend observed in \Fref{fig:extcs}.
+
+%In the point source case, the necessary and sufficient condition for a source to be strongly lensed is that two detectable images are produced.
+%The detection limit of the survey and the intrinsic flux of the source set a requirement on the minimum magnification that two images of the source must have in order for them to be detected.
+%The limiting factor is set by the magnification of the secondary image: given a source flux, 
+%In the point source case, at a given flux, only sources that lie within a certain region give rise to at least two detectable images, which are required to classify a system as a strong lens. 
+%The extent of this region, which is equal to the strong lensing cross-section, is determined by the magnification required in order for the secondary image to be detected (see \Fref{fig:1dmag}).
+%The area of this region is equal to the strong lensing cross-section, and decreases for fainter sources. 
 
 
 

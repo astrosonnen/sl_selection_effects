@@ -32,7 +32,7 @@ for n in range(nreg):
     img_sn = signal/noise
     if img_sn < 10.:
         img[labels==n+1] = 0.
-    print(n, img_sn)
+    print('image n. %d. S/N: %2.1f. Flux: %2.1e'%(n, img_sn, signal))
 
 ax.contourf(img,[thresh,1e8], colors='b')
 ax.set_aspect(1.)

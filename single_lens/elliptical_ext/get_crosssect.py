@@ -5,12 +5,12 @@ import h5py
 
 
 ftot = 200.
-nre = 6
+nre = 11
 logre_grid = np.linspace(-1., 0., nre)
 
 nsim = 10000
 
-rsim = 1.
+rsim = 1.5
 source_area = np.pi * rsim**2
 
 nfrat = 4

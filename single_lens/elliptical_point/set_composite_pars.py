@@ -58,8 +58,10 @@ mstar_phys = (1. - f_dm) * mein_phys / deV.M2d(reff_phys, reff_phys)
 # and with dark matter slope of 1.5
 gammadm = 1.5
 
+# and with r_s = 20 * reff
+rs_phys = 10. * reff_phys
+
 # Finds the virial mass of the halo
-rs_phys = 100.
 rs_arcsec = rs_phys / arcsec2kpc
 
 mein_dm = f_dm * mein_phys

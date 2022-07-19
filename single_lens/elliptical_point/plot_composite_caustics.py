@@ -74,6 +74,6 @@ pylab.text(-0.8, 0.82, 'Major axis', fontsize=fsize)
 
 pylab.legend(loc='lower right', framealpha=1., fontsize=fsize)
 
-pylab.savefig('../../paper/composite_caustics.eps')
+pylab.savefig('../../paper/composite_caustics.png')
 pylab.show()
 
