@@ -34,6 +34,9 @@
 
 \def\reff{R_{\mathrm{e}}}
 \def\mstar{M_*}
+\def\asps{\alpha_{\mathrm{sps}}}
+
+\def\mobs{M_*^{(\mathrm{obs})}}
 \def\gammadm{\gamma_{\mathrm{DM}}}
 \def\fdm{f_{\mathrm{DM}}}
 \def\mdmfive{M_{\mathrm{DM}, 5}}
@@ -202,7 +205,7 @@ In particular, we aim to determine how strong lenses differ from the general pop
 The answer to this question depends on 1) how the lens detection probability $\pdet$ varies as a function of galaxy and source properties, and on 2) the shape of the galaxy and source parameters distribution $\prlens$ and $\prsource$. To understand this second point we can imagine the limiting case in which both $\prlens$ and $\prsource$ are Dirac delta functions: in this limit, $\prsl$ simply reduces to the product $\prlens\prsource$ up to a scaling constant, corresponding to a case in which the lensing bias is none.
 
 \citet{MVK09} carried out a thorough study of point 1): they quantified how the properties of a lens galaxy determine its probability of creating a lensing event with a point source.
-In this work we revisit the \citet{MVK09} study, we expand it to the extended source case and, most importantly, we address point 2) as well: we simulate large populations of strong lenses using semi-analytic models, simulate lensing surveys with realistic assumptions for the lens probability $\pdet$ and quantify the lensing bias under various scenarios.
+In this work we revisit the \citet{MVK09} study, we expand it to the extended source case and, most importantly, we address point 2) as well: we simulate large populations of strong lenses using empirical models, simulate lensing surveys with realistic assumptions for the lens probability $\pdet$ and quantify the lensing bias under various scenarios.
 We explore how the results change as a function of the scatter in mass parameters at fixed light, and as a function of source type: we simulate both galaxy and quasar sources.
 
 %In light of the results of our experiments, we discuss to what extent can studies of galaxy structure based on strong lenses be generalised to describe non-lens galaxies.
@@ -661,6 +664,87 @@ This also explains why $\crosssect$ increases with increasing source size, befor
 
 \section{Lens populations simulations}\label{sect:lenspop}
 
+In the previous section we studied how the lensing cross-section, which is closely related to the term $\pdet$ in \Eref{eq:one}, varies as a function of lens and source properties.
+From here on we study the effect that those trends have on populations of lenses.
+We do this by simulating populations of foreground galaxies and background sources, selecting strong lenses among them, and comparing the properties of the strong lens sample with the general galaxy population.
+Our simulations are based on empirical models, in which existing observations of the baryonic component of galaxies are complemented with a set of assumptions on the mass distribution of the lenses.
+In section \ref{ssec:lenses} we explain how we built our foreground galaxy sample,
+while in section \ref{ssec:sources} we describe the simulation of the background source population.
+In section \ref{ssec:obs} we describe how our mock observations of lenses are generated.
+
+%As we explained in \Sref{sect:intro}, a key ingredient determining the amplitude of the strong lensing bias is the scatter in the mass properties of the foreground galaxy population.
+%Although we do not have robust measurements of the intrinsic scatter in properties such as the stellar mass-to-light ratio or the dark matter halo mass, we set upper limits on their amplitude using the 
+%Our simulations explore different amplitudes of the scatter. Scatter
+
+
+%In section \ref{ssec:lenses} we explain how we built our foreground galaxy sample.
+%In section \ref{ssec:
+
+\subsection{Foreground galaxies}\label{ssec:lenses}
+
+Our foreground galaxy population consists of a volume-limited sample of early-type galaxies, complete above a minimum observed stellar mass of $10^{11}M_\odot$.
+We chose to focus on early-type galaxies because many strong lensing surveys have preferentially targeted this class of objects in their lens-finding phase \citep[e.g.][]{Bol++06,Gav++12,Son++18a}.
+%This, in turn, was motivated by two points:
+This, in turn, had a dual motivation:
+first, early-type galaxies are among the most massive objects in the Universe, and therefore they are more likely to be lenses;
+second, their smooth surface brightness distribution and red colour makes it easier to detect arcs from strongly lensed star forming galaxies around them.
+
+We describe lenses with elliptical versions of the two-component model introduced in section \ref{ssec:profile}.
+In the following sections we explain how their parameters are generated.
+
+\subsubsection{Stellar mass and redshift distribution}
+
+We generated lens galaxies over a finite redshift range, $0.1 < z < 0.9$.
+We chose these lower and upper limits because the value of the critical surface mass density $\Sigma_{\mathrm{cs}}$ becomes very large outside of this range, and the fraction of galaxies that act as strong lenses drops substantially as a result.
+
+We drew stellar masses from the stellar mass function of quiescent galaxies measured by \citet{Muz++13}.
+In particular, we used the following comoving number density distribution
+\begin{equation}
+\Phi(\mobs) = (\ln{10})\Phi^*\left[10^{(\mobs - \mstar^*)(1+\alpha)}\right]\times \exp{\left[-10^{(\mobs -\mstar^*)}\right]}.
+\end{equation}
+We set $\Phi^*=1.009\times10^{-3}\,{\rm Mpc}^{-3}$, $\alpha=-0.92$ and $\log{\mstar^*}=11.21$. These are the best-fit values measured by \citet{Muz++13}.
+
+We refer to the stellar masses drawn from this distribution as the observed stellar masses, $\mobs$, as opposed to the true stellar masses.
+The observed stellar mass is meant to represent an estimate of $\mstar$ based on stellar population synthesis modelling, which is the method used by \citet{Muz++13} to measure the galaxy stellar mass function.
+Stellar population synthesis measurements, however, are subject to systematic uncertainties, since they have not been calibrated on galaxies whose stellar mass is known by other means.
+We quantify the discrepancy between the observed and true stellar mass by means of the stellar population synthesis mismatch parameter $\asps$, defined as follows:
+\begin{equation}
+\asps \equiv \frac{\mstar}{\mobs}.
+\end{equation}
+
+%We randomly assign a value of $\asps$ to each galaxy in the sample, by drawing it from the following distribution:
+For each galaxy in the sample, we randomly drew a value of $\log{\asps}$ from the following distribution:
+\begin{equation}
+\pr(\log{\asps}) \sim \mathcal{N}(0.1, \sigma_\alpha^2),
+\end{equation}
+where the notation $\mathcal{N}(\mu,\sigma^2)$ indicates a Gaussian with mean $\mu$ and variance $\sigma^2$.
+We set the mean of $\log{\asps}$ to $0.1$, as this is an intermediate value among estimates of $\asps$ from the literature \citep{CvD12, Cap++13, SLC15, Son++15, Son++19}.
+For fhe scatter $\sigma_\alpha$ we adopted a few different values. We explain in \ref{ssub:scat} how these were chosen.
+
+
+\subsubsection{Surface mass density distribution}
+
+We described the surface mass density distribution of each galaxy as an elliptical de Vaucouleurs profile (a S\'{e}rsic profile with $n=4$).
+Given the observed stellar mass of a galaxy, we assigned a half-mass radius by drawing it from the following distribution in $\log{\reff}$:
+\begin{equation}\label{eq:masssize}
+\pr(\log{\reff}) \sim \mathcal{N}(1.20 + 0.63(\log{\mobs} - 11.4), 0.14^2).
+\end{equation}
+Then, we assigned an axis ratio $q$ by drawing it from the following distribution:
+\begin{equation}\label{eq:qdist}
+\pr(q) \sim \,{\rm boh}.
+\end{equation}
+%The choice for the distributions of \Eref{eq:masssize} and \Eref{eq:qdist}
+The choice for these distributions was motivated by observations of a sample of early-type galaxies. In Appendix~\ref{sect:appendixa} we explain how this sample was defined and how the coefficients of \Eref{eq:masssize} and \Eref{eq:qdist} were determined. 
+
+
+\subsubsection{Dark matter distribution}
+
+\subsubsection{Intrinsic scatter}\label{ssub:scat}
+
+\subsection{Background sources}\label{ssec:sources}
+
+\subsection{Observations}\label{ssec:obs}
+
 
 %__________________________________________________________________
 
@@ -687,6 +771,24 @@ We conclude.
 
 \bibliographystyle{aa}
 \bibliography{references}
+
+
+\appendix
+\section{Lens galaxy surface brightness distribution}\label{sect:appendixa}
+
+To assign half-light radii and ellipticities to the simulated lenses we relied on observations of a sample of early-type galaxies selected from the Sloan Digital Sky Survey \citep[SDSS][]{Yor++00}.
+This sample was selected as follows. First we defined a narrow redshift slice around $z=0.2$. Then we applied a selection in colour, by choosing objects with $g-r>1.2$, and on S\'{e}rsic index, by selecting only galaxies with $n>2.5$. We used the S\'{e}rsic fit measurements by \citet{Mee++15} for this purpose. These cuts produced a sample of $8078$ galaxies.
+%We focused on the $r-$band de Vaucouleurs profile measurements obtained by \citet{Mee++15}, for these objects.
+%We then took measurements of their total flux, half-light radius and axis ratio from the de Vaucouleurs profile fits to the SDSS $r$-band data obtained by \citet{Mee++15}. Using the 
+%We then took measurements of the total flux, half-light radius and axis ratio obtained by \citet{Mee++15} from the de Vaucouleurs profile fits to the SDSS $r$-band data obtained by \citet{Mee++15}. Using the 
+%For each object, we took the measurement of its de Vaucouleurs model-based $r-band$ total flux, half-light radius and axis ratio, as provided by \citet{Mee++15}.
+We then focused on the $r-$band de Vaucouleurs model-based photometric measurements of \citet{Mee++15}.
+Using the $r-$band total flux from the de Vaucouleurs model and the stellar mass-to-light ratio estimates of \citet{Men++14}, we obtained measurements of $\mobs$. Finally, we fitted the stellar mass-size relation with the following model:
+\begin{equation}
+\log{\reff} \sim \mathcal{N}(\mu_{R,0} + \beta_R(\log{\mobs} - 11.4), \sigma_R^2).
+\end{equation}
+We obtained 
+
 
 \end{document}
 

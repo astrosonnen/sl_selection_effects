@@ -1,8 +1,9 @@
 import numpy as np
-from scipy.optimize import leastsq, least_squares
+from scipy.optimize import leastsq, least_squares, minimize
 from astropy.io import fits as pyfits
 from sl_cosmology import Dang
 from scipy.interpolate import splrep, splev
+import pylab
 
 
 samp_table = pyfits.open('sdss_zbin_latetype_red.fits')[1].data
@@ -26,18 +27,29 @@ dd_spline = splrep(zgrid, dd_grid)
 reff_kpc = reff_arcsec * np.deg2rad(1./3600.) * splev(samp_table['z'][cut], dd_spline) * 1000.
 
 lreff = np.log10(reff_kpc)
-lreff_arr = lreff.reshape((1, len(lreff)))
-lmstar_arr = lmstar.reshape((1, len(lmstar)))
 
-def fitfunc(p, x):
-    return p[0] + p[1]*(x - lmstar_piv)
+# I have no idea why I had to do this, but leastsq wouldn't work otherwise.
+lmstar0 = np.zeros(len(lmstar))
+lmstar0 += lmstar
+lmstar = lmstar0.copy()
 
-def errfunc(p, x, y):
-    #return lreff - fitfunc(p)
-    return y - fitfunc(p, x)
+def fitfunc(p):
+    return p[0] + p[1]*(lmstar - lmstar_piv)
 
-r = leastsq(errfunc, [1., 1.], (lmstar[:10], lreff[:10]))
-print(r)
-print(errfunc([1., 1.], lmstar[:10], lreff[:10]))
+def errfunc(p):
+    return fitfunc(p) - lreff
 
+p0 = [1., 1.]
+s = leastsq(errfunc, p0)
+print(s[0])
+
+model_lreff = s[0][0] + s[0][1] * (lmstar - lmstar_piv)
+scatter = (((model_lreff - lreff)**2).sum()/len(lreff))**0.5
+print(scatter)
+
+pylab.scatter(lmstar, lreff)
+xlim = pylab.xlim()
+xs = np.linspace(xlim[0], xlim[1])
+pylab.plot(xs, s[0][0] + s[0][1]*(xs - lmstar_piv), linestyle='--', color='k')
+pylab.show()
 
