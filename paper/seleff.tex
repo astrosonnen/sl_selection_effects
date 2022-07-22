@@ -729,13 +729,12 @@ Given the observed stellar mass of a galaxy, we assigned a half-mass radius by d
 \begin{equation}\label{eq:masssize}
 \pr(\log{\reff}) \sim \mathcal{N}(1.20 + 0.63(\log{\mobs} - 11.4), 0.14^2).
 \end{equation}
-Then, we assigned an axis ratio $q$ by drawing it from the following distribution:
+Then, we assigned an axis ratio $q$ by drawing it from the following beta distribution:
 \begin{equation}\label{eq:qdist}
-\pr(q) \sim \,{\rm boh}.
+\pr(q) \propto q^{\alpha-1}(1 - q)^{\beta-1},
 \end{equation}
-%The choice for the distributions of \Eref{eq:masssize} and \Eref{eq:qdist}
+with $\alpha=6.28$ and $\beta=2.05$.
 The choice for these distributions was motivated by observations of a sample of early-type galaxies. In Appendix~\ref{sect:appendixa} we explain how this sample was defined and how the coefficients of \Eref{eq:masssize} and \Eref{eq:qdist} were determined. 
-
 
 \subsubsection{Dark matter distribution}
 
@@ -787,8 +786,24 @@ Using the $r-$band total flux from the de Vaucouleurs model and the stellar mass
 \begin{equation}
 \log{\reff} \sim \mathcal{N}(\mu_{R,0} + \beta_R(\log{\mobs} - 11.4), \sigma_R^2).
 \end{equation}
-We obtained 
+We obtained $\mu_{R,0}=1.20$, $\beta_R=0.63$ and $\sigma_R=0.14$.
 
+We then proceeded to fit for the axis ratio distribution of the same sample of galaxies.
+\Fref{fig:qhist} shows a histogram of the observed distribution.
+We fitted this with a beta disribution:
+\begin{equation}\label{eq:betaappendix}
+\pr(q) \propto q^{\alpha-1}(1 - q)^{\beta-1}.
+\end{equation}
+We obtained $\alpha=6.28$ and $\beta=2.05$.
+\begin{figure}
+\includegraphics[width=\columnwidth]{q_dist.eps}
+\caption{
+Distribution in axis ratio of a sample of early-type galaxies.
+The sample consists of $8078$ galaxies from the SDSS, selected by means of cuts in redshift, colour and S\'{e}rsic index as explained in the text.
+Measurements of the axis ratio are taken from the de Vaucouleurs model fits of \citet{Mee++15}.
+The model curve is a beta distribution, \Eref{eq:betaappendix}, with $\alpha=6.28$ and $\beta=2.05$.
+}
+\end{figure}
 
 \end{document}
 
