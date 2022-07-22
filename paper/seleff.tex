@@ -40,6 +40,7 @@
 \def\gammadm{\gamma_{\mathrm{DM}}}
 \def\fdm{f_{\mathrm{DM}}}
 \def\mdmfive{M_{\mathrm{DM}, 5}}
+\def\mhalo{M_{\mathrm{h}}}
 
 \def\tein{\theta_{\mathrm{Ein}}}
 \def\teff{\theta_{\mathrm{e}}}
@@ -127,7 +128,8 @@
    \titlerunning{Strong lensing selection effects}
    \authorrunning{Sonnenfeld et al.}
 
-   \author{Alessandro Sonnenfeld\inst{1}
+   \author{Alessandro Sonnenfeld\inst{1}\and
+           Others
           }
 
    \institute{Leiden Observatory, Leiden University, Niels Bohrweg 2, 2333 CA Leiden, the Netherlands\\
@@ -639,7 +641,7 @@ This lowers the signal-to-noise ratio of the multiple images compared to the poi
 The result is that $\crosssect$ starts to decrease with increasing source size at values of $\theta_{\mathrm{e,s}}$ that are smaller than the no-lensing detection limit, as observed in \Fref{fig:extcs}.
 
 %At the brightest flux explored in the experiment (red line in \Fref{fig:extcs}), $\crosssect$ increases with increasing source size, before dropping to zero.
-At the brightest flux explored in the experiment (red line in \Fref{fig:extcs}), the lensing cross-section at small source sizes is larger than the area enclosed within the radial caustic (red ellipse in \Fref{fig:cs}).
+At the brightest flux explored in the experiment (red line in \Fref{fig:extcs}), the lensing cross-section at small source sizes is larger than the area enclosed within the radial caustic (red ellipse in \Fref{fig:ellcaust}).
 This is because, when the source is very bright, it can give rise to multiple images even while its centroid lies outside of the radial caustic, as long as its surface brightness distribution extends into it.
 This also explains why $\crosssect$ increases with increasing source size, before dropping to zero: the more extended the source, the farther away from the lens centre it can be while still producing multiple images.
 
@@ -737,6 +739,19 @@ with $\alpha=6.28$ and $\beta=2.05$.
 The choice for these distributions was motivated by observations of a sample of early-type galaxies. In Appendix~\ref{sect:appendixa} we explain how this sample was defined and how the coefficients of \Eref{eq:masssize} and \Eref{eq:qdist} were determined. 
 
 \subsubsection{Dark matter distribution}
+
+We modelled the dark matter distribution of each lens galaxy with an elliptical gNFW halo (see section \ref{ssec:profile} for its definition).
+The parameters of the radial density profile were assigned as follows.
+Given the stellar mass of a lens, we first determined the value of its halo virial mass, $\mhalo$. We defined this as the mass enclosed within a spherical shell with average density equal to $200$ times the critical density of the Universe.
+We drew halo masses from the following distribution:
+\begin{equation}
+\pr(\log{\mhalo}) \sim \mathcal{N}(13.0 + 1.0(\log{\mstar} - 11.5), \sigma_h^2),
+\end{equation}
+which is a Gaussian in $\log{\mhalo}$ with a mean that scales with stellar mass and scatter $\sigma_h$.
+The values of the coefficients describing the mean of the distribution were chosen to be close to current weak lensing constraints on the halo mass of elliptical galaxies \citep{Son++22}.
+The the intrinsic scatter in halo mass is more uncertain from an observational point of view, therefore we ran simulations with different values of $\sigma_h$, as for the stellar population synthesis mismatch parameter.
+
+%which is similar to current weak lensing constraints on the halo mass distribution of elliptical galaxies \citep{Son++22}.
 
 \subsubsection{Intrinsic scatter}\label{ssub:scat}
 
