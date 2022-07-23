@@ -321,7 +321,7 @@ The lens models used in this simulations consist of a stellar component and a da
 
 In this paper we focus mostly on lens galaxies with elliptical isodensity contours.
 Given a surface mass density profile $\Sigma(R)$, a lens with an elliptical mass distribution can be obtained by replacing the radial coordinate with the circularised radius:
-\begin{equation}
+\begin{equation}\label{eq:elltransf}
 R \rightarrow \sqrt{qx^2 + \frac{y^2}{q}},
 \end{equation}
 where $x$ and $y$ are cartesian axes centred on the lens centre, with $x$ pointing towards the major axis, and where $q$ is the minor-to-major axis ratio.
@@ -666,9 +666,10 @@ This also explains why $\crosssect$ increases with increasing source size, befor
 
 \section{Lens populations simulations}\label{sect:lenspop}
 
-In the previous section we studied how the lensing cross-section, which is closely related to the term $\pdet$ in \Eref{eq:one}, varies as a function of lens and source properties.
-From here on we study the effect that those trends have on populations of lenses.
-We do this by simulating populations of foreground galaxies and background sources, selecting strong lenses among them, and comparing the properties of the strong lens sample with the general galaxy population.
+In the previous section we showed how the lensing cross-section, which is closely related to the term $\pdet$ in \Eref{eq:one}, varies as a function of lens and source properties.
+From here on we focus on the effect that those trends have on populations of lenses.
+We addressed this question by simulating populations of foreground galaxies and background sources, selecting strong lenses among them, and comparing the properties of the strong lens sample with the general galaxy population.
+We simulated a lens-based search (as opposed to a source-based one), in which strongly lensed images are searched among a stellar mass-selected sample of galaxies.
 Our simulations are based on empirical models, in which existing observations of the baryonic component of galaxies are complemented with a set of assumptions on the mass distribution of the lenses.
 In section \ref{ssec:lenses} we explain how we built our foreground galaxy sample,
 while in section \ref{ssec:sources} we describe the simulation of the background source population.
@@ -678,9 +679,6 @@ In section \ref{ssec:obs} we describe how our mock observations of lenses are ge
 %Although we do not have robust measurements of the intrinsic scatter in properties such as the stellar mass-to-light ratio or the dark matter halo mass, we set upper limits on their amplitude using the 
 %Our simulations explore different amplitudes of the scatter. Scatter
 
-
-%In section \ref{ssec:lenses} we explain how we built our foreground galaxy sample.
-%In section \ref{ssec:
 
 \subsection{Foreground galaxies}\label{ssec:lenses}
 
@@ -721,10 +719,10 @@ For each galaxy in the sample, we randomly drew a value of $\log{\asps}$ from th
 \end{equation}
 where the notation $\mathcal{N}(\mu,\sigma^2)$ indicates a Gaussian with mean $\mu$ and variance $\sigma^2$.
 We set the mean of $\log{\asps}$ to $0.1$, as this is an intermediate value among estimates of $\asps$ from the literature \citep{CvD12, Cap++13, SLC15, Son++15, Son++19}.
-For fhe scatter $\sigma_\alpha$ we adopted a few different values. We explain in \ref{ssub:scat} how these were chosen.
+For the scatter $\sigma_\alpha$ we adopted a few different values. We explain in \ref{ssub:scat} how these were chosen.
 
 
-\subsubsection{Surface mass density distribution}
+\subsubsection{Stellar mass density distribution}
 
 We described the surface mass density distribution of each galaxy as an elliptical de Vaucouleurs profile (a S\'{e}rsic profile with $n=4$).
 Given the observed stellar mass of a galaxy, we assigned a half-mass radius by drawing it from the following distribution in $\log{\reff}$:
@@ -743,17 +741,46 @@ The choice for these distributions was motivated by observations of a sample of 
 We modelled the dark matter distribution of each lens galaxy with an elliptical gNFW halo (see section \ref{ssec:profile} for its definition).
 The parameters of the radial density profile were assigned as follows.
 Given the stellar mass of a lens, we first determined the value of its halo virial mass, $\mhalo$. We defined this as the mass enclosed within a spherical shell with average density equal to $200$ times the critical density of the Universe.
-We drew halo masses from the following distribution:
+%We randomly drew halo masses from the following distribution:
+Using current weak lensing constraints on the halo mass of elliptical galaxise as a reference \citep{Son++22}, we drew halo masses from the following distribution:
 \begin{equation}
 \pr(\log{\mhalo}) \sim \mathcal{N}(13.0 + 1.0(\log{\mstar} - 11.5), \sigma_h^2),
 \end{equation}
 which is a Gaussian in $\log{\mhalo}$ with a mean that scales with stellar mass and scatter $\sigma_h$.
-The values of the coefficients describing the mean of the distribution were chosen to be close to current weak lensing constraints on the halo mass of elliptical galaxies \citep{Son++22}.
-The the intrinsic scatter in halo mass is more uncertain from an observational point of view, therefore we ran simulations with different values of $\sigma_h$, as for the stellar population synthesis mismatch parameter.
+%The values of the coefficients describing the mean of the distribution were chosen to be close to current weak lensing constraints on the halo mass of elliptical galaxies \citep{Son++22}.
+%The intrinsic scatter in halo mass is more uncertain from an observational point of view, therefore we ran simulations with different values of $\sigma_h$, as for the stellar population synthesis mismatch parameter.
+The intrinsic scatter in halo mass is not well constrained observationally, therefore we ran simulations with different values of $\sigma_h$, as for the stellar population synthesis mismatch parameter.
 
-%which is similar to current weak lensing constraints on the halo mass distribution of elliptical galaxies \citep{Son++22}.
+To determine the density profile of the halo we relied on a theoretically motivated model that takes into account the effect of baryons on the dark matter.
+We assumed the dark matter distribution to be initially described by an NFW profile with a concentration\footnote{The concentration is the ratio between the halo virial radius and the scale radius $r_s$.} of five, then used the prescription of \citet{Cau++20} to model the response of the halo to the infall of baryons. % on the basis of the present stellar mass distribution. 
+In the \citet{Cau++20} model the halo response is approximated with an analytical function that depends on the present stellar mass distribution, and typically results in a more concentrated and steeper density profile compared to the original NFW model. 
+Finally, we fitted a gNFW profile to the surface mass density of the contracted halo. By doing this, we were able to fully describe the dark matter density profile with three parameters: $\mhalo$, $\gammadm$ and $r_s$.
+
+The dark matter density profile defined in this way is determined uniquely by the halo mass, the stellar mass and the half-light radius (the more concentrated the stellar distribution, the stronger the halo response, the steeper the dark matter density profile).
+However, we wanted to explore scenarios in which there is scatter in the dark matter inner slope. Therefore, we applied a random scatter on $\gammadm$ of amplitude $\sigma_{\gamma}$. We explored different values for $\sigma_{\gamma}$, as explained in the next section.
+
+Given the radial profile of the dark matter halo, we obtained an elliptical version of it by applying a transformation of the kind of \Eref{eq:elltransf} to its projected surface mass density.
+We assumed that the axis ratio and orientation of the halo is the same as that of the stellar component.
 
 \subsubsection{Intrinsic scatter}\label{ssub:scat}
+
+The distribution in stellar mass, halo mass and dark matter inner slope of our sample of simulated foreground galaxies depends on parameters describing the intinsic scatter in these properties, namely $\sigma_{\mathrm{sps}}$, $\sigma_h$ and $\sigma_{\gamma}$.
+Direct observational constraints on these quantities are poor.
+However, we can derive upper limits on them on the basis of observed scaling relations.
+
+Early-type galaxies lie on the stellar mass fundamental plane, a scaling relation between stellar mass, half-light radius and central velocity dispersion \citep{H+B09}:
+\begin{equation}\label{eq:fpcompact}
+\sigma_{\mathrm{e}} \propto \mstar^{(\mathrm{obs})\beta_{\sigma}}\reff^{\xi_{\sigma}}.
+\end{equation}
+The existence of a fundamental plane relation is a consequence of the virial theorem: the velocity dispersion of a galaxy is directly related to the 3-dimensional mass distribution in its inner regions, which is tyically dominated by the stellar component.
+At fixed observed stellar mass distribution, however, the central velocity dispersion can vary depending on the stellar population synthesis mismatch parameter, on the dark matter mass and on the dark matter density profile. This gives rise to a spread in the values of the velocity dispersion given $\mobs$ and $\reff$.
+Therefore, we can use the observed scatter in velocity dispersion to put an upper limit on the intrinsic scatter in the stellar population synthesis mismatch parameter, halo mass and dark matter slope.
+
+We used Jeans modelling for this purpose.
+We generated samples of early-type galaxies with the recipes described above and with different values of $\sigma_{\mathrm{sps}}$, $\sigma_h$ and $\sigma_\gamma$.
+Using the spherical Jeans equation under the assumption of isotropic orbits, we predicted the central velocity dispersion of each galaxy in the sample. Then, we fitted a fundamental plane relation to this mock sample and measured the predicted scatter in velocity dispersion at fixed $\mobs$ and $\reff$.
+We then varied $\sigma_{\mathrm{sps}}$, $\sigma_h$ and $\sigma_\gamma$ to match the observed and the predicted scatter.
+The details of this procedures are given in Appendix~\ref{sect:appendixb}.
 
 \subsection{Background sources}\label{ssec:sources}
 
@@ -819,6 +846,28 @@ Measurements of the axis ratio are taken from the de Vaucouleurs model fits of \
 The model curve is a beta distribution, \Eref{eq:betaappendix}, with $\alpha=6.28$ and $\beta=2.05$.
 }
 \end{figure}
+
+
+\section{Upper limits on the intrinsic scatter parameters}\label{sect:appendixb}
+
+We used the fundamental plane of early-type galaxies to set an upper limit on the intrinsic scatter parameters of the simulation: $\sigma_{\mathrm{sps}}$, $\sigma_h$ and $\sigma_\gamma$.
+First, we measured the fundamental plane of the sample of SDSS early-type galaxies introduced in Appendix~\ref{sect:appendixa}.
+We took measurements of the line-of-sight stellar velocity dispersion within the SDSS spectroscopic aperture, $\sigma_{\mathrm{ap}}$, from the SDSS data release 16 catalogue \citep{Ahu++20}.
+Then, we fitted the following model to the distribution of $\sigma_{\mathrm{ap}}$ of the sample:
+\begin{equation}
+\pr(\sigma_{\mathrm{ap}}) \sim \mathcal{N}(\mu_{\sigma} + \beta(\log{\mobs} - 11.4) + \xi(\log{\reff} - 1.2), \sigma_{\sigma}).
+\end{equation}
+We accounted for observational uncertainties on $\sigma_{\mathrm{ap}}$ when doing the fit, therefore the parameter $\sigma_{\sigma}$ describes the intrinsic scatter in the logarithm of the velocity dispersion, deconvolved from the observational scatter.
+In principle we should also account for observational uncertainties on the stellar mass measurement, as they too contribute to the inferred scatter in $\sigma_{\mathrm{ap}}$. In practice, however, it is difficult to estimate observational uncertainties on stellar population synthesis measurements.
+For this reason we chose not to propagate uncertainties on $\mobs$. As a result, the inferred scatter parameter $\sigma_{\sigma}$ is slightly overestimated.
+We obtained $\mu_{\sigma}=2.36$, $\beta_{\sigma}=0.33$, $\xi_\sigma=-0.17$, and $\sigma_{\sigma}=0.035$.
+
+We then generated samples of galaxies from the model of section \ref{ssec:lenses}.
+
+We did not attempt to match the other parameters of the fundamental plane (i.e. the constant of proportionality of \Eref{eq:fpcompact} and the power-law indices $\beta_{\sigma}$ and $\xi_{\sigma}$), because these are sensitive to the orbital anisotropy of the galaxies, which we are asserting to be zero.
+
+%First, we took the sample of SDSS early-type galaxies introduced in Appendix~\ref{sect:appendixa}
+
 
 \end{document}
 
