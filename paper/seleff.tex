@@ -700,9 +700,9 @@ We chose these lower and upper limits because the value of the critical surface 
 We drew stellar masses from the stellar mass function of quiescent galaxies measured by \citet{Muz++13}.
 In particular, we used the following comoving number density distribution
 \begin{equation}
-\Phi(\mobs) = (\ln{10})\Phi^*\left[10^{(\mobs - \mstar^*)(1+\alpha)}\right]\times \exp{\left[-10^{(\mobs -\mstar^*)}\right]}.
+\Phi(\mobs) = \Phi^*\left(\frac{\mobs}{\mstar^*}\right)^{\alpha} \exp{\left\{-\frac{\mobs}{\mstar^*}\right\}}.
 \end{equation}
-We set $\Phi^*=1.009\times10^{-3}\,{\rm Mpc}^{-3}$, $\alpha=-0.92$ and $\log{\mstar^*}=11.21$. These are the best-fit values measured by \citet{Muz++13}.
+We set $\Phi^*=1.009\times10^{-3}\,{\rm Mpc}^{-3}$, $\alpha=-0.92$ and $\log{\mstar^*}=11.21$: these are the best-fit values measured by \citet{Muz++13}.
 
 We refer to the stellar masses drawn from this distribution as the observed stellar masses, $\mobs$, as opposed to the true stellar masses.
 The observed stellar mass is meant to represent an estimate of $\mstar$ based on stellar population synthesis modelling, which is the method used by \citet{Muz++13} to measure the galaxy stellar mass function.
@@ -844,6 +844,7 @@ Distribution in axis ratio of a sample of early-type galaxies.
 The sample consists of $8078$ galaxies from the SDSS, selected by means of cuts in redshift, colour and S\'{e}rsic index as explained in the text.
 Measurements of the axis ratio are taken from the de Vaucouleurs model fits of \citet{Mee++15}.
 The model curve is a beta distribution, \Eref{eq:betaappendix}, with $\alpha=6.28$ and $\beta=2.05$.
+\label{fig:qhist}
 }
 \end{figure}
 
@@ -854,7 +855,7 @@ We used the fundamental plane of early-type galaxies to set an upper limit on th
 First, we measured the fundamental plane of the sample of SDSS early-type galaxies introduced in Appendix~\ref{sect:appendixa}.
 We took measurements of the line-of-sight stellar velocity dispersion within the SDSS spectroscopic aperture, $\sigma_{\mathrm{ap}}$, from the SDSS data release 16 catalogue \citep{Ahu++20}.
 Then, we fitted the following model to the distribution of $\sigma_{\mathrm{ap}}$ of the sample:
-\begin{equation}
+\begin{equation}\label{eq:fpfull}
 \pr(\sigma_{\mathrm{ap}}) \sim \mathcal{N}(\mu_{\sigma} + \beta(\log{\mobs} - 11.4) + \xi(\log{\reff} - 1.2), \sigma_{\sigma}).
 \end{equation}
 We accounted for observational uncertainties on $\sigma_{\mathrm{ap}}$ when doing the fit, therefore the parameter $\sigma_{\sigma}$ describes the intrinsic scatter in the logarithm of the velocity dispersion, deconvolved from the observational scatter.
@@ -862,11 +863,17 @@ In principle we should also account for observational uncertainties on the stell
 For this reason we chose not to propagate uncertainties on $\mobs$. As a result, the inferred scatter parameter $\sigma_{\sigma}$ is slightly overestimated.
 We obtained $\mu_{\sigma}=2.36$, $\beta_{\sigma}=0.33$, $\xi_\sigma=-0.17$, and $\sigma_{\sigma}=0.035$.
 
-We then generated samples of galaxies from the model of section \ref{ssec:lenses}.
+We then generated samples of $z=0.2$ galaxies from the model of section \ref{ssec:lenses} and used the spherical Jeans equation to predict their central velocity dispersion.
+The spherical Jeans equation is \citep{B+T87}
+\begin{equation}\label{eq:jeans}
+\frac{d(\rho_*\sigma_r^2)}{dr} + \frac{\beta(r)}{r}\rho_*\sigma_r^2 = -\rho_*(r)\frac{GM(r)}{r^2},
+\end{equation}
+where $\rho_*(r)$ is the 3-dimensional distribution of dynamical tracers (i.e. the stars), $\sigma_r$ the radial component of the velocity dispersion, $\beta(r)$ the orbital anisotropy parameter, and $M(r)$ the mass enclosed within a spherical shell of radius $r$. 
+We assumed isotropic orbits ($\beta=0$), then integrated \Eref{eq:jeans} to obtain the seeing-convolved, surface brightness-weighted line-of-sight velocity dispersion within the SDSS spectroscopic aperture\footnote{We used Python code available at \url{https://github.com/astrosonnen/spherical_jeans}, for this purpose.}.
+Finally, we fitted the fundamental plane relation of \Eref{eq:fpfull} to the observed stellar mass, half-light radius and central velocity dispersion of the mock sample.
+We repeated this procedure for different values of the intrinsic scatter parameters $\sigma_{\mathrm{sps}}$, $\sigma_\mathrm{h}$ and $\sigma_\gamma$.
 
-We did not attempt to match the other parameters of the fundamental plane (i.e. the constant of proportionality of \Eref{eq:fpcompact} and the power-law indices $\beta_{\sigma}$ and $\xi_{\sigma}$), because these are sensitive to the orbital anisotropy of the galaxies, which we are asserting to be zero.
-
-%First, we took the sample of SDSS early-type galaxies introduced in Appendix~\ref{sect:appendixa}
+%We did not attempt to match the other parameters of the fundamental plane (i.e. the constant of proportionality of \Eref{eq:fpcompact} and the power-law indices $\beta_{\sigma}$ and $\xi_{\sigma}$), because these are sensitive to the orbital anisotropy of the galaxies, which we are asserting to be zero.
 
 
 \end{document}
