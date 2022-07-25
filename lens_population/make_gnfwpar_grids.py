@@ -25,16 +25,15 @@ dlm200_max = 1.
 nmstar = 21
 nreff = 15
 nm200 = 21
+nz = 7
 
 lmstar_grid = np.linspace(lmstar_min, lmstar_max, nmstar)
 dlreff_grid = np.linspace(dlreff_min, dlreff_max, nreff)
 dlm200_grid = np.linspace(dlm200_min, dlm200_max, nm200)
+z_grid = np.linspace(zmin, zmax, nz)
 
-gammadm_grid = np.zeros((nmstar, nreff, nm200))
-rs_grid = np.zeros((nmstar, nreff, nm200))
-
-redshift = 0.2
-rhoc = sl_cosmology.rhoc(redshift)
+gammadm_grid = np.zeros((nmstar, nreff, nm200, nz))
+rs_grid = np.zeros((nmstar, nreff, nm200, nz))
 
 nr3d = 1001
 r3d_scalefree = np.logspace(-3., 3., nr3d) # radial grid, from 1/100 to 100 times Reff
@@ -46,7 +45,7 @@ R2d_scalefree = np.logspace(-3., 2., nR2d)
 
 R2d_fit_grid = np.logspace(0., np.log10(30.), nR2d) # radial grid over which to fit the gNFW model
 
-def get_halo_splines(m200, mstar, reff):
+def get_halo_splines(m200, mstar, reff, rhoc):
     r200 = (m200*3./200./(4.*np.pi)/rhoc)**(1./3.) * 1000.
     rs = r200/c200_0
     r3d_grid = r3d_scalefree * reff
@@ -73,7 +72,7 @@ def get_halo_splines(m200, mstar, reff):
 
     return contr_Sigma_spline, contr_SigmaR_spline, R2d_grid
 
-def gnfw_fit(halo_Sigma_spline, m200):
+def gnfw_fit(halo_Sigma_spline, m200, rhoc):
 
     r200_here = (m200*3./200./(4.*np.pi)/rhoc)**(1./3.) * 1000.
 
@@ -105,18 +104,21 @@ for i in range(nmstar):
         for k in range(nm200):
             m200 = 10.**(lm200_model + dlm200_grid[k])
 
-            halo_Sigma_spline, halo_SigmaR_spline, R2d_grid = get_halo_splines(m200, mstar, reff)
+            for l in range(nz):
+                rhoc = sl_cosmology.rhoc(z_grid[l])
+                halo_Sigma_spline, halo_SigmaR_spline, R2d_grid = get_halo_splines(m200, mstar, reff, rhoc)
 
-            gammadm_fit, rs_fit = gnfw_fit(halo_Sigma_spline, m200)
+                gammadm_fit, rs_fit = gnfw_fit(halo_Sigma_spline, m200, rhoc)
 
-            gammadm_grid[i, j, k] = gammadm_fit
-            rs_grid[i, j, k] = rs_fit
+                gammadm_grid[i, j, k, l] = gammadm_fit
+                rs_grid[i, j, k, l] = rs_fit
 
 grid_file = h5py.File('gnfwpar_grid.hdf5', 'w')
 
 grid_file.create_dataset('lmstar_grid', data=lmstar_grid)
 grid_file.create_dataset('dlreff_grid', data=dlreff_grid)
 grid_file.create_dataset('dlm200_grid', data=dlm200_grid)
+grid_file.create_dataset('z_grid', data=z_grid)
 
 grid_file.create_dataset('gammadm_grid', data=gammadm_grid)
 grid_file.create_dataset('rs_grid', data=rs_grid)

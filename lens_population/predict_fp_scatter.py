@@ -9,14 +9,11 @@ import ndinterp
 
 np.random.seed(0)
 
-sigma_h = 0.3
-sigma_sps = 0.1
+sigma_h = 0.2
+sigma_sps = 0.08
 
 def lmobsfunc(lmobs):
     return 10.**((lmobs - lmstar_muz) * (alpha_muz + 1)) * np.exp(-10.**(lmobs - lmstar_muz))
-
-lmobs_min = 11.
-lmobs_max = 12.5
 
 nmobs = 101
 lmobs_grid = np.linspace(lmobs_min, lmobs_max, nmobs)
@@ -40,12 +37,11 @@ lasps_samp = np.random.normal(mu_sps, sigma_sps, nsamp)
 
 lmstar_samp = lmobs_samp + lasps_samp
 
-lm200_samp = mu_h + mu_h * (lmstar_samp - lmstar_piv) + np.random.normal(0., sigma_h, nsamp)
+dlm200_samp = np.random.normal(0., sigma_h, nsamp)
+lm200_samp = mu_h + beta_h * (lmstar_samp - lmstar_piv) + dlm200_samp
 
 mu_Rmstar_samp = mu_R + beta_R * (lmstar_samp - mu_sps - lmobs_piv)
 dlreff_samp = lreff_samp - mu_Rmstar_samp
-
-dlm200_samp = lm200_samp - (mu_h + mu_h * (lmstar_samp - lmstar_piv))
 
 point = np.array([lmstar_samp, dlreff_samp, dlm200_samp]).T
 
