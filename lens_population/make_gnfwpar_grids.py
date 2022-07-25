@@ -94,8 +94,8 @@ def gnfw_fit(halo_Sigma_spline, m200):
 
 for i in range(nmstar):
     mstar = 10.**lmstar_grid[i]
-    lreff_model = lreff_mu + lreff_beta * (lmstar_grid[i] - lasps_mu - lmobs_piv)
-    lm200_model = lm200_mu + lm200_beta * (lmstar_grid[i] - lmstar_piv)
+    lreff_model = mu_R + beta_R * (lmstar_grid[i] - mu_sps - lmobs_piv)
+    lm200_model = mu_h + beta_h * (lmstar_grid[i] - lmstar_piv)
 
     for j in range(nreff):
         print(i, j)

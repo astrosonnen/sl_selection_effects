@@ -9,6 +9,9 @@ import ndinterp
 
 np.random.seed(0)
 
+sigma_h = 0.3
+sigma_sps = 0.1
+
 def lmobsfunc(lmobs):
     return 10.**((lmobs - lmstar_muz) * (alpha_muz + 1)) * np.exp(-10.**(lmobs - lmstar_muz))
 
@@ -31,20 +34,18 @@ invcum_spline = splrep(cumfunc_grid, lmobs_grid)
 
 lmobs_samp = splev(np.random.rand(nsamp), invcum_spline)
 
-lreff_samp = lreff_mu + lreff_beta * (lmobs_samp - lmobs_piv) + np.random.normal(0., lreff_sig, nsamp)
+lreff_samp = mu_R + beta_R * (lmobs_samp - lmobs_piv) + np.random.normal(0., sigma_R, nsamp)
 
-lasps_sig = 0.01
-lasps_samp = np.random.normal(lasps_mu, lasps_sig, nsamp)
+lasps_samp = np.random.normal(mu_sps, sigma_sps, nsamp)
 
 lmstar_samp = lmobs_samp + lasps_samp
 
-lm200_sig = 0.5
-lm200_samp = lm200_mu + lm200_beta * (lmstar_samp - lmstar_piv) + np.random.normal(0., lm200_sig, nsamp)
+lm200_samp = mu_h + mu_h * (lmstar_samp - lmstar_piv) + np.random.normal(0., sigma_h, nsamp)
 
-lreff_mumstar_samp = lreff_mu + lreff_beta * (lmstar_samp - lasps_mu - lmobs_piv)
-dlreff_samp = lreff_samp - lreff_mumstar_samp
+mu_Rmstar_samp = mu_R + beta_R * (lmstar_samp - mu_sps - lmobs_piv)
+dlreff_samp = lreff_samp - mu_Rmstar_samp
 
-dlm200_samp = lm200_samp - (lm200_mu + lm200_beta * (lmstar_samp - lmstar_piv))
+dlm200_samp = lm200_samp - (mu_h + mu_h * (lmstar_samp - lmstar_piv))
 
 point = np.array([lmstar_samp, dlreff_samp, dlm200_samp]).T
 

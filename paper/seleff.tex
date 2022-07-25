@@ -772,15 +772,39 @@ Early-type galaxies lie on the stellar mass fundamental plane, a scaling relatio
 \begin{equation}\label{eq:fpcompact}
 \sigma_{\mathrm{e}} \propto \mstar^{(\mathrm{obs})\beta_{\sigma}}\reff^{\xi_{\sigma}}.
 \end{equation}
-The existence of a fundamental plane relation is a consequence of the virial theorem: the velocity dispersion of a galaxy is directly related to the 3-dimensional mass distribution in its inner regions, which is tyically dominated by the stellar component.
+The existence of a fundamental plane relation is a consequence of the virial theorem: the velocity dispersion of a galaxy is directly related to the 3-dimensional mass distribution in its inner regions, which is typically dominated by the stellar component.
 At fixed observed stellar mass distribution, however, the central velocity dispersion can vary depending on the stellar population synthesis mismatch parameter, on the dark matter mass and on the dark matter density profile. This gives rise to a spread in the values of the velocity dispersion given $\mobs$ and $\reff$.
 Therefore, we can use the observed scatter in velocity dispersion to put an upper limit on the intrinsic scatter in the stellar population synthesis mismatch parameter, halo mass and dark matter slope.
 
 We used Jeans modelling for this purpose.
-We generated samples of early-type galaxies with the recipes described above and with different values of $\sigma_{\mathrm{sps}}$, $\sigma_h$ and $\sigma_\gamma$.
+We generated samples of early-type galaxies with the recipes described above and with different values of $\sigma_{\mathrm{sps}}$, $\sigma_\mathrm{h}$ and $\sigma_\gamma$.
 Using the spherical Jeans equation under the assumption of isotropic orbits, we predicted the central velocity dispersion of each galaxy in the sample. Then, we fitted a fundamental plane relation to this mock sample and measured the predicted scatter in velocity dispersion at fixed $\mobs$ and $\reff$.
 We then varied $\sigma_{\mathrm{sps}}$, $\sigma_h$ and $\sigma_\gamma$ to match the observed and the predicted scatter.
-The details of this procedures are given in Appendix~\ref{sect:appendixb}.
+We did not attempt to match the other parameters of the fundamental plane (i.e. the constant of proportionality of \Eref{eq:fpcompact} and the power-law indices $\beta_{\sigma}$ and $\xi_{\sigma}$), because these are sensitive to the orbital anisotropy of the galaxies, which we are asserting to be zero.
+The details of this procedure are given in Appendix~\ref{sect:appendixb}.
+
+%After comparing the predicted and observed fundamental plane scatter for different sets of values of $\sigma_{\mathrm{sps}}$, $\sigma_h$ and $\sigma_\gamma$, we settled on three 
+%After comparing the predicted and observed fundmantal plane scatter, 
+We settled on three different set of intrinsic scatter parameters, as indicated in \Tref{tab:scatter}. We label them the fiducial, the low-scatter and the high-scatter scenarios.
+The high-scatter scenario is ruled out both by the fundamental plane and by weak lensing constraints \citep{Son++22}. 
+Moreover, our dynamical model is quite simplistic, as it neglects the effects of orbital anisotropy and departures from spherical symmetry, which are additional sources of scatter. 
+Nevertheless, we use it in our experiment in order to obtain a more conservative upper limit on the amplitude of the strong lensing bias.
+%A model with the same intrinsic scatter parameters and a more realistic 3-dimensional and orbital structure would likely predict a fundamental plane scatter that is at least as large as the observed one.
+\begin{table}
+\caption{Intrinsic scatter scenarios}
+\label{tab:scatter}
+\begin{tabular}{lccc}
+\hline
+\hline
+Model name & $\sigma_{\mathrm{sps}}$ & $\sigma_{\mathrm{h}}$ & Predicted FP \\
+ & & & scatter \\
+\hline
+Fiducial & 0.08 & 0.20 & 0.034 \\
+Low scatter & 0.05 & 0.10 & 0.021 \\
+High scatter & 0.10 & 0.30 & 0.433 \\
+\end{tabular}
+\end{table}
+
 
 \subsection{Background sources}\label{ssec:sources}
 
