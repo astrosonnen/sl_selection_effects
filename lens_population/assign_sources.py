@@ -1,6 +1,6 @@
 import numpy as np
 from scipy.stats import poisson
-from poppars import *
+from simpars import *
 import h5py
 from astropy.io import fits as pyfits
 
@@ -23,8 +23,11 @@ sourceind = np.arange(nsource_tot)
 # shuffles source catalog (it's originally ranked by redshift)
 np.random.shuffle(sourceind)
 
+rrand = np.random.rand(len(sourceind))**0.5
+phirand = 2.*np.pi * np.random.rand(len(sourceind))
+
 outlines = []
-outlines.append('# lens_id rcirc nsources source_indices(list)\n')
+outlines.append('# lens_id rcirc nsources source_index,xpos,ypos(list)\n')
 
 sourcecount = 0
 for i in range(nsamp):
@@ -38,7 +41,10 @@ for i in range(nsamp):
 
     line = '%d %f %d'%(i, rcirc, nsources)
     for n in range(nsources):
-        line += ' %d'%sourceind[sourcecount]
+        xsource = rrand[sourcecount] * rcirc * np.cos(phirand[sourcecount])
+        ysource = rrand[sourcecount] * rcirc * np.sin(phirand[sourcecount])
+
+        line += ' %d,%f,%f'%(sourceind[sourcecount], xsource, ysource)
         sourcecount += 1
     line += '\n'
 

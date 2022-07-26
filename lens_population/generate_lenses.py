@@ -6,7 +6,7 @@ import sl_cosmology
 from sl_profiles import deVaucouleurs as deV, gnfw, nfw, eaglecontr
 import h5py
 import ndinterp
-from poppars import *
+from simpars import *
 
 
 seedno = 0

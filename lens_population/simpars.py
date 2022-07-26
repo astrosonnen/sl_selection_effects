@@ -7,6 +7,17 @@ from sl_cosmology import Mpc, M_Sun, c, G
 # number density of background sources
 nbkg = 70. # per square arcminute
 
+# photometric zeropoint
+zeropoint = 25.
+
+# pixel size
+pix_arcsec = 0.1
+
+# lens detection pars
+nsigma_pixdet = 2.
+sky_rms = 0.00433
+min_angle = 90.
+
 # stellar mass function
 phi_muz = 1.009e-3
 alpha_muz = -0.92

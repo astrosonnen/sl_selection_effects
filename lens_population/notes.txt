@@ -1,0 +1,6 @@
+2022-7-25
+
+Photometric zeropoint: 25.0
+
+The noise level is such that a source with flux equal to the zeropoint magnitude and half-light radius of 0.5'' is detected with S/N=10.
+
