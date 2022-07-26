@@ -1,7 +1,11 @@
 import numpy as np
 from scipy.interpolate import splrep, splev, splint
 import sl_cosmology
+from sl_cosmology import Mpc, M_Sun, c, G
 
+
+# number density of background sources
+nbkg = 70. # per square arcminute
 
 # stellar mass function
 phi_muz = 1.009e-3
@@ -72,4 +76,24 @@ for i in range(nz):
 
 invcum_z_spline = splrep(cumfunc_z_grid, zgrid)
 
+# makes a spline for the angular diameter distance
+dd_grid = 0.*zgrid
+for i in range(nz):
+    dd_grid[i] = sl_cosmology.Dang(zgrid[i])
+
+dd_spline = splrep(zgrid, dd_grid)
+
+# and one for the critical surface mass density at the highest source redshift
+zs_ref = 2.5
+
+ds_ref = sl_cosmology.Dang(zs_ref)
+
+dds_grid = 0.*zgrid
+for i in range(nz):
+    dds_grid[i] = sl_cosmology.Dang(zgrid[i], zs_ref)
+
+kpc = Mpc/1000.
+s_cr_grid = c**2/(4.*np.pi*G)*ds_ref/dds_grid/dd_grid/Mpc/M_Sun*kpc**2 # units: M_Sun/kpc**2
+
+s_cr_spline = splrep(zgrid, s_cr_grid)
 
