@@ -12,7 +12,7 @@ from lensdet import detect_lens
 
 modelname = 'fiducial_100sqdeg'
 sourcecat = pyfits.open('/Users/alessandro/catalogs/skills_sourceonly_zcut.fits')[1].data
-pop = h5py.File('%s_lenses.hdf5'%modelname, 'r+')
+pop = h5py.File('%s_galaxies.hdf5'%modelname, 'r+')
 
 modeldir = 'extended_sims/%s/'%modelname
 if not os.path.isdir(modeldir):
@@ -30,7 +30,7 @@ omegaM = 0.3
 omegaL = 0.7
 weos = -1.
 hubble = 0.7
-prefix = 'out'
+prefix = 'tmp'
 xmin = -5.
 ymin = -5.
 xmax = 5.
@@ -48,6 +48,18 @@ glafic.startup_setnum(2, 1, 0)
 glafic.set_lens(1, 'gnfw', 0.3, 1e13, 0.0, 0.0, 0., 90.0, 10., 1.5)
 glafic.set_lens(2, 'sers', 0.3, 1e11, 0.0, 0.0, 0., 90.0, 1., 4.)
 glafic.set_extend(1, 'sersic', zs_ref, 0.5, 0.3, 0., 0., 0., 0.1, 1.)
+
+zs_list = []
+xpos_list = []
+ypos_list = []
+nser_list = []
+sreff_list = []
+sq_list = []
+spa_list = []
+smag_list = []
+avg_mu_list = []
+nimg_list = []
+tein_zs_list = []
 
 for i in range(nsamp):
     line = sourcelines[i].split()
@@ -92,42 +104,37 @@ for i in range(nsamp):
             if detection:
                 islens = True
 
+                glafic.writelens(zs)
+
+                # reads in lens properties
+                lensprop = pyfits.open('tmp_lens.fits')[0].data
+                mu_grid = lensprop[6, :, :]**(-1)
+
+                tein_zs = glafic.calcein2(zs, 0., 0.)
+                tein_zs_list.append(tein_zs)
+
                 print('%d is a lens'%i)
 
-                """
-                # creates an hdf5 file for the lens
-                lens_file = h5py.File(modeldir+'lens_%06d.hdf5'%i, 'w')
-                lens_file.attrs['z'] = pop['z'][i]
-                lens_file.attrs['tein'] = pop['tein'][i]
-                lens_file.attrs['reff_kpc'] = 10.**pop['lreff'][i]
-                lens_file.attrs['reff_arcsec'] = 10.**pop['lreff'][i]
-                lens_file.attrs['lm200'] = pop['lm200'][i]
-                lens_file.attrs['lm200'] = pop['lm200'][i]
-                lens_file.attrs['lmstar'] = pop['lmstar'][i]
-                lens_file.attrs['zs'] = zs
-                lens_file.attrs['source_xpos'] = xpos
-                lens_file.attrs['source_ypos'] = ypos
-                lens_file.attrs['source_nser'] = nser
-                lens_file.attrs['source_q'] = sq
-                lens_file.attrs['source_pa'] = spa
-                lens_file.attrs['source_mag'] = smag
-                lens_file.attrs['source_re'] = sreff
-                lens_file.attrs['source_index'] = sourceind
-
-                lens_file.create_dataset('img', data=img)
-
-                lens_file.close()
-                """
+                zs_list.append(zs)
+                xpos_list.append(xpos)
+                ypos_list.append(ypos)
+                nser_list.append(nser)
+                sreff_list.append(sreff)
+                sq_list.append(sq)
+                spa_list.append(spa)
+                smag_list.append(smag)
+                nimg_list.append(nimg)
 
                 # creates a noisy version of the image
                 img_wnoise = img + np.random.normal(0., sky_rms, img.shape)
 
                 hdr = pyfits.Header()
 
-                # creates an hdf5 file for the lens
+                # creates an fits file for the lens
                 hdr['galno'] = i
                 hdr['zlens'] = pop['z'][i]
-                hdr['tein'] = pop['tein'][i]
+                hdr['tein_zrf'] = pop['tein'][i]
+                hdr['tein_zs'] = tein_zs
                 hdr['reff_ang'] = reff_arcsec
                 hdr['reff_kpc'] = reff_kpc
                 hdr['lm200'] = pop['lm200'][i]
@@ -144,9 +151,12 @@ for i in range(nsamp):
                 hdr['src_ind'] = sourceind
                 hdr['nimg'] = nimg
 
-                # calculates the total magnification
-                obsftot = img.sum()
-                avg_mu = obsftot/ftot
+                # calculates the average magnification over the footprint
+                #obsftot = img.sum()
+                #avg_mu = obsftot/ftot
+                footprint = img > nsigma_pixdet *sky_rms
+                avg_mu = abs(mu_grid[footprint]).mean()
+                avg_mu_list.append(avg_mu)
 
                 hdr['avg_mu'] = avg_mu
 
@@ -170,5 +180,38 @@ if 'islens' in pop:
 else:
     pop.create_dataset('islens', data=islens_samp)
 
+# makes file with lenses
+
+lens_file = h5py.File('%s_lenses.hdf5'%modelname, 'w')
+
+lens_file.create_dataset('z', data=pop['z'][islens_samp])
+lens_file.create_dataset('index', data=np.arange(nsamp)[islens_samp])
+lens_file.create_dataset('lmobs', data=pop['lmobs'][islens_samp])
+lens_file.create_dataset('lmstar', data=pop['lmstar'][islens_samp])
+lens_file.create_dataset('lasps', data=pop['lasps'][islens_samp])
+lens_file.create_dataset('lm200', data=pop['lm200'][islens_samp])
+lens_file.create_dataset('lmdm5', data=pop['lmdm5'][islens_samp])
+lens_file.create_dataset('r200', data=pop['r200'][islens_samp])
+lens_file.create_dataset('lreff', data=pop['lreff'][islens_samp])
+lens_file.create_dataset('tein_zref', data=pop['tein'][islens_samp])
+lens_file.create_dataset('tein_zs', data=np.array(tein_zs_list))
+lens_file.create_dataset('tcaust', data=pop['tcaust'][islens_samp])
+lens_file.create_dataset('q', data=pop['q'][islens_samp])
+lens_file.create_dataset('rs', data=pop['rs'][islens_samp])
+lens_file.create_dataset('gammadm', data=pop['gammadm'][islens_samp])
+
+lens_file.create_dataset('zs', data=np.array(zs_list))
+lens_file.create_dataset('xpos', data=np.array(xpos_list))
+lens_file.create_dataset('ypos', data=np.array(ypos_list))
+lens_file.create_dataset('nser', data=np.array(nser_list))
+lens_file.create_dataset('sreff', data=np.array(sreff_list))
+lens_file.create_dataset('sq', data=np.array(sq_list))
+lens_file.create_dataset('spa', data=np.array(spa_list))
+lens_file.create_dataset('smag', data=np.array(smag_list))
+lens_file.create_dataset('avg_mu', data=np.array(avg_mu_list))
+lens_file.create_dataset('nimg', data=np.array(nimg_list))
+
 pop.close()
+lens_file.close()
+
 
