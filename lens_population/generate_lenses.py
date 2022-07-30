@@ -223,7 +223,7 @@ for i in range(nsamp):
     tein_samp[i] = rein_kpc / arcsec2kpc
     tcaust_samp[i] = radcaust_kpc / arcsec2kpc
 
-output_file = h5py.File('%s_lenses.hdf5'%modelname, 'w')
+output_file = h5py.File('%s_galaxies.hdf5'%modelname, 'w')
 
 output_file.attrs['nsamp'] = nsamp
 output_file.attrs['sigma_h'] = sigma_h

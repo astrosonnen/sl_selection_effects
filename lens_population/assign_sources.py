@@ -11,7 +11,7 @@ np.random.seed(10)
 circ_caust_rat = 1.2 # ratio between circle radius and caustic radius
 
 modelname = 'fiducial_100sqdeg'
-pop = h5py.File('%s_lenses.hdf5'%modelname, 'r')
+pop = h5py.File('%s_galaxies.hdf5'%modelname, 'r')
 
 nsamp = pop.attrs['nsamp']
 

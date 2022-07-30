@@ -17,6 +17,8 @@ pix_arcsec = 0.1
 nsigma_pixdet = 2.
 sky_rms = 0.00433
 min_angle = 90.
+minmag = 3.
+npix_min = 10
 
 # stellar mass function
 phi_muz = 1.009e-3

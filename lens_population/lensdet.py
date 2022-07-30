@@ -13,6 +13,8 @@ def detect_lens(img):
 
     footprint = img > nsigma_pixdet * sky_rms
 
+    img_detected = img.copy()
+
     labels = measure.label(footprint)
     nreg = labels.max()
     nimg = 0
@@ -21,14 +23,14 @@ def detect_lens(img):
         signal = img[labels==n+1].sum()
         noise = npix_here**0.5 * sky_rms
         img_sn = signal/noise
-        if img_sn < 10.:
-            img[labels==n+1] = 0.
+        if img_sn < 10. or npix_here < npix_min:
+            img_detected[labels==n+1] = 0.
         else:
             nimg += 1
 
     # checks subtended angle
 
-    new_footprint = img > nsigma_pixdet * sky_rms
+    new_footprint = img_detected > nsigma_pixdet * sky_rms
 
     ypix = Y[new_footprint]
     xpix = X[new_footprint]
@@ -53,5 +55,48 @@ def detect_lens(img):
         if max_aperture > min_angle:
             islens = True
 
-    return islens, nimg
+    # tries to maximise the number of detected images, by varying the threshold
+    nimg_max = nimg
+
+    sb_max = img.max()
+    sb_min = nsigma_pixdet * sky_rms
+
+    sorted_img = img.flatten().copy()
+    sorted_img.sort()
+    above_threshold = sorted_img[sorted_img > sb_min]
+    nup = len(above_threshold)
+
+    i = 0
+    nimg_here = nimg
+    sb_maxlim = sb_min
+
+    while nimg_here >= nimg_max and i < nup:
+        sb_lim = above_threshold[i]
+
+        img_detected = img.copy()
+        footprint_here = img > sb_lim
+
+        labels = measure.label(footprint_here)
+        nreg = labels.max()
+        nimg_here = 0
+        for n in range(nreg):
+            npix_here = (labels==n+1).sum()
+            signal = img[labels==n+1].sum()
+            noise = npix_here**0.5 * sky_rms
+            img_sn = signal/noise
+            if img_sn >= 10. and npix_here >= npix_min:
+                nimg_here += 1
+
+        if nimg_here > nimg_max:
+            nimg_max = nimg_here
+            sb_maxlim = sb_lim
+
+        i += 1
+
+    if nimg_max > nimg:
+        nmax_footprint = img_detected > sb_maxlim
+    else:
+        nmax_footprint = new_footprint
+
+    return islens, nimg, nimg_max, new_footprint, nmax_footprint
 

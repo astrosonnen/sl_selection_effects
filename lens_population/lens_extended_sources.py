@@ -5,6 +5,7 @@ import h5py
 from simpars import *
 from astropy.io import fits as pyfits
 from scipy.interpolate import splev
+from scipy.optimize import brentq
 from sl_profiles import sersic
 from scipy.special import gamma as gfunc
 from lensdet import detect_lens
@@ -59,6 +60,7 @@ spa_list = []
 smag_list = []
 avg_mu_list = []
 nimg_list = []
+nmax_list = []
 tein_zs_list = []
 
 for i in range(nsamp):
@@ -99,16 +101,28 @@ for i in range(nsamp):
 
             img = np.array(glafic.writeimage())
 
-            detection, nimg = detect_lens(img)
+            # measures detectable source unlensed flux
+            def zerofunc(R):
+                return ftot * sersic.Sigma(R, nser, sreff/pix_arcsec) - nsigma_pixdet * sky_rms
+
+            if zerofunc(0.) < 0.:
+                fdet = 0.
+            elif zerofunc(10.*sreff/pix_arcsec) > 0.:
+                fdet = ftot
+            else:
+                Rmax = brentq(zerofunc, 0., 10.*sreff/pix_arcsec)
+                fdet = ftot * sersic.M2d(Rmax, nser, sreff/pix_arcsec)
+
+            detection, nimg, nmax, footprint, nmax_footprint = detect_lens(img)
 
             if detection:
                 islens = True
 
-                glafic.writelens(zs)
+                #glafic.writelens(zs)
 
                 # reads in lens properties
-                lensprop = pyfits.open('tmp_lens.fits')[0].data
-                mu_grid = lensprop[6, :, :]**(-1)
+                #lensprop = pyfits.open('tmp_lens.fits')[0].data
+                #mu_grid = lensprop[6, :, :]**(-1)
 
                 tein_zs = glafic.calcein2(zs, 0., 0.)
                 tein_zs_list.append(tein_zs)
@@ -124,6 +138,7 @@ for i in range(nsamp):
                 spa_list.append(spa)
                 smag_list.append(smag)
                 nimg_list.append(nimg)
+                nmax_list.append(nmax)
 
                 # creates a noisy version of the image
                 img_wnoise = img + np.random.normal(0., sky_rms, img.shape)
@@ -152,10 +167,9 @@ for i in range(nsamp):
                 hdr['nimg'] = nimg
 
                 # calculates the average magnification over the footprint
-                #obsftot = img.sum()
-                #avg_mu = obsftot/ftot
-                footprint = img > nsigma_pixdet *sky_rms
-                avg_mu = abs(mu_grid[footprint]).mean()
+                #footprint = img > nsigma_pixdet * sky_rms
+
+                avg_mu = abs(img[footprint]).sum()/fdet
                 avg_mu_list.append(avg_mu)
 
                 hdr['avg_mu'] = avg_mu
@@ -210,6 +224,7 @@ lens_file.create_dataset('spa', data=np.array(spa_list))
 lens_file.create_dataset('smag', data=np.array(smag_list))
 lens_file.create_dataset('avg_mu', data=np.array(avg_mu_list))
 lens_file.create_dataset('nimg', data=np.array(nimg_list))
+lens_file.create_dataset('nmax', data=np.array(nmax_list))
 
 pop.close()
 lens_file.close()
