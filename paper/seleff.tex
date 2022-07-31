@@ -39,6 +39,8 @@
 \def\zsource{z_{\mathrm{s}}}
 \def\zlens{z_{\mathrm{g}}}
 
+\def\msource{m_{\mathrm{s}}}
+
 \def\mobs{M_*^{(\mathrm{obs})}}
 \def\gammadm{\gamma_{\mathrm{DM}}}
 \def\fdm{f_{\mathrm{DM}}}
@@ -390,14 +392,22 @@ Additionally, if the source footprint consists of only a single region, we still
 As the first three examples in \Fref{fig:lensdef} show, the presence of multiple images or a full ring implies that the system is classified as a lens. Only if the source footprint subtends an angle smaller than $90^\circ$, a system is not considered a strong lens (fourth example).
 %The choice of points used to define the angle $\theta_{\mathrm{s}}$ is not unique: any pair of points for which \Eref{eq:subtend} is satisfied is acceptable.
 
-\begin{figure*}
-\includegraphics[width=\textwidth]{footprints.eps}
+%\begin{figure*}
+%\includegraphics[width=\textwidth]{footprints.eps}
+%\caption{
+%Criterion used to classify lensed images of extended sources. Four examples. In each panel, the blue regions are the footprint of the lensed source. 
+%The two segments connecting the source footprint to the lens centre show the largest angle subtended by the source. If this angle is larger than $90^\circ$, the system is classified as a strong lens.
+%\label{fig:lensdef}
+%}
+%\end{figure*}
+\begin{figure}
+\includegraphics[width=\columnwidth]{example_detections.eps}
 \caption{
-Criterion used to classify lensed images of extended sources. Four examples. In each panel, the blue regions are the footprint of the lensed source. 
-The two segments connecting the source footprint to the lens centre show the largest angle subtended by the source. If this angle is larger than $90^\circ$, the system is classified as a strong lens.
+Criterion used to classify lensed images of extended sources. Four examples.
 \label{fig:lensdef}
 }
-\end{figure*}
+\end{figure}
+
 %__________________________________________________________________
 
 \section{Individual lenses}\label{sect:indlenses}
@@ -806,7 +816,7 @@ Fiducial & 0.08 & 0.20 & 0.034 \\
 Low scatter & 0.05 & 0.10 & 0.021 \\
 High scatter & 0.10 & 0.30 & 0.433 \\
 \end{tabular}
-\notes{
+\tablefoot{
 Adopted values of the intrinsic scatter parameters $\sigma_{\mathrm{sps}}$ and $\sigma_{\mathrm{h}}$ in different simulations. For each set of values, the fourth column indicates the scatter around the fundamental plane predicted via the spherical Jeans analysis of Appendix~\ref{sect:appendixb}.
 The observed fundamental plane scatter is $0.035$.
 }
@@ -815,7 +825,7 @@ The observed fundamental plane scatter is $0.035$.
 
 \subsection{Background sources: galaxies}\label{ssec:sources}
 
-\ale{To be filled by Shun-Sheng}.
+%\ale{To be filled by Shun-Sheng}.
 We applied a lower limit to the source redshift, by selecting only sources with $z_s > 0.8$.
 This ensures that all of the sources lie behind all of the lenses.
 A similar cut could be applied to a real survey using photometric redshift, to reduce the incidence of false positives (e.g. arc-like features physically associated with the lens galaxy) in the lens finding phase.

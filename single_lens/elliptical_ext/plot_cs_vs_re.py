@@ -45,38 +45,12 @@ for i in range(nfrat):
     ax.loglog(10.**logre_grid, cs_grid[i, :]/np.pi, linewidth=2, color=colseq[i], label="$\log{f} = %2.1f$"%lfrat_grid[i])
     cs_spline = splrep(10.**logre_grid, cs_grid[i, :]/np.pi, k=1)
 
-# lines of constant surface brightness (who cares?)
-"""
-nfr2 = nfrat
-cs_fixedfr2 = np.zeros((nfr2, nfrat))
-re_fixedfr2 = np.zeros((nfr2, nfrat))
-
-for i in range(nfr2):
-    for j in range(nfrat):
-        if i+j>1:
-            re_fixedfr2[i, j] = 10.**logre_grid[i+j-2]
-            cs_fixedfr2[i, j] = cs_grid[j, i+j-2]
-
-for i in range(nfr2):
-    if i<2:
-        istart = 2-i
-        iend = 4
-    else:
-        istart = 0
-        iend = 4
-    ax.loglog(re_fixedfr2[i, istart:iend], cs_fixedfr2[i, istart:iend]/np.pi, color='grey', linewidth=0.5)
-"""
-
-#lines = labelLines(ax.get_lines()[2:], xvals = [0.65, 0.9, 0.58], fontsize=fsize, backgroundcolor='white')
-
-#ax.xaxis.set_major_locator(MultipleLocator(0.5))
-#ax.xaxis.set_minor_locator(MultipleLocator(0.1))
-
 ax.tick_params(axis='both', which='both', top=True, right=True, labelsize=fsize, direction='in')
 
 ax.set_xlabel('$\\theta_{\mathrm{e,s}}/\\theta_{\mathrm{Ein}}$', fontsize=fsize)
 ax.set_ylabel('$\sigma_{\mathrm{SL}}/(\pi\\theta_{\mathrm{Ein}}^2)$', fontsize=fsize)
 
+"""
 # now finds the detection limit for non-lensed galaxies
 nre = 11
 logre_grid = np.linspace(-1., 0., nre)
@@ -108,6 +82,7 @@ for l in range(nfrat):
     logre_crit = splev(10., sn_spline)
 
     ax.axvline(10.**logre_crit, linestyle='--', color=colseq[l])
+"""
 
 #ax.set_xlim(xlim[0], xlim[1])
 ax.set_ylim(ylim[0], ylim[1])
@@ -116,7 +91,7 @@ ax.set_ylim(ylim[0], ylim[1])
 
 ax.legend(loc = 'lower right', fontsize=fsize, framealpha=1.)
 
-pylab.savefig('../../paper/ell_ext_cs.eps')
+#pylab.savefig('../../paper/ell_ext_cs.eps')
 pylab.show()
 
 
