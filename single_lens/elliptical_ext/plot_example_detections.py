@@ -2,6 +2,7 @@ import numpy as np
 import glafic
 from sl_profiles import sersic
 from scipy.special import gamma as gfunc
+from scipy.signal import convolve2d
 import pylab
 from astropy.io import fits as pyfits
 from lensdet import detect_lens
@@ -15,6 +16,8 @@ rc('text', usetex=True)
 fsize = 28
 
 nexamples = 6
+
+psf = pyfits.open('psf.fits')[1].data
 
 re_list = [0.2, 0.2, 0.1, 0.3, 0.4, 0.4]
 srcpos_list = [(0.4, -0.2), (-0.8, 0.4), (0.6, 0.), (0.25, 0.), (-0.1, 0.), (0.3, 0.25)]
@@ -55,6 +58,7 @@ glafic.startup_setnum(2, 1, 0)
 glafic.set_lens(1, 'gnfw', 0.3, 2.021e12, 0.0, 0.0, 0.3, 90.0, 10., 1.5)
 glafic.set_lens(2, 'sers', 0.3, 1.087e11, 0.0, 0.0, 0.3, 90.0, 1., 4.)
 glafic.set_extend(1, 'sersic', 1.5, 1., 0.3, 0., 0., 0., 0.1, 1.)
+#glafic.set_psf(2.*pix, 0., 0., 5., 1., 0., 0., 1., 1.)
 
 sizeone = 4.
 fig, ax = pylab.subplots(nexamples, 3, figsize=(3*sizeone, nexamples*sizeone))
@@ -79,7 +83,10 @@ for n in range(nexamples):
 
     glafic.writecrit(zs_list[n]) # writes caustics onto 'tmp_crit.dat'
 
+    #glafic.readpsf('psf.fits')
     img = np.flipud(np.array(glafic.writeimage()))
+    img = convolve2d(img, psf, mode='same')
+
     img_wnoise = img + np.random.normal(0., sky_rms, img.shape)
 
     pyfits.PrimaryHDU(img).writeto('test.fits', overwrite=True)
