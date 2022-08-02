@@ -331,7 +331,7 @@ R \rightarrow \sqrt{qx^2 + \frac{y^2}{q}},
 \end{equation}
 where $x$ and $y$ are cartesian axes centred on the lens centre, with $x$ pointing towards the major axis, and where $q$ is the minor-to-major axis ratio.
 
-\Fref{fig:ellcaust} shows the source-plane caustics of elliptical lenses with different values of the axis ratio.
+\Fref{fig:ellcaust} shows the source-plane caustics of elliptical lenses with different values of the axis ratio. We used the software {\sc Glafic} \citep{Ogu21} to obtain the caustic curves.
 The outermost curves are radial caustics, while the inner ones are tangential ones.
 %While in the axisymmetric case these are a circle and a point respectively (blue curves), in the elliptical case they are transformed into a 
 The most striking difference with respect to the axisymmetric case (blue curves in \Fref{fig:ellcaust}) is the fact that the tangential caustic is transformed from a point into a diamond-like curve.
@@ -369,44 +369,49 @@ Defining a strong lensing event in the case of an extended source is less straig
 In principle, we should require parts of the source to be multiply imaged.
 In practice, it is not always easy to determine whether a lensed image contains multiple images or not.
 This is because, when the source is extended, some of the images can be blended together.
-In real strong lensing surveys, it is common to find lens candidates in which the lensed source consists only a single arc. In those cases it is difficult to establish whether the arc is a set of blending images or not, and the decision of including such systems in a strong lens sample is often arbitrary.
-%For instance, a source located on one of the cusps of a tangential caustic produces a merging set of three magnified images. If the source is extended and no counter-image is detected, however, the appearence of the merging triplet is very similar to that of a single arc with no multiple images, and it can be difficult to differentiate between the two cases.
-%In real strong lensing surveys, the decision of including systems with a single arc or not is often arbitrary.
+In real strong lensing surveys, it is common to find lens candidates in which the lensed source consists of only a single arc. In those cases it is difficult to establish whether the arc is a set of blending images or not, and the decision of including such systems in a strong lens sample is often arbitrary.
+Here we adopt the following definition: an extended source is strongly lensed if the number of surface brightness peaks that are detected is larger than its intrinsic number of peaks in the absence of lensing.
 
-For the purpose of carrying out our experiment we adopt the following definition. First, we determine the footprint of the lensed source. We define this as the ensemble of pixels where the source is detected with $S/N>2$. The footprint is in general composed of multiple disconnected regions, corresponding to the different images. In order to only include images that can be clearly identified, we add the condition that the integrated $S/N$ of each separate region must be $S/N > 10$. This condition has the effect of removing from the source footprint any isolated region consisting only of a very small number of pixels. In a real-world application, it would be very hard to classify such marginal detections as images.
+We explain how this definition applies in practice with a few examples.
+%We can consider a few examples.
+For simplicity, we focus on the case of a source with a single surface brightness peak, such as a S\'{e}rsic profile. All of the sources considered in this work belong to this family of surface brightness models.
+We adopt the following procedure to determine the number of detected peaks.
+Given the observed image of a lensed source, we define its footprint as the ensemble of pixels where the source is detected with $S/N>2$. The footprint is in general composed of multiple disconnected regions, corresponding to the different images. In order to only include images that can be clearly identified, we add the condition that the integrated $S/N$ of each separate region must be $S/N > 10$. This condition has the effect of removing from the source footprint any isolated region consisting only of a very small number of pixels. In a real-world application, it would be very hard to classify such marginal detections as images.
 If, after applying this cut, the source footprint is spread over multiple separated regions, then the system is classified as a lens.
-Additionally, if the source footprint consists of only a single region, we still classify it as strongly lensed if it subtends an angle larger than $90^\circ$ measured from the lens centre. This last criterion allows us to include highly magnified arcs and full rings.
-
-%Additionally, we classify as strongly lensed the following set of sources any full rings, and any single arcs that subtend an angle larger than $90^\circ$ measured from the lens centre. This last criterion is a 
-%Additionally, we classify as a strongly lensed source any full rings, and any single arcs that subtend an angle larger than $90^\circ$ measured from the lens centre. This last criterion is a 
-
-%Given the source footprint thus defined, we classify the system as a strong lens if the footprint subtends an angle $\theta_{\mathrm{s}}$ with respect to the lens centre that satisfies the following condition:
-%Given the source footprint thus defined, we classify the system as a strong lens if we can find two points on the footprint that subtend an angle $\theta_{\mathrm{s}}$ with respect to the lens centre that satisfies the following condition:
-%\begin{equation}\label{eq:subtend}
-%\theta_{\mathrm{min}} < \theta_{\mathrm{s}} \leq 180^\circ,
-%\end{equation}
-%with $\theta_{\mathrm{min}}=90^\circ$.
-%A similar criterion was used in the automatic lens search campaign of \citet{Son++18a}.
+If the source footprint consists instead of a single region, we iteratively increase the surface brightness threshold used to define the footprint and count the number of isolated regions with $S/N>10$. The maximum number of detected regions defines the number of detected peaks.
 
 \Fref{fig:lensdef} shows a few examples of how this criterion can be used to classify lenses.
-As the first three examples in \Fref{fig:lensdef} show, the presence of multiple images or a full ring implies that the system is classified as a lens. Only if the source footprint subtends an angle smaller than $90^\circ$, a system is not considered a strong lens (fourth example).
-%The choice of points used to define the angle $\theta_{\mathrm{s}}$ is not unique: any pair of points for which \Eref{eq:subtend} is satisfied is acceptable.
+The first column shows the caustic structure and source position. The second column shows an image of the lensed source. 
+The third column shows the source footprint defined with the procedure described above.
+Coral pixels correspond to the largest footprint that maximizes the number of detected images, while purple pixels belong to the $2\sigma$ detection footprint. In the first, second and sixth example, these two footprints coincide.
+In the third, fourth and fifth example, instead, the $2\sigma$ detection footprint consists of a single region, but an increase of the surface brightness threshold leads to the detection of additional images.
 
-%\begin{figure*}
-%\includegraphics[width=\textwidth]{footprints.eps}
-%\caption{
-%Criterion used to classify lensed images of extended sources. Four examples. In each panel, the blue regions are the footprint of the lensed source. 
-%The two segments connecting the source footprint to the lens centre show the largest angle subtended by the source. If this angle is larger than $90^\circ$, the system is classified as a strong lens.
-%\label{fig:lensdef}
-%}
-%\end{figure*}
+Strictly speaking, our lens definition criterion fails for a perfect Einstein ring. In order to cover such a scenario, we also classify as strongly lensed any sources that produce a footprint with a hole.
+
+We point out that, although our lens definition relies on peak detections, it is not necessary for the peak of the source surface brightness to lie within the caustics in order for the source to be strongly lensed.
+This can be observed in the fourth example of \Fref{fig:lensdef}: although the source centroid lies outside of the caustic (as shown in the first column), the outskirts of the source overlap with the lens, and therefore multiple images are produced.
+
 \begin{figure}
 \includegraphics[width=\columnwidth]{example_detections.eps}
 \caption{
 Criterion used to classify lensed images of extended sources. Four examples.
+First column: caustics (red curves) and source position (blue circle). The radius of the circle corresponds to the radius at which the surface brightness is equal to $2\sigma$ the sky background fluctuation for a single pixel. In other words, the blue circle delimits the area of the source that can be detected.
+Second column: mock image of the lensed source, with added noise.
+Third column: footprint of the source. The purple footprint is obtained with a $2\sigma$ detection criterion. The coral region is the largest footprint with the highest number of detected images.
 \label{fig:lensdef}
 }
 \end{figure}
+
+We can identify three different regimes in strong lensing of extended sources, depending on the relative size of the source and of the lens caustics.
+In the limit of a very small source, the image configurations that are produced are qualitatively similar to those that can be obtained in the point-source case.
+When the source and caustic size are comparable, the multiple images tend to be blended into arcs or rings. 
+Most, if not all, of the galaxy-scale strong lenses known belong to these two categories.
+However, there is a third regime in strong lensing, corresponding to the case in which the source size is much bigger than the caustics, such as in the fifth example of \Fref{fig:lensdef}.
+In this regime, the overall size and total flux of the source are roughly preserved, and the lens produces only a relatively minor perturbation on a localised region of the image.
+Strong lenses of this kind can be difficult to detect, especially if the region of the image subject to strong lensing overlaps with the light from the foreground galaxy. 
+%For this reason, the best known examples of strong lensing in the large source size regime are produced by objects with a relatively low brightness that act as perturbers on images that are strongly lensed by a larger mass \citep[see e.g.][]{Veg++12}.
+The ultimate limiting factor to the detection of strong lenses in the large source size regime, however, is the ability to spatially resolve the multiple images. This limit is set by the size of the point spread function (PSF).
+
 
 %__________________________________________________________________
 
@@ -581,7 +586,7 @@ This is the lens model used to produce the caustics plot of \Fref{fig:ellcaust}.
 That figure suggests that the size of the source plane area subject to strong lensing, the area enclosed within the outermost caustic, does not vary strongly with the ellipticity of the lens.
 Therefore we expect the strong lensing cross-section to be a weak function of ellipticity.
 
-We carried out the computation of $\crosssect$ by means of simulation: we generated a large number of point sources over a given area that includes the caustic, then used the software {\sc Glafic} \citep{Ogu21} to solve the lens equation, find the number of images and their magnification. We then multiplied the area over which sources are located by the fraction of those that are strongly lensed according to the criterion of \Eref{eq:pointdet}.
+We carried out the computation of $\crosssect$ by means of simulation: we generated a large number of point sources over a given area that includes the caustic, then used {\sc Glafic} to solve the lens equation, find the number of images and their magnification. We then multiplied the area over which sources are located by the fraction of those that are strongly lensed according to the criterion of \Eref{eq:pointdet}.
 %\Fref{fig:ellcaust} suggests that the size of the source plane area subject to strong lensing, the area enclosed within the outermost caustic, does not vary strongly with the ellipticity of the lens.
 %Therefore we expect the strong lensing cross-section to be a weak function of ellipticity.
 The resulting $\crosssect$ is shown in \Fref{fig:ellpoint_cs} as a function of the minor-to-major axis ratio $q$.

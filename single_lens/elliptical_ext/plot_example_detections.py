@@ -12,21 +12,14 @@ from matplotlib import rc
 rc('text', usetex=True)
 
 
-fsize = 24
+fsize = 28
 
 nexamples = 6
 
-"""
-re_list = [0.2, 0.15, 0.3, 0.4]
-srcpos_list = [(0.5, 0.), (0.75, 0.), (0.2, 0.1), (0.3, 0.25)]
-q_list = [0.7, 0.3, 0.7, 0.7]
-zs_list = [1.5, 1.5, 0.5, 0.35]
-"""
-
-re_list = [0.4, 0.4, 0.4, 0.4, 0.4, 0.4]
-srcpos_list = [(0.05, 0.), (0.1, 0.), (0.15, 0.), (0.2, 0.), (0.25, 0.), (0.3, 0.)]
-q_list = [0.7, 0.7, 0.7, 0.7, 0.7, 0.7]
-zs_list = [0.35, 0.35, 0.35, 0.35, 0.35, 0.35]
+re_list = [0.2, 0.2, 0.1, 0.3, 0.4, 0.4]
+srcpos_list = [(0.4, -0.2), (-0.8, 0.4), (0.6, 0.), (0.25, 0.), (-0.1, 0.), (0.3, 0.25)]
+q_list = [0.7, 0.7, 0.3, 0.7, 0.7, 0.7]
+zs_list = [1.5, 1.5, 1.5, 0.4, 0.35, 0.35]
 
 # creates a custom colormap
 cm_vals = np.ones((3, 4))
@@ -104,8 +97,8 @@ for n in range(nexamples):
 
     ax[n, 0].contour(unlensed_sb, [sb_lim], colors=['b'], extent=(-2., 2., -2., 2.))
 
-    islens, nimg_std, nimg_best, std_footprint, best_footprint, sb_maxlim = detect_lens(img, sky_rms, npix_min=5)
-    print(sb_maxlim)
+    islens, nimg_std, nimg_best, nholes_std, nholes_best, std_footprint, best_footprint, sb_maxlim = detect_lens(img, sky_rms, npix_min=5)
+    print(n+1, nholes_std, nholes_best)
 
     f = open('tmp_crit.dat', 'r')
     table = np.loadtxt(f)
@@ -144,11 +137,16 @@ for n in range(nexamples):
 
         ax[n, 2].legend(loc='upper left', fontsize=fsize)
 
-    #ax[n, 1].imshow(img_wnoise, cmap='gray', vmin = -sky_rms, vmax=5.*sky_rms)
-    ax[n, 1].imshow(img, cmap='gray', vmin = -sky_rms, vmax=5.*sky_rms)
+    ax[n, 1].imshow(img_wnoise, cmap='gray', vmin = -sky_rms, vmax=10.*sky_rms)
+    #ax[n, 1].imshow(img, cmap='gray', vmin = -sky_rms, vmax=5.*sky_rms)
 
     for j in range(3):
         ax[n, j].tick_params(axis='both', which='both', direction='in', labelleft=False, labelbottom=False, left=False, bottom=False)
+
+    if islens:
+        ax[n, 2].text(10., 70., 'Lens', fontsize=fsize)
+    else:
+        ax[n, 2].text(10., 70., 'Not a lens', fontsize=fsize)
 
 pylab.savefig('../../paper/example_detections.eps')
 pylab.show()
