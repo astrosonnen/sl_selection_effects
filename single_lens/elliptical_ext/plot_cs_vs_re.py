@@ -22,7 +22,7 @@ if logscale:
 else:
     leftm = 0.08
 
-cs_file = h5py.File('crosssect.hdf5', 'r')
+cs_file = h5py.File('smallsource_crosssect.hdf5', 'r')
 
 lfrat_grid = cs_file['lfrat_grid'][()]
 nfrat = len(lfrat_grid)
@@ -50,7 +50,6 @@ ax.tick_params(axis='both', which='both', top=True, right=True, labelsize=fsize,
 ax.set_xlabel('$\\theta_{\mathrm{e,s}}/\\theta_{\mathrm{Ein}}$', fontsize=fsize)
 ax.set_ylabel('$\sigma_{\mathrm{SL}}/(\pi\\theta_{\mathrm{Ein}}^2)$', fontsize=fsize)
 
-"""
 # now finds the detection limit for non-lensed galaxies
 nre = 11
 logre_grid = np.linspace(-1., 0., nre)
@@ -82,7 +81,12 @@ for l in range(nfrat):
     logre_crit = splev(10., sn_spline)
 
     ax.axvline(10.**logre_crit, linestyle='--', color=colseq[l])
-"""
+
+# gets the area within the caustics
+afile = h5py.File('../elliptical_point/caustic_areas.hdf5', 'r')
+caustic_area = afile['full_cs'][3]
+
+ax.axhline(caustic_area/np.pi, linestyle=':', color='k', label='Bright point source')
 
 #ax.set_xlim(xlim[0], xlim[1])
 ax.set_ylim(ylim[0], ylim[1])
@@ -91,7 +95,7 @@ ax.set_ylim(ylim[0], ylim[1])
 
 ax.legend(loc = 'lower right', fontsize=fsize, framealpha=1.)
 
-#pylab.savefig('../../paper/ell_ext_cs.eps')
+pylab.savefig('../../paper/ell_ext_cs.eps')
 pylab.show()
 
 

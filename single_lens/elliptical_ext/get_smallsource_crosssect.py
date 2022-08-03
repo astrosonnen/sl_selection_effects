@@ -59,7 +59,7 @@ for l in range(nfrat):
 
         cs_grid[l, m] = islens_sim.sum()/float(nsim) * source_area
 
-output = h5py.File('crosssect.hdf5', 'w')
+output = h5py.File('smallsource_crosssect.hdf5', 'w')
 
 output.create_dataset('lfrat_grid', data=lfrat_grid)
 output.create_dataset('logre_grid', data=logre_grid)

@@ -1,0 +1,91 @@
+omega 0.3
+lambda 0.7
+weos -1.
+hubble 0.7
+prefix base
+xmin -2.
+xmax 2.
+ymin -2.
+ymax 2.
+pix_poi 0.05
+pix_ext 0.05
+maxlev 5
+nfw_users 1
+flag_hodensity 2
+hodensity 200.
+
+startup 2 1 0
+lens gnfw 0.300000 4.173e12 0. 0. 0.3 90.000000 22.45 1.5
+lens sers 0.300000 1.087e11 0. 0. 0.3 90.000000 1. 4.
+extend sersic 1.5 1. 0. 0. 0. 0. 0.1 1.
+end_startup
+
+
+start_command
+
+reset_par prefix ftot200_sourceonly_logre-1.0
+reset_extend 1 2 22.415745
+reset_extend 1 7 0.100000
+
+writeimage_ori
+
+reset_par prefix ftot200_sourceonly_logre-0.9
+reset_extend 1 2 14.143379
+reset_extend 1 7 0.125893
+
+writeimage_ori
+
+reset_par prefix ftot200_sourceonly_logre-0.8
+reset_extend 1 2 8.923869
+reset_extend 1 7 0.158489
+
+writeimage_ori
+
+reset_par prefix ftot200_sourceonly_logre-0.7
+reset_extend 1 2 5.630580
+reset_extend 1 7 0.199526
+
+writeimage_ori
+
+reset_par prefix ftot200_sourceonly_logre-0.6
+reset_extend 1 2 3.552656
+reset_extend 1 7 0.251189
+
+writeimage_ori
+
+reset_par prefix ftot200_sourceonly_logre-0.5
+reset_extend 1 2 2.241574
+reset_extend 1 7 0.316228
+
+writeimage_ori
+
+reset_par prefix ftot200_sourceonly_logre-0.4
+reset_extend 1 2 1.414338
+reset_extend 1 7 0.398107
+
+writeimage_ori
+
+reset_par prefix ftot200_sourceonly_logre-0.3
+reset_extend 1 2 0.892387
+reset_extend 1 7 0.501187
+
+writeimage_ori
+
+reset_par prefix ftot200_sourceonly_logre-0.2
+reset_extend 1 2 0.563058
+reset_extend 1 7 0.630957
+
+writeimage_ori
+
+reset_par prefix ftot200_sourceonly_logre-0.1
+reset_extend 1 2 0.355266
+reset_extend 1 7 0.794328
+
+writeimage_ori
+
+reset_par prefix ftot200_sourceonly_logre0.0
+reset_extend 1 2 0.224157
+reset_extend 1 7 1.000000
+
+writeimage_ori
+
