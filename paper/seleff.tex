@@ -836,12 +836,21 @@ We discuss the possible implications of this approximation in \Sref{sect:discuss
 For each lens, we determined its caustics relative to the highest source redshift, $\zsource=2.5$. We then placed sources randomly behind the lens. If at least one source fell within a circular region enclosing the caustics, we proceeded to compute its lensed images.
 
 For the extended sources, we produced images with a pixel size of $0.1''$.
-We applied a Gaussian PSF with a FWHM of $0.2''$.
+We applied a Moffat PSF with an FWHM of $0.2''$.
 Finally, we assumed a background noise level such that an extended source with half-light radius $0.5''$ and an apparent magnitude in the absence of lensing of $\msource=25$ is detected with $S/N=10$.
 %This is similar to the background noise expected for the Euclid Wide survey \citep{Sca++22}.
 These values are close to those expected for the Euclid Wide survey \citep{Sca++22}.
 
-We applied the lens selection criterion of section \ref{ssec:}
+We applied two different lens selection criteria.
+First, we used the criterion described in section \ref{ssec:lensdetext}.
+This resulted in a sample of XXX lenses.
+Then, we added a cut on the Einstein radius of the lens: we only included in the lens sample those with $\tein > 0.5''$.
+This additional cut is meant to approximate the difficulty in detecting strongly lensed images that lie very close to the lens centre: the number of known lenses with Einstein radius smaller than that cutoff value is very small, even in lens surveys that are based on high-resolution data \citep[see e.g.][]{Gar++22}.
+With this more restrictive criterion, the number of strong lenses in the simulated sample is YYY.
+
+\Fref{fig:lenspars} shows the distribution in the parameters of the foreground galaxies of the lens systems, compared to those of the general population.
+\Fref{fig:sourcepars} shows the distribution in source properties.
+
 
 %__________________________________________________________________
 
@@ -874,7 +883,7 @@ We conclude.
 \section{Lens galaxy surface brightness distribution}\label{sect:appendixa}
 
 To assign half-light radii and ellipticities to the simulated lenses we relied on observations of a sample of early-type galaxies selected from the Sloan Digital Sky Survey \citep[SDSS][]{Yor++00}.
-This sample was selected as follows. First we defined a narrow redshift slice around $z=0.2$. Then we applied a selection in colour, by choosing objects with $g-r>1.2$, and on S\'{e}rsic index, by selecting only galaxies with $n>2.5$. We used the S\'{e}rsic fit measurements by \citet{Mee++15} for this purpose. These cuts produced a sample of $8078$ galaxies.
+This sample was selected as follows. Starting from the SDSS spectroscopic sample, we defined a narrow redshift slice around $z=0.2$. Then we applied a selection in colour, by choosing objects with $g-r>1.2$, and on S\'{e}rsic index, by selecting only galaxies with $n>2.5$. We used the S\'{e}rsic fit measurements by \citet{Mee++15} for this purpose. These cuts produced a sample of $8078$ galaxies.
 %We focused on the $r-$band de Vaucouleurs profile measurements obtained by \citet{Mee++15}, for these objects.
 %We then took measurements of their total flux, half-light radius and axis ratio from the de Vaucouleurs profile fits to the SDSS $r$-band data obtained by \citet{Mee++15}. Using the 
 %We then took measurements of the total flux, half-light radius and axis ratio obtained by \citet{Mee++15} from the de Vaucouleurs profile fits to the SDSS $r$-band data obtained by \citet{Mee++15}. Using the 
