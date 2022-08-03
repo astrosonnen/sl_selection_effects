@@ -16,8 +16,8 @@ from scipy.optimize import brentq
 # keeps the source surface brightness fixed and varies the redshift
 np.random.seed(0)
 
-nrein = 8
-ltein_grid = np.linspace(-0.4, 1., nrein)
+nrein = 5
+ltein_grid = np.linspace(-0.9, -0.1, nrein)
 
 pix = 0.05
 nser = 1. # source Sersic index

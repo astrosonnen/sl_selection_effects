@@ -41,9 +41,9 @@ pix_poi = 0.1
 maxlev = 5
 
 glafic.init(omegaM, omegaL, weos, hubble, prefix, xmin, ymin, xmax, ymax, pix_ext, pix_poi, maxlev, verb = 0)
-glafic.set_secondary('flag_halodensity 2')
+glafic.set_secondary('flag_hodensity 2')
 glafic.set_secondary('nfw_users 1')
-glafic.set_secondary('halodensity 200')
+glafic.set_secondary('hodensity 200')
 
 glafic.startup_setnum(2, 1, 0)
 glafic.set_lens(1, 'gnfw', 0.3, 1e13, 0.0, 0.0, 0., 90.0, 10., 1.5)

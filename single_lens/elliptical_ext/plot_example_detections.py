@@ -17,7 +17,7 @@ fsize = 28
 
 nexamples = 6
 
-psf = pyfits.open('psf.fits')[1].data
+psf = pyfits.open('psf.fits')[0].data
 
 re_list = [0.2, 0.2, 0.1, 0.3, 0.4, 0.4]
 srcpos_list = [(0.4, -0.2), (-0.8, 0.4), (0.6, 0.), (0.25, 0.), (-0.1, 0.), (0.3, 0.25)]

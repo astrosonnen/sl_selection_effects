@@ -19,7 +19,9 @@ def detect_lens(img, sky_rms, nsigma_pixdet=2., npix_min=10):
 
     labels = measure.label(footprint)
     nreg = labels.max()
+    euler = measure.euler_number(footprint)
     nimg_std = 0
+    nholes_std = nreg - euler
     for n in range(nreg):
         npix_tmp = (labels==n+1).sum()
         signal = img[labels==n+1].sum()
@@ -42,6 +44,8 @@ def detect_lens(img, sky_rms, nsigma_pixdet=2., npix_min=10):
     nimg_tmp = nimg_std
     sb_maxlim = sb_min
 
+    nholes_max = 0
+
     best_footprint = std_footprint.copy()
 
     # if there's at least one detected image, increases the threshold to see
@@ -55,7 +59,9 @@ def detect_lens(img, sky_rms, nsigma_pixdet=2., npix_min=10):
 
         labels = measure.label(footprint_tmp)
         nreg = labels.max()
+
         nimg_tmp = 0
+        nholes_tmp = 0
         for n in range(nreg):
             npix_tmp = (labels==n+1).sum()
             signal = img[labels==n+1].sum()
@@ -63,6 +69,9 @@ def detect_lens(img, sky_rms, nsigma_pixdet=2., npix_min=10):
             img_sn = signal/noise
             if img_sn >= 10. and npix_tmp >= npix_min:
                 nimg_tmp += 1
+                # checks if the image has a hole
+                euler = measure.euler_number(labels==n+1)
+                nholes_tmp += 1 - euler
             else:
                 img_detected[labels==n+1] = 0.
 
@@ -71,6 +80,9 @@ def detect_lens(img, sky_rms, nsigma_pixdet=2., npix_min=10):
             sb_maxlim = sb_lim
             best_footprint = img_detected > sb_lim
 
+        if nholes_tmp > nholes_max:
+            nholes_max = nholes_tmp
+
         i += 1
 
     if nimg_max > 1:
@@ -78,5 +90,5 @@ def detect_lens(img, sky_rms, nsigma_pixdet=2., npix_min=10):
     else:
         islens = False
 
-    return islens, nimg_std, nimg_max, std_footprint, best_footprint, sb_maxlim
+    return islens, nimg_std, nimg_max, nholes_std, nholes_max, std_footprint, best_footprint, sb_maxlim
 
