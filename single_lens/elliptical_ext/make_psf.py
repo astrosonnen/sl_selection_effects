@@ -19,10 +19,5 @@ psf = (beta - 1.)/(np.pi*alpha)*(1. + (R/alpha)**2)**(-beta)
 
 psf /= psf.sum()
 
-phdu = pyfits.PrimaryHDU()
-psfhdu = pyfits.ImageHDU(data=psf)
-
-hdulist = pyfits.HDUList([phdu, psfhdu])
-hdulist.writeto('psf.fits', overwrite=True)
-#pyfits.PrimaryHDU(psf).writeto('psf.fits', overwrite=True)
+pyfits.PrimaryHDU(psf).writeto('psf.fits', overwrite=True)
 
