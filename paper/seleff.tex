@@ -410,11 +410,18 @@ In this regime, the overall size and total flux of the source are roughly preser
 Strong lenses of this kind can be difficult to detect, especially if the region of the image subject to strong lensing overlaps with the light from the foreground galaxy. 
 The ultimate limiting factor to the detection of strong lenses in the large source size regime, however, is the ability to spatially resolve the multiple images. This limit is set by the size of the point spread function (PSF).
 
-All of the examples that we considered were based on sources with a single surface brightness peaks.
+All of the examples that we considered were based on sources with a single surface brightness peak.
 In general this is not necessarily the case, and the intrinsic number of surface brightness peaks of a strongly lensed source is not known a priori.
 When dealing with a real lens candidate, applying our lens definition criterion requires showing that the observed number of surface brightness peaks can be reproduced with a lens model in which the source has a smaller number of peaks.
 In samples of lenses defined via visual inspection this process is typically done implicitly, by identifying multiply imaged blobs that belong to the same source element.
 %Applying our lens definition criterion to a real lens requires showing that the observed number of surface brightness peaks can be reproduced with a lens model in which the source has a smaller number of peaks.
+
+To our knowledge, we are the first to propose a surface brightness peak-based definition of a strong lensing event.
+A popular alternative definition of a strong lens is one based on magnification: only images that are magnified by more than a given threshold are considered as strongly lensed \citep[see e.g.][]{Hil++07}.
+The problem with a definition of this kind is that magnification cannot be determined unambiguously from observations, unless the intrinsic properties of the lensed source are known from other means (e.g. if the source is a standard candle or a standard ruler).
+Because of the mass-sheet degeneracy \citep{FGS85}, it is possible to vary the magnification of a lensed image while keeping its observed properties fixed: this could lead to the paradox of two identical lenses that are classified differently on the basis of the underlying magnification.
+Although we could still use a magnification-based definition for the sake of carrying out our experiments, it would then be difficult to apply our results to real data.
+%Because of the mass-sheet degeneracy
 
 %__________________________________________________________________
 
@@ -626,9 +633,10 @@ The total flux of the source, indicated in the legend, is measured in units of t
 \begin{figure}
 \includegraphics[width=\columnwidth]{ell_ext_cs.eps}
 \caption{
-Strong lensing cross-section as a function of source half-light radius.
+Strong lensing cross-section of an extended source.
 Small source size regime.
-The lens model is the same as in \Fref{fig:ellpoint_cs}, with axis ratio $q=0.7$. The source is a circular exponential profile.
+The cross-section is plotted as a function of the ratio between the half-light radius of the source and the Einstein radius of the lens.
+The lens model is fixed to be the same of \Fref{fig:ellpoint_cs}, with axis ratio $q=0.7$. The source is a circular exponential profile.
 Each solid line corresponds to a different value of the total flux of the source. The flux $f$ is expressed in terms of the background noise fluctuation measured over an area equal to $\tein^2$.
 The vertical dashed lines correspond to the maximum size for which a galaxy with a given flux can be detected in the absence of lensing.
 The horizontal dotted line indicates the cross-section for a very bright point source (i.e. the area enclosed within the caustics).
@@ -670,7 +678,25 @@ For the large source size case we fixed the surface brightness profile of the so
 In particular, we set the source half-light radius to $20$ pixels and adjusted its total flux in such a way that the $2\sigma$ detection footprint in the absence of lensing extends out to the half-light radius.
 Then, starting from the lens model used in the previous section, we progressively increased the critical surface mass density to reduce the Einstein radius down to values comparable to the pixel size.
 \Fref{fig:largesourcecs} shows the resulting strong lensing cross-section as a function of the ratio between lens Einstein radius and source half-light radius.
+For values of the Einstein radius close to the size of the PSF, the lensing cross-section (blue solid line) is very small: this is because the perturbations caused by lensing are not well resolved.
+For larger values, $\crosssect$ stays approximately constant, around values that are comparable to the source size (horizontal dotted line) and much larger than the area enclosed within the caustics (red dashed line).
+We conclude that, in the large source size regime, the main factor that determines the lensing cross-section is the area of the background source, provided that the Einstein radius of the lens is larger than the PSF.
 
+\begin{figure}
+\includegraphics[width=\columnwidth]{largesource_cs.eps}
+\caption{
+Strong lensing cross-section of an extended source. Large source size regime.
+The cross-section is plotted as a function of the ratio between the Einstein radius of the lens and the half-light radius of the source.
+The source model is fixed to a circular S\'{e}rsic profile with $n=1$, detected out to the half-light radius.
+The source half-light radius measures $20$ pixels, and the PSF has an FWHM of two pixels.
+The lens model is varied: starting from the model of \Fref{fig:extcs}, the critical surface mass density is increased to produce progressively smaller values of $\tein$.
+Solid line: lensing cross-section, in units of the footprint area of the source in the absence of lensing, as a function of the ratio between the lens Einstein radius and the source half-light radius.
+Dashed line: area enclosed within the lens caustics.
+Dotted line: value of the cross-section corresponding to the area of the source.
+Dash-dotted line: FWHM of the PSF.
+\label{fig:largesourcecs}
+}
+\end{figure}
 
 %__________________________________________________________________
 
