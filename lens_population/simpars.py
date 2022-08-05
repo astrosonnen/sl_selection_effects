@@ -106,6 +106,8 @@ for i in range(nz):
     dds_grid[i] = sl_cosmology.Dang(zgrid[i], zs_ref)
 
 kpc = Mpc/1000.
+
+# S_cr at the reference source redshift, as a function of lens redshift
 s_cr_grid = c**2/(4.*np.pi*G)*ds_ref/dds_grid/dd_grid/Mpc/M_Sun*kpc**2 # units: M_Sun/kpc**2
 
 s_cr_spline = splrep(zgrid, s_cr_grid)

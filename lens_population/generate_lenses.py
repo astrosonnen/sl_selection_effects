@@ -12,7 +12,7 @@ from simpars import *
 seedno = 0
 np.random.seed(seedno)
 
-sky_area_deg2 = 100.
+sky_area_deg2 = 1000.
 sky_area = sky_area_deg2 * np.deg2rad(1.)**2
 
 modelname = 'fiducial_%dsqdeg'%sky_area_deg2
@@ -235,6 +235,8 @@ output_file.create_dataset('lmobs', data=lmobs_samp)
 output_file.create_dataset('lmstar', data=lmstar_samp)
 output_file.create_dataset('lasps', data=lasps_samp)
 output_file.create_dataset('lm200', data=lm200_samp)
+output_file.create_dataset('gnfw_norm', data=gnfw_norm_samp)
+output_file.create_dataset('rhoc', data=rhoc_samp)
 output_file.create_dataset('lmdm5', data=lmdm5_samp)
 output_file.create_dataset('r200', data=r200_samp)
 output_file.create_dataset('lreff', data=lreff_samp)

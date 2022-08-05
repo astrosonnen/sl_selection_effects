@@ -3,6 +3,7 @@ from scipy.stats import poisson
 from simpars import *
 import h5py
 from astropy.io import fits as pyfits
+import sys
 
 
 np.random.seed(10)
@@ -10,7 +11,7 @@ np.random.seed(10)
 
 circ_caust_rat = 1.2 # ratio between circle radius and caustic radius
 
-modelname = 'fiducial_100sqdeg'
+modelname = sys.argv[1]
 pop = h5py.File('%s_galaxies.hdf5'%modelname, 'r')
 
 nsamp = pop.attrs['nsamp']

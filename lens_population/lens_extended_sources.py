@@ -3,17 +3,23 @@ import os
 import glafic
 import h5py
 from simpars import *
+from scipy.signal import convolve2d
 from astropy.io import fits as pyfits
 from scipy.interpolate import splev
 from scipy.optimize import brentq
-from sl_profiles import sersic
+from sl_profiles import sersic, gnfw, deVaucouleurs as deV
+import sl_cosmology
+from sl_cosmology import G, M_Sun, Mpc, c
 from scipy.special import gamma as gfunc
 from lensdet import detect_lens
+import sys
 
 
-modelname = 'fiducial_100sqdeg'
+modelname = sys.argv[1]
 sourcecat = pyfits.open('/Users/alessandro/catalogs/skills_sourceonly_zcut.fits')[1].data
 pop = h5py.File('%s_galaxies.hdf5'%modelname, 'r+')
+
+psf = pyfits.open('psf.fits')[0].data
 
 modeldir = 'extended_sims/%s/'%modelname
 if not os.path.isdir(modeldir):
@@ -21,6 +27,7 @@ if not os.path.isdir(modeldir):
 
 nsamp = pop.attrs['nsamp']
 islens_samp = np.zeros(nsamp, dtype=bool)
+tein_zs_samp = np.zeros(nsamp)
 
 f = open('%s_sources.cat'%modelname, 'r')
 sourcelines = f.readlines()[1:]
@@ -63,7 +70,22 @@ nimg_list = []
 nmax_list = []
 tein_zs_list = []
 
+# defines lensing-related functions (for computation of Einstein radius)
+def alpha_dm(x, gnfw_norm, rs, gammadm, s_cr):
+    # deflection angle (in kpc)
+    return gnfw_norm * gnfw.fast_M2d(abs(x), rs, gammadm) / np.pi/x/s_cr
+
+def alpha_star(x, mstar, reff, s_cr): 
+    # deflection angle (in kpc)
+    return mstar * deV.M2d(abs(x), reff) / np.pi/x/s_cr
+
+def alpha(x, gnfw_norm, rs, gammadm, mstar, reff, s_cr):
+    return alpha_dm(x, gnfw_norm, rs, gammadm, s_cr) + alpha_star(x, mstar, reff, s_cr)
+
+kpc = Mpc/1000.
+
 for i in range(nsamp):
+    print(i)
     line = sourcelines[i].split()
     nsource = int(line[2])
     rmax = float(line[1])
@@ -87,6 +109,8 @@ for i in range(nsamp):
             nser = sourcecat['sersic_n_CM'][sourceind]
             sreff = sourcecat['Re_arcsec_CM'][sourceind]
             sq = sourcecat['axis_ratio_CM'][sourceind]
+            if sq > 1.: # But why.
+                sq = 1./sq
             spa = sourcecat['PA_random'][sourceind]
             zs = sourcecat['zobs'][sourceind]
             smag = sourcecat['g_SDSS_apparent_corr'][sourceind]
@@ -100,6 +124,7 @@ for i in range(nsamp):
             glafic.model_init(verb = 0)
 
             img = np.array(glafic.writeimage())
+            img_wseeing = convolve2d(img, psf, mode='same')
 
             # measures detectable source unlensed flux
             def zerofunc(R):
@@ -113,18 +138,31 @@ for i in range(nsamp):
                 Rmax = brentq(zerofunc, 0., 10.*sreff/pix_arcsec)
                 fdet = ftot * sersic.M2d(Rmax, nser, sreff/pix_arcsec)
 
-            detection, nimg, nmax, footprint, nmax_footprint = detect_lens(img)
+            detection, nimg_std, nimg_max, nholes_std, nholes_max, std_footprint, best_footprint, sb_maxlim = detect_lens(img_wseeing)
 
             if detection:
                 islens = True
 
-                #glafic.writelens(zs)
+                #tein_zs = glafic.calcein2(zs, 0., 0.)
 
-                # reads in lens properties
-                #lensprop = pyfits.open('tmp_lens.fits')[0].data
-                #mu_grid = lensprop[6, :, :]**(-1)
+                ds = sl_cosmology.Dang(zs)
+                dds = sl_cosmology.Dang(pop['z'][i], zs)
+                dd = splev(pop['z'][i], dd_spline)
+                s_cr = c**2/(4.*np.pi*G)*ds/dds/dd/Mpc/M_Sun*kpc**2
+                arcsec2kpc = np.deg2rad(1./3600.) * dd * 1000.
 
-                tein_zs = glafic.calcein2(zs, 0., 0.)
+                def zerofunc(x):
+                    return x - alpha(x, pop['gnfw_norm'][i], pop['rs'][i], pop['gammadm'][i], 10.**pop['lmstar'][i], 10.**pop['lreff'][i], s_cr)
+
+                xmin = max(deV.rgrid_min*10.**pop['lreff'][i], gnfw.R_grid[0]*pop['rs'][i])
+                if zerofunc(xmin) > 0.:
+                    rein_zs = 0.
+                else:
+                    rein_zs = brentq(zerofunc, xmin, 100.)
+
+                tein_zs = rein_zs/arcsec2kpc
+                tein_zs_samp[i] = tein_zs
+
                 tein_zs_list.append(tein_zs)
 
                 print('%d is a lens'%i)
@@ -137,11 +175,11 @@ for i in range(nsamp):
                 sq_list.append(sq)
                 spa_list.append(spa)
                 smag_list.append(smag)
-                nimg_list.append(nimg)
-                nmax_list.append(nmax)
+                nimg_list.append(nimg_std)
+                nmax_list.append(nimg_max)
 
                 # creates a noisy version of the image
-                img_wnoise = img + np.random.normal(0., sky_rms, img.shape)
+                img_wnoise = img_wseeing + np.random.normal(0., sky_rms, img.shape)
 
                 hdr = pyfits.Header()
 
@@ -164,19 +202,22 @@ for i in range(nsamp):
                 hdr['src_mag'] = smag
                 hdr['src_re'] = sreff
                 hdr['src_ind'] = sourceind
-                hdr['nimg'] = nimg
+                hdr['nimg_std'] = nimg_std
+                hdr['nimg_max'] = nimg_max
+                hdr['nhol_std'] = nholes_std
+                hdr['nhol_max'] = nholes_max
 
                 # calculates the average magnification over the footprint
                 #footprint = img > nsigma_pixdet * sky_rms
 
-                avg_mu = abs(img[footprint]).sum()/fdet
+                avg_mu = abs(img[std_footprint]).sum()/fdet
                 avg_mu_list.append(avg_mu)
 
                 hdr['avg_mu'] = avg_mu
 
                 phdu = pyfits.PrimaryHDU(header=hdr)
 
-                ihdu = pyfits.ImageHDU(header=hdr, data=img)
+                ihdu = pyfits.ImageHDU(header=hdr, data=img_wseeing)
                 nhdu = pyfits.ImageHDU(header=hdr, data=img_wnoise)
 
                 hdulist = pyfits.HDUList([phdu, ihdu, nhdu])
@@ -193,6 +234,13 @@ if 'islens' in pop:
 
 else:
     pop.create_dataset('islens', data=islens_samp)
+
+if 'tein_zs' in pop:
+    data = pop['tein_zs']
+    data[()] = tein_zs_samp
+
+else:
+    pop.create_dataset('tein_zs', data=tein_zs_samp)
 
 # makes file with lenses
 
