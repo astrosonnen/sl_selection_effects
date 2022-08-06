@@ -2,7 +2,6 @@ import pylab
 import numpy as np
 import h5py
 from plotters import probcontour
-from astropy.io import fits as pyfits
 import os
 import sys
 import h5py
@@ -12,42 +11,42 @@ rc('text', usetex=True)
 
 
 fsize = 10
-#source_color = (1., 0.2, 1.)
-source_color = (0.2, 0.2, 1.)
-lensed_color = 'g'
+#gal_color = (1., 0.2, 1.)
+gal_color = (0.2, 0.2, 1.)
+lens_color = 'g'
 tein1_color = 'r'
 
 modelname = 'fiducial_1000sqdeg'
 
-lenspop = h5py.File('%s_lenses.hdf5'%modelname, 'r')
-sourcecat = pyfits.open('/Users/alessandro/catalogs/skills_sourceonly_zcut.fits')[1].data
+galpop = h5py.File('%s_galaxies.hdf5'%modelname, 'r')
 
-tein1 = lenspop['tein_zs'][()] > 1.
+pars = ['z', 'lmobs', 'lasps', 'lreff', 'q', 'lm200', 'gammadm']
 
-catpars = ['zobs', 'g_SDSS_apparent_corr', 'Re_arcsec_CM', 'sersic_n_CM', 'axis_ratio_CM']
-pars = ['zs', 'smag', 'sreff', 'nser', 'sq']
 npars = len(pars)
 
-nlens = len(lenspop['z'][()])
-nsource = len(sourcecat)
+lenses = galpop['islens'][()] & (galpop['tein_zs'][()] > 0.5)
+tein1 = galpop['islens'][()] & (galpop['tein_zs'][()] > 1.)
+
+ngal = galpop.attrs['nsamp']
+nlens = lenses.sum()
 ntein1 = tein1.sum()
 
-source_samp = {}
-lensed_samp = {}
+gal_samp = {}
+lens_samp = {}
 tein1_samp = {}
 for i in range(npars):
-    source_samp[pars[i]] = sourcecat[catpars[i]].copy()
-    lensed_samp[pars[i]] = lenspop['%s'%pars[i]][()].copy()
-    tein1_samp[pars[i]] = lenspop['%s'%pars[i]][tein1].copy()
+    gal_samp[pars[i]] = galpop['%s'%pars[i]][()].copy()
+    lens_samp[pars[i]] = galpop['%s'%pars[i]][lenses].copy()
+    tein1_samp[pars[i]] = galpop['%s'%pars[i]][tein1].copy()
 
 nbins = 20
 
-labels = ['$z_{\mathrm{s}}$', '$m_{\mathrm{s}}$', '$\\theta_{\mathrm{s,e}}$', '$n_{\mathrm{s}}$', '$q_{\mathrm{s}}$']
+labels = ['$z_{\mathrm{g}}$', '$\log{M_*^{(\mathrm{obs})}}$', '$\log{\\alpha_{\mathrm{SPS}}}$', '$\log{R_{\mathrm{e}}}$', '$q$', '$\log{M_{\mathrm{h}}}$', '$\gamma_{\mathrm{DM}}$']
 
-lims = [(0.8, 2.5), (21., 28.5), (0., 1.2), (0., 5.), (0., 1.)]
+lims = [(0.1, 0.7), (11., 12.2), (-0.06, 0.28), (0.4, 1.8), (0.2, 1.), (12., 14.5), (1.1, 1.9)]
 
-major_step = [1, 2, 0.5, 2, 0.5]
-minor_step = [0.2, 0.5, 0.1, 0.5, 0.1]
+major_step = [0.2, 0.5, 0.1, 0.5, 0.5, 2, 0.2]
+minor_step = [0.05, 0.1, 0.02, 0.1, 0.1, 0.5, 0.05]
 
 fig = pylab.figure()
 pylab.subplots_adjust(left=0.08, right=0.99, bottom=0.12, top=0.99, hspace=0.1, wspace=0.1)
@@ -59,11 +58,11 @@ for i in range(npars):
 
     bins = np.linspace(lims[i][0], lims[i][1], nbins+1)
 
-    sweights = np.ones(nsource)/float(nsource)/(bins[1] - bins[0])
-    pylab.hist(source_samp[pars[i]], bins=bins, color=source_color, histtype='stepfilled', weights=sweights, linewidth=2, label='General population')
+    gweights = np.ones(ngal)/float(ngal)/(bins[1] - bins[0])
+    pylab.hist(gal_samp[pars[i]], bins=bins, color=gal_color, histtype='stepfilled', weights=gweights, linewidth=2, label='General population')
 
     lweights = np.ones(nlens)/float(nlens)/(bins[1] - bins[0])
-    pylab.hist(lensed_samp[pars[i]], bins=bins, color=lensed_color, histtype='step', weights=lweights, linewidth=2, label="Lenses, $\\theta_{\mathrm{Ein}} > 0.5''$")
+    pylab.hist(lens_samp[pars[i]], bins=bins, color=lens_color, histtype='step', weights=lweights, linewidth=2, label="Lenses, $\\theta_{\mathrm{Ein}} > 0.5''$")
 
     tweights = np.ones(ntein1)/float(ntein1)/(bins[1] - bins[0])
     pylab.hist(tein1_samp[pars[i]], bins=bins, color=tein1_color, histtype='step', weights=tweights, linewidth=2, label="Lenses, $\\theta_{\mathrm{Ein}} > 1.0''$")
@@ -96,10 +95,9 @@ for j in range(1, npars): # loops over rows
     for i in range(j): # loops over columns
         ax = pylab.subplot(npars, npars, npars*j+i+1)
 
-        probcontour(source_samp[pars[i]], source_samp[pars[j]], color=source_color, style='filled', linewidths=2)
-        probcontour(lensed_samp[pars[i]], lensed_samp[pars[j]], color=lensed_color, style='lines', linewidths=2, smooth=5)
-        #probcontour(lens_samp[lenspars[i]], lens_samp[lenspars[j]], color=color, style='solid')
-        #ax.scatter(lensed_samp[pars[i]], lensed_samp[pars[j]], color=color, s=3, linewidth=0)
+        probcontour(gal_samp[pars[i]], gal_samp[pars[j]], color=gal_color, style='filled', linewidths=2)
+        probcontour(lens_samp[pars[i]], lens_samp[pars[j]], color=lens_color, style='lines', linewidths=2, smooth=5)
+        probcontour(tein1_samp[pars[i]], tein1_samp[pars[j]], color=tein1_color, style='lines', linewidths=2, smooth=7)
 
         ax.set_xlim(lims[i])
         ax.set_ylim(lims[j])
@@ -126,6 +124,6 @@ for j in range(1, npars): # loops over rows
         else:
             ax.tick_params(axis='x', labelbottom=False)
 
-pylab.savefig('../paper/source_cornerplot.eps')
+pylab.savefig('../paper/lens_cornerplot.eps')
 pylab.show()
 
