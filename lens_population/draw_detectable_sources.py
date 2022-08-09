@@ -1,10 +1,11 @@
 import numpy as np
 from scipy.stats import poisson
 from simpars import *
-from sc_profiles import sersic
+from sl_profiles import sersic
 import h5py
 import os
 from scipy.signal import convolve2d
+from scipy.special import gamma as gfunc
 from astropy.io import fits as pyfits
 from skimage import measure
 import sys
@@ -12,8 +13,8 @@ import sys
 
 np.random.seed(20)
 
-ndraw = 100000
-sourcecat = pyfits.open('/Users/alessandro/catalogs/skills_sourceonly_zcut.fits')[1].data
+ndraw = 1000
+sourcecat = pyfits.open('/data2/sonnenfeld/skills_sourceonly_zcut.fits')[1].data
 
 psf = pyfits.open('psf.fits')[0].data
 pix_arcsec = 0.1
@@ -30,8 +31,9 @@ nser_draw = sourcecat['sersic_n_CM'][:ndraw]
 sq_draw = sourcecat['axis_ratio_CM'][:ndraw]
 smag_draw = sourcecat['g_SDSS_apparent_corr'][:ndraw]
 zs_draw = sourcecat['zobs'][:ndraw]
-pa_draw = sourcecat['PA_random'][:ndraw]
+spa_draw = sourcecat['PA_random'][:ndraw]
 
+"""
 f = open('preamble.input', 'r')
 prelines = f.readlines()
 f.close()
@@ -40,15 +42,15 @@ outlines = prelines.copy()
 
 for i in range(ndraw):
     ind = sourceind[i]
-    outlines.append('reset_par simdir/source_%07d\n'%ind)
+    outlines.append('reset_par prefix simdir/source_%07d\n'%ind)
     outlines.append('reset_extend 1 1 %f\n'%zs_draw[i])
 
     ftot = 10.**(-2./5.*(smag_draw[i] - zeropoint))
-    I0 = ftot/(2.*np.pi*(sreff/pix_arcsec)**2*nser/sersic.b(nser)**(2*nser)*gfunc(2.*nser))
+    I0 = ftot/(2.*np.pi*(sreff_draw[i]/pix_arcsec)**2*nser_draw[i]/sersic.b(nser_draw[i])**(2*nser_draw[i])*gfunc(2.*nser_draw[i]))
 
     outlines.append('reset_extend 1 2 %f\n'%I0)
     outlines.append('reset_extend 1 5 %f\n'%(1. - sq_draw[i]))
-    outlines.append('reset_extend 1 6 %f\n'%pa_draw[i])
+    outlines.append('reset_extend 1 6 %f\n'%spa_draw[i])
     outlines.append('reset_extend 1 7 %f\n'%sreff_draw[i])
     outlines.append('reset_extend 1 8 %f\n'%nser_draw[i])
 
@@ -62,6 +64,7 @@ f.writelines(outlines)
 f.close()
 
 os.system('glafic unlensed.input')
+"""
 
 detected = np.zeros(ndraw, dtype=bool)
 
@@ -92,5 +95,5 @@ output_file.create_dataset('zs', data=zs_draw[detected])
 output_file.create_dataset('sq', data=sq_draw[detected])
 output_file.create_dataset('spa', data=spa_draw[detected])
 output_file.create_dataset('nser', data=nser_draw[detected])
-output_file.create_dataset('index', data=sourceind[detected])
+output_file.create_dataset('index', data=sourceind[:ndraw][detected])
 
