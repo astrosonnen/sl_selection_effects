@@ -14,30 +14,32 @@ rc('text', usetex=True)
 fsize = 10
 #source_color = (1., 0.2, 1.)
 source_color = (0.2, 0.2, 1.)
-lensed_color = 'g'
+tein05_color = 'g'
 tein1_color = 'r'
 
 modelname = 'fiducial_1000sqdeg'
 
 lenspop = h5py.File('%s_lenses.hdf5'%modelname, 'r')
-sourcecat = pyfits.open('/Users/alessandro/catalogs/skills_sourceonly_zcut.fits')[1].data
+#sourcecat = pyfits.open('/Users/alessandro/catalogs/skills_sourceonly_zcut.fits')[1].data
+sourcecat = pyfits.open('/data2/sonnenfeld/skills_sourceonly_zcut.fits')[1].data
 
+tein05 = lenspop['tein_zs'][()] > 0.5
 tein1 = lenspop['tein_zs'][()] > 1.
 
 catpars = ['zobs', 'g_SDSS_apparent_corr', 'Re_arcsec_CM', 'sersic_n_CM', 'axis_ratio_CM']
 pars = ['zs', 'smag', 'sreff', 'nser', 'sq']
 npars = len(pars)
 
-nlens = len(lenspop['z'][()])
 nsource = len(sourcecat)
+nlens = tein05.sum()
 ntein1 = tein1.sum()
 
 source_samp = {}
-lensed_samp = {}
+tein05_samp = {}
 tein1_samp = {}
 for i in range(npars):
     source_samp[pars[i]] = sourcecat[catpars[i]].copy()
-    lensed_samp[pars[i]] = lenspop['%s'%pars[i]][()].copy()
+    tein05_samp[pars[i]] = lenspop['%s'%pars[i]][tein05].copy()
     tein1_samp[pars[i]] = lenspop['%s'%pars[i]][tein1].copy()
 
 nbins = 20
@@ -63,10 +65,10 @@ for i in range(npars):
     pylab.hist(source_samp[pars[i]], bins=bins, color=source_color, histtype='stepfilled', weights=sweights, linewidth=2, label='General population')
 
     lweights = np.ones(nlens)/float(nlens)/(bins[1] - bins[0])
-    pylab.hist(lensed_samp[pars[i]], bins=bins, color=lensed_color, histtype='step', weights=lweights, linewidth=2, label="Lenses, $\\theta_{\mathrm{Ein}} > 0.5''$")
+    pylab.hist(tein05_samp[pars[i]], bins=bins, color=tein05_color, histtype='step', weights=lweights, linewidth=2, label="Lenses, $\\theta_{\mathrm{Ein}} > 0.5''$")
 
     tweights = np.ones(ntein1)/float(ntein1)/(bins[1] - bins[0])
-    pylab.hist(tein1_samp[pars[i]], bins=bins, color=tein1_color, histtype='step', weights=tweights, linewidth=2, label="Lenses, $\\theta_{\mathrm{Ein}} > 1.0''$")
+    pylab.hist(tein1_samp[pars[i]], bins=bins, color=tein1_color, histtype='step', weights=tweights, linewidth=2, label="Lenses, $\\theta_{\mathrm{Ein}} > 1.0''$", linestyle='--')
 
     if i==0:
         ylim = pylab.ylim()
@@ -97,9 +99,8 @@ for j in range(1, npars): # loops over rows
         ax = pylab.subplot(npars, npars, npars*j+i+1)
 
         probcontour(source_samp[pars[i]], source_samp[pars[j]], color=source_color, style='filled', linewidths=2)
-        probcontour(lensed_samp[pars[i]], lensed_samp[pars[j]], color=lensed_color, style='lines', linewidths=2, smooth=5)
-        #probcontour(lens_samp[lenspars[i]], lens_samp[lenspars[j]], color=color, style='solid')
-        #ax.scatter(lensed_samp[pars[i]], lensed_samp[pars[j]], color=color, s=3, linewidth=0)
+        probcontour(tein05_samp[pars[i]], tein05_samp[pars[j]], color=tein05_color, style='lines', linewidths=2, smooth=5)
+        probcontour(tein1_samp[pars[i]], tein1_samp[pars[j]], color=tein1_color, style='lines', linewidths=2, smooth=5, linestyles='--')
 
         ax.set_xlim(lims[i])
         ax.set_ylim(lims[j])
@@ -127,5 +128,5 @@ for j in range(1, npars): # loops over rows
             ax.tick_params(axis='x', labelbottom=False)
 
 pylab.savefig('../paper/source_cornerplot.eps')
-pylab.show()
+#pylab.show()
 
