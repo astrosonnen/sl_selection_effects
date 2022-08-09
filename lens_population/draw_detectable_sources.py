@@ -13,7 +13,7 @@ import sys
 
 np.random.seed(20)
 
-ndraw = 1000
+ndraw = 30000
 sourcecat = pyfits.open('/data2/sonnenfeld/skills_sourceonly_zcut.fits')[1].data
 
 psf = pyfits.open('psf.fits')[0].data
@@ -33,7 +33,6 @@ smag_draw = sourcecat['g_SDSS_apparent_corr'][:ndraw]
 zs_draw = sourcecat['zobs'][:ndraw]
 spa_draw = sourcecat['PA_random'][:ndraw]
 
-"""
 f = open('preamble.input', 'r')
 prelines = f.readlines()
 f.close()
@@ -64,7 +63,6 @@ f.writelines(outlines)
 f.close()
 
 os.system('glafic unlensed.input')
-"""
 
 detected = np.zeros(ndraw, dtype=bool)
 
