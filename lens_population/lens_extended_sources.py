@@ -111,6 +111,8 @@ for i in range(nsamp):
             sq = sourcecat['axis_ratio_CM'][sourceind]
             if sq > 1.: # But why.
                 sq = 1./sq
+            elif sq < 0.:
+                sq = -sq
             spa = sourcecat['PA_random'][sourceind]
             zs = sourcecat['zobs'][sourceind]
             smag = sourcecat['g_SDSS_apparent_corr'][sourceind]
