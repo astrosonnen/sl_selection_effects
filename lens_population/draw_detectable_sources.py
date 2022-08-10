@@ -22,16 +22,16 @@ sb_min = nsigma_pixdet * sky_rms
 
 nsource_tot = len(sourcecat)
 
-sourceind = np.arange(nsource_tot)
+sourceind = np.arange(nsource_tot, dtype=int)
 # shuffles source catalog (it's originally ranked by redshift)
 np.random.shuffle(sourceind)
 
-sreff_draw = sourcecat['Re_arcsec_CM'][:ndraw]
-nser_draw = sourcecat['sersic_n_CM'][:ndraw]
-sq_draw = sourcecat['axis_ratio_CM'][:ndraw]
-smag_draw = sourcecat['g_SDSS_apparent_corr'][:ndraw]
-zs_draw = sourcecat['zobs'][:ndraw]
-spa_draw = sourcecat['PA_random'][:ndraw]
+sreff_draw = sourcecat['Re_arcsec_CM'][sourceind[:ndraw]]
+nser_draw = sourcecat['sersic_n_CM'][sourceind[:ndraw]]
+sq_draw = sourcecat['axis_ratio_CM'][sourceind[:ndraw]]
+smag_draw = sourcecat['g_SDSS_apparent_corr'][sourceind[:ndraw]]
+zs_draw = sourcecat['zobs'][sourceind[:ndraw]]
+spa_draw = sourcecat['PA_random'][sourceind[:ndraw]]
 
 f = open('preamble.input', 'r')
 prelines = f.readlines()
