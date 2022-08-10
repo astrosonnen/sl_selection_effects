@@ -1,7 +1,7 @@
 import pylab
 import numpy as np
 import h5py
-from plotters import probcontour
+from plotters import probcontour, rgb_to_hex
 from astropy.io import fits as pyfits
 import os
 import sys
@@ -14,6 +14,7 @@ rc('text', usetex=True)
 fsize = 10
 #source_color = (1., 0.2, 1.)
 source_color = (0.2, 0.2, 1.)
+detect_color = 'k'
 tein05_color = 'g'
 tein1_color = 'r'
 
@@ -23,6 +24,8 @@ lenspop = h5py.File('%s_lenses.hdf5'%modelname, 'r')
 #sourcecat = pyfits.open('/Users/alessandro/catalogs/skills_sourceonly_zcut.fits')[1].data
 sourcecat = pyfits.open('/data2/sonnenfeld/skills_sourceonly_zcut.fits')[1].data
 
+detect_file = h5py.File('detectable_sources.hdf5', 'r')
+
 tein05 = lenspop['tein_zs'][()] > 0.5
 tein1 = lenspop['tein_zs'][()] > 1.
 
@@ -31,14 +34,17 @@ pars = ['zs', 'smag', 'sreff', 'nser', 'sq']
 npars = len(pars)
 
 nsource = len(sourcecat)
+ndetect = len(detect_file['zs'][()])
 nlens = tein05.sum()
 ntein1 = tein1.sum()
 
 source_samp = {}
+detect_samp = {}
 tein05_samp = {}
 tein1_samp = {}
 for i in range(npars):
     source_samp[pars[i]] = sourcecat[catpars[i]].copy()
+    detect_samp[pars[i]] = detect_file['%s'%pars[i]][()].copy()
     tein05_samp[pars[i]] = lenspop['%s'%pars[i]][tein05].copy()
     tein1_samp[pars[i]] = lenspop['%s'%pars[i]][tein1].copy()
 
@@ -63,6 +69,9 @@ for i in range(npars):
 
     sweights = np.ones(nsource)/float(nsource)/(bins[1] - bins[0])
     pylab.hist(source_samp[pars[i]], bins=bins, color=source_color, histtype='stepfilled', weights=sweights, linewidth=2, label='General population')
+
+    dweights = np.ones(ndetect)/float(ndetect)/(bins[1] - bins[0])
+    pylab.hist(detect_samp[pars[i]], bins=bins, color=detect_color, histtype='step', weights=dweights, linewidth=2, label="Detectable w/o lensing")
 
     lweights = np.ones(nlens)/float(nlens)/(bins[1] - bins[0])
     pylab.hist(tein05_samp[pars[i]], bins=bins, color=tein05_color, histtype='step', weights=lweights, linewidth=2, label="Lenses, $\\theta_{\mathrm{Ein}} > 0.5''$")
@@ -99,6 +108,7 @@ for j in range(1, npars): # loops over rows
         ax = pylab.subplot(npars, npars, npars*j+i+1)
 
         probcontour(source_samp[pars[i]], source_samp[pars[j]], color=source_color, style='filled', linewidths=2)
+        probcontour(detect_samp[pars[i]], detect_samp[pars[j]], color=detect_color, style='lines', linewidths=1, smooth=2)
         probcontour(tein05_samp[pars[i]], tein05_samp[pars[j]], color=tein05_color, style='lines', linewidths=2, smooth=5)
         probcontour(tein1_samp[pars[i]], tein1_samp[pars[j]], color=tein1_color, style='lines', linewidths=2, smooth=5, linestyles='--')
 
