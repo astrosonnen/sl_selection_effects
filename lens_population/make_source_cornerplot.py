@@ -84,7 +84,7 @@ for i in range(npars):
         pylab.ylim(ylim[0], ylim[1])
 
         box = ax.get_position()
-        ax.legend(loc='upper right', bbox_to_anchor=(7., 1.), fontsize=fsize, scatterpoints=3)
+        ax.legend(loc='upper right', bbox_to_anchor=(5., 1.), fontsize=fsize, scatterpoints=3)
 
     ax.set_xlim((lims[i][0], lims[i][1]))
     ax.tick_params(which='both', direction='in', labelrotation=45)
