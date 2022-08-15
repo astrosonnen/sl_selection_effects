@@ -22,14 +22,14 @@ modelname = 'fiducial_1000sqdeg'
 
 lenspop = h5py.File('%s_lenses.hdf5'%modelname, 'r')
 #sourcecat = pyfits.open('/Users/alessandro/catalogs/skills_sourceonly_zcut.fits')[1].data
-sourcecat = pyfits.open('/data2/sonnenfeld/skills_sourceonly_zcut.fits')[1].data
+sourcecat = pyfits.open('/Users/alessandro/catalogs/skills_sourceonly_zcut.fits')[1].data
 
 detect_file = h5py.File('detectable_sources.hdf5', 'r')
 
 tein05 = lenspop['tein_zs'][()] > 0.5
 tein1 = lenspop['tein_zs'][()] > 1.
 
-catpars = ['zobs', 'g_SDSS_apparent_corr', 'Re_arcsec_CM', 'sersic_n_CM', 'axis_ratio_CM']
+catpars = ['zobs', 'i_SDSS_apparent_corr', 'Re_arcsec_CM', 'sersic_n_CM', 'axis_ratio_CM']
 pars = ['zs', 'smag', 'sreff', 'nser', 'sq']
 npars = len(pars)
 
@@ -138,5 +138,5 @@ for j in range(1, npars): # loops over rows
             ax.tick_params(axis='x', labelbottom=False)
 
 pylab.savefig('../paper/source_cornerplot.eps')
-#pylab.show()
+pylab.show()
 

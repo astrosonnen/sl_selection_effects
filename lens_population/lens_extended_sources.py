@@ -115,7 +115,7 @@ for i in range(nsamp):
                 sq = -sq
             spa = sourcecat['PA_random'][sourceind]
             zs = sourcecat['zobs'][sourceind]
-            smag = sourcecat['g_SDSS_apparent_corr'][sourceind]
+            smag = sourcecat['i_SDSS_apparent_corr'][sourceind]
 
             ftot = 10.**(-2./5.*(smag - zeropoint))
             I0 = ftot/(2.*np.pi*(sreff/pix_arcsec)**2*nser/sersic.b(nser)**(2*nser)*gfunc(2.*nser))

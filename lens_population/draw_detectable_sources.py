@@ -14,7 +14,7 @@ import sys
 np.random.seed(20)
 
 ndraw = 40000
-sourcecat = pyfits.open('/data2/sonnenfeld/skills_sourceonly_zcut.fits')[1].data
+sourcecat = pyfits.open('/Users/alessandro/catalogs/skills_sourceonly_zcut.fits')[1].data
 
 psf = pyfits.open('psf.fits')[0].data
 pix_arcsec = 0.1
@@ -29,7 +29,7 @@ np.random.shuffle(sourceind)
 sreff_draw = sourcecat['Re_arcsec_CM'][sourceind[:ndraw]]
 nser_draw = sourcecat['sersic_n_CM'][sourceind[:ndraw]]
 sq_draw = sourcecat['axis_ratio_CM'][sourceind[:ndraw]]
-smag_draw = sourcecat['g_SDSS_apparent_corr'][sourceind[:ndraw]]
+smag_draw = sourcecat['i_SDSS_apparent_corr'][sourceind[:ndraw]]
 zs_draw = sourcecat['zobs'][sourceind[:ndraw]]
 spa_draw = sourcecat['PA_random'][sourceind[:ndraw]]
 
@@ -63,7 +63,7 @@ f = open('unlensed.input', 'w')
 f.writelines(outlines)
 f.close()
 
-os.system('glafic unlensed.input')
+os.system('/Users/alessandro/glafic unlensed.input')
 
 detected = np.zeros(ndraw, dtype=bool)
 

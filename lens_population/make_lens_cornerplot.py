@@ -65,7 +65,7 @@ for i in range(npars):
     pylab.hist(lens_samp[pars[i]], bins=bins, color=lens_color, histtype='step', weights=lweights, linewidth=2, label="Lenses, $\\theta_{\mathrm{Ein}} > 0.5''$")
 
     tweights = np.ones(ntein1)/float(ntein1)/(bins[1] - bins[0])
-    pylab.hist(tein1_samp[pars[i]], bins=bins, color=tein1_color, histtype='step', weights=tweights, linewidth=2, label="Lenses, $\\theta_{\mathrm{Ein}} > 1.0''$")
+    pylab.hist(tein1_samp[pars[i]], bins=bins, color=tein1_color, histtype='step', weights=tweights, linewidth=2, linestyle='--', label="Lenses, $\\theta_{\mathrm{Ein}} > 1.0''$")
 
     if i==0:
         ylim = pylab.ylim()
@@ -97,7 +97,7 @@ for j in range(1, npars): # loops over rows
 
         probcontour(gal_samp[pars[i]], gal_samp[pars[j]], color=gal_color, style='filled', linewidths=2)
         probcontour(lens_samp[pars[i]], lens_samp[pars[j]], color=lens_color, style='lines', linewidths=2, smooth=5)
-        probcontour(tein1_samp[pars[i]], tein1_samp[pars[j]], color=tein1_color, style='lines', linewidths=2, smooth=7)
+        probcontour(tein1_samp[pars[i]], tein1_samp[pars[j]], color=tein1_color, style='lines', linewidths=2, linestyles='--', smooth=7)
 
         ax.set_xlim(lims[i])
         ax.set_ylim(lims[j])
