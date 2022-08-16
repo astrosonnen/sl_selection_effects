@@ -186,14 +186,14 @@ A necessary condition for a galaxy to act as a strong lens with respect to a giv
 This condition excludes objects with a very diffuse mass distribution from the population of lenses.
 In general, galaxies with a higher concentration of mass are more likely to be strong lenses, and are therefore over-represented in lens samples.
 
-The luminosity and size distribution of strongly lensed sources is also biased with respect to the general population of background galaxies.
-For instance, lensing magnification allows the detection of fainter objects with respect to the field, and galaxies that are very extended with respect to the Einstein radius are less likely to be classified as strongly lensed, since their magnification averaged over their size tends to be low \citep[see also the discussion in section 5.3 of][]{O+A17}.
+The luminosity and size distribution of strongly lensed sources can also be biased with respect to the general population of background galaxies.
+For instance, lensing magnification allows the detection of fainter objects with respect to the field, and, in case lenses are selected on the basis of the magnification of the source, galaxies that are very extended with respect to the Einstein radius are less likely to be classified as strongly lensed. This is because their magnification averaged over their size tends to be low \citep[see the discussion in section 5.3 of][]{O+A17}.
 
 In general, the probability distribution $\prsl$ of a sample of strong lenses from a given survey with selection criterion $S$ is given by \citep{Son22}:
 \begin{equation}\label{eq:one}
 \prsl(\psilens,\psisource|S) \propto \prlens(\psilens)\prsource(\psisource)\pdet(\psilens,\psisource|S).
 \end{equation}
-In the equation above, $\psilens$ is the set of parameters describing the properties of foreground galaxies that are relevant for lensing, such as their redshift and mass distribution; $\psisource$ is the set of parameters describing background sources; $\prlens$ and $\prsource$ describe the general distribution of foreground galaxies and background sources in the absence of lensing; and $\pdet$ describes the probability of detecting a lens-source system with parameters $\psilens$ and $\psisource$ given the criterion $S$ used to define a lens.
+In the equation above, $\psilens$ is the set of parameters describing the properties of foreground galaxies that are relevant for lensing, such as their redshift and mass distribution; $\psisource$ is the set of parameters describing background sources; $\prlens$ and $\prsource$ describe the parent distribution of foreground galaxies and background sources in the absence of lensing; and $\pdet$ describes the probability of detecting a lens-source system with parameters $\psilens$ and $\psisource$ given the criterion $S$ used to define a lens.
 This last factor takes into account both physical effects, that is whether a lens with parameters $\psilens$ produces a strongly lensed image of a source with parameters $\psisource$, and survey selection effects, that is whether such an image can be recognised as a strong lens.
 
 The left-hand side of \Eref{eq:one} is directly accessible from strong lensing observations. If the main goal of a lensing survey is to characterise the properties of the strong lens population, then it can be accomplished by directly analysing this term. For many applications of strong lensing, however, the aim is to constrain the properties of the general galaxy or source population, $\prlens$ and $\prsource$, which are coupled in a nontrivial way via the lens detection probability $\pdet$.
@@ -208,7 +208,7 @@ Few studies have attempted to explicitly account for strong lensing selection ef
 Whether it is necessary to invert \Eref{eq:one}, however, depends on the severity of the strong lensing bias that needs to be corrected and on the accuracy requirements on the key quantities of interest.
 
 In this paper we aim to quantify the strength of the strong lensing bias on a series of foreground galaxy and background source parameters. %, under realistic assumptions for the lens detection probability $\pdet$.
-In particular, we aim to determine how strong lenses differ from the general population of foreground galaxies and background sources in terms of a) the radial mass structure of the lenses (i.e. their stellar and dark matter mass density profiles); b) the ellipticity of the lenses; c) the size-magnitude distribution of the lensed sources.
+In particular, we aim to determine how strong lenses differ from the parent population of foreground galaxies and background sources in terms of a) the radial mass structure of the lenses (i.e. their stellar and dark matter mass density profiles); b) the ellipticity of the lenses; c) the size-magnitude distribution of the lensed sources.
 The answer to this question depends on 1) how the lens detection probability $\pdet$ varies as a function of galaxy and source properties, and on 2) the shape of the galaxy and source parameters distribution $\prlens$ and $\prsource$. To understand this second point we can imagine the limiting case in which both $\prlens$ and $\prsource$ are Dirac delta functions: in this limit, $\prsl$ simply reduces to the product $\prlens\prsource$ up to a scaling constant, corresponding to a case in which the lensing bias is none.
 
 \citet{MVK09} carried out a thorough study of point 1): they quantified how the properties of a lens galaxy determine its probability of creating a lensing event with a point source.
@@ -706,7 +706,7 @@ Dash-dotted line: FWHM of the PSF.
 
 In the previous section we showed how the lensing cross-section, which is closely related to the term $\pdet$ in \Eref{eq:one}, varies as a function of lens and source properties.
 From here on we focus on the effect that those trends have on populations of lenses.
-We addressed this question by simulating populations of foreground galaxies and background sources, selecting strong lenses among them, and comparing the properties of the strong lens sample with the general galaxy population.
+We addressed this question by simulating populations of foreground galaxies and background sources, selecting strong lenses among them, and comparing the properties of the strong lens sample with the parent galaxy population.
 We simulated a lens-based search (as opposed to a source-based one), in which strongly lensed images are searched among a stellar mass-selected sample of galaxies.
 Our simulations are based on empirical models, in which existing observations of the baryonic component of galaxies are complemented with a set of assumptions on the mass distribution of the lenses.
 In section \ref{ssec:lenses} we explain how we built our foreground galaxy sample,
@@ -774,7 +774,7 @@ Then, we assigned an axis ratio $q$ by drawing it from the following beta distri
 with $\alpha=6.28$ and $\beta=2.05$.
 The choice for these distributions was motivated by observations of a sample of early-type galaxies. In Appendix~\ref{sect:appendixa} we explain how this sample was defined and how the coefficients of \Eref{eq:masssize} and \Eref{eq:qdist} were determined. 
 
-\subsubsection{Dark matter distribution}
+\subsubsection{Dark matter distribution}\label{ssec:dmprofile}
 
 We modelled the dark matter distribution of each lens galaxy with an elliptical gNFW halo (see section \ref{ssec:profile} for its definition).
 The parameters of the radial density profile were assigned as follows.
@@ -892,10 +892,30 @@ For the lensed quasars we did not simulate pixel-level data, but simply computed
 Following the definition of section \ref{ssec:lensdefpoint}, we included in the sample of strong lenses only systems with at least two images brighter than a limiting magnitude $m_{\mathrm{lim}}$.
 We set $m_{\mathrm{lim}}=23.3$, which corresponds to the $10\sigma$ detection limit of the LSST in a single visit \citep{O+M10}. This is motivated by the fact that the quasar lenses are meant to simulate a sample assembled for the purpose of carrying out time delay measurements, which in turn require combining single-visit detections over many epochs.
 
-%Both for the lensed galaxies and lensed quasars, we apply an additional selection based on the angular size of the Einstein radius.
-Both for the lensed galaxies and lensed quasars, we apply an additional cut, by selecting only lenses with an angular Einstein radius larger than a limiting value $\theta_{\mathrm{Ein,min}}$.
-This additional cut is meant to approximate the difficulty in detecting strongly lensed images with small separation, because of the contamination from the light of the lens galaxy.
+\subsection{Einstein radius cuts}
+
+\Fref{fig:teinhist} shows the distribution in Einstein radius of the simulated lens samples.
+In all cases, the distribution peaks at $\tein\approx0.7''$.
+Although all of the lenses in these samples are detected, it does not necessarily follow that they would all be included in a strong lensing study.
+There can be a few reasons for escluding certain lenses from a sample. 
+One is the low accuracy of lens finders: current automated lens finding algorithms tend to produce lens candidates samples with low purity \citep[see e.g.][]{Son++18a,Pet++19,Sav++22}. Such samples are then visually inspected, and only those candidates that can be clearly distinguished from false-positives are kept. This visual inspection step tends to disfavour lenses with a small image separation, because of the contamination from the light of the lens galaxy.
+\begin{figure}
+\includegraphics[width=\columnwidth]{tein_hist.eps}
+\caption{
+Einstein radius distribution of the simulated lens samples.
+\label{fig:teinhist}
+}
+\end{figure}
+
+Another reason for refining a sample of lens candidates is the availability of redshift measurements. Redshifts of both the lens and the source are needed in order to convert a lens model into a measurement of mass. When working with large samples of lenses, obtaining spectroscopic measurements is not a viable option, and photometric redshifts are a necessity. Measuring the photometric redshift of a strongly lensed source, however, is challenging, especially when the Einstein radius is small and the source light is blended with the light from the lens \citep{Lan++22}.
+
+Both of these scenarios can result in samples in which lenses with a larger Einstein radius are preferentially selected.
+In order to simulate these situations, we apply an additional cut to lens samples, by selecting only lenses with an angular Einstein radius larger than a limiting value $\theta_{\mathrm{Ein,min}}$.
+This is equivalent to multiplying $\pdet$ by a step function in the Einstein radius, which is zero for $\tein < \theta_{\mathrm{Ein,min}}$ and one otherwise.
+%Both for the lensed galaxies and lensed quasars, we apply an additional cut, by selecting only lenses with an angular Einstein radius larger than a limiting value $\theta_{\mathrm{Ein,min}}$.
+%This additional cut is meant to approximate the difficulty in detecting strongly lensed images with small separation, because of the contamination from the light of the lens galaxy.
 We explored scenarios with different values of $\theta_{\mathrm{Ein,min}}$.
+As the next section shows, the larger the minimum Einstein radius, the higher the strong lensing bias.
 
 %__________________________________________________________________
 
@@ -915,7 +935,7 @@ A minimum Einstein radius of $0.5''$ is close to what can be currently be achiev
 \begin{figure*}
 \includegraphics[width=\textwidth]{lens_cornerplot.eps}
 \caption{
-Comparison bewteen the properties of lens samples and the general population. Distribution in foreground galaxy parameters.
+Comparison bewteen the properties of lens samples and the parent population. Distribution in foreground galaxy parameters.
 Filled contours: distribution of the parent sample.
 Green solid lines: distribution of the lenses with Einstein radius larger than $0.5''$.
 Red solid lines: distribution of the lenses with Einstein radius larger than $1.0''$.
@@ -940,7 +960,7 @@ We can then consider two different strong lensing bias definitions: one that qua
 \begin{figure*}
 \includegraphics[width=\textwidth]{source_cornerplot.eps}
 \caption{
-Comparison bewteen the properties of lens samples and the general population. Distribution in background source parameters.
+Comparison bewteen the properties of lens samples and the parent population. Distribution in background source parameters.
 Filled contours: distribution of the parent sample.
 Black solid lines: distribution of the detectable sources.
 Green solid lines: distribution of the lenses with Einstein radius larger than $0.5''$.
@@ -963,10 +983,22 @@ For this reason, also the distribution in half-light radius is very similar betw
 Qualitatively, the results shown in \Fref{fig:lenspars} and \Fref{fig:sourcepars} match our expectations from \Sref{sect:indlenses}.
 In the rest of this section we quantify the lensing bias.
 We present the results in three different parts.
-In the first part, we focus on the properties of the lens galaxies that can be observed directly. These are quantities that can be derived from photometry and spectroscopy with minimal assumptions: the lens redshift, the observed stellar mass, the half-light radius and the axis ratio.
+First, we focus on the properties of the lens galaxies that can be observed directly. These are quantities that can be derived from photometry and spectroscopy with minimal assumptions: the lens redshift, the observed stellar mass, the half-light radius and the axis ratio.
 Any bias in these quantities can be determined relatively easily in a real strong lens survey.
 In the second part, we consider the parameters related to the mass distribution: the stellar population synthesis mismatch parameter and the dark matter distribution parameters. Determining the bias on these parameters is much more difficult, but these are quantities of great interest from a galaxy science point of view.
 In the third part, we focus on source distribution parameters. 
+
+\subsubsection{Bias in observable lens parameters}
+
+\Fref{fig:lensobsbias} shows the median redshift, median $\mobs$, median size for a given $\mobs$, and median axis ratio of various lens population simulations, as a function of the minimum Einstein radius.
+We defined the median size at fixed $\mobs$ by fitting the following mass-size relation to the $\reff-\mobs$ distribution:
+\begin{equation}
+\log{\reff} \sim \mu_{R,0} + \beta_R(\log{\mobs} - 11.4).
+\end{equation}
+The quantity shown in the third panel of \Fref{fig:lensobsbias} is the parameter $\mu_{R,0}$, which is the average $\log{\reff}$ at an observed stellar mass of $\log{\mobs}=11.4$.
+The horizontal dashed line in each panel shows the value of the parent population: the larger the distance between the curve of a simulation and this line, the higher the strong lensing bias.
+
+%\Fref{fig:lensobsbias} shows the median of various lens galaxy observable quantities as a function of the minimum Einstein radius, for the three lens population simulations 
 
 \begin{figure}
 \includegraphics[width=\columnwidth]{lens_observable_bias.eps}
@@ -978,14 +1010,102 @@ Third panel: median half-light radius at an observed mass of $\log{\mobs}=11.4$.
 Fourth panel: median axis ratio.
 In each panel, the black dashed line indicates the value of the parent population.
 Error bars indicate the standard deviation of the mean of the lens sample.
+\label{fig:lensobsbias}
 }
 \end{figure}
 
-\subsubsection{Bias in observable lens parameters}
+As was already visible in \Fref{fig:lenspars}, there is a clear bias towards lower redshift, higher stellar mass and smaller sizes, with the bias becoming stronger for more restrictive cuts in Einstein radius.
+Biases in stellar mass and size are stronger for the simulation with low scatter in $\asps$ and $\mhalo$.
+This can be explained as follows.
+For a given value of the observed stellar mass, strong lensing selection favors galaxies with a larger $\asps$ or $\mhalo$, or with a smaller half-light radius.
+Since the galaxy stellar mass function of the parent population is steep, lenses tend to have a relatively small $\mobs$ and large values of $\asps$ or $\mhalo$ for their observed stellar mass (this is shown more clearly in the next section).
+If the intrinsic scatter in $\asps$ and $\mhalo$ is low, however, the number of galaxies with a small $\mobs$ and a large stellar or halo mass is greatly reduced.
+Only galaxies with a large $\mobs$ or a small size can therefore act as strong lenses.
 
 \subsubsection{Bias in lens mass parameters}
 
+\Fref{fig:lensmassbias} shows the median of the distribution in various mass-related quantities, as a function of the minimum Einstein radius.
+The top panel is the median stellar population synthesis mismatch parameter.
+In all simulations, strong lenses are biased towards larger values than the parent population. The bias is larger the higher the intrinsic scatter in $\asps$ and $\mhalo$, and increases with increasing $\theta_{\mathrm{Ein,min}}$.
+For the fiducial model, the bias on $\asps$ can be as small as $0.03$~dex (7\%), if no cut on Einstein radius is applied.
+However, it can rise up to $0.09$~dex (23\%) when considering only lenses with $\tein > 2''$.
+
+The second panel of \Fref{fig:lensmassbias} shows the median halo mass of galaxies with a stellar mass of $\log{\mstar}=11.5$.
+We measured this quantity by fitting the following relation to the $\mhalo-\mstar$ distribution,
+\begin{equation}
+\log{\mhalo} \sim \mu_{\mathrm{h},0} + \beta_{\mathrm{h}}(\log{\mstar} - 11.5),
+\end{equation}
+and taking the resulting value of the parameter $\mu_{\mathrm{h},0}$.
+Similarly to the $\asps$ case, the strong lenses are biased towards larger values of the halo mass, with the bias being larger for higher-scatter simulations and more restrictive cuts on $\tein$.
+In the fiducial scatter scenario with a minimum Einstein radius of $\theta_{\mathrm{Ein,min}}=1.0''$, the halo masses of lenses are on average $0.1$~dex larger than those of their parent population.
+
+The third panel of \Fref{fig:lensmassbias} shows the median projected dark matter mass enclosed within an aperture of $5$~kpc, $\mdmfive$, at fixed stellar mass and half-light radius.
+We obtained this quantity by fitting the following relation to the $\mdmfive-\mstar-\reff$ distribution:
+\begin{equation}\label{eq:dmscaling}
+\log{\mdmfive} \sim \mu_{\mathrm{DM},0} + \beta_{\mathrm{DM}}(\log{\mstar} - 11.5) + \xi_{\mathrm{DM}}(\log{\reff} - 1.2).
+\end{equation}
+\Fref{fig:lensmassbias} shows the value of $\mu_{\mathrm{DM},0}$.
+The bias on this quantity is qualitatively similar to that on the total halo mass, but much smaller in amplitude.
+There are two reasons for this.
+First, the dependence of $\mdmfive$ on $\mhalo$ is shallower than linear. This is because, as the virial mass increases, the virial radius increases as well: the extra mass is spread over a larger volume, and therefore the mass within the inner region does not increase proportionally.
+Second, while $\mu_{\mathrm{h},0}$ is the halo mass at fixed stellar mass, $\mu_{\mathrm{DM},0}$ is measured at fixed half-light radius as well.
+The density profile of the dark matter halos in our simulation have a dependence on galaxy size: the response of dark matter to baryons is stronger for more concentrated stellar distributions (see section \ref{ssec:dmprofile}).
+By capturing this dependence in the model of \Eref{eq:dmscaling}, the residual scatter in $\mdmfive$ around the mean is reduced, and so is the strong lensing bias.
+
+In the fiducial scenario, the bias on $\mdmfive$ is negligible for $\theta_{\mathrm{Ein,min}} < 0.5''$.
+Interestingly, the bias is negative in the low-scatter scenario.
+This is a counter-intuitive result that follows from the fact that the model of \Eref{eq:dmscaling} is not a perfect description of the distribution in $\mdmfive$. Nevertheless, the amplitude of the bias is only $0.01$~dex, which for all practical purposes is negligible.
+
+In the fourth panel of \Fref{fig:lensmassbias} we show the average inner dark matter slope at fixed stellar mass and half-light radius, which we measured by fitting the following model
+\begin{equation}\label{eq:dmscaling}
+\gammadm \sim \mu_{\gamma,0} + \beta_{\gamma}(\log{\mstar} - 11.5) + \xi_{\gamma}(\log{\reff} - 1.2),
+\end{equation}
+and taking the resulting value of $\mu_{\gamma}$.
+The trends in the avereage $\gammadm$ reflect very closely those in $\mdmfive$, but with flipped sign.
+This is because, in our model for the dark matter density profile, inner dark matter mass and density slope are perfectly correlated: both $\mdmfive$ and $\gammadm$ are determined univocally once the halo mass, stellar mass and half-light radius are specified. The fact that the bias is negative is somewhat counter-intuitive: lenses with a stronger response to baryons have both a larger value of $\mdmfive$ and a steeper inner dark matter slope.
+However, $\gammadm$ is also anti-correlated with total halo mass (see $\gammadm-\mhalo$ panel in \Fref{fig:lenspars}): since strong lenses tend to have a preferentially larger halo mass, they also have a shallower dark matter slope.
+
+\begin{figure}
+\includegraphics[width=\columnwidth]{lens_mass_bias.eps}
+\caption{
+Bias on lens mass properties as a function of the minimum Einstein radius.
+First panel: median $\log{\asps}$.
+Second panel: median $\mhalo$ at $\log{\mstar}=11.5$.
+Third panel: median $\mdmfive$ at $\log{\mstar}=11.5$ and $\log{\reff}=1.2$.
+Fourth panel: median $\gammadm$ at $\log{\mstar}=11.5$ and $\log{\reff}=1.2$.
+In each panel, the dashed line indicates the value of the parent population.
+Error bars indicate the standard deviation of the mean of the lens sample.
+\label{fig:lensmassbias}
+}
+\end{figure}
+
 \subsubsection{Bias in source parameters}
+
+\Fref{fig:sourcebias} shows the lensing bias in source-related parameters, with respect to the population of sources that are detectable without lensing.
+As previously seen in \Fref{fig:sourcepars}, lensed sources are biased towards higher redshift (top panel of \Fref{fig:sourcebias}), with the trend being larger for more restrictive cuts on the Einstein radius.
+The second panel shows the bias in the source magnitude. This bias is negative for small values of $\theta_{\mathrm{Ein,min}}$, that is, lensed sources tend to be brighter than their field counterparts.
+Naively we would have expected the opposite trend, as strong lensing magnification allows the detection of sources that are intrinsically fainter than the detection limit.
+However, as the analysis of \Sref{sect:indlenses} clearly shows, the lensing cross-section is always larger for brighter sources, and that explains the sign of the bias.
+At the same time, the median does not capture the whole picture of the bias in $\msource$. For instance, in the fiducial simulation with no cut on the Einstein radius, the $90\%$-ile of the $\msource$ distribution is $26.05$, while that of the population of detectable sources is $0.14$~mag brighter: indeed, strong lensing allows the detection of fainter sources.
+
+The third and fourth panels of \Fref{fig:sourcepars} show the bias in half-light radius and S\'{e}rsic index, respectively, for sources within a magnitude bin centred on $\msource=25$ and with a $0.4$~mag width.
+We detected no clear sign of bias.
+Finally, the fifth panel shows the bias in source axis ratio. Also in this case no obvious sign of bias was detected, except in the largest values of $\theta_{\mathrm{Ein,min}}$.
+
+\begin{figure}
+\includegraphics[width=\columnwidth]{source_bias.eps}
+\caption{
+Bias on source properties as a function of the minimum Einstein radius.
+First panel: median source redshift.
+Second panel: median source magnitude.
+Third panel: median half-light radius in the magnitude bin $24.8 < \msource < 25.2$.
+Fourth panel: median S\'{e}rsic index in the magnitude bin $24.8 < \msource < 25.2$.
+Fifth panel: median axis ratio.
+In each panel, the dashed line indicates the value of the population of detectable sources.
+Error bars indicate the standard deviation of the mean of either the full sample (first, second and fifth panel) or the bin (third and fourth panel).
+\label{fig:sourcebias}
+}
+\end{figure}
 
 
 \subsection{Galaxy-quasar lenses}

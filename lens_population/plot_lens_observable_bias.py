@@ -13,8 +13,8 @@ rc('text', usetex=True)
 
 fsize = 20
 
-sims = ['fiducial_1000sqdeg', 'highscatter_1000sqdeg']
-labels = ['Fiducial', 'High scatter']
+sims = ['fiducial_1000sqdeg', 'highscatter_1000sqdeg', 'lowscatter_1000sqdeg']
+labels = ['Fiducial', 'High scatter', 'Low scatter']
 nsims = len(sims)
 
 colseq = pylab.rcParams['axes.prop_cycle'].by_key()['color']
@@ -80,44 +80,46 @@ for n in range(nsims):
         qerr_arr[i] = np.std(galpop['q'][lenscut])/float(nlens)**0.5
 
     ax[0].errorbar(tein_arr, zmed_arr, yerr=zerr_arr, color=colseq[n], label=labels[n])
-    ax[0].axhline(zmed_gal, color='k', linestyle='--', label='Parent population')
-    ax[0].set_ylabel('Median $z$', fontsize=fsize)
-
-    ax[0].yaxis.set_major_locator(MultipleLocator(0.05))
-    ax[0].yaxis.set_minor_locator(MultipleLocator(0.01))
-
     ax[1].errorbar(tein_arr, lmobsmed_arr, yerr=lmobserr_arr, color=colseq[n])
-    ax[1].axhline(lmobsmed_gal, color='k', linestyle='--')
-    ax[1].set_ylabel('Median $\log{M_*^{(\mathrm{obs})}}$', fontsize=fsize)
-
-    ax[1].yaxis.set_major_locator(MultipleLocator(0.2))
-    ax[1].yaxis.set_minor_locator(MultipleLocator(0.05))
-
     ax[2].errorbar(tein_arr, lreffmed_arr, yerr=lrefferr_arr, color=colseq[n])
-    ax[2].axhline(lreffmed_gal, color='k', linestyle='--')
-    ax[2].set_ylabel('$\mu_{\mathrm{R}}$', fontsize=fsize)
-
-    ax[2].yaxis.set_major_locator(MultipleLocator(0.05))
-    ax[2].yaxis.set_minor_locator(MultipleLocator(0.01))
-
     ax[3].errorbar(tein_arr, qmed_arr, yerr=qerr_arr, color=colseq[n])
-    ax[3].axhline(qmed_gal, color='k', linestyle='--')
-    ax[3].set_ylabel('Median $q$', fontsize=fsize)
-    ax[3].set_xlabel('Minimum $\\theta_{\mathrm{Ein}}$', fontsize=fsize)
 
-    ax[3].yaxis.set_major_locator(MultipleLocator(0.02))
-    ax[3].yaxis.set_minor_locator(MultipleLocator(0.005))
+# NEED TO REMOVE INDENTATION
+ax[0].axhline(zmed_gal, color='k', linestyle='--')#, label='Parent population')
+ax[0].set_ylabel('Median $z$', fontsize=fsize)
 
-    ax[0].tick_params(axis='both', which='both', direction='in', labelbottom=False, labelsize=fsize, right=True, top=True)
-    ax[0].legend(loc='lower left', fontsize=fsize)
+ax[0].yaxis.set_major_locator(MultipleLocator(0.05))
+ax[0].yaxis.set_minor_locator(MultipleLocator(0.01))
 
-    ax[1].tick_params(axis='both', which='both', direction='in', labelbottom=False, labelsize=fsize, right=True, top=True)
-    ax[2].tick_params(axis='both', which='both', direction='in', labelbottom=False, labelsize=fsize, right=True, top=True)
-    ax[3].tick_params(axis='both', which='both', direction='in', labelsize=fsize, right=True, top=True)
+ax[1].axhline(lmobsmed_gal, color='k', linestyle='--')
+ax[1].set_ylabel('Median $\log{M_*^{(\mathrm{obs})}}$', fontsize=fsize)
 
-    for j in range(4):
-        ax[j].xaxis.set_major_locator(MultipleLocator(0.5))
-        ax[j].xaxis.set_minor_locator(MultipleLocator(0.1))
+ax[1].yaxis.set_major_locator(MultipleLocator(0.2))
+ax[1].yaxis.set_minor_locator(MultipleLocator(0.05))
+
+ax[2].axhline(lreffmed_gal, color='k', linestyle='--')
+ax[2].set_ylabel('$\mu_{\mathrm{R},0}$', fontsize=fsize)
+
+ax[2].yaxis.set_major_locator(MultipleLocator(0.1))
+ax[2].yaxis.set_minor_locator(MultipleLocator(0.02))
+
+ax[3].axhline(qmed_gal, color='k', linestyle='--')
+ax[3].set_ylabel('Median $q$', fontsize=fsize)
+ax[3].set_xlabel('Minimum $\\theta_{\mathrm{Ein}}$', fontsize=fsize)
+
+ax[3].yaxis.set_major_locator(MultipleLocator(0.02))
+ax[3].yaxis.set_minor_locator(MultipleLocator(0.005))
+
+ax[0].tick_params(axis='both', which='both', direction='in', labelbottom=False, labelsize=fsize, right=True, top=True)
+ax[0].legend(loc='lower left', fontsize=fsize)
+
+ax[1].tick_params(axis='both', which='both', direction='in', labelbottom=False, labelsize=fsize, right=True, top=True)
+ax[2].tick_params(axis='both', which='both', direction='in', labelbottom=False, labelsize=fsize, right=True, top=True)
+ax[3].tick_params(axis='both', which='both', direction='in', labelsize=fsize, right=True, top=True)
+
+for j in range(4):
+    ax[j].xaxis.set_major_locator(MultipleLocator(0.5))
+    ax[j].xaxis.set_minor_locator(MultipleLocator(0.1))
 
 pylab.savefig('../paper/lens_observable_bias.eps')
 pylab.show()
