@@ -2,6 +2,7 @@ import numpy as np
 from scipy.interpolate import splrep, splev, splint
 import sl_cosmology
 from sl_cosmology import Mpc, M_Sun, c, G
+from astropy.io import fits as pyfits
 
 
 # number density of background sources
@@ -111,4 +112,51 @@ kpc = Mpc/1000.
 s_cr_grid = c**2/(4.*np.pi*G)*ds_ref/dds_grid/dd_grid/Mpc/M_Sun*kpc**2 # units: M_Sun/kpc**2
 
 s_cr_spline = splrep(zgrid, s_cr_grid)
+
+# Quasar luminosity function (from Manti et al. 2017)
+
+def lphistar_func(z):
+    return -6.0991 + 0.0209*z + 0.0171*z**2
+
+def Mstar_func(z):
+    return -22.5216 + 1.6510*z + 0.2869*z**2
+
+alpha_Q = -1.35
+beta_Q = -3.23
+
+qso_hdulist = pyfits.open('optical_nir_qso_sed_001.fits')
+
+qso_data = qso_hdulist[1].data
+qso_wav = qso_data['wavelength']
+qso_nu = 1./qso_wav
+qso_flambda = qso_data['flux']
+qso_restfnu = qso_flambda * qso_wav**2 # I don't care about normalization here
+
+ref_lam = 1450. # Wavelength at which the Manti et al. (2017) luminosity function is defined
+restuv_window = (qso_wav > ref_lam-50.) & (qso_wav < ref_lam+50.)
+
+qso_uvnorm = np.median(qso_restfnu[restuv_window])
+
+absmag_0 = -2.5*np.log10(qso_uvnorm/(1e-5)**2)
+
+# loads the SDSS i-band filter
+f = open('i_SDSS.res', 'r')
+iband_wav, iband_t = np.loadtxt(f, unpack=True)
+f.close()
+
+iband_nu = 1./iband_wav
+iband_spline = splrep(np.flipud(iband_nu), np.flipud(iband_t))
+
+# at each source redshift, I calculate the transformation from rest-frame UV absolute magnitude to
+# observed frame i-band magnitude
+
+nzs = 18
+zs_grid = np.linspace(0.8, zs_ref, nzs)
+deltamag = 0. * zs_grid
+for i in range(nzs):
+    dlum = sl_cosmology.Dang(zs_grid[i]) * (1. + zs_grid[i])**2
+
+    scale = 10.**(
+
+
 
