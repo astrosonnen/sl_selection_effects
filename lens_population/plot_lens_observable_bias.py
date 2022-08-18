@@ -1,6 +1,5 @@
 import numpy as np
 import pylab
-from astropy.io import fits as pyfits
 import h5py
 from simpars import *
 from scipy.optimize import leastsq
@@ -79,10 +78,10 @@ for n in range(nsims):
         qmed_arr[i] = np.median(galpop['q'][lenscut])
         qerr_arr[i] = np.std(galpop['q'][lenscut])/float(nlens)**0.5
 
-    ax[0].errorbar(tein_arr, zmed_arr, yerr=zerr_arr, color=colseq[n], label=labels[n])
-    ax[1].errorbar(tein_arr, lmobsmed_arr, yerr=lmobserr_arr, color=colseq[n])
-    ax[2].errorbar(tein_arr, lreffmed_arr, yerr=lrefferr_arr, color=colseq[n])
-    ax[3].errorbar(tein_arr, qmed_arr, yerr=qerr_arr, color=colseq[n])
+    ax[0].errorbar(tein_arr, zmed_arr, yerr=zerr_arr, color=colseq[n], label=labels[n], linewidth=2)
+    ax[1].errorbar(tein_arr, lmobsmed_arr, yerr=lmobserr_arr, color=colseq[n], label=labels[n], linewidth=2)
+    ax[2].errorbar(tein_arr, lreffmed_arr, yerr=lrefferr_arr, color=colseq[n], linewidth=2)
+    ax[3].errorbar(tein_arr, qmed_arr, yerr=qerr_arr, color=colseq[n], linewidth=2)
 
 # NEED TO REMOVE INDENTATION
 ax[0].axhline(zmed_gal, color='k', linestyle='--')#, label='Parent population')
@@ -111,7 +110,7 @@ ax[3].yaxis.set_major_locator(MultipleLocator(0.02))
 ax[3].yaxis.set_minor_locator(MultipleLocator(0.005))
 
 ax[0].tick_params(axis='both', which='both', direction='in', labelbottom=False, labelsize=fsize, right=True, top=True)
-ax[0].legend(loc='lower left', fontsize=fsize)
+ax[1].legend(loc='lower left', fontsize=fsize)
 
 ax[1].tick_params(axis='both', which='both', direction='in', labelbottom=False, labelsize=fsize, right=True, top=True)
 ax[2].tick_params(axis='both', which='both', direction='in', labelbottom=False, labelsize=fsize, right=True, top=True)

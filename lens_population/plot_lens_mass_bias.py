@@ -127,11 +127,11 @@ for n in range(nsims):
         gammamed_arr[i] = mu_gamma_here
         gammaerr_arr[i] = gamma_scat/float(nlens)**0.5
 
-    ax[0].errorbar(tein_arr, laspsmed_arr, yerr=laspserr_arr, color=colseq[n], label=labels[n])
-    ax[1].errorbar(tein_arr, lm200med_arr, yerr=lm200err_arr, color=colseq[n], label=labels[n])
-    ax[2].errorbar(tein_arr, lmdm5med_arr, yerr=lmdm5err_arr, color=colseq[n])
+    ax[0].errorbar(tein_arr, laspsmed_arr, yerr=laspserr_arr, color=colseq[n], label=labels[n], linewidth=2)
+    ax[1].errorbar(tein_arr, lm200med_arr, yerr=lm200err_arr, color=colseq[n], label=labels[n], linewidth=2)
+    ax[2].errorbar(tein_arr, lmdm5med_arr, yerr=lmdm5err_arr, color=colseq[n], linewidth=2)
     ax[2].axhline(lmdm5med_gal, color=colseq[n], linestyle='--')
-    ax[3].errorbar(tein_arr, gammamed_arr, yerr=gammaerr_arr, color=colseq[n])
+    ax[3].errorbar(tein_arr, gammamed_arr, yerr=gammaerr_arr, color=colseq[n], linewidth=2)
     ax[3].axhline(gammamed_gal, color=colseq[n], linestyle='--')
 
 ax[0].set_ylabel('Median $\log{\\alpha_{\mathrm{SPS}}}$', fontsize=fsize)
