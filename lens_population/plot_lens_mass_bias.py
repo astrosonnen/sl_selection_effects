@@ -1,6 +1,5 @@
 import numpy as np
 import pylab
-from astropy.io import fits as pyfits
 import h5py
 from simpars import *
 from scipy.optimize import leastsq
@@ -13,8 +12,10 @@ rc('text', usetex=True)
 
 fsize = 20
 
-sims = ['fiducial_1000sqdeg', 'highscatter_1000sqdeg', 'lowscatter_1000sqdeg']
-labels = ['Fiducial', 'High scatter', 'Low scatter']
+sims = ['fiducial_1000sqdeg', 'highscatter_1000sqdeg', 'lowscatter_1000sqdeg', 'fiducial_1000sqdeg']
+sources = ['gal', 'gal', 'gal', 'qso']
+
+labels = ['Fiducial', 'High scatter', 'Low scatter', 'Quasars']
 nsims = len(sims)
 
 colseq = pylab.rcParams['axes.prop_cycle'].by_key()['color']
@@ -65,7 +66,11 @@ for n in range(nsims):
     gammamed_gal = pgammafit[0][0]
 
     for i in range(ntein):
-        lenscut = galpop['islens'][()] & (galpop['tein_zs'][()] > tein_arr[i])
+        if sources[n] == 'gal':
+            lenscut = galpop['islens'][()] & (galpop['tein_zs'][()] > tein_arr[i])
+        elif sources[n] == 'qso':
+            lenscut = galpop['qsolens'][()] & (galpop['tein_zqso'][()] > tein_arr[i])
+
         nlens = lenscut.sum()
         print('Theta_Ein > %2.1f. %d lenses'%(tein_arr[i], lenscut.sum()))
         laspsmed_arr[i] = np.median(galpop['lasps'][lenscut])

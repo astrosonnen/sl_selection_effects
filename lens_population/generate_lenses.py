@@ -15,9 +15,9 @@ np.random.seed(seedno)
 sky_area_deg2 = 1000.
 sky_area = sky_area_deg2 * np.deg2rad(1.)**2
 
-modelname = 'fiducial_%dsqdeg'%sky_area_deg2
-sigma_h = 0.2
-sigma_sps = 0.08
+modelname = 'lowscatter_%dsqdeg'%sky_area_deg2
+sigma_h = 0.1
+sigma_sps = 0.05
 
 print('Sky area: %d square degrees'%sky_area_deg2)
 print('Expected number of foreground galaxies: %2.1e'%(ngal_1Mpc3 * fourpi_volume * sky_area / (4.*np.pi)))

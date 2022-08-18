@@ -3,15 +3,14 @@ import os
 import glafic
 import h5py
 from simpars import *
+from qsopars import *
 from scipy.signal import convolve2d
-from astropy.io import fits as pyfits
 from scipy.interpolate import splev
 from scipy.optimize import brentq
 from sl_profiles import sersic, gnfw, deVaucouleurs as deV
 import sl_cosmology
 from sl_cosmology import G, M_Sun, Mpc, c
 from scipy.special import gamma as gfunc
-from lensdet import detect_lens
 import sys
 
 
@@ -24,13 +23,22 @@ tein_zs_samp = np.zeros(nsamp)
 
 # reads the number of sources
 f = open('%s_sources.cat'%modelname, 'r')
-nsources = np.loadtxt(f, usecols=(1, ), dtype=int)
+nqso = np.loadtxt(f, usecols=(2, ), dtype=int)
 f.close()
 
-nsource_tot = nsources.sum()
+nqso_tot = nqso.sum()
 
-# generates redshift and magnitude
+# generates redshift and magnitudes
 
+zqso_samp = splev(np.random.rand(nqso_tot), invcum_zqso_spline)
+t_samp = np.random.rand(nqso_tot)
+
+qsomag_samp = np.zeros(nqso_tot)
+
+for i in range(nqso_tot):
+    ind = ztoind(zqso_samp[i])
+    qsomag_here = splev(t_samp[i], invcum_phiqso_splines[ind])
+    qsomag_samp[i] = qsomag_here
 
 # primary parameters
 omegaM = 0.3
@@ -42,7 +50,7 @@ xmin = -5.
 ymin = -5.
 xmax = 5.
 ymax = 5.
-pix_ext = pix_arcsec
+pix_ext = 0.1
 pix_poi = 0.1
 maxlev = 5
 
@@ -56,10 +64,10 @@ glafic.set_lens(1, 'gnfw', 0.3, 1e13, 0.0, 0.0, 0., 90.0, 10., 1.5)
 glafic.set_lens(2, 'sers', 0.3, 1e11, 0.0, 0.0, 0., 90.0, 1., 4.)
 glafic.set_point(1, zs_ref, 0., 0.)
 
-zs_list = []
+zqso_list = []
 xpos_list = []
 ypos_list = []
-smag_list = []
+qsomag_list = []
 nimg_list = []
 tein_zs_list = []
 
@@ -77,8 +85,12 @@ def alpha(x, gnfw_norm, rs, gammadm, mstar, reff, s_cr):
 
 kpc = Mpc/1000.
 
+f = open('%s_sources.cat'%modelname, 'r')
+sourcelines = f.readlines()[1:]
+f.close()
+
+sourcecount = 0
 for i in range(nsamp):
-    print(i)
     line = sourcelines[i].split()
     nsource = int(line[2])
     rmax = float(line[1])
@@ -99,46 +111,32 @@ for i in range(nsamp):
             xpos = float(sourcestrs[1])
             ypos = float(sourcestrs[2])
 
-            nser = sourcecat['sersic_n_CM'][sourceind]
-            sreff = sourcecat['Re_arcsec_CM'][sourceind]
-            sq = sourcecat['axis_ratio_CM'][sourceind]
-            if sq > 1.: # But why.
-                sq = 1./sq
-            elif sq < 0.:
-                sq = -sq
-            spa = sourcecat['PA_random'][sourceind]
-            zs = sourcecat['zobs'][sourceind]
-            smag = sourcecat['i_SDSS_apparent_corr'][sourceind]
+            zs = zqso_samp[sourcecount]
+            smag = qsomag_samp[sourcecount]
+            sourcecount += 1
 
-            ftot = 10.**(-2./5.*(smag - zeropoint))
-            I0 = ftot/(2.*np.pi*(sreff/pix_arcsec)**2*nser/sersic.b(nser)**(2*nser)*gfunc(2.*nser))
-
-            glafic.set_extend(1, 'sersic', zs, I0, xpos, ypos, 1.-sq, spa, sreff, nser)
+            glafic.set_point(1, zs, xpos, ypos)
 
             # model_init needs to be done again whenever model parameters are changed
             glafic.model_init(verb = 0)
 
-            img = np.array(glafic.writeimage())
-            img_wseeing = convolve2d(img, psf, mode='same')
+            glafic.findimg(1)
+            f = open('tmp_point.dat', 'r')
+            pointlines = f.readlines()
+            f.close()
 
-            # measures detectable source unlensed flux
-            def zerofunc(R):
-                return ftot * sersic.Sigma(R, nser, sreff/pix_arcsec) - nsigma_pixdet * sky_rms
+            nimg = int(pointlines[0].split()[0])
+            ndetected = 0
 
-            if zerofunc(0.) < 0.:
-                fdet = 0.
-            elif zerofunc(10.*sreff/pix_arcsec) > 0.:
-                fdet = ftot
-            else:
-                Rmax = brentq(zerofunc, 0., 10.*sreff/pix_arcsec)
-                fdet = ftot * sersic.M2d(Rmax, nser, sreff/pix_arcsec)
+            for j in range(nimg):
+                pointline = pointlines[j+1].split()
+                mu_here = abs(float(pointline[2]))
+                mag_img = smag -2.5*np.log10(mu_here)
+                if mag_img < pointmag_max:
+                    ndetected += 1
 
-            detection, nimg_std, nimg_max, nholes_std, nholes_max, std_footprint, best_footprint, sb_maxlim = detect_lens(img_wseeing)
-
-            if detection:
+            if ndetected > 1:
                 islens = True
-
-                #tein_zs = glafic.calcein2(zs, 0., 0.)
 
                 ds = sl_cosmology.Dang(zs)
                 dds = sl_cosmology.Dang(pop['z'][i], zs)
@@ -162,84 +160,33 @@ for i in range(nsamp):
 
                 print('%d is a lens'%i)
 
-                zs_list.append(zs)
+                zqso_list.append(zs)
                 xpos_list.append(xpos)
                 ypos_list.append(ypos)
-                nser_list.append(nser)
-                sreff_list.append(sreff)
-                sq_list.append(sq)
-                spa_list.append(spa)
-                smag_list.append(smag)
-                nimg_list.append(nimg_std)
-                nmax_list.append(nimg_max)
-
-                # creates a noisy version of the image
-                img_wnoise = img_wseeing + np.random.normal(0., sky_rms, img.shape)
-
-                hdr = pyfits.Header()
-
-                # creates an fits file for the lens
-                hdr['galno'] = i
-                hdr['zlens'] = pop['z'][i]
-                hdr['tein_zrf'] = pop['tein'][i]
-                hdr['tein_zs'] = tein_zs
-                hdr['reff_ang'] = reff_arcsec
-                hdr['reff_kpc'] = reff_kpc
-                hdr['lm200'] = pop['lm200'][i]
-                hdr['lmstar'] = pop['lmstar'][i]
-                hdr['lens_q'] = pop['q'][i]
-                hdr['zs'] = zs
-                hdr['src_x'] = xpos
-                hdr['src_y'] = ypos
-                hdr['src_nser'] = nser
-                hdr['src_q'] = sq
-                hdr['src_pa'] = spa
-                hdr['src_mag'] = smag
-                hdr['src_re'] = sreff
-                hdr['src_ind'] = sourceind
-                hdr['nimg_std'] = nimg_std
-                hdr['nimg_max'] = nimg_max
-                hdr['nhol_std'] = nholes_std
-                hdr['nhol_max'] = nholes_max
-
-                # calculates the average magnification over the footprint
-                #footprint = img > nsigma_pixdet * sky_rms
-
-                avg_mu = abs(img[std_footprint]).sum()/fdet
-                avg_mu_list.append(avg_mu)
-
-                hdr['avg_mu'] = avg_mu
-
-                phdu = pyfits.PrimaryHDU(header=hdr)
-
-                ihdu = pyfits.ImageHDU(header=hdr, data=img_wseeing)
-                nhdu = pyfits.ImageHDU(header=hdr, data=img_wnoise)
-
-                hdulist = pyfits.HDUList([phdu, ihdu, nhdu])
-
-                hdulist.writeto(modeldir+'/lens_%06d.fits'%i, overwrite=True)
+                qsomag_list.append(smag)
+                nimg_list.append(ndetected)
 
             n += 1
 
     islens_samp[i] = islens
 
-if 'islens' in pop:
-    data = pop['islens']
+if 'qsolens' in pop:
+    data = pop['qsolens']
     data[()] = islens_samp
 
 else:
-    pop.create_dataset('islens', data=islens_samp)
+    pop.create_dataset('qsolens', data=islens_samp)
 
-if 'tein_zs' in pop:
-    data = pop['tein_zs']
+if 'tein_zqso' in pop:
+    data = pop['tein_zqso']
     data[()] = tein_zs_samp
 
 else:
-    pop.create_dataset('tein_zs', data=tein_zs_samp)
+    pop.create_dataset('tein_zqso', data=tein_zs_samp)
 
 # makes file with lenses
 
-lens_file = h5py.File('%s_lenses.hdf5'%modelname, 'w')
+lens_file = h5py.File('%s_qsolenses.hdf5'%modelname, 'w')
 
 lens_file.create_dataset('z', data=pop['z'][islens_samp])
 lens_file.create_dataset('index', data=np.arange(nsamp)[islens_samp])
@@ -257,19 +204,12 @@ lens_file.create_dataset('q', data=pop['q'][islens_samp])
 lens_file.create_dataset('rs', data=pop['rs'][islens_samp])
 lens_file.create_dataset('gammadm', data=pop['gammadm'][islens_samp])
 
-lens_file.create_dataset('zs', data=np.array(zs_list))
+lens_file.create_dataset('zqso', data=np.array(zqso_list))
 lens_file.create_dataset('xpos', data=np.array(xpos_list))
 lens_file.create_dataset('ypos', data=np.array(ypos_list))
-lens_file.create_dataset('nser', data=np.array(nser_list))
-lens_file.create_dataset('sreff', data=np.array(sreff_list))
-lens_file.create_dataset('sq', data=np.array(sq_list))
-lens_file.create_dataset('spa', data=np.array(spa_list))
-lens_file.create_dataset('smag', data=np.array(smag_list))
-lens_file.create_dataset('avg_mu', data=np.array(avg_mu_list))
+lens_file.create_dataset('qsomag', data=np.array(qsomag_list))
 lens_file.create_dataset('nimg', data=np.array(nimg_list))
-lens_file.create_dataset('nmax', data=np.array(nmax_list))
 
 pop.close()
 lens_file.close()
-
 

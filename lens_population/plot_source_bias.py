@@ -22,7 +22,7 @@ nsims = len(sims)
 
 colseq = pylab.rcParams['axes.prop_cycle'].by_key()['color']
 
-fig, ax = pylab.subplots(5, 1, figsize=(6, 12))
+fig, ax = pylab.subplots(5, 1, figsize=(6, 14))
 
 pylab.subplots_adjust(left=0.2, right=1.00, bottom=0.05, top=1., wspace=0., hspace=0.)
 
@@ -121,7 +121,7 @@ ax[4].yaxis.set_major_locator(MultipleLocator(0.02))
 ax[4].yaxis.set_minor_locator(MultipleLocator(0.005))
 
 ax[0].tick_params(axis='both', which='both', direction='in', labelbottom=False, labelsize=fsize, right=True, top=True)
-ax[1].legend(loc='upper left', fontsize=fsize)
+ax[0].legend(loc='upper left', fontsize=fsize)
 
 ax[1].tick_params(axis='both', which='both', direction='in', labelbottom=False, labelsize=fsize, right=True, top=True)
 ax[2].tick_params(axis='both', which='both', direction='in', labelbottom=False, labelsize=fsize, right=True, top=True)
