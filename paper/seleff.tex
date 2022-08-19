@@ -1128,7 +1128,7 @@ Error bars indicate the standard deviation of the mean of either the full sample
 \end{figure}
 
 
-\subsection{Galaxy-quasar lenses}
+\subsection{Galaxy-quasar lenses}\label{ssec:quasarbias}
 
 The main goal of the experiment with lensed quasars is to check whether there are any differences in the strong lensing bias with respect to the extended source case, at fixed properties of the foreground galaxy population.
 For this reason, we only ran simulations with lensed quasars in the fiducial scatter scenario and compared the results with those from the extended source simulation.
@@ -1176,17 +1176,20 @@ The first two points are intrinsic to a strong lensing survey and constitute an 
 The best case scenario occurs when the efficiency of including a detected strong lens in a survey is always one. In this case, the third condition does not introduce any further selection and the strong lensing bias is minimised.
 We explored this scenario in \Sref{sect:results} when setting the minimum Einstein radius to zero.
 
-
-
-There are two sources of strong lensing bias. 
-The first one is related to the detectability of 
-
+Strictly speaking, the results shown in \Sref{sect:results} apply only to samples of lenses and background sources with the same properties as our simulations.
+However, the comparison of section \ref{ssec:quasarbias} shows that, at fixed foreground galaxy population, the strong lensing bias for the sample of extended sources is indistinguishable from that of the lensed quasar population, at least for values of $\theta_{\mathrm{Ein,min}} < 1.0''$.
+This result suggests that the dependence of the strong lensing bias on the deails of the background source population is very weak, as long as no additional selection on the image configuration is applied (e.g. by selecting only quad lenses).
+This is not a coincidence, but is a consequence of the fact that the dependence of the strong lensing cross-section on the lens parameters is a weak function of source magnitude\footnote{The cross-section itself is a strong function of source magnitude, but the trends between $\crosssect$ and the lens parameters are not.} (see section \ref{ssec:axisymmpoint}).
+We can then conclude that the details of the properties of the background source population play a secondary role in determining the strong lensing bias.
 
 %__________________________________________________________________
 
 \section{Conclusions}\label{sect:concl}
 
 We conclude.
+
+We also introduced a new definition for a strong lensing event, in the case of an extended source.
+This definition, which is based on the number of detected surface brightness peaks, is robust with respect to the mass-sheet degeneracy, unlike all magnification-based definitions.
 
 %\begin{acknowledgements}
 
