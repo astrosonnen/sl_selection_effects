@@ -874,7 +874,7 @@ and charachteristic magnitude
 \begin{equation}
 M^* = -22.5216 - 1.6510\zqso + 0.2869\zqso^2.
 \end{equation}
-Given the redshift and rest-frame UV luminosity of a quasar, we then computed the apparent magnitude in the observed $i-$band, $\mqso$, using a quasar spectral template\footprint{\url{https://archive.stsci.edu/hlsps/reference-atlases/cdbs/grid/comp_qso/}} built from optical and near-infrared spectra obtained by \citet{vdB++01,Gli++06}.
+Given the redshift and rest-frame UV luminosity of a quasar, we then computed the apparent magnitude in the observed $i-$band, $\mqso$, using a quasar spectral template\footnote{\url{https://archive.stsci.edu/hlsps/reference-atlases/cdbs/grid/comp_qso/}} built from optical and near-infrared spectra obtained by \citet{vdB++01,Gli++06}.
 
 For the sake of consistency with the population of background extended sources, we limited the redshift distribution of quasars to the range $0.8 < \zqso < 2.5$.
 We then truncated the distribution in $\mqso$ at two magnitudes fainter than the detection limit (which is specified in section \ref{ssub:obs}).
@@ -918,11 +918,12 @@ One is the low accuracy of lens finders: current automated lens finding algorith
 \includegraphics[width=\columnwidth]{tein_hist.eps}
 \caption{
 Einstein radius distribution of the simulated lens samples.
+These are: galaxy-galaxy lenses in the fiducial, high scatter and low scatter scenarios; galaxy-quasar lenses with fiducial scatter, considering all lenses or only lenses that produce four images.
 \label{fig:teinhist}
 }
 \end{figure}
 
-Another reason for refining a sample of lens candidates is the availability of redshift measurements. Redshifts of both the lens and the source are needed in order to convert a lens model into a measurement of mass. When working with large samples of lenses, obtaining spectroscopic measurements is not a viable option, and photometric redshifts are a necessity. Measuring the photometric redshift of a strongly lensed source, however, is challenging, especially when the Einstein radius is small and the source light is blended with the light from the lens \citep{Lan++22}.
+Another possible reason for refining a sample of lens candidates is the availability of redshift measurements. Redshifts of both the lens and the source are needed in order to convert a lens model into a measurement of mass. When working with large samples of lenses, obtaining spectroscopic measurements is not a viable option, and photometric redshifts are a necessity. Measuring the photometric redshift of a strongly lensed source, however, is challenging, especially when the Einstein radius is small and the source light is blended with the light from the lens \citep{Lan++22}.
 
 Both of these scenarios can result in samples in which lenses with a larger Einstein radius are preferentially selected.
 In order to simulate these situations, we apply an additional cut to lens samples, by selecting only lenses with an angular Einstein radius larger than a limiting value $\theta_{\mathrm{Ein,min}}$.
@@ -994,11 +995,10 @@ As we showed in section \ref{ssec:ellext}, the lensing cross-section drops to ze
 For this reason, also the distribution in half-light radius is very similar between the lensed sources and the detectable source population.
 %We can also see a bias in favour of sources with a very low S\'{e}rsic index. This is a consequence of the selection in magnitude: our source sample shows a strong correlation between $\msource$ and $n$: the brightest sources tend to have the smallest values of the S\'{e}rsic index.
 
-
 Qualitatively, the results shown in \Fref{fig:lenspars} and \Fref{fig:sourcepars} match our expectations from \Sref{sect:indlenses}.
 In the rest of this section we quantify the lensing bias.
 We present the results in three different parts.
-First, we focus on the properties of the lens galaxies that can be observed directly. These are quantities that can be derived from photometry and spectroscopy with minimal assumptions: the lens redshift, the observed stellar mass, the half-light radius and the axis ratio.
+First, we focus on the properties of the lens galaxies that can be observed directly. These are quantities that can be derived from photometry and spectroscopy with minimal assumptions: the lens redshift, the observed stellar mass, the half-light radius and the axis ratio\footnote{Strictly speaking, the axis ratio in mass is not necessarily observable, but in the context of our simulations it is, since light and mass have the same ellipticity.}.
 Any bias in these quantities can be determined relatively easily in a real strong lens survey.
 In the second part, we consider the parameters related to the mass distribution: the stellar population synthesis mismatch parameter and the dark matter distribution parameters. Determining the bias on these parameters is much more difficult, but these are quantities of great interest from a galaxy science point of view.
 In the third part, we focus on source distribution parameters. 
@@ -1125,6 +1125,20 @@ Error bars indicate the standard deviation of the mean of either the full sample
 
 \subsection{Galaxy-quasar lenses}
 
+The main goal of the experiment with lensed quasars is to check whether there are any differences in the strong lensing bias with respect to the extended source case, at fixed properties of the foreground galaxy population.
+For this reason, we only ran simulations with lensed quasars in the fiducial scatter scenario and compared the results with those from the extended source simulation.
+%We are also interested in understanding how the entire population of quasar lenses differs from the subset of quad lenses, therefore we computed the bias for 
+We are also interested in understanding how the subset of quad lenses differs from the entire population of quasar lenses, therefore we computed the bias for this sample as well.
+%\Fref{fig:quasarbias} shows the strong lensing bias obtained with the lensed quasars simulation, compared with that 
+\Fref{fig:quasarbias} shows the strong lensing bias as a function of minimum Einstein radius in the following quantities: stellar population synthesis mismatch parameter, halo mass at fixed stellar mass, enclosed dark matter mass at fixed stellar mass and half-light radius, and axis ratio.
+
+
+\begin{figure}
+\includegraphics[width=\columnwidth]{quasar_bias.eps}
+\caption{
+
+}
+\end{figure}
 
 %__________________________________________________________________
 
