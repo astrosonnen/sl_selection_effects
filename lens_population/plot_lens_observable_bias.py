@@ -18,7 +18,7 @@ nsims = len(sims)
 
 colseq = pylab.rcParams['axes.prop_cycle'].by_key()['color']
 
-fig, ax = pylab.subplots(4, 1, figsize=(6, 12))
+fig, ax = pylab.subplots(4, 1, figsize=(6, 13))
 
 pylab.subplots_adjust(left=0.2, right=1.00, bottom=0.05, top=1., wspace=0., hspace=0.)
 
@@ -80,12 +80,12 @@ for n in range(nsims):
 
     ax[0].errorbar(tein_arr, zmed_arr, yerr=zerr_arr, color=colseq[n], label=labels[n], linewidth=2)
     ax[1].errorbar(tein_arr, lmobsmed_arr, yerr=lmobserr_arr, color=colseq[n], label=labels[n], linewidth=2)
-    ax[2].errorbar(tein_arr, lreffmed_arr, yerr=lrefferr_arr, color=colseq[n], linewidth=2)
+    ax[2].errorbar(tein_arr, lreffmed_arr, yerr=lrefferr_arr, color=colseq[n], linewidth=2, label=labels[n])
     ax[3].errorbar(tein_arr, qmed_arr, yerr=qerr_arr, color=colseq[n], linewidth=2)
 
 # NEED TO REMOVE INDENTATION
 ax[0].axhline(zmed_gal, color='k', linestyle='--')#, label='Parent population')
-ax[0].set_ylabel('Median $z$', fontsize=fsize)
+ax[0].set_ylabel('Median $z_{\mathrm{g}}$', fontsize=fsize)
 
 ax[0].yaxis.set_major_locator(MultipleLocator(0.05))
 ax[0].yaxis.set_minor_locator(MultipleLocator(0.01))
@@ -96,21 +96,22 @@ ax[1].set_ylabel('Median $\log{M_*^{(\mathrm{obs})}}$', fontsize=fsize)
 ax[1].yaxis.set_major_locator(MultipleLocator(0.2))
 ax[1].yaxis.set_minor_locator(MultipleLocator(0.05))
 
-ax[2].axhline(lreffmed_gal, color='k', linestyle='--')
-ax[2].set_ylabel('$\mu_{\mathrm{R},0}$', fontsize=fsize)
+ax[2].axhline(lreffmed_gal, color='k', linestyle='--', label='Parent pop.')
+#ax[2].set_ylabel('$\mu_{\mathrm{R},0}$', fontsize=fsize)
+ax[2].set_ylabel('Median $\log{R_{\mathrm{e}}}$\n at $\log{M_*^{(\mathrm{obs})}}=11.4$', fontsize=fsize)
 
 ax[2].yaxis.set_major_locator(MultipleLocator(0.1))
 ax[2].yaxis.set_minor_locator(MultipleLocator(0.02))
 
 ax[3].axhline(qmed_gal, color='k', linestyle='--')
-ax[3].set_ylabel('Median $q$', fontsize=fsize)
+ax[3].set_ylabel('Median $q_{\mathrm{g}}$', fontsize=fsize)
 ax[3].set_xlabel('Minimum $\\theta_{\mathrm{Ein}}$', fontsize=fsize)
 
 ax[3].yaxis.set_major_locator(MultipleLocator(0.02))
 ax[3].yaxis.set_minor_locator(MultipleLocator(0.005))
 
 ax[0].tick_params(axis='both', which='both', direction='in', labelbottom=False, labelsize=fsize, right=True, top=True)
-ax[1].legend(loc='lower left', fontsize=fsize)
+ax[2].legend(loc='lower left', fontsize=fsize)
 
 ax[1].tick_params(axis='both', which='both', direction='in', labelbottom=False, labelsize=fsize, right=True, top=True)
 ax[2].tick_params(axis='both', which='both', direction='in', labelbottom=False, labelsize=fsize, right=True, top=True)

@@ -84,9 +84,9 @@ for n in range(nsims):
 
     ax[0].errorbar(tein_arr, zmed_arr, yerr=zerr_arr, color=colseq[n], label=labels[n])
     ax[1].errorbar(tein_arr, smagmed_arr, yerr=smagerr_arr, color=colseq[n], label=labels[n])
-    ax[2].errorbar(tein_arr, sreffmed_arr, yerr=srefferr_arr, color=colseq[n])
-    ax[3].errorbar(tein_arr, nsermed_arr, yerr=nsererr_arr, color=colseq[n])
-    ax[4].errorbar(tein_arr, qmed_arr, yerr=qerr_arr, color=colseq[n])
+    ax[2].errorbar(tein_arr, sreffmed_arr, yerr=srefferr_arr, color=colseq[n], label=labels[n])
+    ax[3].errorbar(tein_arr, nsermed_arr, yerr=nsererr_arr, color=colseq[n], label=labels[n])
+    ax[4].errorbar(tein_arr, qmed_arr, yerr=qerr_arr, color=colseq[n], label=labels[n])
 
 # NEED TO REMOVE INDENTATION
 ax[0].axhline(zmed_det, color='k', linestyle='--')#, label='Parent population')
@@ -95,7 +95,7 @@ ax[0].set_ylabel('Median $z$', fontsize=fsize)
 ax[0].yaxis.set_major_locator(MultipleLocator(0.2))
 ax[0].yaxis.set_minor_locator(MultipleLocator(0.05))
 
-ax[1].axhline(smagmed_det, color='k', linestyle='--')
+ax[1].axhline(smagmed_det, color='k', linestyle='--', label='Detectable pop.')
 ax[1].set_ylabel('Median $m_{\mathrm{s}}$', fontsize=fsize)
 
 ax[1].yaxis.set_major_locator(MultipleLocator(0.2))
@@ -107,7 +107,7 @@ ax[2].set_ylabel("Median $\\theta_{\mathrm{s}}$\n at $m_{\mathrm{s}}=25\, ('')$"
 ax[2].yaxis.set_major_locator(MultipleLocator(0.1))
 ax[2].yaxis.set_minor_locator(MultipleLocator(0.02))
 
-ax[3].axhline(nsermed_det, color='k', linestyle='--')
+ax[3].axhline(nsermed_det, color='k', linestyle='--', label='Detectable pop.')
 ax[3].set_ylabel("Median $n$\n at $m_{\mathrm{s}}=25$", fontsize=fsize)
 
 ax[3].yaxis.set_major_locator(MultipleLocator(0.2))
@@ -121,7 +121,8 @@ ax[4].yaxis.set_major_locator(MultipleLocator(0.02))
 ax[4].yaxis.set_minor_locator(MultipleLocator(0.005))
 
 ax[0].tick_params(axis='both', which='both', direction='in', labelbottom=False, labelsize=fsize, right=True, top=True)
-ax[0].legend(loc='upper left', fontsize=fsize)
+#ax[1].legend(loc='upper left', fontsize=fsize)
+ax[3].legend(loc=(0.02, 0.8), fontsize=fsize, framealpha=1.)
 
 ax[1].tick_params(axis='both', which='both', direction='in', labelbottom=False, labelsize=fsize, right=True, top=True)
 ax[2].tick_params(axis='both', which='both', direction='in', labelbottom=False, labelsize=fsize, right=True, top=True)

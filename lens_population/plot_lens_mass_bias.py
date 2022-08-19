@@ -12,15 +12,14 @@ rc('text', usetex=True)
 
 fsize = 20
 
-sims = ['fiducial_1000sqdeg', 'highscatter_1000sqdeg', 'lowscatter_1000sqdeg', 'fiducial_1000sqdeg']
-sources = ['gal', 'gal', 'gal', 'qso']
+sims = ['fiducial_1000sqdeg', 'highscatter_1000sqdeg', 'lowscatter_1000sqdeg']
 
-labels = ['Fiducial', 'High scatter', 'Low scatter', 'Quasars']
+labels = ['Fiducial', 'High scatter', 'Low scatter']
 nsims = len(sims)
 
 colseq = pylab.rcParams['axes.prop_cycle'].by_key()['color']
 
-fig, ax = pylab.subplots(4, 1, figsize=(6, 12))
+fig, ax = pylab.subplots(4, 1, figsize=(6, 13))
 
 pylab.subplots_adjust(left=0.2, right=1.00, bottom=0.05, top=1., wspace=0., hspace=0.)
 
@@ -66,10 +65,7 @@ for n in range(nsims):
     gammamed_gal = pgammafit[0][0]
 
     for i in range(ntein):
-        if sources[n] == 'gal':
-            lenscut = galpop['islens'][()] & (galpop['tein_zs'][()] > tein_arr[i])
-        elif sources[n] == 'qso':
-            lenscut = galpop['qsolens'][()] & (galpop['tein_zqso'][()] > tein_arr[i])
+        lenscut = galpop['islens'][()] & (galpop['tein_zs'][()] > tein_arr[i])
 
         nlens = lenscut.sum()
         print('Theta_Ein > %2.1f. %d lenses'%(tein_arr[i], lenscut.sum()))
@@ -131,32 +127,45 @@ for n in range(nsims):
     ax[1].errorbar(tein_arr, lm200med_arr, yerr=lm200err_arr, color=colseq[n], label=labels[n], linewidth=2)
     ax[2].errorbar(tein_arr, lmdm5med_arr, yerr=lmdm5err_arr, color=colseq[n], linewidth=2)
     ax[2].axhline(lmdm5med_gal, color=colseq[n], linestyle='--')
-    ax[3].errorbar(tein_arr, gammamed_arr, yerr=gammaerr_arr, color=colseq[n], linewidth=2)
+    ax[3].errorbar(tein_arr, gammamed_arr, yerr=gammaerr_arr, color=colseq[n], linewidth=2, label=labels[n])
     ax[3].axhline(gammamed_gal, color=colseq[n], linestyle='--')
 
 ax[0].set_ylabel('Median $\log{\\alpha_{\mathrm{SPS}}}$', fontsize=fsize)
-ax[0].axhline(laspsmed_gal, color='k', linestyle='--')#, label='Parent population')
+ax[0].axhline(laspsmed_gal, color='k', linestyle='--', label='Parent pop.')
+ax[0].set_ylim(-0.03, 0.32)
 
-ax[0].yaxis.set_major_locator(MultipleLocator(0.02))
-ax[0].yaxis.set_minor_locator(MultipleLocator(0.005))
+ax[0].axhline(0., linestyle=':', color='k')
+ax[0].axhline(0.25, linestyle=':', color='k')
+ax[0].text(1.2, 0.01, 'Chabrier IMF', fontsize=fsize)
+ax[0].text(1.2, 0.26, 'Salpeter IMF', fontsize=fsize)
+
+ax[0].yaxis.set_major_locator(MultipleLocator(0.1))
+ax[0].yaxis.set_minor_locator(MultipleLocator(0.02))
 
 ax[0].tick_params(axis='both', which='both', direction='in', labelbottom=False, labelsize=fsize, right=True, top=True)
-ax[1].legend(loc='upper left', fontsize=fsize)
 
-ax[1].axhline(mu_h, color='k', linestyle='--')
-ax[1].set_ylabel('$\mu_{\mathrm{h}}$', fontsize=fsize)
+ax[1].axhline(mu_h, color='k', linestyle='--', label='Parent pop.')
+#ax[1].set_ylabel('$\mu_{\mathrm{h}}$', fontsize=fsize)
+#ax[1].set_ylabel('Mean $\log{M_{\mathrm{h}}}$ at\n$\log{M_*}=11.5$', fontsize=fsize)
+ax[1].set_ylabel('$\mu_{\mathrm{h},0}$ (Mean $\log{M_{\mathrm{h}}}$ \n at fixed $M_*$)', fontsize=fsize)
 
 ax[1].yaxis.set_major_locator(MultipleLocator(0.2))
 ax[1].yaxis.set_minor_locator(MultipleLocator(0.05))
 
 #ax[2].axhline(lreffmed_gal, color='k', linestyle='--')
-ax[2].set_ylabel('$\mu_{\mathrm{DM},0}$', fontsize=fsize)
+#ax[2].set_ylabel('$\mu_{\mathrm{DM},0}$', fontsize=fsize)
+#ax[2].set_ylabel('Mean $\log{M_{\mathrm{DM},5}}$ at\n$\log{M_*}=11.5,\log{R_{\mathrm{e}}}=1.2$', fontsize=fsize)
+ax[2].set_ylabel('$\mu_{\mathrm{DM},0}$ (Mean $\log{M_{\mathrm{DM},5}}$ \n at fixed $M_*$, $R_{\mathrm{e}}$)', fontsize=fsize)
+#ax[2].text(0.05, 11.22, '$\log_{M_*}=11.5$, $\log_{R_\mathrm{e}}=1.2$', fontsize=fsize)
 
 ax[2].yaxis.set_major_locator(MultipleLocator(0.1))
 ax[2].yaxis.set_minor_locator(MultipleLocator(0.02))
 
-#ax[3].axhline(qmed_gal, color='k', linestyle='--')
-ax[3].set_ylabel('$\mu_{\gamma,0}$', fontsize=fsize)
+#ax[3].set_ylabel('$\mu_{\gamma,0}$', fontsize=fsize)
+#ax[3].set_ylabel('Mean $\gamma_{\mathrm{DM},5}$ at\n fixed $M_*$, $R_{\mathrm{e}}$', fontsize=fsize)
+ax[3].set_ylabel('$\mu_{\gamma,0}$ (Mean $\gamma_{\mathrm{DM},5}$\n at fixed $M_*$, $R_{\mathrm{e}}$)', fontsize=fsize)
+#ax[3].text(0.05, 1.4, '$\log_{M_*}=11.5$, $\log_{R_\mathrm{e}}=1.2$', fontsize=fsize)
+
 ax[3].set_xlabel('Minimum $\\theta_{\mathrm{Ein}}$', fontsize=fsize)
 
 ax[3].yaxis.set_major_locator(MultipleLocator(0.05))
@@ -169,6 +178,8 @@ ax[3].tick_params(axis='both', which='both', direction='in', labelsize=fsize, ri
 for j in range(4):
     ax[j].xaxis.set_major_locator(MultipleLocator(0.5))
     ax[j].xaxis.set_minor_locator(MultipleLocator(0.1))
+
+ax[1].legend(loc='upper left', fontsize=fsize)
 
 pylab.savefig('../paper/lens_mass_bias.eps')
 pylab.show()
