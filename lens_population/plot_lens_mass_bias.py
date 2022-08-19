@@ -132,12 +132,12 @@ for n in range(nsims):
 
 ax[0].set_ylabel('Median $\log{\\alpha_{\mathrm{SPS}}}$', fontsize=fsize)
 ax[0].axhline(laspsmed_gal, color='k', linestyle='--', label='Parent pop.')
-ax[0].set_ylim(-0.03, 0.32)
+ax[0].set_ylim(-0.07, 0.28)
 
-ax[0].axhline(0., linestyle=':', color='k')
-ax[0].axhline(0.25, linestyle=':', color='k')
-ax[0].text(1.2, 0.01, 'Chabrier IMF', fontsize=fsize)
-ax[0].text(1.2, 0.26, 'Salpeter IMF', fontsize=fsize)
+ax[0].axhline(-0.04, linestyle=':', color='k')
+ax[0].axhline(0.21, linestyle=':', color='k')
+ax[0].text(1.2, -0.03, 'Chabrier IMF', fontsize=fsize)
+ax[0].text(1.2, 0.22, 'Salpeter IMF', fontsize=fsize)
 
 ax[0].yaxis.set_major_locator(MultipleLocator(0.1))
 ax[0].yaxis.set_minor_locator(MultipleLocator(0.02))

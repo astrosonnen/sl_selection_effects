@@ -1,8 +1,6 @@
 import numpy as np
 import pylab
-from astropy.io import fits as pyfits
 import h5py
-from simpars import *
 from scipy.optimize import leastsq
 from matplotlib.ticker import MultipleLocator
 from matplotlib.colors import ListedColormap
