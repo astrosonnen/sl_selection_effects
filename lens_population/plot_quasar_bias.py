@@ -126,8 +126,8 @@ ax[0].set_ylim(-0.03, 0.32)
 
 ax[0].axhline(0., linestyle=':', color='k')
 ax[0].axhline(0.25, linestyle=':', color='k')
-ax[0].text(1.2, 0.01, 'Chabrier IMF', fontsize=fsize)
-ax[0].text(1.2, 0.26, 'Salpeter IMF', fontsize=fsize)
+ax[0].text(0.2, 0.01, 'Chabrier IMF', fontsize=fsize)
+ax[0].text(0.2, 0.26, 'Salpeter IMF', fontsize=fsize)
 
 ax[0].yaxis.set_major_locator(MultipleLocator(0.05))
 ax[0].yaxis.set_minor_locator(MultipleLocator(0.01))
