@@ -187,9 +187,10 @@ Strong lenses, however, are a biased subset of the general population of galaxie
 A necessary condition for a galaxy to act as a strong lens with respect to a given source is that its projected surface mass density $\Sigma(\boldsymbol\theta)$ must be larger than the critical surface mass density for lensing $\Sigma_{\mathrm{cr}}$ at at least one position $\boldsymbol\theta$ \citep{SEF92}.
 This condition excludes objects with a very diffuse mass distribution from the population of lenses.
 In general, galaxies with a higher concentration of mass are more likely to be strong lenses, and are therefore over-represented in lens samples.
+The distribution of strongly lensed sources can also be biased with respect to the general population of background galaxies: for instance, lensing magnification allows the detection of fainter objects with respect to the field.
 
-The luminosity and size distribution of strongly lensed sources can also be biased with respect to the general population of background galaxies.
-For instance, lensing magnification allows the detection of fainter objects with respect to the field, and, in case lenses are selected on the basis of the magnification of the source, galaxies that are very extended with respect to the Einstein radius are less likely to be classified as strongly lensed. This is because their magnification averaged over their size tends to be low \citep[see the discussion in section 5.3 of][]{O+A17}.
+%The luminosity and size distribution of strongly lensed sources can also be biased with respect to the general population of background galaxies.
+%For instance, lensing magnification allows the detection of fainter objects with respect to the field, and, in case lenses are selected on the basis of the magnification of the source, galaxies that are very extended with respect to the Einstein radius are less likely to be classified as strongly lensed. This is because their magnification averaged over their size tends to be low \citep[see the discussion in section 5.3 of][]{O+A17}.
 
 In general, the probability distribution $\prsl$ of a sample of strong lenses from a given survey with selection criterion $S$ is given by \citep{Son22}:
 \begin{equation}\label{eq:one}
@@ -444,7 +445,7 @@ In the limit of low density of background sources, which is satisfied in all pra
 
 We compute $\crosssect$ in a series of different scenarios of increasing complexity.
 The model family adopted to describe the radial density profile of the lenses is the same in all of our experiments. We describe this in section \ref{ssec:profile}.
-In section \ref{ssec:axsymmpoint} we show calculations of the strong lensing cross-section in the case of axisymmetric lenses and point sources.
+In section \ref{ssec:axisymmpoint} we show calculations of the strong lensing cross-section in the case of axisymmetric lenses and point sources.
 In section \ref{ssec:ellpoint} we generalise the lens geometry to elliptical, while in section \ref{ssec:ellext} we replace point sources with extended sources.
 
 
@@ -500,7 +501,7 @@ The blue, orange and green dashed lines are identical, as they correspond to pro
 \end{figure}
 %
 
-\subsection{Axisymmetric lenses, point sources}\label{ssec:axsymmpoint}
+\subsection{Axisymmetric lenses, point sources}\label{ssec:axisymmpoint}
 
 Axisymmetric lenses with a density profile of the kind introduced in section \ref{ssec:profile} can produce either one or three images of a point source.
 This can be seen in \Fref{fig:scheme}, which shows the lens equation for various values of the dark matter fraction and the inner dark matter slope.
@@ -715,6 +716,7 @@ Our simulations are based on empirical models, in which existing observations of
 In section \ref{ssec:lenses} we explain how we built our foreground galaxy sample,
 while in section \ref{ssec:sources} we describe the simulation of the background source population.
 In section \ref{ssec:obs} we describe how our mock observations of lenses are generated.
+In section \ref{ssec:teincuts} we apply a further selection step, based on the angular size of the Einstein radius.
 
 %As we explained in \Sref{sect:intro}, a key ingredient determining the amplitude of the strong lensing bias is the scatter in the mass properties of the foreground galaxy population.
 %Although we do not have robust measurements of the intrinsic scatter in properties such as the stellar mass-to-light ratio or the dark matter halo mass, we set upper limits on their amplitude using the 
@@ -752,7 +754,7 @@ We quantify the discrepancy between the observed and true stellar mass by means 
 \begin{equation}
 \asps \equiv \frac{\mstar}{\mobs}.
 \end{equation}
-The most important source of systematic uncertainty in the measurement of the stellar mass is the assumption of the stellar initial mass function (IMF). \citet{Muz++13} assumed a Kroupa IMF \citep{Kro01} to derive their measurements. This means that, in the absence of other systematic effects, a value of $\asps=1$ corresponds to a Kroupa IMF.
+The most important source of systematic uncertainty in the measurement of the stellar mass is the assumption of the stellar initial mass function (IMF). \citet{Muz++13} assumed a Kroupa IMF \citep{Kro01} to derive their measurements. This means that, in the absence of other systematic effects, a galaxy with a Kroupa IMF has a value of $\asps=1$.
 
 %We randomly assign a value of $\asps$ to each galaxy in the sample, by drawing it from the following distribution:
 For each galaxy in the sample, we randomly drew a value of $\log{\asps}$ from the following distribution:
@@ -778,7 +780,7 @@ Then, we assigned an axis ratio $q$ by drawing it from the following beta distri
 with $\alpha=6.28$ and $\beta=2.05$.
 The choice for these distributions was motivated by observations of a sample of early-type galaxies. In Appendix~\ref{sect:appendixa} we explain how this sample was defined and how the coefficients of \Eref{eq:masssize} and \Eref{eq:qdist} were determined. 
 
-\subsubsection{Dark matter distribution}\label{ssec:dmprofile}
+\subsubsection{Dark matter distribution}\label{ssub:dmprofile}
 
 We modelled the dark matter distribution of each lens galaxy with an elliptical gNFW halo (see section \ref{ssec:profile} for its definition).
 The parameters of the radial density profile were assigned as follows.
@@ -851,8 +853,9 @@ The observed fundamental plane scatter is $0.035$.
 }
 \end{table}
 
+\subsection{Background sources}\label{ssec:sources}
 
-\subsection{Background sources: galaxies}\label{ssec:sources}
+\subsubsection{Galaxies}\label{ssub:extsources}
 
 %\ale{To be filled by Shun-Sheng}.
 We applied a lower limit to the source redshift, by selecting only sources with $z_s > 0.8$.
@@ -862,7 +865,7 @@ A similar cut could be applied to a real survey using photometric redshift, to r
 The resulting number density of sources is $70$~arcmin$^{-2}$.
 We approximated their spatial distribution as uniform in the sky, that is we neglected clustering of the sources.
 
-\subsection{Background sources: quasars}\label{ssec:quasars}
+\subsubsection{Quasars}\label{ssub:quasars}
 
 We describe the population of background quasars with the following double power-law luminosity function in the rest-frame UV absolute magnitude $M$:
 \begin{equation}
@@ -883,7 +886,7 @@ We then truncated the distribution in $\mqso$ at two magnitudes fainter than the
 Finally, we randomly placed quasars in the source plane with a projected number density of $70$~arcmin$^{-2}$. This is a much larger number density than observed in the real universe. Nevertheless, we are not interested in predicting the absolute number of strong lenses, so this is a viable choice. The advantage of boosting the number density of quasars is that it allows us to produce a large number of lenses without the need for generating too big a population of foreground galaxies.
 
 
-\subsection{Observations}\label{ssub:obs}
+\subsection{Observations}\label{ssec:obs}
 
 For each of the three intrinsic scatter scenarios, we drew a population of foreground galaxies covering $1000$ square degrees.
 The expectation value of the number of galaxies in the corresponding volume, given the redshift and stellar mass cuts described in section \ref{ssub:mstarz}, is around $300000$.
@@ -908,7 +911,12 @@ For the lensed quasars we did not simulate pixel-level data, but simply computed
 Following the definition of section \ref{ssec:lensdefpoint}, we included in the sample of strong lenses only systems with at least two images brighter than a limiting magnitude $m_{\mathrm{lim}}$.
 We set $m_{\mathrm{lim}}=23.3$, which corresponds to the $10\sigma$ detection limit of the LSST in a single visit \citep{O+M10}. This is motivated by the fact that the quasar lenses are meant to simulate a sample assembled for the purpose of carrying out time delay measurements, which in turn require combining single-visit detections over many epochs.
 
-\subsection{Einstein radius cuts}
+The resulting number of quasar lenses in our simulation with the fiducial scatter is $1621$. This number is meaningless, given that the simulation was created with an unrealistically large number density of quasars.
+More interesting is the relative number of quad lenses with respect to the total, which is about $9\%$. This is a slightly smaller value than the fraction of quads predicted by \citet{O+M10}.
+The reason for this discrepancy lies in the differences bewteen the lens mass models in the two simulations.
+
+
+\subsection{Einstein radius cuts}\label{ssec:teincuts}
 
 \Fref{fig:teinhist} shows the distribution in Einstein radius of the simulated lens samples.
 In all cases, the distribution peaks at $\tein\approx0.7''$.
@@ -939,12 +947,12 @@ As the next section shows, the larger the minimum Einstein radius, the higher th
 \section{Results}\label{sect:results}
 
 In this section we present the results of the lens population simulations. 
-Section \ref{ssec:resgal} shows the results of the galaxy-galaxy lens experiment, while section \ref{ssec:resquasar} focuses on the population of galaxy-quasar lenses.
+Section \ref{ssec:galbias} shows the results of the galaxy-galaxy lens experiment, while section \ref{ssec:quasarbias} focuses on the population of galaxy-quasar lenses.
 Given the number of parameters that are needed to describe our model, providing a complete characterisation of the strong lensing bias is a problem with relatively high dimensionality, and is beyond the scope of this paper.
 For the sake of conciseness, we focus instead on the quantities that we consider most important.
 Nevertheless, the output of our simulations is available online\footnote{\url{https://github.com/astrosonnen/sl_selection_effects}}. We encourage readers who are interested in studying aspects of the strong lensing bias that are not covered in this section to download our data and analyse them directly.
 
-\subsection{Galaxy-galaxy lenses}
+\subsection{Galaxy-galaxy lenses}\label{ssec:galbias}
 
 In this section we show the results of the experiments with populations of galaxy-galaxy lenses.
 We first present the results in a qualitative way, then proceed to quantify the amplitude of the strong lensing bias in various quantities of interest.
@@ -1069,7 +1077,7 @@ The bias on this quantity is qualitatively similar to that on the total halo mas
 There are two reasons for this.
 First, the dependence of $\mdmfive$ on $\mhalo$ is shallower than linear. This is because, as the virial mass increases, the virial radius increases as well: the extra mass is spread over a larger volume, and therefore the mass within the inner region does not increase proportionally.
 Second, while $\mu_{\mathrm{h},0}$ is the halo mass at fixed stellar mass, $\mu_{\mathrm{DM},0}$ is measured at fixed half-light radius as well.
-The density profile of the dark matter halos in our simulation have a dependence on galaxy size: the response of dark matter to baryons is stronger for more concentrated stellar distributions (see section \ref{ssec:dmprofile}).
+The density profile of the dark matter halos in our simulation have a dependence on galaxy size: the response of dark matter to baryons is stronger for more concentrated stellar distributions (see section \ref{ssub:dmprofile}).
 By capturing this dependence in the model of \Eref{eq:dmscaling}, the residual scatter in $\mdmfive$ around the mean is reduced, and so is the strong lensing bias.
 
 In the fiducial scenario, the bias on $\mdmfive$ is negligible for $\theta_{\mathrm{Ein,min}} < 0.5''$.
@@ -1140,7 +1148,7 @@ We are also interested in understanding how the subset of quad lenses differs fr
 \Fref{fig:quasarbias} shows the strong lensing bias as a function of minimum Einstein radius in the following quantities: stellar population synthesis mismatch parameter, halo mass at fixed stellar mass, enclosed dark matter mass at fixed stellar mass and half-light radius, and axis ratio.
 The biases of the population of lensed quasars (red curves) are very similar to that of lensed galaxies (blue curves), especially for values of $\theta_{\mathrm{Ein},min}<1''$, 
 When considering only quad lenses, however, there are some differences, the most remarkable of which is the bias in the axis ratio: quad lenses tend to be on average galaxies with a higher ellipticity.
-This trend was expected, given the results of section \ref{ssec:axsymmpoint}: the higher the ellipticity, the larger the area enclosed within the inner caustic, which is where a source needs to lie in order to produce four or more images.
+This trend was expected, given the results of section \ref{ssec:axisymmpoint}: the higher the ellipticity, the larger the area enclosed within the inner caustic, which is where a source needs to lie in order to produce four or more images.
 %As we discuss in \Sref{sect:discuss}, the difference in ellipticity between quad lenses and 
 Quad lenses tend to also have a slightly larger halo mass at fixed stellar mass, for $\theta_{\mathrm{Ein},min}<1''$.
 
@@ -1166,6 +1174,8 @@ Error bars indicate the standard deviation of the mean of the lens sample.
 
 \section{Discussion}\label{sect:discuss}
 
+\subsection{Key results}
+
 In order for a galaxy-source pair to be included as a strong lens in a survey, three condition must be met.
 First of all, part of the source must be multiply imaged.
 Second, the multiple images must be detectable.
@@ -1175,12 +1185,99 @@ Each one of these conditions introduces a bias with respect to the parent popula
 The first two points are intrinsic to a strong lensing survey and constitute an unavoidable source of bias. 
 The best case scenario occurs when the efficiency of including a detected strong lens in a survey is always one. In this case, the third condition does not introduce any further selection and the strong lensing bias is minimised.
 We explored this scenario in \Sref{sect:results} when setting the minimum Einstein radius to zero.
+If only lenses with Einstein radius larger than a given threshold are selected, however, the bias generally increases.
+
+The strong lensing bias affects all quantities that are related to the mass distribution of the lens, as well as the redshifts of lens and source and the source surface brightness parameters.
+Some of these quantities, such as the observed stellar mass and half-light radius of the lenses, can be directly measured, and it is straightforward to quantify their lensing bias.
+Other quantities, however, such as the stellar population synthesis mismatch parameter or the dark matter content, are difficult to obtain via traditional, non-lensing, observations. Our simulations are particularly useful to quantify the bias on these properties.
+
+In the fiducial scatter scenario, the one consistent with the observed scatter around the fundamental plane, the bias on $\asps$ varies from $0.03$~dex, when no restrictions on the lens Einstein radius are applied, to $0.08$~dex, corresponding to the case in which only lenses with $\tein > 2.0''$ are selected (see \Fref{fig:lensmassbias}).
+The current systematic uncertainty on $\asps$ is $0.2-0.3$~dex: this is roughly the difference in mesaurements of the stellar mass of a galaxy obtained with a Chabrier or a Salpeter IMF.
+Compared with this uncertainty, the amplitude of the strong lensing bias on $\asps$ is small: strong lensing observations can be used directly to discriminate between these two alternative choices of IMF, without the need to correct for selection effects. This is especially the case when working with samples of lenses that probe the sub-arcsecond Einstein radius regime.
+Such a goal could be reached with a sample size of a thousand lenses and a statistical study of the kind proposed by \citet{S+C21}.
+
+Strong lenses are also biased towards larger halo masses.
+Nevertheless, when focusing on the dark matter content in the inner regions, the amplitude of the strong lensing bias is relatively small, especially when controlling for the stellar distribution of the lens galaxies.
+For instance, at fixed stellar mass and half-light radius, the bias on the projected dark matter mass enclosed within $5$~kpc, $\mdmfive$, is only a few percent in the fiducial scatter scenario with $\theta_{\mathrm{Ein,min}} < 1.0''$.
+This means that strong lenses can be used to understand the inner dark matter distribution of galaxies, as long as the dependence of the dark matter distribution on the properties of the baryonic component is accurately modelled \citep[for example, by following the approach of][]{S+C21}.
+
+We also looked at the bias on source-related parameters.
+Strong lensing causes the luminosity function of background sources to be broadened, compared to the distribution of detectable sources.
+On the one hand, it preferentially selects brighter sources, because the lensing cross-section increases with increasing source brightness.
+On the other hand, it allows the detection of sources that are intrinsically fainter than the detection limit in the absence of lensing.
+Interestingly, we did not detect any significant bias on the source size, at fixed magnitude.
+This result follows from the fact that our lens detection criterion relies on a surface brightness threshold, and surface brightness is preserved by lensing.
+However, it appears to be in contradiction with the work of \citet{O+A17}, who argued that their strong lens sample selected preferentially compact sources.
+%However, \citet{O+A17} showed that their strong lens sample selected preferentially compact sources. 
+The origin of this discrepancy probably lies in the differences between the criteria used to define a strong lens in the two studies.
+The \citet{O+A17} sample was selected primarily via spectroscopy, by looking for signatures of two galaxies at different redshifts in the Sloan Digital Sky Survey \citep[SDSS][]{Yor++00} data.
+SDSS spectra were taken in fibers with a $1.5''$ radius.
+Lensed galaxies that are comparable in size to this scale, or larger, are less likely to be detected, because part of their flux extends outside of the fiber. Compact galaxies with a large overall magnification, instead, are more likely to be detected \citep[see the discussion in section 5.3 of][]{O+A17}.
+
+%Our analysis based on photometric detection showed that the tendency to select compact sources is not a general feature of strong lens samples.
+There is also an indirect way in which strong lensing could preferentially probe more compact sources than possible in the field.
+Sources that are smaller than the size of the PSF can be easily confused as stars in our own Galaxy.
+Since these stars cannot be strongly lensed into multiple images, the detection of a strong lens automatically confirms the extragalactic nature of a lensed source.
+This type of selection effect could explain, for example, the detection of an apparent outlier in the magnitude-size relation of Lyman-break galaxy by means of strong lensing, by \citet{Jae++20}.
+It is, however, improper to refer to this effect as strong lensing bias, since the star-galaxy separation is a bias that primarily affects field observations.
+Our analysis showed that the tendency to select compact sources is not a general feature of strong lens samples.
+
+\subsection{Combining lensed quasars with lensed galaxies}
+
+Our experiments were also useful for understanding the possible biases that might incur when combining information from samples of galaxy-galaxy lenses with samples of galaxy-quasar lenses.
+On the one hand the biases in the mass-related quantities ($\asps$ and $\mdmfive$) are very similar in simulations with the same foreground galaxy population and different background sources (see \Fref{fig:quasarbias}).
+On the other hand, these biases are a function of the minimum Einstein radius. In order to use a sample of strong lenses as a prior for another sample, then, it is important to make sure that 1) the parent population of foreground galaxies among which lenses are searched for is the same in both surveys, and 2) the two surveys can probe the same distribution in Einstein radius.
+
+The above argument applies to samples of quasars selected regardless of the number of multiple images.
+When dealing with quad lenses, however, the situation is more complicated.
+First of all, because our experiment revealed differences in the bias on the dark matter distribution between quads and the entire sample of lensed quasars.
+Second, because quad lenses tend to have a preferentially higher ellipticity.
+The ellipticity is important in the context of stellar dynamical analyses,
+which are often used in combination with strong lensing to constrain lens mass parameters \citep[see e.g.][]{Yil++20}.
+In order to correctly interpret stellar dynamics data, assumptions on the three-dimensional structure of a lens must be made.
+This is directly related to the projected ellipcitiy: galaxies with an axis ratio close to one tend to be preferentially elongated in the line-of-sight direction, and viceversa.
+When using stellar dynamics-based mass measurements to inform the properties of a sample of quad lenses, therefore, it is important to take into account possible biases due to the different three-dimensional structure of the two samples.
+
+\subsection{The importance of the source population properties}
 
 Strictly speaking, the results shown in \Sref{sect:results} apply only to samples of lenses and background sources with the same properties as our simulations.
 However, the comparison of section \ref{ssec:quasarbias} shows that, at fixed foreground galaxy population, the strong lensing bias for the sample of extended sources is indistinguishable from that of the lensed quasar population, at least for values of $\theta_{\mathrm{Ein,min}} < 1.0''$.
 This result suggests that the dependence of the strong lensing bias on the deails of the background source population is very weak, as long as no additional selection on the image configuration is applied (e.g. by selecting only quad lenses).
-This is not a coincidence, but is a consequence of the fact that the dependence of the strong lensing cross-section on the lens parameters is a weak function of source magnitude\footnote{The cross-section itself is a strong function of source magnitude, but the trends between $\crosssect$ and the lens parameters are not.} (see section \ref{ssec:axisymmpoint}).
+This is not a coincidence, but is a consequence of the fact that the dependence of the strong lensing cross-section on the lens parameters is a weak function of source magnitude\footnote{The cross-section itself is a strong function of source magnitude, but the trends between $\crosssect$ and the lens parameters are not.}, especially for magnitudes close to the detection limit (see section \ref{ssec:axisymmpoint}).
 We can then conclude that the details of the properties of the background source population play a secondary role in determining the strong lensing bias.
+
+\subsection{Mitigation strategies}
+
+Although the amplitude of the strong lensing bias in difficult-to-observe mass-related quantities is relatively small, compared to current uncertainties, there might be situations in which one wishes to account for it.
+The formally correct way to do this is by explicitly modelling all of the selection steps in a Bayesian hierarchical formalism, as explained by \citet{Son22}.
+Doing so, however, can be difficult in practice.
+Therefore, it can be useful to develop alternative strategies to correct for the bias, or to mitigate its effects.
+
+As we discussed throughout this paper, the amplitude of the strong lensing bias depends on the intrinsic scatter in the mass parameters of the foreground galaxy population.
+One way to minimise the bias, therefore, is to identify scaling relations between observable quantities and mass-related properties that can account for part of the scatter.
+Describing the inner dark matter distribution as a function of stellar mass and half-light radius, as we did in section \ref{ssec:galbias}, is the first step in this direction: the bias in $\mdmfive$ at fixed $\mstar$ and $\reff$ is smaller than the overall shift in the median $\mdmfive$ of the lens population.
+This description could be extended by including the central velocity dispersion as an additional control parameter. The velocity dispersion is directly related to the mass distribution of the lens galaxy, and therefore the intrinsic scatter in $\asps$ and $\mdmfive$ at fixed velocity dispersion should be smaller.
+
+One problem with this approach is that the amplitude of the scatter in quantities such as $\asps$ or the dark matter parameters is not known before carrying out a strong lensing analysis, and neither is the resulting strong lensing bias.
+An estimate of the bias, however, could be obtained after constraining the lens population distribution, by creating a simulation of the survey under the assumption that the inferred distribution is a good approximation of the truth. This would allow to posterior predict the effects of strong lensing bias. One could then adjust the parameters of the simulated galaxy population until the posterior predicted lens population matches the observed one. 
+%An estimate of the bias, however, could be obtained after constraining the lens population distribution, by creating a simulation of the survey under the assumption that the inferred distribution is a good approximation of the truth. The end product would be a posterior prediction of the properties of a sample of strong lenses. This procedure could then be iterated until convergence.
+%If the inferred intrinsic scatter at fixed observable properties is small, so will be the amplitude of the strong lensing bias.
+
+%If one wishes to directly correct for the strong lensing bias but wants to avoid to explicitly model all of the aspects entering the selection process, one possibility is to try and approximate $\pdet$. 
+If one wishes to directly correct for the strong lensing bias in a computationally manageable way, one possibility is to try and approximate $\pdet$. 
+In general, $\pdet$ depends nontrivially on the position, redshift and surface brightness distribution of the source, as well as on the lens mass density profile and redshift.
+This requires in principle to explicitly model the distribution of all of these quantities \citep[as done by][]{Son22}.
+However, we can make the assumption that $\pdet$ can be separable in a term that depends purely on the strong lensing cross-section and a term that depends purely on the Einstein radius.
+This is a reasonable assumption, as long as the lens finding procedure does not selectively pick lenses with different image configurations depending on their Einstein radius.
+It would allow us to marginalise over the source position and surface brightness parameters, thus simplifying the problem.
+The dependence of $\pdet$ on $\tein$ could then be described empirically and inferred during the analysis.
+This is essentially the same approach adopted by \citet{Son++19} in the analysis of strong and weak lensing data from the Hyper Suprime-Cam Survey.
+
+%However, we can make the assumption that the dependence of $\pdet$ on source position and surface brightness distribution can be separable from the dependence on the lens mass properties and the lens and source redshift.
+%This is a reasonable assumption, given that the dependence of the strong lensing cross-section on the source parameters is similar in lenses with different mass properties (see section \ref{ssec:axisymmpoint}).
+%This assumption would allow us to marginalise over the source parameters, simplifying the problem. The lens detection probability would then be reduced to the sole $\crosssect$, computed 
+
+\subsection{Limitations of our analysis}
 
 %__________________________________________________________________
 
