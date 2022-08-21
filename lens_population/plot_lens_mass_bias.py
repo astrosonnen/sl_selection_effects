@@ -21,7 +21,7 @@ colseq = pylab.rcParams['axes.prop_cycle'].by_key()['color']
 
 fig, ax = pylab.subplots(4, 1, figsize=(6, 13))
 
-pylab.subplots_adjust(left=0.2, right=1.00, bottom=0.05, top=1., wspace=0., hspace=0.)
+pylab.subplots_adjust(left=0.23, right=1.00, bottom=0.05, top=1., wspace=0., hspace=0.)
 
 ntein = 21
 tein_arr = np.linspace(0., 2., ntein)
@@ -160,6 +160,7 @@ ax[2].set_ylabel('$\mu_{\mathrm{DM},0}$ (Mean $\log{M_{\mathrm{DM},5}}$ \n at fi
 
 ax[2].yaxis.set_major_locator(MultipleLocator(0.1))
 ax[2].yaxis.set_minor_locator(MultipleLocator(0.02))
+ax[2].set_ylim(10.98, 11.28)
 
 #ax[3].set_ylabel('$\mu_{\gamma,0}$', fontsize=fsize)
 #ax[3].set_ylabel('Mean $\gamma_{\mathrm{DM},5}$ at\n fixed $M_*$, $R_{\mathrm{e}}$', fontsize=fsize)
@@ -181,7 +182,7 @@ for j in range(4):
 
 ax[1].legend(loc='upper left', fontsize=fsize)
 
-pylab.savefig('../paper/alternative_lens_mass_bias.eps')
+pylab.savefig('../paper/lens_mass_bias.eps')
 pylab.show()
 
 
