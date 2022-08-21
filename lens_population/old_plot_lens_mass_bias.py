@@ -42,7 +42,7 @@ for n in range(nsims):
     lmdm5err_arr = np.zeros(ntein)
 
     def mdm5fitfunc(p):
-        return p[0] + p[1] * (galpop['lmobs'][()] - lmobs_piv) + p[2] * (galpop['lreff'][()] - lreff_piv)
+        return p[0] + p[1] * (galpop['lmstar'][()] - lmstar_piv) + p[2] * (galpop['lreff'][()] - lreff_piv)
 
     def mdm5errfunc(p):
         return mdm5fitfunc(p) - galpop['lmdm5'][()]
@@ -55,7 +55,7 @@ for n in range(nsims):
     gammaerr_arr = np.zeros(ntein)
 
     def gammafitfunc(p):
-        return p[0] + p[1] * (galpop['lmobs'][()] - lmobs_piv) + p[2] * (galpop['lreff'][()] - lreff_piv)
+        return p[0] + p[1] * (galpop['lmstar'][()] - lmstar_piv) + p[2] * (galpop['lreff'][()] - lreff_piv)
 
     def gammaerrfunc(p):
         return gammafitfunc(p) - galpop['gammadm'][()]
@@ -75,13 +75,13 @@ for n in range(nsims):
         # fits for the stellar-halo mass relation
 
         lm200_here = galpop['lm200'][lenscut]
-        lmobs_here = galpop['lmobs'][lenscut]
+        lmstar_here = galpop['lmstar'][lenscut]
         lreff_here = galpop['lreff'][lenscut]
         lmdm5_here = galpop['lmdm5'][lenscut]
         gammadm_here = galpop['gammadm'][lenscut]
 
         def fitfunc(p):
-            return p[0] + p[1] * (lmobs_here - lmobs_piv)
+            return p[0] + p[1] * (lmstar_here - lmstar_piv)
 
         def errfunc(p):
             return fitfunc(p) - lm200_here
@@ -95,7 +95,7 @@ for n in range(nsims):
         lm200err_arr[i] = lm200_scat/float(nlens)**0.5
 
         def mdm5fitfunc(p):
-            return p[0] + p[1] * (lmobs_here - lmobs_piv) + p[2] * (lreff_here - lreff_piv)
+            return p[0] + p[1] * (lmstar_here - lmstar_piv) + p[2] * (lreff_here - lreff_piv)
 
         def mdm5errfunc(p):
             return mdm5fitfunc(p) - lmdm5_here
@@ -110,7 +110,7 @@ for n in range(nsims):
         lmdm5err_arr[i] = lmdm5_scat/float(nlens)**0.5
 
         def gammafitfunc(p):
-            return p[0] + p[1] * (lmobs_here - lmobs_piv) + p[2] * (lreff_here - lreff_piv)
+            return p[0] + p[1] * (lmstar_here - lmstar_piv) + p[2] * (lreff_here - lreff_piv)
 
         def gammaerrfunc(p):
             return gammafitfunc(p) - gammadm_here
@@ -147,7 +147,7 @@ ax[0].tick_params(axis='both', which='both', direction='in', labelbottom=False, 
 ax[1].axhline(mu_h, color='k', linestyle='--', label='Parent pop.')
 #ax[1].set_ylabel('$\mu_{\mathrm{h}}$', fontsize=fsize)
 #ax[1].set_ylabel('Mean $\log{M_{\mathrm{h}}}$ at\n$\log{M_*}=11.5$', fontsize=fsize)
-ax[1].set_ylabel('$\mu_{\mathrm{h},0}$ (Mean $\log{M_{\mathrm{h}}}$ \n at fixed $M_*^{(\mathrm{obs})}$)', fontsize=fsize)
+ax[1].set_ylabel('$\mu_{\mathrm{h},0}$ (Mean $\log{M_{\mathrm{h}}}$ \n at fixed $M_*$)', fontsize=fsize)
 
 ax[1].yaxis.set_major_locator(MultipleLocator(0.2))
 ax[1].yaxis.set_minor_locator(MultipleLocator(0.05))
@@ -155,7 +155,7 @@ ax[1].yaxis.set_minor_locator(MultipleLocator(0.05))
 #ax[2].axhline(lreffmed_gal, color='k', linestyle='--')
 #ax[2].set_ylabel('$\mu_{\mathrm{DM},0}$', fontsize=fsize)
 #ax[2].set_ylabel('Mean $\log{M_{\mathrm{DM},5}}$ at\n$\log{M_*}=11.5,\log{R_{\mathrm{e}}}=1.2$', fontsize=fsize)
-ax[2].set_ylabel('$\mu_{\mathrm{DM},0}$ (Mean $\log{M_{\mathrm{DM},5}}$ \n at fixed $M_*^{(\mathrm{obs})}$, $R_{\mathrm{e}}$)', fontsize=fsize)
+ax[2].set_ylabel('$\mu_{\mathrm{DM},0}$ (Mean $\log{M_{\mathrm{DM},5}}$ \n at fixed $M_*$, $R_{\mathrm{e}}$)', fontsize=fsize)
 #ax[2].text(0.05, 11.22, '$\log_{M_*}=11.5$, $\log_{R_\mathrm{e}}=1.2$', fontsize=fsize)
 
 ax[2].yaxis.set_major_locator(MultipleLocator(0.1))
@@ -163,7 +163,7 @@ ax[2].yaxis.set_minor_locator(MultipleLocator(0.02))
 
 #ax[3].set_ylabel('$\mu_{\gamma,0}$', fontsize=fsize)
 #ax[3].set_ylabel('Mean $\gamma_{\mathrm{DM},5}$ at\n fixed $M_*$, $R_{\mathrm{e}}$', fontsize=fsize)
-ax[3].set_ylabel('$\mu_{\gamma,0}$ (Mean $\gamma_{\mathrm{DM},5}$\n at fixed $M_*^{(\mathrm{obs})}$, $R_{\mathrm{e}}$)', fontsize=fsize)
+ax[3].set_ylabel('$\mu_{\gamma,0}$ (Mean $\gamma_{\mathrm{DM},5}$\n at fixed $M_*$, $R_{\mathrm{e}}$)', fontsize=fsize)
 #ax[3].text(0.05, 1.4, '$\log_{M_*}=11.5$, $\log_{R_\mathrm{e}}=1.2$', fontsize=fsize)
 
 ax[3].set_xlabel('Minimum $\\theta_{\mathrm{Ein}}$', fontsize=fsize)
@@ -181,7 +181,7 @@ for j in range(4):
 
 ax[1].legend(loc='upper left', fontsize=fsize)
 
-pylab.savefig('../paper/alternative_lens_mass_bias.eps')
+pylab.savefig('../paper/lens_mass_bias.eps')
 pylab.show()
 
 
