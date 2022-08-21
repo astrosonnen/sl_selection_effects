@@ -1057,19 +1057,19 @@ However, it can rise up to $0.09$~dex (23\%) when considering only lenses with $
 For comparison, we also show two reference values of $\asps$, corresponding to a Chabrier IMF \citep{Cha03} and a Salpeter IMF \citep{Sal55}.
 These values roughly bracket the current systematic uncertainty on $\asps$.
 
-The second panel of \Fref{fig:lensmassbias} shows the median halo mass of galaxies with a stellar mass of $\log{\mstar}=11.5$.
-We measured this quantity by fitting the following relation to the $\mhalo-\mstar$ distribution,
+The second panel of \Fref{fig:lensmassbias} shows the median halo mass of galaxies with an observed stellar mass of $\log{\mobs}=11.4$.
+We measured this quantity by fitting the following relation to the $\mhalo-\mobs$ distribution,
 \begin{equation}
-\log{\mhalo} \sim \mu_{\mathrm{h},0} + \beta_{\mathrm{h}}(\log{\mstar} - 11.5),
+\log{\mhalo} \sim \mu_{\mathrm{h},0} + \beta_{\mathrm{h}}(\log{\mobs} - 11.4),
 \end{equation}
 and taking the resulting value of the parameter $\mu_{\mathrm{h},0}$.
 Similarly to the $\asps$ case, the strong lenses are biased towards larger values of the halo mass, with the bias being larger for higher-scatter simulations and more restrictive cuts on $\tein$.
-In the fiducial scatter scenario with a minimum Einstein radius of $\theta_{\mathrm{Ein,min}}=1.0''$, the halo masses of lenses are on average $0.1$~dex larger than those of their parent population.
+In the fiducial scatter scenario with a minimum Einstein radius of $\theta_{\mathrm{Ein,min}}=1.0''$, the halo masses of lenses are on average $0.16$~dex larger than those of their parent population.
 
-The third panel of \Fref{fig:lensmassbias} shows the median projected dark matter mass enclosed within an aperture of $5$~kpc, $\mdmfive$, at fixed stellar mass and half-light radius.
-We obtained this quantity by fitting the following relation to the $\mdmfive-\mstar-\reff$ distribution:
+The third panel of \Fref{fig:lensmassbias} shows the median projected dark matter mass enclosed within an aperture of $5$~kpc, $\mdmfive$, at fixed observed stellar mass and half-light radius.
+We obtained this quantity by fitting the following relation to the $\mdmfive-\mobs-\reff$ distribution:
 \begin{equation}\label{eq:dmscaling}
-\log{\mdmfive} \sim \mu_{\mathrm{DM},0} + \beta_{\mathrm{DM}}(\log{\mstar} - 11.5) + \xi_{\mathrm{DM}}(\log{\reff} - 1.2).
+\log{\mdmfive} \sim \mu_{\mathrm{DM},0} + \beta_{\mathrm{DM}}(\log{\mobs} - 11.4) + \xi_{\mathrm{DM}}(\log{\reff} - 1.2).
 \end{equation}
 \Fref{fig:lensmassbias} shows the value of $\mu_{\mathrm{DM},0}$.
 The bias on this quantity is qualitatively similar to that on the total halo mass, but much smaller in amplitude.
@@ -1078,28 +1078,34 @@ First, the dependence of $\mdmfive$ on $\mhalo$ is shallower than linear. This i
 Second, while $\mu_{\mathrm{h},0}$ is the halo mass at fixed stellar mass, $\mu_{\mathrm{DM},0}$ is measured at fixed half-light radius as well.
 The density profile of the dark matter halos in our simulation have a dependence on galaxy size: the response of dark matter to baryons is stronger for more concentrated stellar distributions (see section \ref{ssub:dmprofile}).
 By capturing this dependence in the model of \Eref{eq:dmscaling}, the residual scatter in $\mdmfive$ around the mean is reduced, and so is the strong lensing bias.
+%
+In the fiducial scenario, the bias on $\mdmfive$ is as small as $0.02$~dex for $\theta_{\mathrm{Ein,min}} < 0.5''$, and is negligible in the low-scatter scenario.
+%Interestingly, the bias is negative in the low-scatter scenario.
+%This is a counter-intuitive result that follows from the fact that the model of \Eref{eq:dmscaling} is not a perfect description of the distribution in $\mdmfive$. Nevertheless, the amplitude of the bias is only $0.01$~dex, which for all practical purposes is negligible.
 
-In the fiducial scenario, the bias on $\mdmfive$ is negligible for $\theta_{\mathrm{Ein,min}} < 0.5''$.
-Interestingly, the bias is negative in the low-scatter scenario.
-This is a counter-intuitive result that follows from the fact that the model of \Eref{eq:dmscaling} is not a perfect description of the distribution in $\mdmfive$. Nevertheless, the amplitude of the bias is only $0.01$~dex, which for all practical purposes is negligible.
-
-In the fourth panel of \Fref{fig:lensmassbias} we show the average inner dark matter slope at fixed stellar mass and half-light radius, which we measured by fitting the following model
+In the fourth panel of \Fref{fig:lensmassbias} we show the average inner dark matter slope at fixed observed stellar mass and half-light radius, which we measured by fitting the following model
 \begin{equation}\label{eq:dmscaling}
-\gammadm \sim \mu_{\gamma,0} + \beta_{\gamma}(\log{\mstar} - 11.5) + \xi_{\gamma}(\log{\reff} - 1.2),
+\gammadm \sim \mu_{\gamma,0} + \beta_{\gamma}(\log{\mobs} - 11.4) + \xi_{\gamma}(\log{\reff} - 1.2),
 \end{equation}
 and taking the resulting value of $\mu_{\gamma}$.
-The trends in the avereage $\gammadm$ reflect very closely those in $\mdmfive$, but with flipped sign.
-This is because, in our model for the dark matter density profile, inner dark matter mass and density slope are perfectly correlated: both $\mdmfive$ and $\gammadm$ are determined univocally once the halo mass, stellar mass and half-light radius are specified. The fact that the bias is negative is somewhat counter-intuitive: lenses with a stronger response to baryons have both a larger value of $\mdmfive$ and a steeper inner dark matter slope.
-However, $\gammadm$ is also anti-correlated with total halo mass (see $\gammadm-\mhalo$ panel in \Fref{fig:lenspars}): since strong lenses tend to have a preferentially larger halo mass, they also have a shallower dark matter slope.
+Different simulations show different trends in the average $\gammadm$.
+These are the results of underlying correlations between the dark matter density profile and the stellar and halo mass.
+In our model, galaxies of a given size with a larger stellar mass have a steeper dark matter slope, because the response of the dark matter to the infall of baryons is stronger. Vice-versa, galaxies with a larger halo mass have a shallower density slope.
+At fixed $\mobs$ and $\reff$, strong lenses have both a larger stellar mass (because their $\asps$ is larger) and a larger halo mass.
+In the simulation with low scatter, the bias in stellar mass is more important, therefore $\gammadm$ has a positive bias. In the simulation with large scatter, the bias in halo mass dominates, and therefore $\gammadm$ is negatively biased.
+
+%The trends in the avereage $\gammadm$ reflect very closely those in $\mdmfive$, but with flipped sign.
+%This is because, in our model for the dark matter density profile, inner dark matter mass and density slope are perfectly correlated: both $\mdmfive$ and $\gammadm$ are determined univocally once the halo mass, stellar mass and half-light radius are specified. The fact that the bias is negative is somewhat counter-intuitive: lenses with a stronger response to baryons have both a larger value of $\mdmfive$ and a steeper inner dark matter slope.
+%However, $\gammadm$ is also anti-correlated with total halo mass (see $\gammadm-\mhalo$ panel in \Fref{fig:lenspars}): since strong lenses tend to have a preferentially larger halo mass, they also have a shallower dark matter slope.
 
 \begin{figure}
 \includegraphics[width=\columnwidth]{lens_mass_bias.eps}
 \caption{
 Bias on lens mass properties as a function of the minimum Einstein radius.
 First panel: median $\log{\asps}$. Dotted lines indicate values of $\asps$ corresponding to a Chabrier and a Salpeter IMF ($\asps=1$ corresponds to a Kroupa IMF).
-Second panel: median $\mhalo$ at $\log{\mstar}=11.5$.
-Third panel: median $\mdmfive$ at $\log{\mstar}=11.5$ and $\log{\reff}=1.2$.
-Fourth panel: median $\gammadm$ at $\log{\mstar}=11.5$ and $\log{\reff}=1.2$.
+Second panel: median $\mhalo$ at $\log{\mobs}=11.4$.
+Third panel: median $\mdmfive$ at $\log{\mobs}=11.4$ and $\log{\reff}=1.2$.
+Fourth panel: median $\gammadm$ at $\log{\mobs}=11.4$ and $\log{\reff}=1.2$.
 In each panel, the dashed line indicates the value of the parent population.
 Error bars indicate the standard deviation of the mean of the lens sample.
 \label{fig:lensmassbias}
@@ -1198,7 +1204,7 @@ Such a goal could be reached with a sample size of a thousand lenses and a stati
 
 Strong lenses are also biased towards larger halo masses.
 Nevertheless, when focusing on the dark matter content in the inner regions, the amplitude of the strong lensing bias is relatively small, especially when controlling for the stellar distribution of the lens galaxies.
-For instance, at fixed stellar mass and half-light radius, the bias on the projected dark matter mass enclosed within $5$~kpc, $\mdmfive$, is only a few percent in the fiducial scatter scenario with $\theta_{\mathrm{Ein,min}} < 1.0''$.
+For instance, at fixed observed stellar mass and half-light radius, the bias on the projected dark matter mass enclosed within $5$~kpc, $\mdmfive$, is only a few percent in the fiducial scatter scenario with $\theta_{\mathrm{Ein,min}} < 1.0''$.
 This means that strong lenses can be used to understand the inner dark matter distribution of galaxies, as long as the dependence of the dark matter distribution on the properties of the baryonic component is accurately modelled \citep[for example, by following the approach of][]{S+C21}.
 
 We also looked at the bias on source-related parameters.
@@ -1301,7 +1307,7 @@ The amplitude of the bias is larger in simulations with a larger intrinsic scatt
 
 We used observational constraints from the fundamental plane to set the values of the intrinsic scatter in our fiducial simulation.
 In that case, assuming a survey that probes the Einstein radius distribution down to $\tein=0.5''$ with relatively high completeness, the bias on $\asps$ is as low as $0.04$~dex (10\%). This bias is much smaller than the current systematic uncertainty on the stellar population synthesis-based stellar masses. Therefore, strong lensing measurements could be used directly to calibrate stellar mass measurements of massive galaxies to $10\%$ accuracy, without the need to correct for selection effects.
-Under the same assumptions, the strong lensing bias on the average halo mass at fixed stellar mass is $0.04$~dex, while that on the inner dark matter distribution at fixed stellar mass and size is negligible.
+Under the same assumptions, the strong lensing bias on the average halo mass at fixed stellar mass is $0.04$~dex, while that on the inner dark matter distribution at fixed stellar mass and size is $0.02$~dex.
 
 Strong lensing selection broadens the magnitude distribution of background sources, compared to the population of objects that are detectable without lensing.
 At the same time, we did not find any evidence for a bias in the size distribution of background sources, at fixed magnitude.
