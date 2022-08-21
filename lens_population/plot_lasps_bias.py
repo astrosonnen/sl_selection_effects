@@ -21,7 +21,7 @@ colseq = pylab.rcParams['axes.prop_cycle'].by_key()['color']
 
 fig, ax = pylab.subplots(1, 1, figsize=(8, 6))
 
-pylab.subplots_adjust(left=0.12, right=1.00, bottom=0.08, top=1., wspace=0., hspace=0.)
+pylab.subplots_adjust(left=0.12, right=0.99, bottom=0.08, top=0.99, wspace=0., hspace=0.)
 
 ntein = 21
 tein_arr = np.linspace(0., 2., ntein)
@@ -84,7 +84,7 @@ ax.xaxis.set_minor_locator(MultipleLocator(0.1))
 
 ax.set_xlabel('Minimum $\\theta_{\mathrm{Ein}}$', fontsize=fsize)
 
-ax.legend(loc='lower right', fontsize=fsize)
+ax.legend(loc='lower right', fontsize=fsize, framealpha=1.)
 
 pylab.savefig('../paper/lasps_bias.png')
 pylab.show()
