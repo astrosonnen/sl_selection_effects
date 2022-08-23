@@ -51,6 +51,7 @@
 \def\mhalo{M_{\mathrm{h}}}
 
 \def\tein{\theta_{\mathrm{Ein}}}
+\def\teinmin{\theta_{\mathrm{Ein,min}}}
 \def\teff{\theta_{\mathrm{e}}}
 \def\trad{\theta_{\mathrm{rad}}}
 \def\tsis{\theta_{\mathrm{Ein}}^{\mathrm{(SIS)}}}
@@ -102,6 +103,8 @@
 \def\prsourcenobeta{{\rm P}_\mathrm{s}^{(-\boldsymbol\beta)}}
 
 \def\pdet{{\rm P}_\mathrm{det}}
+\def\psel{{\rm P}_\mathrm{sel}}
+\def\pfind{{\rm P}_\mathrm{find}}
 \def\pdetone{{\rm P}_{\mathrm{det},1}}
 \def\pdettwo{{\rm P}_{\mathrm{det},2}}
 \def\crosssect{\sigma_\mathrm{{SL}}}
@@ -202,17 +205,23 @@ The distribution of strongly lensed sources can also be biased with respect to t
 
 In general, the probability distribution $\prsl$ of a sample of strong lenses from a given survey with selection criterion $S$ is given by \citep{Son22}:
 \begin{equation}\label{eq:one}
-\prsl(\psilens,\psisource|S) \propto \prlens(\psilens)\prsource(\psisource)\pdet(\psilens,\psisource|S).
+\prsl(\psilens,\psisource|S) \propto \prlens(\psilens)\prsource(\psisource)\psel(\psilens,\psisource|S).
 \end{equation}
-In the equation above, $\psilens$ is the set of parameters describing the properties of foreground galaxies that are relevant for lensing, such as their redshift and mass distribution; $\psisource$ is the set of parameters describing background sources; $\prlens$ and $\prsource$ describe the parent distribution of foreground galaxies and background sources in the absence of lensing; and $\pdet$ describes the probability of detecting a lens-source system with parameters $\psilens$ and $\psisource$ given the criterion $S$ used to define a lens.
-This last factor takes into account both physical effects, that is whether a lens with parameters $\psilens$ produces a strongly lensed image of a source with parameters $\psisource$, and survey selection effects, that is whether such an image can be recognised as a strong lens.
+In the equation above, $\psilens$ is the set of parameters describing the properties of foreground galaxies that are relevant for lensing, such as their redshift and mass distribution; $\psisource$ is the set of parameters describing background sources; $\prlens$ and $\prsource$ describe the parent distribution of foreground galaxies and background sources in the absence of lensing; and $\psel$ describes the probability of selecting a lens-source system with parameters $\psilens$ and $\psisource$ given the criterion $S$ used to define a lens.
+This last factor takes into account both physical effects, that is whether a lens with parameters $\psilens$ produces a strongly lensed image of a source with parameters $\psisource$, and survey selection effects, that is whether such an image can be detected and recognised as a strong lens.
 
-The left-hand side of \Eref{eq:one} is directly accessible from strong lensing observations. If the main goal of a lensing survey is to characterise the properties of the strong lens population, then it can be accomplished by directly analysing this term. For many applications of strong lensing, however, the aim is to constrain the properties of the general galaxy or source population, $\prlens$ and $\prsource$, which are coupled in a nontrivial way via the lens detection probability $\pdet$.
+The left-hand side of \Eref{eq:one} is directly accessible from strong lensing observations. If the main goal of a lensing survey is to characterise the properties of the strong lens population, then it can be accomplished by directly analysing this term. For many applications of strong lensing, however, the aim is to constrain the properties of the general galaxy or source population, $\prlens$ and $\prsource$, which are coupled in a nontrivial way via the lens selection probability $\psel$.
 In order to obtain an unbiased estimate of either $\prlens$ or $\prsource$, then, it is necessary to invert \Eref{eq:one}.
-In principle, this can be done with a Bayesian hierarchical formalism, provided that the lens detection probability $\pdet$ is known \citep{Son22}.
-For most of the existing strong lensing surveys, however, characterising $\pdet$ is very challenging: the process of determining whether a system is included in a strong lens sample is typically a combination of several cuts, usually involving a nontrivial visual selection step. 
+In principle, this can be done with a Bayesian hierarchical formalism, provided that the lens selection probability $\psel$ is known \citep{Son22}.
+%For most of the existing strong lensing surveys, however, characterising $\psel$ is very challenging. %: the process of determining whether a system is included in a strong lens sample is typically a combination of several cuts, usually involving a nontrivial visual selection step. 
+This factor can be written as the following product:
+\begin{equation}\label{eq:two}
+\psel(\psilens,\psisource|S) = \pdet(\psilens,\psisource)\pfind(\psilens,\psisource|S),%\footnote{\citet{Son22} implicitly assumed $\pfind\equiv1$, therefore $\pdet$ and $\psel$ can be used interchangeably in the context of that work},
+\end{equation}
+where $\pdet$ is the probability of detecting a strong lensing event, and $\pfind(\psilens,\psisource|S,\mathrm{det})$ is the probability of correctly classifying it as such\footnote{\citet{Son22} implicitly assumed $\pfind\equiv1$, therefore $\pdet$ and $\psel$ can be used interchangeably in the context of that work.}.
+The detection probability $\pdet$ can be obtained via simulation. The main challenge is characterising $\pfind$: in most of the existing strong lensing surveys, the process of determining whether a system is included in a strong lens sample is typically a combination of several cuts, usually involving a nontrivial visual selection step.
 
-The problem of inverting \Eref{eq:one} is a difficult one to tackle exactly.
+For the above reasons, the problem of inverting \Eref{eq:one} is a difficult one to tackle exactly.
 Few studies have attempted to explicitly account for strong lensing selection effects, usually by making ad-hoc simplifying assumptions \citep{Son++15,O+A17,Son++19}.
 %The problem of the invertibility of \Eref{eq:one} can be simplified by adopting lens selection criteria that can be easily forward-modelled: for instance by building samples that are complete above a well-defined observational cut \citep{Son22}.
 %The problem can be simplified by adopting lens selection criteria that can be easily forward-modelled: for instance by building samples that are complete above a well-defined observational cut \citep{Son22}.
@@ -220,23 +229,24 @@ Whether it is necessary to invert \Eref{eq:one}, however, depends on the severit
 
 In this paper we aim to quantify the strength of the strong lensing bias on a series of foreground galaxy and background source parameters. %, under realistic assumptions for the lens detection probability $\pdet$.
 In particular, we aim to determine how strong lenses differ from the parent population of foreground galaxies and background sources in terms of a) the radial mass structure of the lenses (i.e. their stellar and dark matter mass density profiles); b) the ellipticity of the lenses; c) the size-magnitude distribution of the lensed sources.
-The answer to this question depends on 1) how the lens detection probability $\pdet$ varies as a function of galaxy and source properties, and on 2) the shape of the galaxy and source parameters distribution $\prlens$ and $\prsource$. To understand this second point we can imagine the limiting case in which both $\prlens$ and $\prsource$ are Dirac delta functions: in this limit, $\prsl$ simply reduces to the product $\prlens\prsource$ up to a scaling constant, corresponding to a case in which the lensing bias is none.
+The answer to this question depends on 1) how the lens detection probability $\pdet$ varies as a function of galaxy and source properties, 2) the efficiency of a survey at correctly classifying detected strong lenses (i.e. $\pfind$), and on 3) the shape of the galaxy and source parameters distribution $\prlens$ and $\prsource$. To understand this third point we can imagine the limiting case in which both $\prlens$ and $\prsource$ are Dirac delta functions (i.e. all lenses and sources are identical): in this limit, $\prsl$ simply reduces to the product $\prlens\prsource$ up to a scaling constant, corresponding to a case in which the lensing bias is none.
 
 \citet{MVK09} carried out a thorough study of point 1): they quantified how the properties of a lens galaxy determine its probability of creating a lensing event with a point source.
-In this work we revisit the \citet{MVK09} study, we expand it to the extended source case and, most importantly, we address point 2) as well: we simulate large populations of strong lenses using empirical models, simulate lensing surveys with realistic assumptions for the lens probability $\pdet$ and quantify the lensing bias under various scenarios.
+In this work we revisited the \citet{MVK09} study, expanding it to the extended source case. We simulated individual lenses and examined how the lens detection probability varies with lens and source properties.
+In addition, we addressed point 2) and 3) as well: we simulated large populations of strong lenses using empirical models, we simulated the lens detection and finding phase, and quantified the lensing bias under various scenarios.
 %We explore how the results change as a function of the scatter in mass parameters at fixed light, of the efficiency of finding lenses with small image separation, and of source type: we simulate both galaxy and quasar sources.
 %We explore how the results change as a function of the scatter in mass parameters at fixed light, and as a function of the efficiency of a lens survey at discovering small image separation lenses.
-We explore how the results change as a function of the efficiency of a lens survey at discovering small image separation lenses, and of the scatter in mass parameters at fixed light.
+We explored how the results change as a function of the efficiency of a lens survey at discovering small image separation lenses, and of the scatter in mass parameters at fixed light.
 
 %In light of the results of our experiments, we discuss to what extent can studies of galaxy structure based on strong lenses be generalised to describe non-lens galaxies.
-Finally, we address the question of how different are galaxy-galaxy lens samples from sets of galaxy-quasar lenses. This last point is relevant for time-delay cosmography studies, in which measurements of the time-delay between the multiple images of a strongly lensed quasar are used to constrain the expansion rate of the Universe. Galaxy-galaxy lenses can in principle be used to help break some of the model degeneracies affecting these measurements \citep{B+T21}, but any difference between the two lens classes can in principle introduce biases, if not corrected for.
+Finally, we addressed the question of how different are galaxy-galaxy lens samples from sets of galaxy-quasar lenses. This last point is relevant for time-delay cosmography studies, in which measurements of the time-delay between the multiple images of a strongly lensed quasar are used to constrain the expansion rate of the Universe. Galaxy-galaxy lenses can in principle be used to help break some of the model degeneracies affecting these measurements \citep{B+T21}, but any difference between the two lens classes can in principle introduce biases, if not corrected for.
 With this study we aim to quantify this bias.
 
 The structure of this work is the following.
 In \Sref{sect:basics} we introduce the basics of gravitational lensing.
-In \Sref{sect:indlenses} we study individual lens systems, to look for trends in the lensing cross-section with various lens and source properties.
-In \Sref{sect:lenspop} we describe our simulations of lens populations.
-In \Sref{sect:results} we show the results of our analysis on the simulated lens populations.
+In \Sref{sect:indlenses} we study individual lens systems. %, to look for trends in the lensing cross-section with various lens and source properties.
+In \Sref{sect:lenspop} we describe our simulations of lens surveys.
+In \Sref{sect:results} we show the results of our analysis on the simulated lens survey data.
 We discuss the results in \Sref{sect:discuss} and draw conclusions in \Sref{sect:concl}.
 
 The Python code used for the simulation and analysis of the lens sample can be found in a dedicated section of a GitHub repository\footnote{\url{https://github.com/astrosonnen/strong_lensing_tools}}.
@@ -407,7 +417,7 @@ This can be observed in the fourth example of \Fref{fig:lensdef}: although the s
 \includegraphics[width=\columnwidth]{example_detections.eps}
 \caption{
 Criterion used to classify lensed images of extended sources. Four examples.
-First column: caustics (red curves) and source position (blue circle). The radius of the circle corresponds to the radius at which the surface brightness is equal to $2\sigma$ the sky background fluctuation for a single pixel. In other words, the blue circle delimits the area of the source that can be detected.
+First column: caustics (red curves) and source position (blue circle). The radius of the circle corresponds to the radius at which the surface brightness is equal to $2\sigma$ the sky background rms fluctuation for a single pixel. In other words, the blue circle delimits the area of the source that can be detected.
 Second column: mock image of the lensed source, with added noise.
 Third column: footprint of the source. The purple footprint is obtained with a $2\sigma$ detection criterion. The coral region is the largest footprint with the highest number of detected images.
 \label{fig:lensdef}
@@ -450,6 +460,9 @@ Given a foreground galaxy with parameters $\psilens$, a background source with p
 where $\boldsymbol\beta$ is the position of the background source, $\psisourcenobeta$ is the ensemble of source parameter except for the position, and the integral is carried out over the whole sky.
 The definition above is valid for both a point source and an extended source: although there is no unique way of defining the position of an extended source, the integral over the sky ensures that the result is independent of how the source position is defined.
 In the limit of low density of background sources, which is satisfied in all practical cases, the probability of a lensing event is proportional to $\crosssect$.
+The lensing cross-section defined via \Eref{eq:crosssect} depends solely on the lens detection probability $\pdet$ and does not take into account whether the lens can be correctly classified by a lens finder.
+This separate selection step is captured by the term $\pfind$ in \Eref{eq:two}.
+In this section we consider solely on the detectability of a lens, and therefore focus only on $\crosssect$. In \Sref{sect:lenspop}, when considering specific lens survey simulations, we introduce $\pfind$.
 
 We compute $\crosssect$ in a series of different scenarios of increasing complexity.
 The model family adopted to describe the radial density profile of the lenses is the same in all of our experiments. We describe this in section \ref{ssec:profile}.
@@ -520,7 +533,7 @@ In order to compute the lensing cross-section, however, we must take into accoun
 %In order to compute the lensing cross-section, however, we must take into account the magnification of the multiple images: according to our definition of a strong lensing event, given in section \ref{ssec:lensdefpoint}, at least two images must be detected in order for a system to qualify as a strong lens.
 
 \Fref{fig:1dmag} shows the magnification of the secondary image as a function of source position. The secondary image is the one located in the region between the radial and tangential critical curves, opposite to the source with respect to the lens centre. In most practical cases this is the second brightest image.
-As \Fref{fig:1dmag} shows, the magnification is very large for sources close to the lens (small values of $\beta$), decreases with increasing source position and then increases in close proximity to the radial caustic.
+As \Fref{fig:1dmag} shows, the magnification is very large for sources close to the lens centre (small values of $\beta$), decreases with increasing source position and then increases in close proximity to the radial caustic.
 While for the model with $f_{\mathrm{DM}}=0.8$ (purple curve) the magnification is above unity everywhere, other lens models can produce highly de-magnified secondary images for large values of $\beta$.
 Depending on the intrinsic brightness of the lensed source, these images may or may not be detected.
 %This has two implications for the lensing cross-section. First, a larger caustic size does not necessarily translate into a larger value of $\crosssect$. Second, the cross-section depends on the intrinsic brightness of the lensed source: an extremely bright point source can be detected regardless of its position in the source plane, but a source with a finite brightness can go undetected depending on its value of $\beta$.
@@ -598,7 +611,7 @@ This is the lens model used to produce the caustics plot of \Fref{fig:ellcaust}.
 \Fref{fig:ellcaust} suggests that the size of the source plane area subject to strong lensing, the area enclosed within the outermost caustic, does not vary strongly with the ellipticity of the lens.
 Therefore we expect the strong lensing cross-section to be a weak function of ellipticity.
 
-We carried out the computation of $\crosssect$ by means of simulation: we generated a large number of point sources over a given area that includes the caustic, then used {\sc Glafic} to solve the lens equation, find the number of images and their magnification. We then measured the fraction of sources that are strongly lensed according to the criterion of \Eref{eq:pointdet} and multiplied this value by the area over which sources are located.
+We carried out the computation of $\crosssect$ by means of simulation: we generated a large number of point sources randomly distributed over a given area that includes the caustic, then used {\sc Glafic} to solve the lens equation, find the number of images and their magnification. We then measured the fraction of sources that are strongly lensed according to the criterion of \Eref{eq:pointdet} and multiplied this value by the area over which sources are located.
 The resulting $\crosssect$ is shown in \Fref{fig:ellpoint_cs} as a function of the minor-to-major axis ratio $q$.
 
 \begin{figure}
@@ -641,9 +654,9 @@ We then took a lens model with the same parameters used in section \ref{ssec:ell
 We simulated a large number of images of extended sources with {\sc Glafic} and measured the fraction of them that results in a strong lens, according to the definition of section \ref{ssec:lensdefext}.
 For the small source size experiment, we used pixels with a size equal to $1/20\tein$ and convolved the images with a Moffat PSF with a FWHM of two pixels.
 We also assumed that the background noise is an uncorrelated Gaussian field.
-We carried out experiments with sources with different values of the total flux, $f$, and half-light radius, $\theta_{\mathrm{e,s}}$.
+We carried out experiments with sources with different values of the total unlensed flux, $f$, and half-light radius, $\theta_{\mathrm{e,s}}$.
 The results are shown in \Fref{fig:extcs}.
-The total flux of the source, indicated in the legend, is measured in units of the sky background fluctuation within an area equal to the square of the Einstein radius.
+The total flux of the source, indicated in the legend, is measured in units of the sky background rms fluctuation within an area equal to the square of the Einstein radius.
 
 \begin{figure}
 \includegraphics[width=\columnwidth]{ell_ext_cs.eps}
@@ -652,7 +665,7 @@ Strong lensing cross-section of an extended source.
 Small source size regime.
 The cross-section is plotted as a function of the ratio between the half-light radius of the source and the Einstein radius of the lens.
 The lens model is fixed to be the same of \Fref{fig:ellpoint_cs}, with axis ratio $q=0.7$. The source is a circular exponential profile.
-Each solid line corresponds to a different value of the total flux of the source. The flux $f$ is expressed in terms of the background noise fluctuation measured over an area equal to $\tein^2$.
+Each solid line corresponds to a different value of the total unlensed flux of the source. The flux $f$ is expressed in terms of the background noise rms fluctuation measured over an area equal to $\tein^2$.
 The vertical dashed lines correspond to the maximum size for which a galaxy with a given flux can be detected in the absence of lensing.
 The horizontal dotted line indicates the cross-section for a very bright point source (i.e. the area enclosed within the caustics).
 %Solid grey curves are lines of constant effective surface brightness, $f/(2\pi\theta_s^2)$.
@@ -667,7 +680,7 @@ The horizontal dotted line indicates the cross-section for a very bright point s
 
 As in the point source case, the lensing cross-section increases with increasing total flux, at fixed source size.
 At fixed flux, $\crosssect$ stays approximately constant with increasing source size until a given value, then drops rapidly for larger sizes.
-From a qualitative point of view, this behaviour can be observed also in the absence of lensing: increasing the size of a galaxy while keeping its flux fixed lowers its average surface brightness. If the surface brightness drops below the sky fluctuation level, then it becomes very difficult to detect it.
+From a qualitative point of view, this behaviour can be observed also in the absence of lensing: increasing the size of a galaxy while keeping its flux fixed lowers its average surface brightness. If the surface brightness drops below the sky rms fluctuation level, then it becomes very difficult to detect it.
 In order to determine whether there are lensing-specific features in the $\crosssect-\theta_{\mathrm{e,s}}$ relation of \Fref{fig:extcs}, we computed, for each source flux, the maximum half-light radius for which it can be detected in the absence of lensing.
 We used the same criterion as that of section \ref{ssec:lensdefext} to define a detection: we defined the source footprint as the ensemble of pixels that are $2\sigma$ above the background and required the total signal-to-noise ratio within the footprint to be larger than ten.
 The resulting limiting sizes are shown as vertical lines in \Fref{fig:extcs}. For each given total flux, the non-lensing size limit is similar to the value of $\theta_{\mathrm{e,s}}$ at which the lensing cross-section drops.
@@ -717,7 +730,7 @@ Dash-dotted line: FWHM of the PSF.
 
 \section{Lens populations simulations}\label{sect:lenspop}
 
-In the previous section we showed how the lensing cross-section, which is closely related to the term $\pdet$ in \Eref{eq:one}, varies as a function of lens and source properties.
+In the previous section we showed how the lensing cross-section, which is closely related to the lens detection probability $\pdet$, varies as a function of lens and source properties.
 From here on we focus on the effect that those trends have on populations of lenses.
 We addressed this question by simulating populations of foreground galaxies and background sources, selecting strong lenses among them, and comparing the properties of the strong lens sample with the parent galaxy population.
 We simulated a lens-based search (as opposed to a source-based one), in which strongly lensed images are searched among a stellar mass-selected sample of galaxies.
@@ -926,7 +939,7 @@ The reason for this discrepancy lies in the differences between the lens mass mo
 
 
 %\subsection{Einstein radius cuts}\label{ssec:teincuts}
-\subsection{Completeness in Einstein radius}\label{ssec:teincuts}
+\subsection{Lens finding probability}\label{ssec:teincuts}
 
 \Fref{fig:teinhist} shows the distribution in Einstein radius of the simulated lens samples.
 In all cases, the distribution peaks at $\tein\approx0.7''$.
@@ -945,12 +958,14 @@ These are: galaxy-galaxy lenses in the fiducial, high scatter and low scatter sc
 Another possible reason for refining a sample of lens candidates is the availability of redshift measurements. Redshifts of both the lens and the source are needed in order to convert a lens model into a measurement of mass. When working with large samples of lenses, obtaining spectroscopic measurements is not a viable option, and photometric redshifts are a necessity. Measuring the photometric redshift of a strongly lensed source, however, is challenging, especially when the Einstein radius is small and the source light is blended with the light from the lens \citep{Lan++22}.
 
 Both of these scenarios can result in samples that are incomplete below a certain value of the Einstein radius. %in which lenses with a larger Einstein radius are preferentially selected.
-In order to simulate these situations, we apply an additional cut to lens samples, by selecting only lenses with an angular Einstein radius larger than a limiting value $\theta_{\mathrm{Ein,min}}$. 
-We refer to this value as the completeness limit.
-This is equivalent to multiplying $\pdet$ by a step function in the Einstein radius, which is zero for $\tein < \theta_{\mathrm{Ein,min}}$ and one otherwise.
-%Both for the lensed galaxies and lensed quasars, we apply an additional cut, by selecting only lenses with an angular Einstein radius larger than a limiting value $\theta_{\mathrm{Ein,min}}$.
-%This additional cut is meant to approximate the difficulty in detecting strongly lensed images with small separation, because of the contamination from the light of the lens galaxy.
-We explored scenarios with different values of $\theta_{\mathrm{Ein,min}}$.
+We simulate these situation via the following Einstein radius-dependent lens finding probability:
+\begin{equation}
+\pfind(\tein|S,\mathrm{det}) = \left\{\begin{array}{ll} 1 & \rm{if}\,\tein > \teinmin \\
+0 & \rm{otherwise}\end{array}\right. .
+\end{equation}
+In words, all lenses with Einstein radius larger than $\theta_{\mathrm{Ein,min}}$ are included in the sample, while all those with smaller Einstein radius are excluded.
+We refer to $\teinmin$ as the completeness limit: our simulated lens samples are complete down to $\tein=\teinmin$.
+We explored scenarios with different values of $\teinmin$.
 As the next section shows, the larger the minimum Einstein radius, the higher the strong lensing bias.
 
 %__________________________________________________________________
@@ -1197,7 +1212,7 @@ In order for a galaxy-source pair to be included as a strong lens in a survey, t
 First of all, part of the source must be multiply imaged.
 Second, the multiple images must be detectable.
 Third, the lens must be recognised as such.
-Each one of these conditions introduces a bias with respect to the parent population of foreground galaxies and background sources. Together, they define the lens detection probability term $\pdet$ of \Eref{eq:one}.
+Each one of these conditions introduces a bias with respect to the parent population of foreground galaxies and background sources. Together, they define the lens selection probability term $\psel$ of \Eref{eq:one}.
 %In the best case scenario, the only sources of bias are the first two points.
 The first two points are intrinsic to a strong lensing survey and constitute an unavoidable source of bias. 
 The best case scenario occurs when the efficiency of including a detected strong lens in a survey is always one, and the sample is $100\%$ complete. In this case, the third condition does not introduce any further selection and the strong lensing bias is minimised.
@@ -1266,29 +1281,46 @@ We can then conclude that the details of the properties of the background source
 
 \subsection{Mitigation strategies}
 
-Although the amplitude of the strong lensing bias in difficult-to-observe mass-related quantities is relatively small, compared to current uncertainties, there might be situations in which one wishes to account for it.
-The formally correct way to do this is by explicitly modelling all of the selection steps in a Bayesian hierarchical formalism, as explained by \citet{Son22}.
-Doing so, however, can be difficult in practice.
-Therefore, it can be useful to develop alternative strategies to correct for the bias, or to mitigate its effects.
+%Although the amplitude of the strong lensing bias in difficult-to-observe mass-related quantities is relatively small, compared to current uncertainties, there might be situations in which one wishes to account for it.
+%The formally correct way to do this is by explicitly modelling all of the selection steps in a Bayesian hierarchical formalism, as explained by \citet{Son22}.
+%When the entire lens selection procedure is fully automated, then it is possible to use machine-learning to make this problem computationally tractable \citep{Leg++22}. 
+%If human selection is involved, however, it can be a difficult problem to solve in practice.
+%Therefore, it can be useful to develop alternative strategies to correct for the bias, or to mitigate its effects.
 
 As we discussed throughout this paper, the amplitude of the strong lensing bias depends on the intrinsic scatter in the mass parameters of the foreground galaxy population.
 One way to minimise the bias, therefore, is to identify scaling relations between observable quantities and mass-related properties that can account for part of the scatter.
 Describing the inner dark matter distribution as a function of stellar mass and half-light radius, as we did in section \ref{ssec:galbias}, is the first step in this direction: the bias in $\mdmfive$ at fixed $\mstar$ and $\reff$ is smaller than the overall shift in the median $\mdmfive$ of the lens population.
-This description could be extended by including the central velocity dispersion as an additional control parameter. The velocity dispersion is directly related to the mass distribution of the lens galaxy, which means that, for example, the distribution in $\asps$ at fixed velocity dispersion should be narrower than its global distribution. 
+This description could be extended by including the central velocity dispersion as an additional control parameter. The velocity dispersion is directly related to the mass distribution of the lens galaxy, which means that, for example, the distribution in $\asps$ at fixed velocity dispersion should be narrower than its global distribution marginalised over the whole population. 
 The central velocity dispersion, however, is very sensitive to the orbital anisotropy and to gradients in stellar mass-to-light ratio, which are not well known, therefore it is difficult to quantitatively estimate the benefit of including it in the description of the lensing bias.
 %intrinsic scatter in $\asps$ at fixed velocity dispersion should be smaller than %and therefore the intrinsic scatter in $\asps$ and $\mdmfive$ at fixed velocity dispersion should be smaller.
 
 %One problem with this approach is that the amplitude of the scatter in quantities such as $\asps$ or the dark matter parameters is not known before carrying out a strong lensing analysis, and neither is the resulting strong lensing bias.
 %An estimate of the bias, however, could be obtained after constraining the lens population distribution, by creating a simulation of the survey under the assumption that the inferred distribution is a good approximation of the truth. This would allow to posterior predict the effects of strong lensing bias. One could then adjust the parameters of the simulated galaxy population until the posterior predicted lens population matches the observed one. 
 
-If one wishes to directly correct for the strong lensing bias in a computationally manageable way, one possibility is to try and approximate $\pdet$. 
-In general, $\pdet$ depends nontrivially on the position, redshift and surface brightness distribution of the source, as well as on the lens mass density profile and redshift.
-This requires in principle to explicitly model the distribution of all of these quantities \citep[as done by][]{Son22}.
-However, we can make the assumption that $\pdet$ can be separable in a term that depends purely on the strong lensing cross-section and a term that depends purely on the Einstein radius.
+If one wishes to directly account for the strong lensing bias, the formally correct procedure is to explicitly model all of the selection steps in a Bayesian hierarchical formalism, as explained by \citet{Son22}.
+Although this can be computationally challenging, machine learning can offer an efficient alternative \citep{Leg++22}.
+In order for either of these approaches to work, however, it is essential that the lens selection procedure can be simulated.
+This can be difficult to do if human selection is involved in the definition of the lens sample.
+In that case, a possible alternative is to approximate the lens finding probability $\pfind$. %, which is the component of $\psel$ that is difficult to simulate. 
+For example, we can make the assumption that $\pfind$ depends purely on the Einstein radius.
 This is a reasonable assumption, as long as the lens finding procedure does not selectively pick lenses with different image configurations depending on their Einstein radius.
-It would allow us to marginalise over the source position and surface brightness parameters, thus simplifying the problem.
-The dependence of $\pdet$ on $\tein$ could then be described empirically and inferred during the analysis.
+%It would allow us to marginalise over the source position and surface brightness parameters, thus simplifying the problem.
+The dependence of $\pfind$ on $\tein$ could then be described empirically and inferred during the analysis.
 This is essentially the same approach adopted by \citet{Son++19} in the analysis of strong and weak lensing data from the Hyper Suprime-Cam Survey.
+
+%Although the amplitude of the strong lensing bias in difficult-to-observe mass-related quantities is relatively small, compared to current uncertainties, there might be situations in which one wishes to account for it.
+%The formally correct way to do this is by explicitly modelling all of the selection steps in a Bayesian hierarchical formalism, as explained by \citet{Son22}.
+%When the entire lens selection procedure is fully automated, then it is possible to use machine-learning to make this problem computationally tractable \citep{Leg++22}. 
+%If human selection is involved, however, it can be a difficult problem to solve in practice.
+%Therefore, it can be useful to develop alternative strategies to correct for the bias, or to mitigate its effects.
+
+%In general, $\pdet$ depends nontrivially on the position, redshift and surface brightness distribution of the source, as well as on the lens mass density profile and redshift.
+%This requires in principle to explicitly model the distribution of all of these quantities \citep[as done by][ in a simplified case]{Son22}.
+%However, we can make the assumption that $\pdet$ can be separable in a term that depends purely on the strong lensing cross-section and a term that depends purely on the Einstein radius.
+%This is a reasonable assumption, as long as the lens finding procedure does not selectively pick lenses with different image configurations depending on their Einstein radius.
+%It would allow us to marginalise over the source position and surface brightness parameters, thus simplifying the problem.
+%The dependence of $\pdet$ on $\tein$ could then be described empirically and inferred during the analysis.
+%This is essentially the same approach adopted by \citet{Son++19} in the analysis of strong and weak lensing data from the Hyper Suprime-Cam Survey.
 
 
 \subsection{Limitations of our analysis}
