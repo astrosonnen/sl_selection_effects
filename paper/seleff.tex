@@ -877,8 +877,10 @@ The observed fundamental plane scatter is $0.035$.
 
 \subsubsection{Galaxies}\label{ssub:extsources}
 
-\todo{Shun-Sheng please fill in}
-%\ale{To be filled by Shun-Sheng}.
+Our background galaxy population is taken from the \textsc{surfs}-based KiDS-Legacy-Like Simulation (SKiLLS) input catalogue, a hybrid simulation catalogue integrating cosmological simulation with high-quality imaging observations (Li et al., in prep). The cosmological simulation is obtained from the Synthetic UniveRses For Surveys (\textsc{surfs}) simulations, a set of $N$-body simulations from \citet{Ela++18}. The galaxy properties, including the star formation history and the metallicity history, are from an open-source semi-analytic model named \textsc{Shark}\footnote{\url{https://github.com/ICRAR/shark}}~\citep{Lag++18}. The original photometry is drawn from a stellar population synthesis technique using stellar synthesis libraries with physically motivated dust attenuation and re-emission models~\citep{Rob++20}. Li et al. (in prep) further applied an empirical correction to the original synthetic photometry to better agree with the COSMOS2015 observations~\citep{Lai++16}. The galaxy morphology is described by a S\'ersic profile with three parameters: the half-light radius in angular units $\theta_{
+mathrm{e,s}}$, the S\'ersic index $n_\mathrm{s}$, and the axis ratio $q_\mathrm{s}$. These structural parameters are learned from the imaging data obtained with the Advanced Camera for Surveys (ACS) instrument on the \textit{Hubble} Space Telescope~\citep{Gri++12}. We refer to Li et al. (in prep) for details on the learning algorithm and validation.
+
+The complete SKiLLS catalogue contains ${\sim}108~{\rm deg}^2$ of galaxies with redshift up to $2.5$ and $r$-band apparent magnitude down to $27$.
 We applied a lower limit to the source redshift, by selecting only sources with $z_s > 0.8$.
 This ensures that all of the sources lie behind all of the lenses.
 A similar cut could be applied to a real survey using photometric redshifts, to reduce the incidence of false positives (e.g. arc-like features physically associated with the lens galaxy) in the lens finding phase.
