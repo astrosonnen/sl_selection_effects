@@ -393,7 +393,7 @@ In principle, we should require parts of the source to be multiply imaged.
 In practice, it is not always easy to determine whether a lensed image contains multiple images or not.
 This is because, when the source is extended, some of the images can be blended together.
 In real strong lensing surveys, it is common to find lens candidates in which the lensed source consists of only a single arc. In those cases it is difficult to establish whether the arc is a set of blending images or not, and the decision of including such systems in a strong lens sample is often arbitrary.
-Here we adopt the following definition: an extended source is strongly lensed if the number of surface brightness peaks that are detected is larger than its intrinsic number of peaks in the absence of lensing.
+Here we adopt the following working definition: {\em an extended source is strongly lensed if the number of surface brightness peaks that are detected is larger than its intrinsic number of peaks in the absence of lensing}.
 
 We explain how this definition applies in practice with a few examples.
 For simplicity, we focus on the case of a source with a single surface brightness peak, such as a S\'{e}rsic profile. All of the sources considered in this work belong to this family of surface brightness models.
@@ -472,27 +472,53 @@ In section \ref{ssec:ellpoint} we generalise the lens geometry to elliptical, wh
 
 \subsection{Lens density profile}\label{ssec:profile}
 
-Throughout this work we describe the mass distribution of the lens galaxies with a two-component model consisting of a S\'{e}rsic profile, describing the baryonic component of a galaxy, and a generalised Navarro, Frenk \& White (gNFW) profile, describing the dark matter halo.
-We assume that the two components are concentric.
-We also assume that the baryonic component consists entirely of stars.
-This is a good approximation for the majority of the known strong lenses, which are massive elliptical galaxies with little gas.
-Finally, we assume that the light distribution of the stellar component follows its mass distribution exactly. That is, we do not allow for the presence of gradients in the stellar mass-to-light ratio. This assumption is probably broken in real galaxies but, as we discuss in \Sref{sect:discuss}, does not impact our investigation.
-
-The projected surface mass density of a S\'{e}rsic profile is given by
+%In this work we focus on massive elliptical galaxies as lenses. This is because this class of objects makes up the vast majority of known strong lenses.
+%The type of lenses that we focus on in this work are massive elliptical galaxies: these make up the vast majority of known strong lenses.
+%The lens galaxies that we focus on in this work are massive early-types: these make up the vast majority of known strong lenses.
+In this work we focus on massive early-type galaxies as lenses, as these make up the vast majority of known strong lenses.
+We describe their mass distribution with a model consisting of two concentric components, one describing the baryons and one for the dark matter.
+We assume that the baryonic component consists entirely of stars, thereby neglecting gas, which is known to contribute very little to the mass of early-type galaxies in the inner regions that are probed by strong lensing. 
+We then assume that the stars follow a S\'{e}rsic profile, with %with a fixed index of $n=4$ (also known as a de Vaucouleurs profile).
+projected surface mass density given by
 \begin{equation}
-\Sigma(R) = \Sigma_0 \exp{\left\{-b\left(\frac{R}{\reff}\right)^{1/4}\right\}},
+\Sigma(R) = \Sigma_0 \exp{\left\{-b\left(\frac{R}{\reff}\right)^{1/n}\right\}}.
 \end{equation}
-with
+In the above equation,
 \begin{equation}
 \Sigma_0 = \frac{\mstar b^{2n}}{2\pi n \reff^2 \Gamma(2n)},
 \end{equation}
-where $\mstar$ is the total mass, $\reff$ is the radius enclosing half of the total mass, $n$ is the S\'{e}rsic index, $\Gamma$ is the incomplete Gamma function, and $b$ is given by \citep{C+B99}
+$\mstar$ is the total mass, $\reff$ is the radius enclosing half of the total mass, $n$ is the S\'{e}rsic index, $\Gamma$ is the incomplete Gamma function, and $b$ is given by \citep{C+B99}
 \begin{equation}
 b(n) \approx 2n -\frac13 + \frac{4}{405n} + \frac{46}{25515n^2} + O(n^{-3}).
 \end{equation}
 Throughout this paper we indicate with $\teff$ the angular size of the half-light radius.
 
-The dark matter component is first defined by means of its three-dimensional distribution, which for a spherically symmetric gNFW profile is
+Throughout our work we fix the S\'{e}rsic index of the lenses to $n=4$, also known as a de Vaucouleurs model.
+Although early-type galaxies are often described with a free S\'{e}rsic index, a de Vaucouleurs profile is able to reproduce their surface brightness distribution to a few percent in the radial range $1\rm{kpc} < R < 30\rm{kpc}$ \citep[see e.g.][]{Son20}, which is the region that is relevant for strong lensing.
+Finally, we assume that the light distribution of the stellar component follows its mass distribution exactly. That is, we do not allow for the presence of gradients in the stellar mass-to-light ratio. This assumption is probably broken in real galaxies but, as we discuss in \Sref{sect:discuss}, does not impact our investigation.
+
+%Throughout this work we describe the mass distribution of the lens galaxies with a two-component model consisting of a S\'{e}rsic profile, describing the baryonic component of a galaxy, and a generalised Navarro, Frenk \& White (gNFW) profile, describing the dark matter halo.
+%We assume that the two components are concentric.
+%We also assume that the baryonic component consists entirely of stars.
+%This is a good approximation for the majority of the known strong lenses, which are massive elliptical galaxies with little gas.
+%Finally, we assume that the light distribution of the stellar component follows its mass distribution exactly. That is, we do not allow for the presence of gradients in the stellar mass-to-light ratio. This assumption is probably broken in real galaxies but, as we discuss in \Sref{sect:discuss}, does not impact our investigation.
+
+%The projected surface mass density of a S\'{e}rsic profile is given by
+%\begin{equation}
+%\Sigma(R) = \Sigma_0 \exp{\left\{-b\left(\frac{R}{\reff}\right)^{1/n}\right\}},
+%\end{equation}
+%with
+%\begin{equation}
+%\Sigma_0 = \frac{\mstar b^{2n}}{2\pi n \reff^2 \Gamma(2n)},
+%\end{equation}
+%where $\mstar$ is the total mass, $\reff$ is the radius enclosing half of the total mass, $n$ is the S\'{e}rsic index, $\Gamma$ is the incomplete Gamma function, and $b$ is given by \citep{C+B99}
+%\begin{equation}
+%b(n) \approx 2n -\frac13 + \frac{4}{405n} + \frac{46}{25515n^2} + O(n^{-3}).
+%\end{equation}
+%Throughout this paper we indicate with $\teff$ the angular size of the half-light radius.
+
+We describe the dark matter halo with a generalised Navarro, Frenk \& White (gNFW) profile.
+We first define it by its three-dimensional distribution, which for a spherically symmetric profile is
 \begin{equation}
 \rho(r) = \dfrac{\rho_0}{(r/r_s)^{\gammadm}\left(1 + r/r_s\right)^{3-\gammadm}}.
 \end{equation}
@@ -503,7 +529,8 @@ The projected surface mass density of a gNFW profile can be expressed in terms o
 \end{equation}
 
 \Fref{fig:kappa} shows the dimensionless surface mass density profile of S\'{e}rsic + gNFW models with various values of the inner dark matter density slope $\gammadm$ and of the fraction of projected dark matter mass within the half-light radius, $\fdm$.
-All of the profiles have a S\'{e}rsic index $n=4$, a dark matter scale radius equal to ten times $\reff$, and are normalised in such a way that the Einstein radius is equal to the half-mass radius of the stellar component. 
+All of the profiles have %a S\'{e}rsic index $n=4$, 
+a dark matter scale radius equal to ten times $\reff$, and are normalised in such a way that the Einstein radius is equal to the half-mass radius of the stellar component (these assumptions are dropped later).
 Two main features emerge from \Fref{fig:kappa}. First, the baryons generally dominate the total density in the inner regions $(\theta < \tein)$, while the dark matter is the main component at large radii.
 Second, models with different dark matter fractions and inner dark matter slopes can conspire to produce very similar total density profiles. 
 This is the case, for example, of the ($\fdm=0.5,\gammadm=1.5$) and the ($\fdm=0.2,\gammadm=2.0$) models (green and blue lines in \Fref{fig:kappa}).
@@ -543,7 +570,7 @@ Depending on the intrinsic brightness of the lensed source, these images may or 
 \includegraphics[width=\columnwidth]{composite_fixedap_mu2.eps}
 \caption{
 Magnification of the secondary image as a function of the source position.
-The lenses are axisymmetric composite model. Their density profile is plotted in \Fref{fig:kappa}.
+The lenses are axisymmetric composite models. Their density profile is plotted in \Fref{fig:kappa}.
 Vertical dotted lines mark the position of the radial caustic.
 \label{fig:1dmag}
 }
@@ -566,8 +593,9 @@ In these cases the lensing cross-section coincides with the full area enclosed w
 \caption{
 Strong lensing cross-section of an axisymmetric lens and a point source.
 The lens galaxy is a composite model, introduced in section \ref{ssec:profile}, with angular half-light radius equal to the Einstein radius.
-Left panel: cross-section, in units of $\pi\tein^2$, as a function of the inner dark matter slope. The dark matter fraction is fixed at $\fdm=0.5$.
-Right panel: cross-section as a function of the fraction of dark matter within the half-light radius. The inner dark matter slope is fixed at $\gammadm=1.5$.
+The left panel shows the effect of varying the slope $\gammadm$ for fixed $\fdm$; conversely, the right panel shows variations as a function of $\fdm$ with $\gammadm$ fixed.
+%Left panel: cross-section, in units of $\pi\tein^2$, as a function of the inner dark matter slope. The dark matter fraction is fixed at $\fdm=0.5$.
+%Right panel: cross-section as a function of the fraction of dark matter within the half-light radius. The inner dark matter slope is fixed at $\gammadm=1.5$.
 The system is defined as a strong lens if at least two images are detected.
 Different lines correspond to the difference $\Delta m$ between the source magnitude and the survey detection limit for a point source.
 \label{fig:fixedap_cs}
@@ -1234,7 +1262,7 @@ Such a goal could be reached with a sample size of a thousand lenses and a stati
 Strong lenses are also biased towards larger halo masses.
 Nevertheless, when focusing on the dark matter content in the inner regions, the amplitude of the strong lensing bias is relatively small, especially when controlling for the stellar distribution of the lens galaxies.
 For instance, at fixed observed stellar mass and half-light radius, the bias on the projected dark matter mass enclosed within $5$~kpc, $\mdmfive$, is only a few percent in the fiducial scatter scenario with $\theta_{\mathrm{Ein,min}} < 1.0''$.
-This means that strong lenses can be used to understand the inner dark matter distribution of galaxies, as long as the dependence of the dark matter distribution on the properties of the baryonic component is accurately modelled \citep[for example, by following the approach of][]{S+C21}.
+This means that strong lenses can indeed be used to understand the inner dark matter distribution of galaxies, as long as the dependence of the dark matter distribution on the properties of the baryonic component is accurately modelled \citep[for example, by following the approach of][]{S+C21}.
 
 We also looked at the bias on source-related parameters.
 Strong lensing causes the luminosity function of background sources to be broadened, compared to the distribution of detectable sources.
