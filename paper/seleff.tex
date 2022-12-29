@@ -192,7 +192,7 @@ Given current uncertainties, strong lensing observations can be used directly to
 \section{Introduction}\label{sect:intro}
 
 Strong gravitational lensing is a powerful tool for studying galaxies and cosmology.
-Strong lenses have been used to probe the mass structure of massive galaxies \citep{Aug++10, ORF14, Son++15, Sha++21}, to detect substructure \citep{Veg++12, Hez++16, Nie++20}, to carry out detailed studies of magnified star-forming galaxies \citep{Jon++13}, and to measure the expansion rate of the universe with time delays \citep[see][for a review]{T+M16}.
+Strong lenses have been used to probe the mass structure of massive galaxies \citep{Aug++10, ORF14, Son++15, Sha++21}, to detect substructure \citep{Veg++12, Hez++16, Nie++20}, to carry out detailed studies of magnified star-forming galaxies \citep{Jon++13}, and to measure the expansion rate of the universe with time delays \citep[see][ for a review]{T+M16}.
 
 Strong lenses, however, are a biased subset of the general population of galaxies and background sources.
 A necessary condition for a galaxy to act as a strong lens with respect to a given source is that its projected surface mass density $\Sigma(\boldsymbol\theta)$ must be larger than the critical surface mass density for lensing $\Sigma_{\mathrm{cr}}$ at at least one position $\boldsymbol\theta$ \citep{SEF92}.
@@ -212,7 +212,7 @@ This last factor takes into account both physical effects, that is whether a len
 
 The left-hand side of \Eref{eq:one} is directly accessible from strong lensing observations. If the main goal of a lensing survey is to characterise the properties of the strong lens population, then it can be accomplished by directly analysing this term. For many applications of strong lensing, however, the aim is to constrain the properties of the general galaxy or source population, $\prlens$ and $\prsource$, which are coupled in a nontrivial way via the lens selection probability $\psel$.
 In order to obtain an unbiased estimate of either $\prlens$ or $\prsource$, then, it is necessary to invert \Eref{eq:one}.
-In principle, this can be done with a Bayesian hierarchical formalism, provided that the lens selection probability $\psel$ is known \citep{Son22}.
+In principle, this can be done with a Bayesian hierarchical formalism \citep{Son22}, but knowledge of the lens selection probability $\psel$ is required.
 %For most of the existing strong lensing surveys, however, characterising $\psel$ is very challenging. %: the process of determining whether a system is included in a strong lens sample is typically a combination of several cuts, usually involving a nontrivial visual selection step. 
 This factor can be written as the following product:
 \begin{equation}\label{eq:two}
@@ -233,7 +233,7 @@ The answer to this question depends on 1) how the lens detection probability $\p
 
 \citet{MVK09} carried out a thorough study of point 1): they quantified how the properties of a lens galaxy determine its probability of creating a lensing event with a point source.
 In this work we revisited the \citet{MVK09} study, expanding it to the extended source case. We simulated individual lenses and examined how the lens detection probability varies with lens and source properties.
-In addition, we addressed point 2) and 3) as well: we simulated large populations of strong lenses using empirical models, we simulated the lens detection and finding phase, and quantified the lensing bias under various scenarios.
+In addition, we addressed points 2) and 3) as well: we simulated large populations of strong lenses using empirical models, we simulated the lens detection and finding phase, and quantified the lensing bias under various scenarios.
 %We explore how the results change as a function of the scatter in mass parameters at fixed light, of the efficiency of finding lenses with small image separation, and of source type: we simulate both galaxy and quasar sources.
 %We explore how the results change as a function of the scatter in mass parameters at fixed light, and as a function of the efficiency of a lens survey at discovering small image separation lenses.
 We explored how the results change as a function of the efficiency of a lens survey at discovering small image separation lenses, and of the scatter in mass parameters at fixed light.
@@ -377,9 +377,9 @@ The lens model adopted for this experiment consists of a stellar component and a
 In order to compute the probability of a lensing event we must provide an exact definition for it.
 A necessary condition for a lens-source system to qualify as a strong lens is the presence of multiple images of the source.
 As we showed above, this requires the source to lie within the region enclosed by the radial caustic.
-In order to recognise a strong lens in a real strong lensing survey, however, it is not sufficient for multiple images to exist: they must be detected.
-For this reason, given the detection limit of a survey for a point source, $m_{\mathrm{lim}}$, we define as strong lensing event any lens-source system with at least two images brighter than $m_{\mathrm{lim}}$.
-This is the same definition upon which the \citet{MVK09} work is based \citep{VMK09}.
+In order to recognise a strong lens in a real survey, however, it is not sufficient for multiple images to exist: they must be detected.
+For this reason, given the detection limit for a point source, $m_{\mathrm{lim}}$, we define as strong lensing event any lens-source system with at least two images brighter than $m_{\mathrm{lim}}$.
+This is the same definition used by \citep{VMK09}, upon which the \citet{MVK09} work is based.
 Labelling with $m_2$ the magnitude of the second-brightest image, then, in the absence of photometric noise the lens detection probability $\pdet$ becomes
 \begin{equation}\label{eq:pointdet}
 \pdet(\psilens,\psisource) = \left\{\begin{array}{ll} 1 & \rm{if}\,m_2(\psilens,\psisource) < m_{\mathrm{lim}} \\
@@ -495,7 +495,8 @@ Throughout this paper we indicate with $\teff$ the angular size of the half-ligh
 
 We fix the S\'{e}rsic index of the lenses to $n=4$, corresponding to a de Vaucouleurs model.
 Although early-type galaxies are often described with a free S\'{e}rsic index, a de Vaucouleurs profile is able to reproduce their surface brightness distribution to a few percent in the radial range $1\rm{kpc} < R < 30\rm{kpc}$ \citep[see e.g.][]{Son20}, which is the region that is most relevant for strong lensing.
-Finally, we assume that the light distribution of the stellar component follows its mass distribution exactly. That is, we do not allow for the presence of gradients in the stellar mass-to-light ratio. This assumption is probably broken in real galaxies but, as we discuss in \Sref{ssec:limitations}, does not impact our investigation.
+Finally, we assume that the light distribution of the stellar component follows its mass distribution exactly. That is, we do not allow for the presence of gradients in the stellar mass-to-light ratio. In section \ref{ssec:limitations} we discuss qualitatively what the implications of relaxing this assumption would be.
+%This assumption is probably broken in real galaxies but, as we discuss in \Sref{ssec:limitations}, does not impact our investigation.
 
 %Throughout this work we describe the mass distribution of the lens galaxies with a two-component model consisting of a S\'{e}rsic profile, describing the baryonic component of a galaxy, and a generalised Navarro, Frenk \& White (gNFW) profile, describing the dark matter halo.
 %We assume that the two components are concentric.
@@ -714,7 +715,7 @@ We used the same criterion as that of section \ref{ssec:lensdefext} to define a 
 The resulting limiting sizes are shown as vertical lines in \Fref{fig:extcs}. For each given total flux, the non-lensing size limit is similar to the value of $\theta_{\mathrm{e,s}}$ at which the lensing cross-section drops.
 
 This result suggests that, to first approximation, lensing does not introduce a strong selection in source size.
-This follows from the fact that gravitational lensing preserves surface brightness: a source that can be detected in the absence of lensing will produce images with the same surface brightness when lensed, which can be detected as well.
+While perhaps surprising, this follows from the fact that gravitational lensing preserves surface brightness: a source that can be detected in the absence of lensing will produce images with the same surface brightness when lensed, which can be detected as well.
 %When the source is extended, however, 
 In order to classify a source as strongly lensed, however, we require that multiple images are observed. 
 Only sources that lie within a well-defined region give rise to a strong lensing configuration.
@@ -813,7 +814,7 @@ For each galaxy in the sample, we randomly drew a value of $\log{\asps}$ from th
 \end{equation}
 where the notation $\mathcal{N}(\mu,\sigma^2)$ indicates a Gaussian with mean $\mu$ and variance $\sigma^2$.
 We set the mean of $\log{\asps}$ to $0.1$, as this is an intermediate value among estimates of $\asps$ from the literature \citep{CvD12, Cap++13, SLC15, Son++15, Son++19}.
-For the scatter $\sigma_\alpha$ we adopted a few different values. We explain in \ref{ssub:scat} how these were chosen.
+We adopted a few different values for the scatter $\sigma_\alpha$. We explain in \ref{ssub:scat} how these were chosen.
 
 
 \subsubsection{Stellar mass density distribution}
@@ -852,7 +853,7 @@ Finally, we fitted a gNFW profile to the surface mass density of the contracted 
 %
 The dark matter density profile defined in this way is determined uniquely by the halo mass, the stellar mass and the half-light radius (the more concentrated the stellar distribution, the stronger the halo response and the steeper the dark matter density profile).
 In principle we could have allowed for additional degrees of freedom, for instance by relaxing the assumption of a fixed initial halo concentration.
-In practice, as we explain in section \ref{ssec:limitations}, our main resultsare not affected by this choice.
+In practice, as we explain in section \ref{ssec:limitations}, our main results are not affected by this choice.
 %However, we wanted to explore scenarios in which there is scatter in the dark matter inner slope. Therefore, we applied a random scatter on $\gammadm$ of amplitude $\sigma_{\gamma}$. We explored different values for $\sigma_{\gamma}$, as explained in the next section.
 
 Given the radial profile of the dark matter halo, we obtained an elliptical version of it by applying a transformation of the kind of \Eref{eq:elltransf} to its projected surface mass density.
@@ -1017,7 +1018,7 @@ In this section we show the results of the experiments with populations of galax
 We first present the results in a qualitative way, then proceed to quantify the amplitude of the strong lensing bias in various quantities of interest.
 
 \Fref{fig:lenspars} shows the distribution in the parameters of the foreground galaxies of the lens systems, compared to those of the parent population, for the fiducial scatter scenario with two different values of the minimum Einstein radius: $0.5''$ and $1.0''$.
-A completeness limit of $0.5''$ is close to what can be currently be achieved via visual inspection of high-resolution space-based images \cite{Gar++22}, while the $1.0''$ limit can be seen as a more conservative case.
+A completeness limit of $0.5''$ is close to what can currently be achieved via visual inspection of high-resolution space-based images \cite{Gar++22}, while the $1.0''$ limit can be seen as a more conservative case.
 \begin{figure*}
 \includegraphics[width=\textwidth]{lens_cornerplot.eps}
 \caption{
@@ -1106,6 +1107,7 @@ For a given value of the observed stellar mass, strong lensing selection favours
 Since the galaxy stellar mass function of the parent population is steep, lenses tend to have a relatively small $\mobs$ and large values of $\asps$ or $\mhalo$ for their observed stellar mass (this is shown more clearly in the next section).
 If the intrinsic scatter in $\asps$ and $\mhalo$ is low, however, the number of galaxies with a small $\mobs$ and a large stellar or halo mass is greatly reduced.
 Only galaxies with a large $\mobs$ or a small size can therefore act as strong lenses.
+This is an interesting result, because it suggests that it is in principle possible to use the strong lensing bias on $\mobs$ or $\reff$, which is observable, as a way to constrain the amplitude of the intrinsic scatter in the mass parameters, which is poorly known.
 
 \subsubsection{Bias in lens mass parameters}
 
@@ -1206,7 +1208,7 @@ Error bars indicate the standard deviation of the mean of either the full sample
 The main goal of the experiment with lensed quasars is to check whether there are any differences in the strong lensing bias with respect to the extended source case, at fixed properties of the foreground galaxy population.
 For this reason, we only ran simulations with lensed quasars in the fiducial scatter scenario and compared the results with those from the extended source simulation.
 %We are also interested in understanding how the subset of quad lenses differs from the entire population of quasar lenses, therefore we computed the bias for this sample as well.
-We are also interested in understanding how the subset of quad lenses differs from the entire population of quasar lenses, therefore we also analysed this subsample on its own.
+We are also interested in understanding how the subset of quad lenses differs from the entire population of quasar lenses, therefore we also analysed that subsample on its own.
 %\Fref{fig:quasarpars} shows the distribution in a 
 %\Fref{fig:quasarbias} shows the strong lensing bias obtained with the lensed quasars simulation, compared with that 
 
@@ -1242,7 +1244,7 @@ Error bars indicate the standard deviation of the mean of the lens sample.
 \subsection{Key results}
 
 In order for a galaxy-source pair to be included as a strong lens in a survey, three condition must be met.
-First of all, part of the source must be multiply imaged.
+First of all, at least part of the source must be multiply imaged.
 Second, the multiple images must be detectable.
 Third, the lens must be recognised as such.
 Each one of these conditions introduces a bias with respect to the parent population of foreground galaxies and background sources. Together, they define the lens selection probability term $\psel$ of \Eref{eq:one}.
@@ -1270,8 +1272,8 @@ This means that strong lenses can indeed be used to understand the inner dark ma
 We also looked at the bias on source-related parameters.
 Strong lensing causes the luminosity function of background sources to be broadened, compared to the distribution of detectable sources.
 On the one hand, it preferentially selects brighter sources, because the lensing cross-section increases with increasing source brightness.
-On the other hand, it allows the detection of sources that are intrinsically fainter than the detection limit in the absence of lensing.
-Interestingly, we did not detect any significant bias on the source size, at fixed magnitude.
+On the other hand, it allows for the detection of sources that are intrinsically fainter than the detection limit in the absence of lensing.
+Interestingly, we did not find any significant bias on the source size, at fixed magnitude.
 This result follows from the fact that our lens detection criterion relies on a surface brightness threshold, and surface brightness is preserved by lensing.
 However, it appears to be in contradiction with the work of \citet{O+A17}, who argued that their strong lens sample selected preferentially compact sources.
 %However, \citet{O+A17} showed that their strong lens sample selected preferentially compact sources. 
@@ -1339,7 +1341,7 @@ For example, we can make the assumption that $\pfind$ depends purely on the Eins
 This is a reasonable assumption, as long as the lens finding procedure does not selectively pick lenses with different image configurations depending on their Einstein radius.
 %It would allow us to marginalise over the source position and surface brightness parameters, thus simplifying the problem.
 The dependence of $\pfind$ on $\tein$ could then be described empirically and inferred during the analysis.
-This is essentially the same approach adopted by \citet{Son++19} in the analysis of strong and weak lensing data from the Hyper Suprime-Cam Survey.
+This is essentially the approach adopted by \citet{Son++19} in the analysis of strong and weak lensing data from the Hyper Suprime-Cam Survey.
 
 %Although the amplitude of the strong lensing bias in difficult-to-observe mass-related quantities is relatively small, compared to current uncertainties, there might be situations in which one wishes to account for it.
 %The formally correct way to do this is by explicitly modelling all of the selection steps in a Bayesian hierarchical formalism, as explained by \citet{Son22}.
@@ -1366,22 +1368,39 @@ External convergence mimics the effect of adding or removing a constant sheet of
 Typical values of the external shear and external convergence are $|\gamma|<0.1$ and $|\kappa_{\mathrm{ext}}|<0.1$ \citep{Mil++20}: these values are small compared to the typical ellipticities and dark matter fractions of our simulated lenses.
 Therefore, while including them might modify slightly the amplitude of the strong lensing bias in the axis ratio and dark matter distribution parameters, the conclusions our our analysis would not be affected.
 
-We also assumed that the dark matter density profile of the galaxies is determined uniquely by the halo mass and by the stellar mass distribution (see section \ref{ssub:dmprofile}). In reality we expect there to be a range of density profiles, for example as a result of halos having a nonzero scatter in their initial concentration parameter.
+We also assumed that the dark matter density profile of the galaxies is completely determined by the halo mass and by the stellar mass distribution (see section \ref{ssub:dmprofile}). In reality we expect there to be a range of density profiles, for example as a result of halos having a nonzero scatter in their initial (i.e. before baryonic infall) concentration parameter.
 We could in principle carry out an experiment with such an additional source of variation in the dark matter profile.
-Allowing for additional flexibility at fixed halo mass scatter parameter $\sigma_h$ results in a larger scatter in the inner dark matter distribution, which would increase the amplitude of the lensing bias. However, the value of $\sigma_h$ that we chose for our fiducial experiment was tuned on the basis of the predicted scatter in velocity dispersion around the fundamental plane. That scatter would also be increased by adding flexibility to the dark matter density profile. Then, in order to be consistent with the analysis carried out in our paper, the value of $\sigma_h$ would need to be lowered accordingly. This, in turn, would reduce the amplitude of the strong lensing bias.
-Since lensing and dynamics are sensitive to the mass distribution at comparable scales (the half-light radius and Einstein radius are similar for most of the lenses), we expect these two effects to cancel out to first approximation, leaving the strong lensing bias roughly unchanged.
+Adding a scatter in concentration while keeping the halo mass scatter parameter $\sigma_h$ fixed results in a larger spread in the inner dark matter distribution, which would increase the amplitude of the lensing bias. However, the value of $\sigma_h$ that we chose for our fiducial experiment was tuned on the basis of the predicted scatter in velocity dispersion around the fundamental plane. That scatter would also be increased by adding flexibility to the dark matter density profile. Then, in order to be consistent with the analysis carried out in this paper, the value of $\sigma_h$ would need to be lowered accordingly. This, in turn, would reduce the amplitude of the strong lensing bias and introduce a bias on the halo concentration.
+%Allowing for additional flexibility at fixed halo mass scatter parameter $\sigma_h$ results in a larger scatter in the inner dark matter distribution, which would increase the amplitude of the lensing bias. However, the value of $\sigma_h$ that we chose for our fiducial experiment was tuned on the basis of the predicted scatter in velocity dispersion around the fundamental plane. That scatter would also be increased by adding flexibility to the dark matter density profile. Then, in order to be consistent with the analysis carried out in our paper, the value of $\sigma_h$ would need to be lowered accordingly. This, in turn, would reduce the amplitude of the strong lensing bias.
+Since lensing and dynamics are sensitive to the mass distribution at comparable scales (the half-light radius and Einstein radius are similar for most of the lenses), we expect these two effects to cancel out to first approximation. The lensing bias on quantities directly related to the inner mass distribution, such as $\asps$ and $\mdmfive$, would be left roughly unchanged. %leaving the strong lensing bias on roughly unchanged.
+The main effect of adding scatter to the concentration is to reduce the correlation between the total halo mass and the dark matter mass enclosed within the Einstein radius. This would then reduce the amplitude of the strong lensing bias on the halo mass.
+
+Another simplifying assumption that we made was that of adopting a constant mass-to-light ratio for the stellar component. Massive galaxies are known to have colour gradients, the main effect of which is to cause the stellar half-mass radius to be smaller than the half-light radius \citep{Szo++13,Sue++19}. Since, as shown in \Sref{sect:results}, strong lensing bias tends to select galaxies with a more compact stellar distribution, it would also preferentially select galaxies with a steeper mass-to-light ratio gradient.
+However, testing for the amplitude of the strong lensing bias on the mass-to-light ratio gradient is beyond the scope of this paper.
 
 
 %__________________________________________________________________
 
 \section{Conclusions}\label{sect:concl}
 
-We carried out a thorough investigation of the strong lensing bias in photometrically selected samples of strong lenses.
-We first explored how the strong lensing cross-section varies as a function of lens and source properties, expanding upon the work of \citet{MVK09}. % by considering both point-like and extended sources. 
-We introduced a new definition for a strong lensing event in the case of an extended source, for this purpose.
-%We also introduced a new definition for a strong lensing event, in the case of an extended source.
-This definition, which is based on the number of detected surface brightness peaks, is robust with respect to the mass-sheet degeneracy, unlike all magnification-based definitions.
-We found that the strong lensing cross-section increases primarily with increasing lens mass, with decreasing half-mass radius, and with decreasing source magnitude.
+Strong lensing is a very active line of research, but a comprehensive understanding of the selection effects associated with it has so far been lacking.
+This work takes a major step towards filling that knowledge gap.
+%After a thorough investigation of the strong lensing bias in photometrically selected samples of strong lenses, we learned the following important lessons. 
+%After a thorough investigation of the strong lensing bias, we learned the following important lessons that apply to photometrically selected samples of strong lenses.
+After a thorough investigation, we learned several lessons regarding the strong lensing bias in photometrically selected lens samples. The following are the most important ones.
+%The thorough investigation of the strong lensing bias that we carried out in this work allowed us to learn several important lessons.
+\begin{enumerate}
+\item The strong lensing cross-section increases primarily with increasing lens mass, with decreasing half-mass radius, and with increasing source brightness. However, it has little dependence on the size of the source, if this is smaller than the Einstein radius and if it is detectable in the absence of lensing. %source size when this is smaller than the Einstein radius. 
+%Sources with a surface brightness that is too low to be detected in the absence of lensing are still undetected when strongly lensed. Similarly, sources that are detectable 
+\item 
+
+\end{enumerate}
+
+%We carried out a thorough investigation of the strong lensing bias in photometrically selected samples of strong lenses.
+%We first explored how the strong lensing cross-section varies as a function of lens and source properties, expanding upon the work of \citet{MVK09}. % by considering both point-like and extended sources. 
+%We introduced a new definition for a strong lensing event in the case of an extended source, for this purpose.
+%This definition, which is based on the number of detected surface brightness peaks, is robust with respect to the mass-sheet degeneracy, unlike all magnification-based definitions.
+%We found that the strong lensing cross-section increases primarily with increasing lens mass, with decreasing half-mass radius, and with decreasing source magnitude.
 
 We then simulated photometric strong lensing surveys with data similar to Euclid Wide, and measured how various properties of the lens galaxies and background sources are biased with respect to their parent distributions.
 We focused primarily on mass-related quantities: most importantly, the stellar population synthesis mismatch parameter $\asps$ and the dark matter distribution.
