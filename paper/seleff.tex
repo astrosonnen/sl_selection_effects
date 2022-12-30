@@ -1140,6 +1140,7 @@ First, the dependence of $\mdmfive$ on $\mhalo$ is shallower than linear. This i
 Second, while $\mu_{\mathrm{h},0}$ is the halo mass at fixed stellar mass, $\mu_{\mathrm{DM},0}$ is measured at fixed half-light radius as well.
 The density profile of the dark matter halos in our simulation have a dependence on galaxy size: the response of dark matter to baryons is stronger for more concentrated stellar distributions (see section \ref{ssub:dmprofile}).
 By capturing this dependence in the model of \Eref{eq:dmscaling}, the residual scatter in $\mdmfive$ around the mean is reduced, and so is the strong lensing bias.
+This, however, is a minor effect: we repeated the analysis while setting the dependence on size to zero and found minimal differences on the derived values of $\mu_{\mathrm{DM},0}$.
 %
 In the fiducial scenario, the bias on $\mdmfive$ is as small as $0.02$~dex for $\theta_{\mathrm{Ein,min}} < 0.5''$, and is negligible in the low-scatter scenario.
 %Interestingly, the bias is negative in the low-scatter scenario.
@@ -1316,46 +1317,21 @@ We can then conclude that the details of the properties of the background source
 
 \subsection{Mitigation strategies}
 
-%Although the amplitude of the strong lensing bias in difficult-to-observe mass-related quantities is relatively small, compared to current uncertainties, there might be situations in which one wishes to account for it.
-%The formally correct way to do this is by explicitly modelling all of the selection steps in a Bayesian hierarchical formalism, as explained by \citet{Son22}.
-%When the entire lens selection procedure is fully automated, then it is possible to use machine-learning to make this problem computationally tractable \citep{Leg++22}. 
-%If human selection is involved, however, it can be a difficult problem to solve in practice.
-%Therefore, it can be useful to develop alternative strategies to correct for the bias, or to mitigate its effects.
-
 As we discussed throughout this paper, the amplitude of the strong lensing bias depends on the intrinsic scatter in the mass parameters of the foreground galaxy population.
 One way to minimise the bias, therefore, is to identify scaling relations between observable quantities and mass-related properties that can account for part of the scatter.
-Describing the inner dark matter distribution as a function of stellar mass and half-light radius, as we did in section \ref{ssec:galbias}, is the first step in this direction: the bias in $\mdmfive$ at fixed $\mstar$ and $\reff$ is smaller than the overall shift in the median $\mdmfive$ of the lens population.
+Describing the inner dark matter distribution as a function of stellar mass and half-light radius, as we did in section \ref{ssec:galbias}, is the first step in this direction: the bias in $\mdmfive$ at fixed $\mstar$ and $\reff$ is smaller than the overall shift in the median $\mdmfive$ of the lens population (albeit by a marginal amount, as we pointed out earlier).
 This description could be extended by including the central velocity dispersion as an additional control parameter. The velocity dispersion is directly related to the mass distribution of the lens galaxy, which means that, for example, the distribution in $\asps$ at fixed velocity dispersion should be narrower than its global distribution marginalised over the whole population. 
 The central velocity dispersion, however, is very sensitive to the orbital anisotropy and to gradients in stellar mass-to-light ratio, which are not well known, therefore it is difficult to quantitatively estimate the benefit of including it in the description of the lensing bias.
-%intrinsic scatter in $\asps$ at fixed velocity dispersion should be smaller than %and therefore the intrinsic scatter in $\asps$ and $\mdmfive$ at fixed velocity dispersion should be smaller.
-
-%One problem with this approach is that the amplitude of the scatter in quantities such as $\asps$ or the dark matter parameters is not known before carrying out a strong lensing analysis, and neither is the resulting strong lensing bias.
-%An estimate of the bias, however, could be obtained after constraining the lens population distribution, by creating a simulation of the survey under the assumption that the inferred distribution is a good approximation of the truth. This would allow to posterior predict the effects of strong lensing bias. One could then adjust the parameters of the simulated galaxy population until the posterior predicted lens population matches the observed one. 
 
 If one wishes to directly account for the strong lensing bias, the formally correct procedure is to explicitly model all of the selection steps in a Bayesian hierarchical formalism, as explained by \citet{Son22}.
 Although this can be computationally challenging, machine learning can offer an efficient alternative \citep{Leg++22}.
 In order for either of these approaches to work, however, it is essential that the lens selection procedure can be simulated.
 This can be difficult to do if human selection is involved in the definition of the lens sample.
-In that case, a possible alternative is to approximate the lens finding probability $\pfind$. %, which is the component of $\psel$ that is difficult to simulate. 
+In that case, a possible alternative is to approximate the lens finding probability $\pfind$. 
 For example, we can make the assumption that $\pfind$ depends purely on the Einstein radius.
 This is a reasonable assumption, as long as the lens finding procedure does not selectively pick lenses with different image configurations depending on their Einstein radius.
-%It would allow us to marginalise over the source position and surface brightness parameters, thus simplifying the problem.
 The dependence of $\pfind$ on $\tein$ could then be described empirically and inferred during the analysis.
 This is essentially the approach adopted by \citet{Son++19} in the analysis of strong and weak lensing data from the Hyper Suprime-Cam Survey.
-
-%Although the amplitude of the strong lensing bias in difficult-to-observe mass-related quantities is relatively small, compared to current uncertainties, there might be situations in which one wishes to account for it.
-%The formally correct way to do this is by explicitly modelling all of the selection steps in a Bayesian hierarchical formalism, as explained by \citet{Son22}.
-%When the entire lens selection procedure is fully automated, then it is possible to use machine-learning to make this problem computationally tractable \citep{Leg++22}. 
-%If human selection is involved, however, it can be a difficult problem to solve in practice.
-%Therefore, it can be useful to develop alternative strategies to correct for the bias, or to mitigate its effects.
-
-%In general, $\pdet$ depends nontrivially on the position, redshift and surface brightness distribution of the source, as well as on the lens mass density profile and redshift.
-%This requires in principle to explicitly model the distribution of all of these quantities \citep[as done by][ in a simplified case]{Son22}.
-%However, we can make the assumption that $\pdet$ can be separable in a term that depends purely on the strong lensing cross-section and a term that depends purely on the Einstein radius.
-%This is a reasonable assumption, as long as the lens finding procedure does not selectively pick lenses with different image configurations depending on their Einstein radius.
-%It would allow us to marginalise over the source position and surface brightness parameters, thus simplifying the problem.
-%The dependence of $\pdet$ on $\tein$ could then be described empirically and inferred during the analysis.
-%This is essentially the same approach adopted by \citet{Son++19} in the analysis of strong and weak lensing data from the Hyper Suprime-Cam Survey.
 
 
 \subsection{Limitations of our analysis}\label{ssec:limitations}
@@ -1371,8 +1347,7 @@ Therefore, while including them might modify slightly the amplitude of the stron
 We also assumed that the dark matter density profile of the galaxies is completely determined by the halo mass and by the stellar mass distribution (see section \ref{ssub:dmprofile}). In reality we expect there to be a range of density profiles, for example as a result of halos having a nonzero scatter in their initial (i.e. before baryonic infall) concentration parameter.
 We could in principle carry out an experiment with such an additional source of variation in the dark matter profile.
 Adding a scatter in concentration while keeping the halo mass scatter parameter $\sigma_h$ fixed results in a larger spread in the inner dark matter distribution, which would increase the amplitude of the lensing bias. However, the value of $\sigma_h$ that we chose for our fiducial experiment was tuned on the basis of the predicted scatter in velocity dispersion around the fundamental plane. That scatter would also be increased by adding flexibility to the dark matter density profile. Then, in order to be consistent with the analysis carried out in this paper, the value of $\sigma_h$ would need to be lowered accordingly. This, in turn, would reduce the amplitude of the strong lensing bias and introduce a bias on the halo concentration.
-%Allowing for additional flexibility at fixed halo mass scatter parameter $\sigma_h$ results in a larger scatter in the inner dark matter distribution, which would increase the amplitude of the lensing bias. However, the value of $\sigma_h$ that we chose for our fiducial experiment was tuned on the basis of the predicted scatter in velocity dispersion around the fundamental plane. That scatter would also be increased by adding flexibility to the dark matter density profile. Then, in order to be consistent with the analysis carried out in our paper, the value of $\sigma_h$ would need to be lowered accordingly. This, in turn, would reduce the amplitude of the strong lensing bias.
-Since lensing and dynamics are sensitive to the mass distribution at comparable scales (the half-light radius and Einstein radius are similar for most of the lenses), we expect these two effects to cancel out to first approximation. The lensing bias on quantities directly related to the inner mass distribution, such as $\asps$ and $\mdmfive$, would be left roughly unchanged. %leaving the strong lensing bias on roughly unchanged.
+Since lensing and dynamics are sensitive to the mass distribution at comparable scales (the half-light radius and Einstein radius are similar for most of the lenses), we expect these two effects to cancel out to first approximation. The lensing bias on quantities directly related to the inner mass distribution, such as $\asps$ and $\mdmfive$, would be left roughly unchanged. 
 The main effect of adding scatter to the concentration is to reduce the correlation between the total halo mass and the dark matter mass enclosed within the Einstein radius. This would then reduce the amplitude of the strong lensing bias on the halo mass.
 
 Another simplifying assumption that we made was that of adopting a constant mass-to-light ratio for the stellar component. Massive galaxies are known to have colour gradients, the main effect of which is to cause the stellar half-mass radius to be smaller than the half-light radius \citep{Szo++13,Sue++19}. Since, as shown in \Sref{sect:results}, strong lensing bias tends to select galaxies with a more compact stellar distribution, it would also preferentially select galaxies with a steeper mass-to-light ratio gradient.
@@ -1390,41 +1365,38 @@ This work takes a major step towards filling that knowledge gap.
 After a thorough investigation, we learned several lessons regarding the strong lensing bias in photometrically selected lens samples. The following are the most important ones.
 %The thorough investigation of the strong lensing bias that we carried out in this work allowed us to learn several important lessons.
 \begin{enumerate}
-\item The strong lensing cross-section increases primarily with increasing lens mass, with decreasing half-mass radius, and with increasing source brightness. However, it has little dependence on the size of the source, if this is smaller than the Einstein radius and if it is detectable in the absence of lensing. %source size when this is smaller than the Einstein radius. 
-%Sources with a surface brightness that is too low to be detected in the absence of lensing are still undetected when strongly lensed. Similarly, sources that are detectable 
+\item The strong lensing cross-section increases primarily with increasing lens mass, with decreasing half-mass radius, and with increasing source brightness. 
+At fixed stellar distribution and fixed dark matter mass enclosed within a given aperture, varying the inner dark matter slope has little impact on the strong lensing cross-section (as long as the aperture within which the dark matter mass is normalised is comparable to the Einstein radius).
+\item The strong lensing cross-section has little dependence on the size of the source, if this is smaller than the Einstein radius and if it is detectable in the absence of lensing.
+Sources with a surface brightness that is too low to be detected are still undetected when strongly lensed. 
+%\item At fixed stellar distribution and fixed dark matter mass enclosed within a given physical aperture, varying the inner dark matter slope has little impact on the strong lensing cross-section.
+\item Lens galaxies tend to be more massive and more compact than their non-lens counterparts. Their redshift distribution is also modified with respect to the general galaxy population.
+At fixed observed stellar mass (i.e. inferred by means of stellar population synthesis), lens galaxies have a larger intrinsic stellar mass (i.e. a larger stellar population synthesis mismatch parameter $\asps$) and a larger dark matter halo mass.
+At fixed stellar mass and size, lens galaxies are still biased towards a larger dark matter content.
+\item The amplitude of the strong lensing bias depends on how broad is the distribution of the parameters describing the lens population. 
+Important quantities in this regard are the intrinsic scatter in the stellar population synthesis mismatch parameter, $\sigma_{\mathrm{sps}}$, and in the dark matter halo mass, $\sigma_{\mathrm{h}}$.
+Increasing the values of $\sigma_{\mathrm{sps}}$ and $\sigma_\mathrm{h}$ results in a stronger bias on $\asps$ and on the dark matter mass, and a weaker bias on the observed stellar mass and half-light radius.
+This implies that, in principle, we could constrain the intrinsic scatter parameters, which are currently poorly known, by measuring the amplitude of the strong lensing bias on $\mobs$ and $\reff$, which is easily observable.
+\item The strong lensing bias varies depending on the completeness of the lens sample as a function of Einstein radius. Surveys that can discover lenses with a smaller Einstein radius have a smaller associated strong lensing bias in all quantities.
 \item 
-
-\end{enumerate}
-
-%We carried out a thorough investigation of the strong lensing bias in photometrically selected samples of strong lenses.
-%We first explored how the strong lensing cross-section varies as a function of lens and source properties, expanding upon the work of \citet{MVK09}. % by considering both point-like and extended sources. 
-%We introduced a new definition for a strong lensing event in the case of an extended source, for this purpose.
-%This definition, which is based on the number of detected surface brightness peaks, is robust with respect to the mass-sheet degeneracy, unlike all magnification-based definitions.
-%We found that the strong lensing cross-section increases primarily with increasing lens mass, with decreasing half-mass radius, and with decreasing source magnitude.
-
-We then simulated photometric strong lensing surveys with data similar to Euclid Wide, and measured how various properties of the lens galaxies and background sources are biased with respect to their parent distributions.
-We focused primarily on mass-related quantities: most importantly, the stellar population synthesis mismatch parameter $\asps$ and the dark matter distribution.
-We found that strong lenses are biased towards larger values of $\asps$ and of the halo mass $\mhalo$.
-The amplitude of the bias is larger in simulations with a larger intrinsic scatter in the distribution of $\asps$ and $\mhalo$, and increases if lenses with a preferentially large Einstein radius are selected.
-
-We used observational constraints from the fundamental plane to set the values of the intrinsic scatter in our fiducial simulation.
-In that case, assuming a survey that is complete down to $\tein=0.5''$, the bias on $\asps$ is smaller than $0.04$~dex (10\%). This bias is much smaller than the current systematic uncertainty on the stellar population synthesis-based stellar masses. Therefore, strong lensing measurements could be used directly to calibrate stellar mass measurements of massive galaxies to $10\%$ accuracy, without the need to correct for selection effects.
+%We used observational constraints from the fundamental plane to set the values of the intrinsic scatter in our fiducial simulation.
+Under reasonable assumptions on the intrinsic scatter parameters, for a Euclid-like survey that is complete down to $\tein=0.5''$ the bias on $\asps$ is smaller than $0.04$~dex (10\%). This bias is much smaller than the current systematic uncertainty on the stellar population synthesis-based stellar masses. Therefore, strong lensing measurements could be used directly to calibrate stellar mass measurements of massive galaxies to $10\%$ accuracy, without the need to correct for selection effects.
 Under the same assumptions, the strong lensing bias on the average halo mass at fixed stellar mass is $0.07$~dex, while that on the inner dark matter distribution at fixed stellar mass and size is $0.02$~dex.
-
-Strong lensing selection broadens the magnitude distribution of background sources, compared to the population of objects that are detectable without lensing.
+%
+\item Strong lensing selection broadens the magnitude distribution of background sources, compared to the population of objects that are detectable without lensing.
 At the same time, we did not find any evidence for a bias in the size distribution of background sources, at fixed magnitude.
-%This follows from the fact that our selection criterion is based on the surface brightness 
 
-We also ran simulations with lensed quasars in place of extended sources, and found that the amplitude of the strong lensing bias in the lens-related parameters has very little sensitivity of the details of the source population.
+\item Simulations with lensed quasars in place of extended sources showed that the amplitude of the strong lensing bias in the lens-related parameters has very little sensitivity on the details of the source population.
 This result has positive implications for time-delay lensing studies: it means that information from a sample of galaxy-galaxy lenses can be used as a prior on the properties of a set of galaxy-quasar lenses, as long as the two samples are probing the same range in Einstein radius and lens observable properties.
-Samples of quad lenses, however, are biased towards galaxies with larger ellipticity, which implies that their three-dimensional structure is on average different from that of the entire sample of lenses. This means that particular care must be taken when stellar dynamics measurements obtained on galaxy-galaxy lenses is used to inform the properties of quads.
+\item Samples of quad lenses are biased towards galaxies with larger ellipticity, which implies that their three-dimensional structure is also biased. This means that particular care must be taken when stellar dynamics measurements obtained on galaxy-galaxy lenses is used to inform the properties of quads.
+\end{enumerate}
 
 In conclusion, strong lensing selection introduces unavoidable biases in the properties of the lens galaxy and background source populations.
 Biases that affect observable properties, such as the redshift and the light distribution of the lens, can be easily quantified.
-Biases on mass-related quantities, such as the stellar mass-to-light ratio or the dark matter distribution, are more difficult to measure directly, but can be reduced by modelling how they scale with the observable properties of the lenses, thus minimising their intrinsic scatter.
-
-In the future, it might be desirable to directly model strong lensing selection effects, thus accounting for the strong lensing bias.
+Biases on mass-related quantities, such as the stellar mass-to-light ratio or the dark matter distribution, are more difficult to measure directly and must be modelled by taking into account selection effects. %, but can be reduced by modelling how they scale with the observable properties of the lenses, thus minimising their intrinsic scatter.
+%In the future, it might be desirable to directly model strong lensing selection effects, thus accounting for the strong lensing bias.
 Designing strong lensing surveys with clearly-defined and easily-modellable selection criteria would help greatly in this task.
+A peak-based definition of a strong lensing event such as that introduced in section \ref{ssec:lensdefext} could be used for this purpose.
 
 \begin{acknowledgements}
 
