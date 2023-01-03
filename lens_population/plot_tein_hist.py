@@ -31,10 +31,10 @@ for n in range(nsims):
         ax.hist(lenspop['tein_zs'][()], bins=tein_bins, color=colseq[n], histtype='step', label=labels[n], linewidth=2)
     elif sources[n] == 'qso':
         lenspop = h5py.File('%s_qsolenses.hdf5'%sims[n], 'r')
-        ax.hist(lenspop['tein_zs'][()], bins=tein_bins, color=colseq[n], histtype='step', label=labels[n], linewidth=2)
+        ax.hist(lenspop['tein_zs'][()], bins=tein_bins, color=colseq[n], histtype='step', label=labels[n], linewidth=2, linestyle='dashed')
     elif sources[n] == 'quads':
         lenspop = h5py.File('%s_qsolenses.hdf5'%sims[n], 'r')
-        ax.hist(lenspop['tein_zs'][lenspop['nimg'][()] > 3], bins=tein_bins, color=colseq[n], histtype='step', label=labels[n], linewidth=2)
+        ax.hist(lenspop['tein_zs'][lenspop['nimg'][()] > 3], bins=tein_bins, color=colseq[n], histtype='step', label=labels[n], linewidth=2, linestyle='dashed')
 
 ax.set_xlabel('$\\theta_{\mathrm{Ein}}$', fontsize=fsize)
 ax.set_ylabel('$N$', fontsize=fsize)

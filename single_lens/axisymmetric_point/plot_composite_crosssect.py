@@ -41,15 +41,19 @@ pylab.subplots_adjust(left=leftm, right=1.00, bottom=0.16, top=0.99, wspace=0.)
 colseq = pylab.rcParams['axes.prop_cycle'].by_key()['color']
 
 for i in range(ndms):
-    if i>1:
+    if i>0:
         ax[0].plot(gammadm_grid, cs_gammadm[:, i+1]/np.pi, label='$\Delta m_s=%2.1f$'%dms_grid[i+1], linewidth=2, color=colseq[i])
         ax[1].plot(fdm_grid, cs_fdm[:, i+1]/np.pi, label='$\Delta m_s=%2.1f$'%dms_grid[i+1], linewidth=2, color=colseq[i])
     else:
-        ax[0].plot(gammadm_grid, cs_gammadm[:, i+1]/np.pi, label='$%2.1f$'%dms_grid[i+1], linewidth=2, color=colseq[i])
-        ax[1].plot(fdm_grid, cs_fdm[:, i+1]/np.pi, label='$%2.1f$'%dms_grid[i+1], linewidth=2, color=colseq[i])
+        ax[0].plot(gammadm_grid, cs_gammadm[:, i+1]/np.pi, linewidth=2, color=colseq[i])
+        ax[1].plot(fdm_grid, cs_fdm[:, i+1]/np.pi, linewidth=2, color=colseq[i])
 
-lines0 = labelLines(ax[0].get_lines(), xvals = [1.75, 1.8, 1.6, 1.5, 1.4], fontsize=lsize, backgroundcolor='white')
-lines1 = labelLines(ax[1].get_lines(), xvals = [0.25, 0.25, 0.3, 0.4, 0.5], fontsize=lsize, backgroundcolor='white')
+#lines0 = labelLines(ax[0].get_lines(), xvals = [1.75, 0.9, 1.6, 1.5, 1.4], fontsize=lsize, backgroundcolor='white')
+#lines1 = labelLines(ax[1].get_lines(), xvals = [0.25, 0.23, 0.3, 0.4, 0.5], fontsize=lsize, backgroundcolor='white')
+lines0 = labelLines(ax[0].get_lines()[1:], xvals = [0.9, 1.6, 1.5, 1.4], fontsize=lsize, backgroundcolor='white')
+ax[0].text(1.4, 0.8, '$\Delta m_s = -2.0$', fontsize=lsize, color=colseq[0], rotation=20)
+lines1 = labelLines(ax[1].get_lines()[1:], xvals = [0.23, 0.3, 0.4, 0.5], fontsize=lsize, backgroundcolor='white')
+ax[1].text(0.1, 1., '$\Delta m_s = -2.0$', fontsize=lsize, color=colseq[0], rotation=-15)
 
 ax[0].xaxis.set_major_locator(MultipleLocator(0.5))
 ax[0].xaxis.set_minor_locator(MultipleLocator(0.1))
@@ -75,7 +79,7 @@ ax[1].set_yscale('log')
 ax[0].set_ylim(ylim[0], ylim[1])
 ax[1].set_ylim(ylim[0], ylim[1])
 
-pylab.savefig('../../paper/axisymm_composite_crosssect.eps')
+#pylab.savefig('../../paper/axisymm_composite_crosssect.eps')
 pylab.show()
 
 

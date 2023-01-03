@@ -47,12 +47,15 @@ for n in range(nsims):
 
     if sources[n] == 'gal':
         lenspop = h5py.File('%s_lenses.hdf5'%sims[n], 'r')
+        linestyle = 'solid'
 
     elif sources[n] == 'qso':
         lenspop = h5py.File('%s_qsolenses.hdf5'%sims[n], 'r')
+        linestyle = 'dashed'
 
     elif sources[n] == 'quads':
         lenspop = h5py.File('%s_qsolenses.hdf5'%sims[n], 'r')
+        linestyle = 'dashed'
 
     laspsmed_arr = np.zeros(ntein)
     laspserr_arr = np.zeros(ntein)
@@ -115,10 +118,10 @@ for n in range(nsims):
         lmdm5med_arr[i] = mu_mdm5_here
         lmdm5err_arr[i] = lmdm5_scat/float(nlens)**0.5
 
-    ax[0].errorbar(tein_arr, laspsmed_arr, yerr=laspserr_arr, color=colors[n], label=labels[n], linewidth=2)
-    ax[1].errorbar(tein_arr, lm200med_arr, yerr=lm200err_arr, color=colors[n], label=labels[n], linewidth=2)
-    ax[2].errorbar(tein_arr, lmdm5med_arr, yerr=lmdm5err_arr, color=colors[n], linewidth=2, label=labels[n])
-    ax[3].errorbar(tein_arr, qmed_arr, yerr=qerr_arr, color=colors[n], linewidth=2, label=labels[n])
+    ax[0].errorbar(tein_arr, laspsmed_arr, yerr=laspserr_arr, color=colors[n], label=labels[n], linewidth=2, linestyle=linestyle)
+    ax[1].errorbar(tein_arr, lm200med_arr, yerr=lm200err_arr, color=colors[n], label=labels[n], linewidth=2, linestyle=linestyle)
+    ax[2].errorbar(tein_arr, lmdm5med_arr, yerr=lmdm5err_arr, color=colors[n], linewidth=2, label=labels[n], linestyle=linestyle)
+    ax[3].errorbar(tein_arr, qmed_arr, yerr=qerr_arr, color=colors[n], linewidth=2, label=labels[n], linestyle=linestyle)
 
 ax[0].set_ylabel('Median $\log{\\alpha_{\mathrm{SPS}}}$', fontsize=fsize)
 ax[0].axhline(laspsmed_gal, color='k', linestyle='--')#, label='Parent population')
