@@ -79,7 +79,7 @@ ax[1].set_yscale('log')
 ax[0].set_ylim(ylim[0], ylim[1])
 ax[1].set_ylim(ylim[0], ylim[1])
 
-#pylab.savefig('../../paper/axisymm_composite_crosssect.eps')
+pylab.savefig('../../paper/axisymm_composite_crosssect.eps')
 pylab.show()
 
 
