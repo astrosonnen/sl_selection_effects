@@ -140,12 +140,24 @@
    \titlerunning{Strong lensing selection effects}
    \authorrunning{Sonnenfeld et al.}
 
-   \author{Alessandro Sonnenfeld\inst{1}\and
-           Others
+   \author{Alessandro Sonnenfeld\inst{\ref{sjtu},\ref{leiden}}\and
+           Shun-Sheng Li\inst{\ref{leiden}}\and
+           Giulia Despali\inst{\ref{ita}}\and
+           Anowar Shajib\inst{\ref{chicago},\ref{kicp}}\and
+           Edward N. Taylor\inst{\ref{swin}}
           }
 
-   \institute{Leiden Observatory, Leiden University, Niels Bohrweg 2, 2333 CA Leiden, the Netherlands\\
-              \email{sonnenfeld@strw.leidenuniv.nl}
+   \institute{
+Department of Astronomy, School of Physics and Astronomy, Shanghai Jiao Tong University, Shanghai 200240, China\\
+              \email{sonnenfeld@sjtu.edu.cn}\label{sjtu}
+\and
+Leiden Observatory, Leiden University, P.O. Box 9513, 2300 RA Leiden, The Netherlands\label{leiden}\and
+Institut für Theoretische Astrophysik, Zentrum für Astronomie, Heidelberg Universität, Albert-Ueberle-Str. 2, 69120, Heidelberg, Germany\label{ita}\and
+Department of Astronomy \& Astrophysics, University of Chicago,
+Chicago, IL 60637, USA\label{chicago}\and
+Kavli Institute for Cosmological Physics, University of Chicago,
+Chicago, IL 60637, USA\label{kicp}\and
+Centre for Astrophysics and Supercomputing, Swinburne University of Technology, Hawthorn 3122, Australia\label{swin}\and
              }
 
    \date{}
@@ -896,7 +908,7 @@ Model name & $\sigma_{\mathrm{sps}}$ & $\sigma_{\mathrm{h}}$ & Predicted FP \\
 \hline
 Fiducial & 0.08 & 0.20 & 0.034 \\
 Low scatter & 0.05 & 0.10 & 0.021 \\
-High scatter & 0.10 & 0.30 & 0.433 \\
+High scatter & 0.10 & 0.30 & 0.043 \\
 \end{tabular}
 \tablefoot{
 Adopted values of the intrinsic scatter parameters $\sigma_{\mathrm{sps}}$ and $\sigma_{\mathrm{h}}$ in different simulations. For each set of values, the fourth column indicates the scatter around the fundamental plane predicted via the spherical Jeans analysis of Appendix~\ref{sect:appendixb}.
@@ -1326,7 +1338,9 @@ The central velocity dispersion, however, is very sensitive to the orbital aniso
 If one wishes to directly account for the strong lensing bias, the formally correct procedure is to explicitly model all of the selection steps in a Bayesian hierarchical formalism, as explained by \citet{Son22}.
 Although this can be computationally challenging, machine learning can offer an efficient alternative \citep{Leg++22}.
 In order for either of these approaches to work, however, it is essential that the lens selection procedure can be simulated.
-This can be difficult to do if human selection is involved in the definition of the lens sample.
+This, in turn, requires having an objective definition of a strong lensing event. A peak-based definition such as that introduced in section \ref{ssec:lensdefext} could be used for this purpose.
+
+Nevertheless, it can still be difficult to fully forward model strong lensing selection if visual inspection by humans is involved in the definition of the lens sample.
 In that case, a possible alternative is to approximate the lens finding probability $\pfind$. 
 For example, we can make the assumption that $\pfind$ depends purely on the Einstein radius.
 This is a reasonable assumption, as long as the lens finding procedure does not selectively pick lenses with different image configurations depending on their Einstein radius.
@@ -1336,7 +1350,7 @@ This is essentially the approach adopted by \citet{Son++19} in the analysis of s
 
 \subsection{Limitations of our analysis}\label{ssec:limitations}
 
-The simulations on which our analysis is based as as complex as required by the goal of the analysis itself, which is to estimate the amplitude of the strong lensing bias in a few key quantities.
+The simulations on which our analysis is based are as complex as required by the goal of the analysis itself, which is to estimate the amplitude of the strong lensing bias in a few key quantities.
 We did, however, make some simplifying assumptions.
 One such assumption consisted in neglecting the contribution from line-of-sight structure and the environment to the lensing signal, which typically introduce an external shear and convergence.
 The effect of including external shear in a lens model is similar to that of changing the ellipticity of the lens. %Therefore the main result that would be affected by neglecting it is the bias on the axis ratio.
@@ -1396,7 +1410,7 @@ Biases that affect observable properties, such as the redshift and the light dis
 Biases on mass-related quantities, such as the stellar mass-to-light ratio or the dark matter distribution, are more difficult to measure directly and must be modelled by taking into account selection effects. %, but can be reduced by modelling how they scale with the observable properties of the lenses, thus minimising their intrinsic scatter.
 %In the future, it might be desirable to directly model strong lensing selection effects, thus accounting for the strong lensing bias.
 Designing strong lensing surveys with clearly-defined and easily-modellable selection criteria would help greatly in this task.
-A peak-based definition of a strong lensing event such as that introduced in section \ref{ssec:lensdefext} could be used for this purpose.
+%A peak-based definition of a strong lensing event such as that introduced in section \ref{ssec:lensdefext} could be used for this purpose.
 
 \begin{acknowledgements}
 
