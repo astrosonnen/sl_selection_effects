@@ -17,7 +17,7 @@ ylim = (0.085, 1.5)
 logscale = True
 
 if logscale:
-    leftm = 0.14
+    leftm = 0.15
 else:
     leftm = 0.08
 

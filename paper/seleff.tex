@@ -144,7 +144,7 @@
    \author{Alessandro Sonnenfeld\inst{\ref{sjtu},\ref{leiden}}\and
            Shun-Sheng Li\inst{\ref{leiden}}\and
            Giulia Despali\inst{\ref{ita}}\and
-           Anowar Shajib\inst{\ref{chicago},\ref{kicp},\ref{einstein}}\and
+           Anowar J. Shajib\inst{\ref{chicago},\ref{kicp},\ref{einstein}}\and
            Edward N. Taylor\inst{\ref{swin}}
           }
 
@@ -159,7 +159,7 @@ Chicago, IL 60637, USA\label{chicago}\and
 Kavli Institute for Cosmological Physics, University of Chicago,
 Chicago, IL 60637, USA\label{kicp}\and
 NHFP Einstein Fellow\label{einstein}\and
-Centre for Astrophysics and Supercomputing, Swinburne University of Technology, Hawthorn 3122, Australia\label{swin}\and
+Centre for Astrophysics and Supercomputing, Swinburne University of Technology, Hawthorn 3122, Australia\label{swin}
              }
 
    \date{}
@@ -253,7 +253,7 @@ In addition, we addressed points 2) and 3) as well: we simulated large populatio
 We explored how the results change as a function of the efficiency of a lens survey at discovering small image separation lenses, and of the scatter in mass parameters at fixed light.
 
 %In light of the results of our experiments, we discuss to what extent can studies of galaxy structure based on strong lenses be generalised to describe non-lens galaxies.
-Finally, we addressed the question of how different are galaxy-galaxy lens samples from sets of galaxy-quasar lenses. This last point is relevant for time-delay cosmography studies, in which measurements of the time-delay between the multiple images of a strongly lensed quasar are used to constrain the expansion rate of the Universe. Galaxy-galaxy lenses can in principle be used to help break some of the model degeneracies affecting these measurements \citep{B+T21}, but any difference between the two lens classes can in principle introduce biases, if not corrected for.
+Finally, we addressed the question of how different are galaxy-galaxy lens samples from sets of galaxy-quasar lenses. This last point is relevant for time-delay cosmography studies, in which measurements of the time-delay between the multiple images of a strongly lensed quasar are used to constrain the expansion rate of the Universe. Galaxy-galaxy lenses can in principle be used to help break some of the model degeneracies affecting these measurements \citep{B+T21}, but any difference between the two lens classes can introduce biases, if not corrected for.
 With this study we aim to quantify this bias.
 
 The structure of this work is the following.
@@ -311,7 +311,7 @@ This can also be expressed in terms of the total projected mass enclosed within 
 \end{equation}
 
 A very important quantity for describing the strength of a strong lens is the Einstein radius, $\tein$. For an axisymmetric lens, this is the radius corresponding to the solution of \Eref{eq:1dlenseq} for a source placed at the same angular position as the lens centre ($\beta=0$).
-The circle with radius equal to $\tein$ is known as the tangential critical curve. Images that form here have infinite magnification in the tangential direction.
+The circle with radius equal to $\tein$ is known as the tangential critical curve. Images that form there have infinite magnification in the tangential direction.
 %
 It can be shown that $\tein$ satisfies the following condition,
 \begin{equation}\label{eq:criteq}
@@ -380,7 +380,7 @@ The fact that the number of images changes by two at a caustic crossing is a gen
 \caption{
 Caustics of lenses with fixed radial structure and different ellipticity.
 Source-plane angular coordinates are in units of the Einstein radius.
-The outer curve is the radial caustic, while the inner diamond is the tangential caustic. Sources located outside the caustic are not strongly lensed. Sources that lie in the region enclosed between the two caustics produce three images, while sources inside the tangential caustic produce five images.
+The outer curve is the radial caustic, while the inner diamond is the tangential caustic. Point sources located outside the caustic are not strongly lensed. Sources that lie in the region enclosed between the two caustics produce three images, while sources inside the tangential caustic produce five images.
 The lens model adopted for this experiment consists of a stellar component and a dark matter halo, as described in \ref{ssec:profile}. The two components have the same ellipticity.
 \label{fig:ellcaust}
 }
@@ -430,7 +430,7 @@ This can be observed in the fourth example of \Fref{fig:lensdef}: although the s
 \begin{figure}
 \includegraphics[width=\columnwidth]{example_detections.eps}
 \caption{
-Criterion used to classify lensed images of extended sources. Four examples.
+Criterion used to classify lensed images of extended sources. Six examples.
 First column: caustics (red curves) and source position (blue circle). The radius of the circle corresponds to the radius at which the surface brightness is equal to $2\sigma$ the sky background rms fluctuation for a single pixel. In other words, the blue circle delimits the area of the source that can be detected.
 Second column: mock image of the lensed source, with added noise.
 Third column: footprint of the source. The purple footprint is obtained with a $2\sigma$ detection criterion. The coral region is the largest footprint with the highest number of detected images.
@@ -688,7 +688,7 @@ For sources that are intrinsically fainter than the detection limit, however, th
 
 \subsection{Elliptical lenses, extended sources}\label{ssec:ellext}
 
-In the case of an extended source, the complexity of the problem is increased due to the addition of a series of features: the source surface brightness distribution, with its radial profile, shape and orientation, and the point spread function (PSF). 
+In the case of an extended source, the complexity of the problem is increased due to the addition of a series of features: the source surface brightness distribution, with its radial profile, shape and orientation, and the PSF. 
 Moreover, as we discussed in section \ref{ssec:lensdefext}, there are different regimes in strong lensing of extended sources, depending on the relative size of the source and the caustics of the lens.
 For this reason, we split our analysis into two parts. First, we explore the small source size regime, where the source size is comparable to or smaller than the lens caustics. Then, we consider cases in which the source size is bigger than the lens caustics, which we refer to as the large source regime.
 
@@ -697,7 +697,7 @@ For this reason, we split our analysis into two parts. First, we explore the sma
 For the sake of reducing the dimensionality of the analysis, we focused on circularly symmetric sources. We also fixed the surface brightness profile to an exponential disk (i.e. a S\'{e}rsic model with $n=1$).
 We then took a lens model with the same parameters used in section \ref{ssec:ellpoint} and a minor-to-major axis ratio of $q=0.7$.
 We simulated a large number of images of extended sources with {\sc Glafic} and measured the fraction of them that results in a strong lens, according to the definition of section \ref{ssec:lensdefext}.
-For the small source size experiment, we used pixels with a size equal to $1/20\tein$ and convolved the images with a Moffat PSF with a FWHM of two pixels.
+For the small source size experiment, we used pixels with a size equal to $1/20\tein$ and convolved the images with a Moffat PSF with a FWHM of two pixels and a $\beta$ parameter of $5.0$.
 We also assumed that the background noise is an uncorrelated Gaussian field.
 We carried out experiments with sources with different values of the total unlensed flux, $f$, and half-light radius, $\theta_{\mathrm{e,s}}$.
 The results are shown in \Fref{fig:extcs}.
@@ -924,8 +924,8 @@ The observed fundamental plane scatter is $0.035$.
 
 \subsubsection{Galaxies}\label{ssub:extsources}
 
-Our background galaxy population is taken from the \textsc{surfs}-based KiDS-Legacy-Like Simulation (SKiLLS) input catalogue, a hybrid simulation catalogue integrating cosmological simulation with high-quality imaging observations (Li et al., in prep). The cosmological simulation is obtained from the Synthetic UniveRses For Surveys (\textsc{surfs}) simulations, a set of $N$-body simulations from \citet{Ela++18}. The galaxy properties, including the star formation history and the metallicity history, are from an open-source semi-analytic model named \textsc{Shark}\footnote{\url{https://github.com/ICRAR/shark}}~\citep{Lag++18}. The original photometry is drawn from a stellar population synthesis technique using stellar synthesis libraries with physically motivated dust attenuation and re-emission models~\citep{Rob++20}. Li et al. (in prep) further applied an empirical correction to the original synthetic photometry to better agree with the COSMOS2015 observations~\citep{Lai++16}. The galaxy morphology is described by a S\'ersic profile with three parameters: the half-light radius in angular units $\theta_{
-\mathrm{e,s}}$, the S\'ersic index $n_\mathrm{s}$, and the axis ratio $q_\mathrm{s}$. These structural parameters are learned from the imaging data obtained with the Advanced Camera for Surveys (ACS) instrument on the \textit{Hubble} Space Telescope~\citep{Gri++12}. We refer to Li et al. (in prep) for details on the learning algorithm and validation.
+Our background galaxy population is taken from the \textsc{surfs}-based KiDS-Legacy-Like Simulation (SKiLLS) input catalogue, a hybrid simulation catalogue integrating cosmological simulation with high-quality imaging observations \citep{Li++23}. The cosmological simulation is obtained from the Synthetic UniveRses For Surveys (\textsc{surfs}) simulations, a set of $N$-body simulations from \citet{Ela++18}. The galaxy properties, including the star formation history and the metallicity history, are from an open-source semi-analytic model named \textsc{Shark}\footnote{\url{https://github.com/ICRAR/shark}}~\citep{Lag++18}. The original photometry is drawn from a stellar population synthesis technique using stellar synthesis libraries with physically motivated dust attenuation and re-emission models~\citep{Rob++20}. \citet{Li++23} further applied an empirical correction to the original synthetic photometry to better agree with the COSMOS2015 observations~\citep{Lai++16}. The galaxy morphology is described by a S\'ersic profile with three parameters: the half-light radius in angular units $\theta_{
+\mathrm{e,s}}$, the S\'ersic index $n_\mathrm{s}$, and the axis ratio $q_\mathrm{s}$. These structural parameters are learned from the imaging data obtained with the Advanced Camera for Surveys (ACS) instrument on the \textit{Hubble} Space Telescope~\citep{Gri++12}. We refer to \citet{Li++23} for details on the learning algorithm and validation.
 
 The complete SKiLLS catalogue contains ${\sim}108~{\rm deg}^2$ of galaxies with redshift up to $2.5$ and $r$-band apparent magnitude down to $27$.
 We applied a lower limit to the source redshift, by selecting only sources with $z_s > 0.8$.
@@ -953,12 +953,12 @@ Given the redshift and rest-frame UV luminosity of a quasar, we then computed th
 
 For the sake of consistency with the population of background extended sources, we limited the redshift distribution of quasars to the range $0.8 < \zqso < 2.5$.
 We then truncated the distribution in $\mqso$ at two magnitudes fainter than the detection limit (which is specified in section \ref{ssec:obs}).
-Finally, we randomly placed quasars in the source plane with a projected number density of $70$~arcmin$^{-2}$. This is a much larger number density than observed in the real universe. Nevertheless, we are not interested in predicting the absolute number of strong lenses, so this is a legitimate choice. The advantage of boosting the number density of quasars is that it allows us to produce a large number of lenses without the need for generating too big a population of foreground galaxies.
+Finally, we randomly placed quasars in the source plane with a projected number density of $70$~arcmin$^{-2}$. This is a much larger number density than observed in the real universe, but we are allowed to do so because we are not interested in predicting the absolute number of strong lenses. The advantage of boosting the number density of quasars is that it allows us to produce a large number of lenses without the need for generating too big a population of foreground galaxies.
 
 
 \subsection{Observations}\label{ssec:obs}
 
-For each of the three intrinsic scatter scenarios, we drew a population of foreground galaxies covering $1000$ square degrees.
+For each of the three intrinsic scatter scenarios, we drew a population of foreground galaxies covering \num{1000} square degrees.
 The expectation value of the number of galaxies in the corresponding volume, given the redshift and stellar mass cuts described in section \ref{ssub:mstarz}, is around \num{300000}.
 %Then we generated a population of sources behind the lenses.
 %We approximated the foreground galaxies as isolated: for each source, we only modelled the contribution to the lensing field generated by a single lens.
@@ -1004,10 +1004,10 @@ These are: galaxy-galaxy lenses in the fiducial, high scatter and low scatter sc
 }
 \end{figure}
 
-Another possible reason for refining a sample of lens candidates is the availability of redshift measurements. Redshifts of both the lens and the source are needed in order to convert a lens model into a measurement of mass. When working with large samples of lenses, obtaining spectroscopic measurements is not a viable option, and photometric redshifts are a necessity. Measuring the photometric redshift of a strongly lensed source, however, is challenging, especially when the Einstein radius is small and the source light is blended with the light from the lens \citep{Lan++22}.
+Another possible reason for refining a sample of lens candidates is the availability of redshift measurements. Redshifts of both the lens and the source are needed in order to convert a lens model into a measurement of mass. When working with large samples of lenses, obtaining spectroscopic measurements is not a viable option, and photometric redshifts are a necessity. Measuring the photometric redshift of a strongly lensed source, however, is challenging, especially when the Einstein radius is small and the source light is blended with the light from the lens \citep{Lan++23}.
 
 Both of these scenarios can result in samples that are incomplete below a certain value of the Einstein radius. %in which lenses with a larger Einstein radius are preferentially selected.
-We simulate these situation via the following Einstein radius-dependent lens finding probability:
+We simulate this situation via the following Einstein radius-dependent lens finding probability:
 \begin{equation}
 \pfind(\tein|S,\mathrm{det}) = \left\{\begin{array}{ll} 1 & \rm{if}\,\tein > \teinmin \\
 0 & \rm{otherwise}\end{array}\right. .
@@ -1033,14 +1033,14 @@ In this section we show the results of the experiments with populations of galax
 We first present the results in a qualitative way, then proceed to quantify the amplitude of the strong lensing bias in various quantities of interest.
 
 \Fref{fig:lenspars} shows the distribution in the parameters of the foreground galaxies of the lens systems, compared to those of the parent population, for the fiducial scatter scenario with two different values of the minimum Einstein radius: $0.5''$ and $1.0''$.
-A completeness limit of $0.5''$ is close to what can currently be achieved via visual inspection of high-resolution space-based images \cite{Gar++22}, while the $1.0''$ limit can be seen as a more conservative case.
+A completeness limit of $0.5''$ is close to what can currently be achieved via visual inspection of high-resolution space-based images \citep{Gar++22}, while the $1.0''$ limit can be seen as a more conservative case.
 \begin{figure*}
 \includegraphics[width=\textwidth]{lens_cornerplot.eps}
 \caption{
 Comparison between the properties of lens samples and the parent population. Distribution in foreground galaxy parameters.
 Filled contours: distribution of the parent sample.
 Green solid lines: distribution of the lenses with Einstein radius larger than $0.5''$.
-Red solid lines: distribution of the lenses with Einstein radius larger than $1.0''$.
+Red dashed lines: distribution of the lenses with Einstein radius larger than $1.0''$.
 \label{fig:lenspars}
 }
 \end{figure*}
@@ -1066,7 +1066,7 @@ Comparison between the properties of lens samples and the parent population. Dis
 Filled contours: distribution of the parent sample.
 Black solid lines: distribution of the detectable sources.
 Green solid lines: distribution of the lenses with Einstein radius larger than $0.5''$.
-Red solid lines: distribution of the lenses with Einstein radius larger than $1.0''$.
+Red dashed lines: distribution of the lenses with Einstein radius larger than $1.0''$.
 \label{fig:sourcepars}
 }
 \end{figure*}
@@ -1165,7 +1165,7 @@ In the fourth panel of \Fref{fig:lensmassbias} we show the average inner dark ma
 \begin{equation}\label{eq:dmscaling}
 \gammadm \sim \mu_{\gamma,0} + \beta_{\gamma}(\log{\mobs} - 11.4) + \xi_{\gamma}(\log{\reff} - 1.2),
 \end{equation}
-and taking the resulting value of $\mu_{\gamma}$.
+and taking the resulting value of $\mu_{\gamma,0}$.
 Different simulations show different trends in the average $\gammadm$.
 These are the results of underlying correlations between the dark matter density profile and the stellar and halo mass.
 In our model, galaxies of a given size with a larger stellar mass have a steeper dark matter slope, because the response of the dark matter to the infall of baryons is stronger. Vice-versa, galaxies with a larger halo mass have a shallower density slope.
@@ -1241,8 +1241,8 @@ Quad lenses tend to also have a slightly larger halo mass at fixed stellar mass,
 Bias in the population of quasar lenses (all and quads only), compared to the extended source simulation.
 %Bias on lens mass properties as a function of the minimum Einstein radius.
 First panel: median $\log{\asps}$.
-Second panel: median $\mhalo$ at $\log{\mstar}=11.5$.
-Third panel: median $\mdmfive$ at $\log{\mstar}=11.5$ and $\log{\reff}=1.2$.
+Second panel: median $\mhalo$ at $\log{\mobs}=11.4$.
+Third panel: median $\mdmfive$ at $\log{\mobs}=11.4$ and $\log{\reff}=1.2$.
 Fourth panel: median lens axis ratio.
 In each panel, the dashed line indicates the value of the parent population.
 Error bars indicate the standard deviation of the mean of the lens sample.
@@ -1338,7 +1338,7 @@ Describing the inner dark matter distribution as a function of stellar mass and 
 This description could be extended by including the central velocity dispersion as an additional control parameter. 
 %Galaxies selected in velocity dispersion are similar to existing samples of lenses in terms of other observable quantities
 The velocity dispersion is directly related to the mass distribution of the lens galaxy, which means that, for example, the distribution in $\asps$ at fixed velocity dispersion should be narrower than its global distribution marginalised over the whole population. 
-The central velocity dispersion, however, is very sensitive to the orbital anisotropy, to the three-dimensional structure, and to gradients in stellar mass-to-light ratio, which are not well known, therefore it is difficult to quantitatively estimate the benefit of including it in the description of the lensing bias.
+The central velocity dispersion, however, is very sensitive to the orbital anisotropy, to the three-dimensional structure, and to gradients in stellar mass-to-light ratio, which are not well known. Therefore it is difficult to quantitatively estimate the benefit of including it in the description of the lensing bias.
 
 If one wishes to directly account for the strong lensing bias, the formally correct procedure is to explicitly model all of the selection steps in a Bayesian hierarchical formalism, as explained by \citet{Son22}.
 Although this can be computationally challenging, machine learning can offer an efficient alternative \citep{Leg++22}.

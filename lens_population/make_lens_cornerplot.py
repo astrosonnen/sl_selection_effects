@@ -49,7 +49,7 @@ major_step = [0.2, 0.5, 0.1, 0.5, 0.5, 2, 0.2]
 minor_step = [0.05, 0.1, 0.02, 0.1, 0.1, 0.5, 0.05]
 
 fig = pylab.figure()
-pylab.subplots_adjust(left=0.08, right=0.99, bottom=0.12, top=0.99, hspace=0.1, wspace=0.1)
+pylab.subplots_adjust(left=0.10, right=0.99, bottom=0.12, top=0.99, hspace=0.1, wspace=0.1)
 #pylab.figtext(0.45, 0.95, 'Extended model', fontsize=fsize+3, backgroundcolor=(0., 1., 0.))
 
 for i in range(npars):
