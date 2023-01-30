@@ -3,7 +3,6 @@ import pylab
 import h5py
 from astropy.io import fits as pyfits
 from scipy.interpolate import splrep, splev
-from plotters import probcontour
 from labellines import labelLine, labelLines
 from matplotlib.ticker import MultipleLocator
 from matplotlib import rc

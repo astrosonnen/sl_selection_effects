@@ -1,6 +1,5 @@
 import numpy as np
 from astropy.io import fits as pyfits
-from skimage import measure
 from scipy.interpolate import splrep, splev
 import h5py
 import pylab

@@ -1,16 +1,11 @@
 import numpy as np
 from sl_profiles import sersic
-from scipy.special import gamma as gfunc
 from scipy.interpolate import splrep, splev
 import os
 import glafic
 import h5py
 from scipy.signal import convolve2d
 from astropy.io import fits as pyfits
-from wl_profiles import gnfw, deVaucouleurs as deV
-from wl_cosmology import Mpc, c, G, M_Sun
-import wl_cosmology
-from scipy.optimize import brentq
 
 
 # keeps the source surface brightness fixed and varies the redshift

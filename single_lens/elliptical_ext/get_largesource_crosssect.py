@@ -1,9 +1,4 @@
 import numpy as np
-from astropy.io import fits as pyfits
-from skimage import measure
-from scipy.special import gamma as gfunc
-from scipy.signal import convolve2d
-from scipy.optimize import brentq
 from sl_profiles import sersic
 from lensdet import detect_lens
 import h5py

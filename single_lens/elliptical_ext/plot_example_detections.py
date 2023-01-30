@@ -1,7 +1,6 @@
 import numpy as np
 import glafic
 from sl_profiles import sersic
-from scipy.special import gamma as gfunc
 from scipy.signal import convolve2d
 import pylab
 from astropy.io import fits as pyfits
