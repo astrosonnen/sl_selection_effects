@@ -23,7 +23,7 @@ colors = [colseq[0], colseq[3], colseq[4]]
 
 fig, ax = pylab.subplots(4, 1, figsize=(6, 13))
 
-pylab.subplots_adjust(left=0.2, right=1.00, bottom=0.05, top=1., wspace=0., hspace=0.)
+pylab.subplots_adjust(left=0.23, right=1.00, bottom=0.05, top=1., wspace=0., hspace=0.)
 
 ntein = 21
 tein_arr = np.linspace(0., 2., ntein)
@@ -34,7 +34,7 @@ lm200med_gal = mu_h
 qmed_gal = np.median(galpop['q'][()])
 
 def mdm5fitfunc(p):
-    return p[0] + p[1] * (galpop['lmstar'][()] - lmstar_piv) + p[2] * (galpop['lreff'][()] - lreff_piv)
+    return p[0] + p[1] * (galpop['lmobs'][()] - lmobs_piv) + p[2] * (galpop['lreff'][()] - lreff_piv)
 
 def mdm5errfunc(p):
     return mdm5fitfunc(p) - galpop['lmdm5'][()]
@@ -83,7 +83,7 @@ for n in range(nsims):
         qmed_arr[i] = np.median(lenspop['q'][lenscut])
         qerr_arr[i] = np.std(lenspop['q'][lenscut])/float(nlens)**0.5
 
-        lmstar_here = lenspop['lmstar'][lenscut]
+        lmobs_here = lenspop['lmobs'][lenscut]
         lm200_here = lenspop['lm200'][lenscut]
         lmdm5_here = lenspop['lmdm5'][lenscut]
         lreff_here = lenspop['lreff'][lenscut]
@@ -91,7 +91,7 @@ for n in range(nsims):
         # fits for the stellar-halo mass relation
 
         def fitfunc(p):
-            return p[0] + p[1] * (lmstar_here - lmstar_piv)
+            return p[0] + p[1] * (lmobs_here - lmobs_piv)
 
         def errfunc(p):
             return fitfunc(p) - lm200_here
@@ -105,7 +105,7 @@ for n in range(nsims):
         lm200err_arr[i] = lm200_scat/float(nlens)**0.5
 
         def mdm5fitfunc(p):
-            return p[0] + p[1] * (lmstar_here - lmstar_piv) + p[2] * (lreff_here - lreff_piv)
+            return p[0] + p[1] * (lmobs_here - lmobs_piv) + p[2] * (lreff_here - lreff_piv)
 
         def mdm5errfunc(p):
             return mdm5fitfunc(p) - lmdm5_here
@@ -138,17 +138,19 @@ ax[0].yaxis.set_minor_locator(MultipleLocator(0.01))
 ax[0].tick_params(axis='both', which='both', direction='in', labelbottom=False, labelsize=fsize, right=True, top=True)
 
 ax[1].axhline(mu_h, color='k', linestyle='--')
-ax[1].set_ylabel('$\mu_{\mathrm{h},0}$ (Mean $\log{M_{\mathrm{h}}}$ \n at fixed $M_*$)', fontsize=fsize)
+ax[1].set_ylabel('$\mu_{\mathrm{h},0}$ (Mean $\log{M_{\mathrm{h}}}$ \n at fixed $M_*^{(\mathrm{obs})}$)', fontsize=fsize)
 
 ax[1].yaxis.set_major_locator(MultipleLocator(0.2))
 ax[1].yaxis.set_minor_locator(MultipleLocator(0.05))
+ax[1].set_ylim(12.95, 13.55)
 
 ax[2].axhline(lmdm5med_gal, color='k', linestyle='--', label='Parent pop.')
 #ax[2].set_ylabel('$\mu_{\mathrm{DM},0}$', fontsize=fsize)
-ax[2].set_ylabel('$\mu_{\mathrm{DM},0}$ (Mean $\log{M_{\mathrm{DM},5}}$ \n at fixed $M_*$, $R_{\mathrm{e}}$)', fontsize=fsize)
+ax[2].set_ylabel('$\mu_{\mathrm{DM},0}$ (Mean $\log{M_{\mathrm{DM},5}}$ \n at fixed $M_*^{(\mathrm{obs})}$, $R_{\mathrm{e}}$)', fontsize=fsize)
 
 ax[2].yaxis.set_major_locator(MultipleLocator(0.1))
 ax[2].yaxis.set_minor_locator(MultipleLocator(0.02))
+ax[2].set_ylim(10.98, 11.36)
 
 ax[3].axhline(qmed_gal, color='k', linestyle='--')
 ax[3].set_ylabel('Median $q$', fontsize=fsize)
