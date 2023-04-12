@@ -10,7 +10,7 @@ modelname = sys.argv[1]
 
 pop = h5py.File(modelname+'_lenses.hdf5', 'a')
 
-nlens = len(pop['z'][()])
+nlens = len(pop['tein_zs'][()])
 
 psi1 = np.zeros(nlens)
 psi2_pl = np.zeros(nlens)
