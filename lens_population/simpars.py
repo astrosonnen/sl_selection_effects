@@ -18,6 +18,7 @@ pix_arcsec = 0.1
 nsigma_pixdet = 2.
 sky_rms = 0.00433
 npix_min = 1
+minmu = 4. # minimum magnification (only applied to alternative selection sim)
 
 # stellar mass function
 phi_muz = 1.009e-3
