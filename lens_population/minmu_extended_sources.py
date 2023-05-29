@@ -11,7 +11,6 @@ from sl_profiles import sersic, gnfw, deVaucouleurs as deV
 import sl_cosmology
 from sl_cosmology import G, M_Sun, Mpc, c
 from scipy.special import gamma as gfunc
-from lensdet import detect_lens
 import sys
 
 
@@ -68,8 +67,6 @@ spa_list = []
 smag_list = []
 det_mu_list = []
 global_mu_list = []
-nimg_list = []
-nmax_list = []
 tein_zs_list = []
 rein_zs_list = []
 psi2_list = []
@@ -148,14 +145,19 @@ for i in range(nsamp):
                 Rmax = brentq(zerofunc, 0., 10.*sreff/pix_arcsec)
                 fdet = ftot * sersic.M2d(Rmax, nser, sreff/pix_arcsec)
 
-            old_detection, nimg_std, nimg_max, nholes_std, nholes_max, std_footprint, best_footprint, sb_maxlim = detect_lens(img_wseeing)
+            std_footprint = img_wseeing > nsigma_pixdet * sky_rms
+            npix_tmp = std_footprint.sum()
 
-            det_mu = abs(img_wseeing[std_footprint].sum())/fdet
+            signal = img_wseeing[std_footprint].sum()
+            noise = npix_tmp**0.5 * sky_rms
+            img_sn = signal/noise
+
+            det_mu = abs(signal)/fdet
             global_mu = abs(img_wseeing.sum())/ftot
             if fdet==0.:
                 det_mu = np.inf
 
-            detection = (det_mu > minmu) & (nimg_std > 0)
+            detection = (global_mu > minmu) & (npix_tmp > 0) & (img_sn > 10.)
 
             if detection:
                 islens = True
@@ -210,8 +212,6 @@ for i in range(nsamp):
                 sq_list.append(sq)
                 spa_list.append(spa)
                 smag_list.append(smag)
-                nimg_list.append(nimg_std)
-                nmax_list.append(nimg_max)
 
                 # creates a noisy version of the image
                 img_wnoise = img_wseeing + np.random.normal(0., sky_rms, img.shape)
@@ -237,10 +237,6 @@ for i in range(nsamp):
                 hdr['src_mag'] = smag
                 hdr['src_re'] = sreff
                 hdr['src_ind'] = sourceind
-                hdr['nimg_std'] = nimg_std
-                hdr['nimg_max'] = nimg_max
-                hdr['nhol_std'] = nholes_std
-                hdr['nhol_max'] = nholes_max
 
                 # calculates the average magnification over the footprint
                 #footprint = img > nsigma_pixdet * sky_rms
@@ -326,8 +322,6 @@ lens_file.create_dataset('spa', data=np.array(spa_list))
 lens_file.create_dataset('smag', data=np.array(smag_list))
 lens_file.create_dataset('det_mu', data=np.array(det_mu_list))
 lens_file.create_dataset('global_mu', data=np.array(global_mu_list))
-lens_file.create_dataset('nimg', data=np.array(nimg_list))
-lens_file.create_dataset('nmax', data=np.array(nmax_list))
 
 pop.close()
 lens_file.close()
