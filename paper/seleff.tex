@@ -210,6 +210,7 @@ Given current uncertainties, strong lensing observations can be used directly to
 Strong gravitational lensing is a powerful tool for studying galaxies and cosmology.
 Strong lenses have been used to probe the mass structure of massive galaxies \citep{Aug++10, ORF14, Son++15, Sha++21}, to detect substructure \citep{Veg++12, Hez++16, Nie++20}, to carry out detailed studies of magnified star-forming galaxies \citep{Jon++13}, and to measure the expansion rate of the universe with time delays \citep[see][ for a review]{T+M16}.
 
+{\bf
 Strong lenses, however, are a biased subset of the general population of galaxies and background sources.
 In order for a lens-source pair to be included in a strong lensing survey, the following conditions must be met:
 \begin{enumerate}
@@ -238,6 +239,7 @@ Condition 3 can introduce additional biases, depending on the efficiency of the 
 %The distribution of strongly lensed sources can also be biased with respect to the general population of background galaxies: for instance, lensing magnification allows the detection of fainter objects with respect to the field.
 
 The cumulative effect of these conditions can be summarised as follows.
+}
 %In general, 
 The probability distribution $\prsl$ of a sample of strong lenses from a given survey with selection criterion $S$ is given by \citep{Son22}:
 \begin{equation}\label{eq:one}
@@ -1289,6 +1291,32 @@ The main effect of adding scatter to the concentration is to reduce the correlat
 
 Another simplifying assumption that we made was that of adopting a constant mass-to-light ratio for the stellar component. Massive galaxies are known to have colour gradients, the main effect of which is to cause the stellar half-mass radius to be smaller than the half-light radius \citep{Szo++13,Sue++19}. Since, as shown in \Sref{sect:results}, strong lensing bias tends to select galaxies with a more compact stellar distribution, it would also preferentially select galaxies with a steeper mass-to-light ratio gradient.
 However, testing for the amplitude of the strong lensing bias on the mass-to-light ratio gradient is beyond the scope of this paper.
+
+
+\subsection{Alternative lens definitions}
+
+{\bf
+Our extended source analysis was based on a peak detection criterion to define strong lensing events, as explained in section \ref{ssec:lensdefext}.
+However, many previous studies aimed at simulating populations of lenses adopted a magnification-based definition, in which a lens-source system is classified as a strong lens if the magnification of the source is larger than a minimum value \citep[see e.g.][]{Col15, Rob++20}.
+In order to check whether our results are robust to the choice of definition of a strong lensing event, we re-analysed the fiducial sample with this alternative definition. %repeated the analysis of the fiducial sample with extended sources. 
+In particular, we defined as strong lenses all systems with a detected background source and $\mu_{\mathrm{tot}} > 3$, where $\mu_{\mathrm{tot}}$ is the total magnification (obtained by integrating the flux of all of the lensed images and dividing it by the intrinsic source flux).
+The total number of strong lenses increases by $34\%$ with this new definition, mostly due to the inclusion of fainter sources with no detected multiple images.
+\Fref{fig:minmubias} shows the strong lensing bias on a few selected quantities (stellar population synthesis mismatch parameter, projected dark matter mass within $5$~kpc, source magnitude and source half-light radius).
+
+}
+
+%However, many previous simulation studies adopted criteria based on magnification \citep[see e.g.][]{Col15, Rob++20}.
+ 
+However, in the literature it is common to find alternative criteria based on magnification \citep[see e.g.][]{Col15, 
+
+it is common to find 
+In the 
+Other simulation works, however, use a
+
+
+Our analysis was based on the definition of a strong lens given in sections \ref{ssec:lensdefpoint} and \ref{ssec:lensdefext}. 
+These are not the only possible definitions.
+In the case of an extended source, in particular, it is common to find in the literature magnification-based 
 
 
 %__________________________________________________________________
