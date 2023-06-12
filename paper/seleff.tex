@@ -1246,6 +1246,8 @@ When using stellar dynamics-based mass measurements to inform the properties of 
 \subsection{The importance of the source population properties}
 
 Strictly speaking, the results shown in \Sref{sect:results} apply only to samples of lenses and background sources with the same properties as our simulations.
+{\bf Real lens samples can have more complex source distributions. For example, many existing lens-finding algorithms are tuned to identify sources with different colours from the lenses, introducing a selection that can modify the source distribution in redshift-magnitude space.
+}
 However, the comparison of section \ref{ssec:quasarbias} shows that, at fixed foreground galaxy population, the strong lensing bias for the sample of extended sources is indistinguishable from that of the lensed quasar population, at least for values of $\theta_{\mathrm{Ein,min}} < 1.0''$.
 This result suggests that the dependence of the strong lensing bias on the details of the background source population is very weak, as long as no additional selection on the image configuration is applied (e.g. by selecting only quad lenses).
 This is not a coincidence, but is a consequence of the fact that the dependence of the strong lensing cross-section on the lens parameters is a weak function of source magnitude\footnote{The cross-section itself is a strong function of source magnitude, but the trends between $\crosssect$ and the lens parameters are not.}, especially for magnitudes close to the detection limit (see section \ref{ssec:axisymmpoint}).
@@ -1300,24 +1302,22 @@ Our extended source analysis was based on a peak detection criterion to define s
 However, many previous studies aimed at simulating populations of lenses adopted a magnification-based definition, in which a lens-source system is classified as a strong lens if the magnification of the source is larger than a minimum value \citep[see e.g.][]{Col15, Rob++20}.
 In order to check whether our results are robust to the choice of definition of a strong lensing event, we re-analysed the fiducial sample with this alternative definition. %repeated the analysis of the fiducial sample with extended sources. 
 In particular, we defined as strong lenses all systems with a detected background source and $\mu_{\mathrm{tot}} > 3$, where $\mu_{\mathrm{tot}}$ is the total magnification (obtained by integrating the flux of all of the lensed images and dividing it by the intrinsic source flux).
-The total number of strong lenses increases by $34\%$ with this new definition, mostly due to the inclusion of fainter sources with no detected multiple images.
+The total number of strong lenses increased by $34\%$ with this new definition, mostly due to the inclusion of fainter sources with no detected multiple images.
 \Fref{fig:minmubias} shows the strong lensing bias on a few selected quantities (stellar population synthesis mismatch parameter, projected dark matter mass within $5$~kpc, source magnitude and source half-light radius).
-
+Besides the change in the source magnitude (third panel), we see very little differences in the bias with respect to the peak-based definition of the fiducial analysis. We then conclude that the exact definition of a strong lensing event does not have a big impact on the strong lensing bias of lens-related properties.
+We stress out, however, that magnification is not a directly-observable quantity, and therefore we advise against applying magnification-based lens definitions to define lens samples, for the reasons discussed in section \ref{ssec:lensdefext}.
+\begin{figure}
+\includegraphics[width=\columnwidth]{minmu_bias.eps}
+\caption{
+Strong lensing bias in the case of a magnification-based lens definition (brown curves), compared to that of the fiducial analysis (blue curves).
+First panel: median $\log{\asps}$.
+Second panel: median $\mdmfive$ at $\log{\mstar}=11.5$ and $\log{\reff}=1.2$.
+Third panel: median source magnitude.
+Fourth panel: median half-light radius in the magnitude bin $24.8 < \msource < 25.2$.
 }
-
-%However, many previous simulation studies adopted criteria based on magnification \citep[see e.g.][]{Col15, Rob++20}.
- 
-However, in the literature it is common to find alternative criteria based on magnification \citep[see e.g.][]{Col15, 
-
-it is common to find 
-In the 
-Other simulation works, however, use a
-
-
-Our analysis was based on the definition of a strong lens given in sections \ref{ssec:lensdefpoint} and \ref{ssec:lensdefext}. 
-These are not the only possible definitions.
-In the case of an extended source, in particular, it is common to find in the literature magnification-based 
-
+\label{fig:minmubias}
+\end{figure}
+}
 
 %__________________________________________________________________
 
