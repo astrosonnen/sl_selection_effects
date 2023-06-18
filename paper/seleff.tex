@@ -119,6 +119,8 @@
 
 \def\mlim{m_{\mathrm{max}}}
 
+\def\lmst{\lambda_{\mathrm{mst}}}
+
 \def\Sref#1{Section~\ref{#1}\xspace}
 \def\Fref#1{Figure~\ref{#1}\xspace}
 \def\Tref#1{Table~\ref{#1}\xspace}
@@ -191,11 +193,16 @@ Strong lens galaxies are biased towards larger stellar masses, smaller half-mass
 The amplitude of the bias depends on the intrinsic scatter in the mass-related parameters of the galaxy population and on the completeness in Einstein radius of the lens sample.
 For values of the scatter that are consistent with observed scaling relations and a minimum detectable Einstein radius of $0.5''$, the strong lensing bias in $\asps$ is $10\%$, while that in the central dark matter mass is $5\%$.
 The bias has little dependence on the properties of the source population: samples of galaxy-galaxy lenses and galaxy-quasar lenses that probe the same Einstein radius distribution are biased in a very similar way.
-Quadruply imaged quasar lenses, however, are biased towards higher ellipticity galaxies.
+%Quadruply imaged quasar lenses, however, are biased towards higher ellipticity galaxies.
+%{\bf
+%The bias on time-delay measurements of $H_0$ due to the use of prior information from galaxy-galaxy lenses is on the order of $1\%$.
+%}
 }
   % conclusions heading (optional), leave it empty if necessary 
    {
 Given current uncertainties, strong lensing observations can be used directly to improve our current knowledge of the inner structure of galaxies, without the need to correct for selection effects.
+{\bf Time-delay measurements of $H_0$ from lensed quasars can take advantage of prior information obtained from galaxy-galaxy lenses with similar Einstein radius.}
+%{\bf Galaxy-galaxy lenses can be used to inform the properties of quasar lenses for the purpose of measuring $H_0$ from time delays
 }
    \keywords{
              Gravitational lensing: strong 
@@ -271,7 +278,13 @@ In this work we revisited the \citet{MVK09} study, expanding it to the extended 
 In addition, we addressed points 2) and 3) as well: we simulated large populations of strong lenses using empirical models, we simulated the lens detection and finding phase, and quantified the lensing bias under various scenarios.
 We explored how the results change as a function of the efficiency of a lens survey at discovering small image separation lenses, and of the scatter in mass parameters at fixed light.
 
-Finally, we addressed the question of how different are galaxy-galaxy lens samples from sets of galaxy-quasar lenses. This last point is relevant for time-delay cosmography studies, in which measurements of the time-delay between the multiple images of a strongly lensed quasar are used to constrain the expansion rate of the Universe. Galaxy-galaxy lenses can in principle be used to help break some of the model degeneracies affecting these measurements \citep{B+T21}, but any difference between the two lens classes can introduce biases, if not corrected for.
+{\bf Finally, we considered galaxy-quasar lenses. 
+The strong lensing bias of lensed quasars was studied by \citep{C+C16}, in the context of power-law lens mass models with external convergence.
+Here we addressed the question of how different are galaxy-quasar lenses from galaxy-galaxy lens samples. 
+}
+%Finally, we addressed the question of how different are galaxy-galaxy lens samples from sets of galaxy-quasar lenses. 
+This %last% 
+point is relevant for time-delay cosmography studies, in which measurements of the time-delay between the multiple images of a strongly lensed quasar are used to constrain the expansion rate of the Universe. Galaxy-galaxy lenses can in principle be used to help break some of the model degeneracies affecting these measurements \citep{Bir++20,B+T21}, but any difference between the two lens classes can introduce biases, if not corrected for.
 With this study we aim to quantify this bias.
 
 The structure of this work is the following.
@@ -1152,14 +1165,17 @@ Error bars indicate the standard deviation of the mean of either the full sample
 
 \subsection{Galaxy-quasar lenses}\label{ssec:quasarbias}
 
+\subsubsection{Bias in lens parameters}
+
 The main goal of the experiment with lensed quasars is to check whether there are any differences in the strong lensing bias with respect to the extended source case, at fixed properties of the foreground galaxy population.
 For this reason, we only ran simulations with lensed quasars in the fiducial scatter scenario and compared the results with those from the extended source simulation.
 We are also interested in understanding how the subset of quad lenses differs from the entire population of quasar lenses, therefore we also analysed that subsample on its own.
 
-\Fref{fig:quasarbias} shows the strong lensing bias as a function of minimum Einstein radius in the following quantities: stellar population synthesis mismatch parameter, halo mass at fixed stellar mass, enclosed dark matter mass at fixed stellar mass and half-light radius, and axis ratio.
+{\bf The first four rows of \Fref{fig:quasarbias} show} the strong lensing bias as a function of minimum Einstein radius in the following quantities: stellar population synthesis mismatch parameter, halo mass at fixed stellar mass, enclosed dark matter mass at fixed stellar mass and half-light radius, and axis ratio.
 The biases of the population of lensed quasars (red curves) are very similar to that of lensed galaxies (blue curves), especially for values of $\theta_{\mathrm{Ein},min}<1''$, 
 When considering only quad lenses, however, there are some differences, the most remarkable of which is the bias in the axis ratio: quad lenses tend to be on average galaxies with a higher ellipticity.
-This trend was expected, given the results of section \ref{ssec:axisymmpoint}: the higher the ellipticity, the larger the area enclosed within the inner caustic, which is where a source needs to lie in order to produce four or more images.
+This is a well-known effect \citep[see e.g.][]{KKS97} which can be explained in the context of the results of section \ref{ssec:axisymmpoint}: the higher the ellipticity, the larger the area enclosed within the inner caustic, which is where a source needs to lie in order to produce four or more images.
+%This trend was expected, given the results of section \ref{ssec:axisymmpoint}: the higher the ellipticity, the larger the area enclosed within the inner caustic, which is where a source needs to lie in order to produce four or more images.
 Quad lenses tend to also have a slightly larger halo mass at fixed stellar mass, for $\theta_{\mathrm{Ein},min}<1''$.
 
 \begin{figure}
@@ -1170,11 +1186,39 @@ First panel: median $\log{\asps}$.
 Second panel: median $\mhalo$ at $\log{\mstar}=11.5$.
 Third panel: median $\mdmfive$ at $\log{\mstar}=11.5$ and $\log{\reff}=1.2$.
 Fourth panel: median lens axis ratio.
+Fifth panel: median mass-sheet transformation parameter, defined in Appendix~\ref{sect:appendixc}.
 In each panel, the dashed line indicates the value of the parent population.
 Error bars indicate the standard deviation of the mean of the lens sample.
 \label{fig:quasarbias}
 }
 \end{figure}
+
+\subsubsection{Impact on $H_0$}
+
+{\bf
+A measurement of the time delay between the images of a lensed quasar can be converted into an estimate of the expansion rate of the Universe, $H_0$. %, provided that the mass distribution of the lens galaxy (and of matter along the line-of-sight) is accurately known.
+In general, though, the value of $H_0$ is degenerate with the mass distribution of the lens (and of matter along the line-of-sight), which can be difficult to constrain on an individual lens basis.
+One possible strategy to break this denegeracy is to use information gathered from a larger set of lenses as a prior for the time-delay lenses.
+This was the strategy adopted by \citet{Bir++20} in the most recent measurement of $H_0$ by the TDCOSMO collaboration: they combined a larger sample of extended source lenses with a smaller set of time-delay lenses.
+In this section we want to quantify the possible bias on $H_0$ that can result from this approach.
+
+The lens mass model used by \citet{Bir++20} consists in a power-law density profile modified by a mass-sheet transformation. The corresponding projected density profile is
+\begin{equation}\label{eq:mstprofile}
+\kappa(\theta) \propto \lmst\theta^{1-\gamma} + (1 - \lmst),
+\end{equation}
+where $\lmst$ is called the mass-sheet transformation parameter.
+Strong lensing data can constrain very well the power-law index $\gamma$, but not at all $\lmst$.
+%, on which the inference on the Hubble constant depends.
+Given the time delay, the inferred value of the Hubble constant $H_0$ scales linearly with $1/\lmst$.
+\citet{Bir++20} measured the population distribution of $\lmst$ on the sample of extended source lenses, by combining strong lensing and stellar kinematics data, and then used it as a prior in the time-delay analysis.
+Although the mass model used in our work is different from that of \Eref{eq:mstprofile}, we can estimate the bias associated with this approach by computing the value of $\lmst$ for each lens and then comparing the strong lensing bias on $\lmst$ of extended source and quasar lenses.
+Appendix~\ref{sect:appendixc} explains how we obtained $\lmst$ for each lens. The strong lensing bias on the median value of $\lmst$ is shown in the fifth panel of \Fref{fig:quasarbias}\footnote{Since $\lmst$ is only defined for strong lenses, the median value of $\lmst$ of the general population of galaxies is not defined.}.
+
+At fixed minimum Einstein radius, there is a small difference between the median $\lmst$ in extended source and quasar lenses, typically of order 1\%.
+The associated bias on $H_0$ is, therefore, equally small.
+The value of $\lmst$, however, increases with increasing minimum $\tein$. This implies that if the two samples probe different ranges in Einstein radius, the bias on $H_0$ can be larger than that.
+The bias can also be larger if the properties of the general population of galaxies (as opposed to the strong lenses) are used to inform the structure of time-delay lenses \citep[see][]{C+C16}. This is simply because quasar lenses are on average more similar to galaxy-galaxy lenses than they are to the underlying galaxy population (the blue and red curves in \Fref{fig:quasarbias} are closer to each other than they are to the dashed horizontal lines)
+}
 
 %__________________________________________________________________
 
@@ -1348,6 +1392,9 @@ At the same time, we did not find any evidence for a bias in the size distributi
 
 \item Simulations with lensed quasars in place of extended sources showed that the amplitude of the strong lensing bias in the lens-related parameters has very little sensitivity on the details of the source population.
 This result has positive implications for time-delay lensing studies: it means that information from a sample of galaxy-galaxy lenses can be used as a prior on the properties of a set of galaxy-quasar lenses, as long as the two samples are probing the same range in Einstein radius and lens observable properties.
+{\bf
+The associated bias on the inference of $H_0$ is on the order of $1\%$.
+}
 \item Samples of quad lenses are biased towards galaxies with larger ellipticity, which implies that their three-dimensional structure is also biased. This means that particular care must be taken when stellar dynamics measurements obtained on galaxy-galaxy lenses is used to inform the properties of quads.
 \end{enumerate}
 
@@ -1423,6 +1470,39 @@ where $\rho_*(r)$ is the 3-dimensional distribution of dynamical tracers (i.e. t
 We assumed isotropic orbits ($\beta=0$), then integrated \Eref{eq:jeans} to obtain the seeing-convolved, surface brightness-weighted line-of-sight velocity dispersion within the SDSS spectroscopic aperture\footnote{We used Python code available at \url{https://github.com/astrosonnen/spherical_jeans}, for this purpose.}.
 Finally, we fitted the fundamental plane relation of \Eref{eq:fpfull} to the observed stellar mass, half-light radius and central velocity dispersion of the mock sample.
 We repeated this procedure for different values of the intrinsic scatter parameters $\sigma_{\mathrm{sps}}$, $\sigma_\mathrm{h}$ and $\sigma_\gamma$, then settled on the three scenarios listed in \Tref{tab:scatter}.
+
+\section{Mass-sheet transformation parameter}\label{sect:appendixc}
+
+In the time-delay study of \citet{Bir++20}, lenses are described with a mass density profile given by \Eref{eq:mstprofile}.
+\citet{Bir++20} defined the profile by first fitting a pure power-law mass model to the strong lensing data, thus constraining the Einstein radius and power-law index $\gamma$, and then applying a mass-sheet transformation of the following kind:
+\begin{equation}\label{eq:mst}
+\kappa(\boldsymbol\theta) \rightarrow \lmst\kappa(\boldsymbol\theta) + 1 - \lmst.
+\end{equation}
+%\citet{Bir++20} fixed the slope $\gamma$ of the power-law component to the value obtained by fitting a pure power-law mass model to the strong lensing data.
+The mass-sheet transformation parameter $\lmst$ can be interpreted as a quantity describing a departure from a pure power-law profile.
+One possible way of estimating $\lmst$ for our lenses is to fit a power-law to the simulated images and then optimize for the value of $\lmst$ that best matches the true density profile. That, however, would be too time-consuming. Instead, we emulate this process as follows.
+
+\citet{Son18} showed that, when the main arc and the counter-image of an extended source are well resolved, their relative widths constrain the following combination of derivatives of the lens potential at the Einstein radius:
+\begin{equation}\label{eq:invariant}
+\frac{\psi'''}{1 - \psi''}.
+\end{equation}
+In other words, the above quantity can be measured robustly (i.e. in a model-independent way).
+When fitting a pure power-law lens model to lensing data, then, the value of $\gamma$ that we obtain is the one that reproduces the true $\psi'''/(1-\psi'')$\footnote{Strictly speaking, this is only true in the limit of well-resolved arcs and nearly axisymmetric lenses}. This is given by
+\begin{equation}
+\gamma = 2 + \tein \frac{\psi'''}{1-\psi''}
+\end{equation}
+Hence, given a lens in our sample, we first define a pure power-law model with the same Einstein radius as the true one and with $\gamma$ given by the equation above. 
+Then, given a pure power-law model, we find $\lmst$ such that the first three derivatives of the lens potential match the true values.
+In particular, since a mass-sheet transformation changes the second derivative of the potential as
+\begin{equation}
+\psi'' \rightarrow \lmst\psi'' + 1 - \lmst,
+\end{equation}
+we set
+\begin{equation}
+\lmst = \frac{1 - \psi''_{\mathrm{PL}}}{1 - \psi''},
+\end{equation}
+where $\psi''_{\mathrm{PL}}$ is the value of $\psi''$ of the pure power-law lens model.
+
 
 \end{document}
 
