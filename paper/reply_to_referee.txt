@@ -2,15 +2,15 @@ We thank the referee for the useful suggestions. We have addressed the points ra
 
 - "The authors have a novel definition of a lens, and a toy definition of lens finding. The results are likely very sensitive to these definitions (indeed their conclusion about source size biases is demonstrably at odds with other authors because they have different definitions of a detectable lens). The authors should investigate which of their results are robust to different definitions of a lens and a discovered lens, and which findings are not robust e.g. if they impose a minimum magnification cut, or only choose objects with a centroid within the caustic."
 
-Reply - We added a subsection in the Discussion (6.6) to check how the key results vary with a magnification-based lens definition.
+Reply - We added a subsection in the Discussion (6.7) to check how the key results vary with a magnification-based lens definition.
 
 - "I also wonder how much source colour plays a role - we often think of lenses as red and lensed sources as blue. Given their source catalogue has colours, the authors might consider investigating if colour based finders can introduce a potential selection bias too."
 
-Reply - A selection on colour is equivalent to a change in the properties of the underlying source population. Given the small differences in the strong lensing bias between galaxy-galaxy and galaxy-quasar lenses, which have different source redshift distributions, we expect the effect of colour selection to be similarly small.
+Reply - A selection on colour is equivalent to a change in the properties of the underlying source population. Given the small differences in the strong lensing bias between galaxy-galaxy and galaxy-quasar lenses, which have different source redshift distributions, we expect the effect of colour selection to be similarly small. We added a comment on this point in section 6.3.
 
 - "This work doesn't seem to be a huge step forward compared to Collett & Cunnington 2016 (https://ui.adsabs.harvard.edu/abs/2016MNRAS.462.3255C/abstract). The authors don't seem to be aware of that paper and I think they need to rework their lensed quasar section substantially to compare their result to Collett & Cunnington, in a similar way to how they compare with Mandelbaum 2008 for galaxy-galaxy lenses."
 
-Reply - We thank the referee for pointing out this important work that we had missed. Our paper, however, addresses a different question from the ones covered by Collett & Cunnington 2016: how galaxy-quasar lenses are different from galaxy-galaxy lenses. We hope that the revised text make this point more clear.
+Reply - We thank the referee for pointing out this important work that we had missed. Our paper, however, addresses a different question from the ones covered by Collett & Cunnington 2016: how galaxy-quasar lenses are different from galaxy-galaxy lenses. We hope that the revised text makes this point more clear.
 
 - "It would be good if this section had a more concrete application to time-delay cosmography. The main potential H0 bias in applying galaxy-galaxy results to lensed quasars is likely to be differences in the total density slope of the populations. A figure comparing these would be very useful. Ideally, the authors would also seek to quantify if the H0 shifts seen by Birrer 2020 (https://ui.adsabs.harvard.edu/abs/2020A%26A...643A.165B/abstract) are consistent with differences in the selection function of the SLACS and TDCOSMO lenses."
 
@@ -23,4 +23,6 @@ Reply - We're a bit unsure about how to address this point. We believe that the 
 - "I found the introduction to get very technical, very quickly. Equation 1 isn't really an equation, more an illustration of what goes into the discovered lens population. I think a bit more qualitative text about lensing selection biases would be helpful before jumping in to equation 1."
 
 Reply - We restructured the introduction accordingly.
+
+Finally, we added a section to the Discussion to address the issue of lens vs. source selection (section 6.6).
 

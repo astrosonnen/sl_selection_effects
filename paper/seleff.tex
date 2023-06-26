@@ -1342,7 +1342,18 @@ However, testing for the amplitude of the strong lensing bias on the mass-to-lig
 \subsection{Lens vs. source selection}
 
 {\bf
-The simulations described in \Sref{sect:sims} are examples of lens-selected surveys.
+The simulations described in \Sref{sect:sims}, on which our experiment is based, are examples of so-called lens-selected surveys:
+the lens samples are built by first defining a population of possible lens galaxies and then searching for strong lenses among them. Photometric lens searches are typically carried out in this way \citep[see e.g.][]{Gav++12,Son++18,Pet++19}.
+An alternative approach is to build a source-selected sample, by first searching for signatures of strong lensing within a population of possible background sources and then obtaining information on the lens galaxies \citep[see e.g.][]{Hez++13}.
+In principle, these two approaches lead to different strong lensing biases. %Therefore, strictly speaking, our results only apply to a lens-selected sample.
+%For example, from \Fref{fig:lenspars} we can see that the distribution in redshift and stellar mass of the lenses extends beyond the bounds applied to the population of foreground galaxies: in principle, a source-based selection method 
+For example, from \Fref{fig:lenspars} we can see that the stellar mass distribution of the lenses extends below the minimum mass cut that we applied to the population of foregrounds galaxies: a source-based search that is able detect those lenses would result in a different sample and a different associated strong lensing bias.
+However, when considering only lenses with $\tein > 1''$, lens-selection and source-selection yield the same sample (see red histogram in \Fref{fig:lenspars}): in the limit of large Einstein radius, the two operations (identifying suitable lens galaxies and detecting a strongly lensed source) commute.
+
+%In general, speaking of a lens- or source-selected sample is improper.
+In general, there is no such thing as a purely lens- or source-selected sample. 
+A lens-based search is always also source-based, because a detection of the lensed source is required to identify a lens.
+A source-based search is also lens-based, because the lens properties determine important observational features of the lensed source, such as the number of images, the image separation and the total flux.
 }
 
 \subsection{Alternative lens definitions}
