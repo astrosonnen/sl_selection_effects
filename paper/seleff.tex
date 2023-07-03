@@ -145,7 +145,7 @@
 
    \author{Alessandro Sonnenfeld\inst{\ref{sjtu},\ref{leiden}}\and
            Shun-Sheng Li\inst{\ref{leiden}}\and
-           Giulia Despali\inst{\ref{ita}}\and
+           Giulia Despali\inst{\ref{bologna}}\and
            Raphael Gavazzi\inst{\ref{marseille}}\and
            Anowar J. Shajib\inst{\ref{chicago},\ref{kicp},\ref{einstein}}\and
            Edward N. Taylor\inst{\ref{swin}}
@@ -156,7 +156,7 @@ Department of Astronomy, School of Physics and Astronomy, Shanghai Jiao Tong Uni
               \email{sonnenfeld@sjtu.edu.cn}\label{sjtu}
 \and
 Leiden Observatory, Leiden University, P.O. Box 9513, 2300 RA Leiden, The Netherlands\label{leiden}\and
-Institut für Theoretische Astrophysik, Zentrum für Astronomie, Heidelberg Universität, Albert-Ueberle-Str. 2, 69120, Heidelberg, Germany\label{ita}\and
+Alma Mater Studiorum - Università di Bologna, Dipartimento di Fisica e Astronomia "Augusto Righi", Via Gobetti 93/2, Bologna, Italy\label{bologna}\and
 CNRS and CNES, Laboratoire d'Astrophysique de Marseille, Aix-Marseille Universit\'{e} 38, Rue Fr\'{e}d\'{e}ric Joliot-Curie, F-13388 Marseille, France\label{marseille}\and
 Department of Astronomy \& Astrophysics, University of Chicago,
 Chicago, IL 60637, USA\label{chicago}\and
@@ -1310,7 +1310,7 @@ The velocity dispersion is directly related to the mass distribution of the lens
 The central velocity dispersion, however, is very sensitive to the orbital anisotropy, to the three-dimensional structure, and to gradients in stellar mass-to-light ratio, which are not well known. Therefore it is difficult to quantitatively estimate the benefit of including it in the description of the lensing bias.
 
 If one wishes to directly account for the strong lensing bias, the formally correct procedure is to explicitly model all of the selection steps in a Bayesian hierarchical formalism, as explained by \citet{Son22}.
-Although this can be computationally challenging, machine learning can offer an efficient alternative \citep{Leg++22}.
+Although this can be computationally challenging, machine learning can offer an efficient alternative \citep{Leg++23}.
 In order for either of these approaches to work, however, it is essential that the lens selection procedure can be simulated.
 This, in turn, requires having an objective definition of a strong lensing event. A peak-based definition such as that introduced in section \ref{ssec:lensdefext} could be used for this purpose.
 
@@ -1363,7 +1363,7 @@ A source-based search is also lens-based, because the lens properties determine 
 
 {\bf
 Our extended source analysis was based on a peak detection criterion to define strong lensing events, as explained in section \ref{ssec:lensdefext}.
-However, many previous studies aimed at simulating populations of lenses adopted a magnification-based definition, in which a lens-source system is classified as a strong lens if the magnification of the source is larger than a minimum value \citep[see e.g.][]{Col15, Rob++20}.
+However, many previous studies aimed at simulating populations of lenses adopted a magnification-based definition, in which a lens-source system is classified as a strong lens if the magnification of the source is larger than a minimum value \citep[see e.g.][]{Col15, Robertson++20}.
 In order to check whether our results are robust to the choice of definition of a strong lensing event, we re-analysed the fiducial sample with this alternative definition. %repeated the analysis of the fiducial sample with extended sources. 
 In particular, we defined as strong lenses all systems with a detected background source and $\mu_{\mathrm{tot}} > 3$, where $\mu_{\mathrm{tot}}$ is the total magnification (obtained by integrating the flux of all of the lensed images and dividing it by the intrinsic source flux).
 The total number of strong lenses increased by $34\%$ with this new definition, mostly due to the inclusion of fainter sources with no detected multiple images.
@@ -1493,6 +1493,7 @@ We repeated this procedure for different values of the intrinsic scatter paramet
 
 \section{Mass-sheet transformation parameter}\label{sect:appendixc}
 
+{\bf
 In the time-delay study of \citet{Bir++20}, lenses are described with a mass density profile given by \Eref{eq:mstprofile}.
 \citet{Bir++20} defined the profile by first fitting a pure power-law mass model to the strong lensing data, thus constraining the Einstein radius and power-law index $\gamma$, and then applying a mass-sheet transformation of the following kind:
 \begin{equation}\label{eq:mst}
@@ -1522,6 +1523,7 @@ we set
 \lmst = \frac{1 - \psi''_{\mathrm{PL}}}{1 - \psi''},
 \end{equation}
 where $\psi''_{\mathrm{PL}}$ is the value of $\psi''$ of the pure power-law lens model.
+}
 
 
 \end{document}
